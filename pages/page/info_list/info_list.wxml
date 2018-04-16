@@ -1,0 +1,40 @@
+<view>
+  <view class='mess-head'>
+    <view class='mess-radius'></view>
+    <image src='../../images/11.jpg'></image>
+  </view>
+  <!-- 基本信息 -->
+  <view class='base-message'>
+    <view class='base-title'>基本信息</view>
+    <view class='base-item'>
+      <text>姓 名：</text>曹萌雅</view>
+    <view class='base-item'>
+      <text>性别：</text> 女</view>
+    <view class='base-item'>
+      <text>农户类型：</text>普通农户</view>
+    <view class='base-item'>
+      <text>手机号码：</text>13793485838</view>
+    <view class='base-item'>
+      <text>身份证号：</text>39458349582390458234</view>
+  </view>
+  <!-- 开户信息 -->
+  <view class='base-message mt28'>
+    <view class='base-title'>开户信息</view>
+    <view class='base-item'>
+      <text>银行账号：</text>93458324059823495</view>
+    <view class='base-item'>
+      <text>开户行：</text> 广州农村商业银行</view>
+    <view class='base-item'>
+      <text>持卡人：</text>普农户</view>
+    <view class='base-item'>
+      <text>开户类型：</text>个人账户</view>
+    <view class='base-item'>
+      <text>开户地址：</text>贵州省贵阳市</view>
+  </view>
+  <!-- 开户信息 -->
+  <view class='base-message mt28'>
+    <view class='base-title'>发货信息</view>
+    <view class='base-item'>
+      <text>发货地址：</text>广东省广州市天河区新塘街道软件路12号</view>
+  </view>
+</view>

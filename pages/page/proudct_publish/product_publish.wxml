@@ -1,0 +1,32 @@
+<import src="product_list_template/product_list_template.wxml" />
+<view>
+  <view class='pro-info'>
+    <view class='pro-info-head'>
+      <image src='../../images/11.jpg'></image>
+    </view>
+    <view class='pro-info-detail'>
+      <text>曹萌雅</text>
+      <text>电话号码：14567876598</text>
+      <text>身份证号：145678734536598</text>
+    </view>
+    <view class='pro-info-dec'>
+      <view>描述相符：
+        <text class='color-red'>5.0分</text>
+      </view>
+      <view>服务态度：
+        <text class='color-red'>5.0分</text>
+      </view>
+      <view>发货速度：
+        <text class='color-red'>5.0分</text>
+      </view>
+    </view>
+  </view>
+  <!-- 产品列表 -->
+  <view class='product-list'>
+    <template is="productListTemplate" />
+  </view>
+  <!-- 底部按钮 -->
+  <view class='pro-new'>
+  <button class='pro-new-btn' bindtap='AddProductTap'>发布新产品</button>
+  </view>
+</view>

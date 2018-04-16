@@ -1,0 +1,78 @@
+.paid-container {
+  margin-top: 18rpx;
+  background: #fff;
+  border-top: 3px solid #00a0e9;
+  font-size: 14px;
+  padding: 10rpx 20rpx;
+}
+
+.paid-txt1 {
+  display: block;
+  line-height: 24px;
+}
+
+.consignee-info {
+  color: #757575;
+}
+
+.consignee-info>text {
+  display: block;
+  line-height: 22px;
+}
+
+.goods-container {
+  display: flex;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 15rpx 0;
+  margin: 10rpx 0;
+}
+
+.good-img {
+  width: 130rpx;
+  height: 130rpx;
+  margin-right: 10rpx;
+}
+
+.good-img image {
+  width: 130rpx;
+  height: 130rpx;
+}
+
+.good-info {
+  flex: 3;
+}
+
+.good-info>text {
+  display: block;
+}
+
+.item-good-name {
+  font-size: 15px;
+  margin-bottom: 8rpx;
+}
+
+.paid-txt2 {
+  color: #757575;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.mr15 {
+  margin-right: 30rpx;
+}
+.paid-btn-item{
+  overflow: hidden;
+}
+.paid-btn{
+  padding: 0 35rpx;
+  color: #00a0e9;
+  font-size: 14px;
+  border: 1px solid #00a0e9;
+  background: #fff;
+  height: 60rpx;
+  line-height: 60rpx;
+  float: right;
+  border-radius: 4px;
+  margin:0 10rpx;
+}

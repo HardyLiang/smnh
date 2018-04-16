@@ -1,0 +1,69 @@
+.user-info {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0 0;
+}
+
+.user-head {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.user-cell {
+  font-size: 13px;
+  color: #666;
+  line-height: 20px;
+}
+
+.user-name {
+  font-size: 15px;
+  line-height: 30px;
+  margin-bottom: 10px;
+}
+
+.user-grade {
+  display: block;
+  width: 100%;
+  text-align: center;
+  line-height: 40px;
+  font-size: 14px;
+  color: #333;
+  border-top: 1px solid #eee;
+}
+
+.user-grade text {
+  margin: 0 20rpx;
+}
+
+.user-list {
+  margin-top: 20rpx;
+  background: #fff;
+}
+
+.user-list-item {
+  display: flex;
+  line-height: 44px;
+   border-bottom: 1px solid #eee; 
+  padding: 0 30rpx;
+}
+.user-list-item>view:first-child {
+ flex: 1;
+}
+
+/* .user-list-item:last-child {
+  border-bottom: none;
+} */
+
+.user-login {
+  margin-top: 30rpx;
+  background: #fff;
+  text-align: center;
+  line-height: 50px;
+  color: #00a0e9;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}

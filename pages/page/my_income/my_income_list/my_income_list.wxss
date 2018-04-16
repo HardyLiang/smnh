@@ -1,0 +1,20 @@
+page {
+  background: #fff;
+}
+
+.income-list {
+  line-height: 100rpx;
+  position: relative;
+  font-size: 32rpx;
+  padding: 0 20rpx;
+  border-bottom: 1px solid #ddd;
+}
+
+.income-time {
+  display: inline-block;
+}
+
+.income-money {
+  float: right;
+  color: #00a0e9;
+}

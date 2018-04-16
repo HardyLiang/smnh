@@ -1,0 +1,81 @@
+page {
+  background: #f0f0f0;
+}
+
+.income-info {
+  background: #00a0e9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  color: #fff;
+  font-size: 14px;
+}
+
+.income-info-money {
+  font-size: 18px;
+  line-height: 50px;
+}
+
+.income-info-txt text {
+  margin: 0 10px;
+}
+
+.income-list {
+  background: #fff;
+}
+
+.income-item {
+  padding: 0 30rpx;
+  line-height: 44px;
+  border-top: 1px solid #eee;
+  display: flex;
+}
+.income-item-list{
+  flex: 1;
+}
+.income-item text {
+  float: right;
+  color: #666;
+  font-size: 13px;
+  margin-right:13px; 
+}
+
+.income-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-around;
+  background: #fff;
+  margin-top: 6px;
+}
+
+.income-itemBox {
+  width: 50%;
+  padding: 20rpx 0 0;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  color: #1e1e1e;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.income-title {
+  font-size: 16px;
+  color: #00a0e9;
+  line-height: 40px;
+}
+
+.income-blue {
+  font-size: 16px;
+  color: #00a0e9;
+  line-height: 32px;
+  margin-bottom: 10px;
+}
+
+.line-right {
+  border-right: 1px solid #f0f0f0;
+}

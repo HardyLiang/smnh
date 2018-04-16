@@ -1,0 +1,20 @@
+<import src="../goods_info_template/goods_info_template.wxml" />
+<template name="paidTemplate">
+  <view class="paid-container">
+    <text class='paid-txt1'>订单编号： 82394572389457239483</text>
+    <text class='paid-txt1'>订单时间：2018-04-10</text>
+    <view class='consignee-info'>
+      <text>收件人：宝贝儿</text>
+      <text>手机号：14798789876</text>
+      <text>地址：河北省衡水市新塘街道软件路13号好水电费sdfasdfasdfa撒打飞机啊</text>
+    </view>
+    <view class="goods-order">
+      <!-- <block wx:for="{{}}" wx:for-item=""></block> -->
+      <template is="GoodInfoTemplate" />
+    </view>
+    <view class='paid-btn-item'>
+      <view class='paid-btn'>发货</view>
+    </view>
+  </view>
+
+</template>

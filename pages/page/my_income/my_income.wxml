@@ -1,0 +1,41 @@
+<view>
+  <view class='income-info'>
+    <text>待结算</text>
+    <text class='income-info-money'>39493.53元</text>
+    <view class='income-info-txt'>
+      <text>结算中 2987.89元</text>
+      <text>交易中43898.87元</text>
+    </view>
+  </view>
+  <view class='income-list'>
+    <navigator url="my_income_list/my_income_list">
+      <view class='income-item'>
+        <view class='income-item-list'>已结算</view>
+        <text>90元</text>
+        <view class="navigator-arrow"></view>
+      </view>
+    </navigator>
+    <navigator url="../my_order/my_order">
+      <view class='income-item'>
+        <view class='income-item-list'> 我的订单 </view>
+        <view class="navigator-arrow"></view>
+      </view>
+    </navigator>
+  </view>
+  <view class='income-container'>
+    <view class='income-itemBox line-right'>
+      <text class='income-title'>今日</text>
+      <text>成交金额</text>
+      <text class='income-blue'>0 元</text>
+      <text>成交笔数</text>
+      <text class='income-blue'>0 </text>
+    </view>
+    <view class='income-itemBox'>
+      <text class='income-title'>累计</text>
+      <text>应收金额</text>
+      <text class='income-blue'>1232320 元</text>
+      <text>成交笔数</text>
+      <text class='income-blue'>0 </text>
+    </view>
+  </view>
+</view>

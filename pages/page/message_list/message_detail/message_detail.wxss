@@ -1,0 +1,19 @@
+.message-detail{
+  padding: 20rpx 28rpx;
+  background: #fff;
+}
+.message-detail>text{
+  font-size: 26rpx;
+  color: #999;
+}
+.message-title{
+  margin: 10px auto;
+  text-align: center;
+  font-size: 32rpx;
+  line-height: 44rpx;
+}
+.message-txt text{
+  line-height:44rpx;
+  font-size: 28rpx;
+  color: #666;
+}
