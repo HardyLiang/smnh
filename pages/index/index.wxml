@@ -1,0 +1,58 @@
+<!--index.wxml-->
+<view>
+  <!-- <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>     
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view> -->
+  <view>
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="swiper-style" indicator-color="rgba(255, 255, 255, 1)" indicator-active-color="#00a0e9">
+      <block wx:for="{{imgUrls}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <!-- 菜单 -->
+  <view class="nav-block">
+    <view class='wrap-item' catchtap="onProductTap">
+      <image src='../images/ic_main_release_products.png' class='wrap_icon'></image>
+      <text>产品发布</text>
+    </view>
+    <view class='wrap-item' catchtap="onOrderTap">
+      <image src='../images/ic_main_order_delivery.png' class='wrap_icon'></image>
+      <text>我的订单</text>
+    </view>
+    <view class='wrap-item' catchtap="onShopTap">
+      <image src='../images/ic_main_farmer_shop.png' class='wrap_icon'></image>
+      <text>我的店铺</text>
+    </view>
+    <view class='wrap-item' catchtap="onIncomeTap">
+      <image src='../images/ic_main_my_income.png' class='wrap_icon'></image>
+      <text>我的收入</text>
+    </view>
+    <view class='wrap-item' catchtap="onInfoTap">
+      <image src='../images/ic_main_info_edit.png' class='wrap_icon'></image>
+      <text>我的信息</text>
+    </view>
+    <view class='wrap-item' catchtap="onWechatTap">
+      <image src='../images/ic_main_wei_xin.png' class='wrap_icon'></image>
+      <text>微信绑定</text>
+    </view>
+  </view>
+  <!-- /菜单 -->
+  <!-- 我的消息 -->
+  <view class='message-item'>
+    <view class='message-style'>我的消息
+      <text>2018-04-08 12:12:12</text>
+    </view>
+    <view class='message-list'>测试通知 这是个通知</view>
+  </view>
+  <!-- /我的消息 -->
+</view>

@@ -1,0 +1,38 @@
+<view>
+ <navigator url="../info_list/info_list">
+  <view class='user-info'>
+    <image src='../../images/ic_main_release_products.png' class='user-head'></image>
+    <text class='user-cell'>13787657899</text>
+    <text class='user-name'>这个是昵称</text>
+  <text class='user-grade'> <text> 描述：5.0</text> <text> 服务：5.0 </text> <text>发货：5.0 </text> </text>
+  </view>
+</navigator>
+  <!-- 菜单 -->
+<view class='user-list'>
+ <navigator url="../operation_guide/operation_guide">
+  <view class='user-list-item'>
+    <view> 操作指南 </view> 
+    <view class="navigator-arrow"></view>
+  </view>
+   </navigator>
+   <navigator url="../message_list/message_list">
+  <view class='user-list-item'>
+    <view>我的消息</view>  <view class="navigator-arrow"></view>
+  </view>
+  </navigator>
+  <navigator url="../agreement/agreement">
+  <view class='user-list-item'>
+    <view>查看协议 </view> <view class="navigator-arrow"></view>
+  </view>
+  </navigator>
+  <navigator url="../about_soft/about_soft">
+  <view class='user-list-item'>
+    <view>关于软件</view> <view class="navigator-arrow"></view>
+  </view>
+  </navigator>
+</view>
+<!-- 登录农户账号 -->
+<view class='user-login'>
+登录农户账户
+</view>
+</view>

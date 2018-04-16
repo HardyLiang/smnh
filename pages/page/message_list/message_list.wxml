@@ -1,0 +1,33 @@
+<view class='message-center'>
+  <!-- 列表 -->
+  <view class='message-item'>
+    <text>2018-03-22 11:33:22</text>
+    <view class='border-blue' bindtap='onMessageDetail'>
+      <view class='message-box'>
+        <view>这里是标题这里是标题这里是标题这里是标题这里是标题</view>
+        <view>这里是内容这里是内容这里是里是内</view>
+      </view>
+      <view class="navigator-arrow"></view>
+    </view>
+  </view>
+   <view class='message-item'>
+    <text>2018-03-22 11:33:22</text>
+    <view class='border-blue' bindtap='onMessageDetail'>
+      <view class='message-box'>
+        <view>这里是标题这里是标题这里是标题这里是标题这里是标题</view>
+        <view>这里是内容这里是内容这里是里是内</view>
+      </view>
+      <view class="navigator-arrow"></view>
+    </view>
+  </view>
+   <view class='message-item'>
+    <text>2018-03-22 11:33:22</text>
+    <view class='border-blue' bindtap='onMessageDetail'>
+      <view class='message-box'>
+        <view>这里是标题这里是标题这里是标题这里是标题这里是标题</view>
+        <view>这里是内容这里是内容这里是里是内</view>
+      </view>
+      <view class="navigator-arrow"></view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/page/auth/login/login",
+    "pages/index/index",
+    "pages/page/add_product/add_product",
+    "pages/page/my_order/my_order",
+    "pages/page/my_income/my_income",
+    "pages/page/user/user",
+    "pages/logs/logs",
+    "pages/page/info_list/info_list",
+    "pages/page/my_shop/my_shop",
+    "pages/page/proudct_publish/product_publish",
+    "pages/page/wechat_bind/wechat_bind",
+    "pages/page/wechat_bind/bind_guide/bind_guide",
+    "pages/page/my_income/my_income_list/my_income_list",
+    "pages/page/message_list/message_list",
+    "pages/page/message_list/message_detail/message_detail",
+    "pages/page/operation_guide/operation_guide",
+    "pages/page/agreement/agreement",
+    "pages/page/add_product/product_classify/product_classify",
+    "pages/page/about_soft/about_soft",
+    "pages/page/auth/register/register"
+   
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#00a0e9",
+    "navigationBarTitleText": "农户",
+    "navigationBarTextStyle": "#fff"
+  },
+  "tabBar": {
+    "color": "#ccc",
+    "selectedColor": "#fb2f31",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "pages/images/icon_home.png",
+        "selectedIconPath": "pages/images/icon_home_active.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/page/user/user",
+        "iconPath": "pages/images/icon_buyer.png",
+        "selectedIconPath": "pages/images/icon_buyer_active.png",
+        "text": "我的"
+      }
+    ]
+  }
+}

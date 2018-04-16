@@ -1,0 +1,107 @@
+ @import "../../style/public.wxss"; 
+.form-group{
+	padding: 0 20rpx;
+	margin: 20rpx 0;
+	background: #fff;
+}
+/* .input-list{
+	padding: 0 20rpx;
+	margin: 20rpx 0;
+	background: #fff;
+	border-top: 1rpx solid #ddd;
+	border-bottom: 1rpx solid #ddd;
+} */
+.input-item{
+	padding: 20rpx;
+	line-height: 2;
+	display: flex;
+	font-size: 32rpx;
+	border-bottom: 1rpx solid #e8e8e8;
+  position: relative;
+}
+.input-item:first-child{
+	border-top: 0;
+}
+.input-item-label{
+	display: block;
+	width: 5em;
+	color: #333;
+}
+.input-item-content{
+  margin-top: 6rpx;
+	color: #333;
+	flex:1;
+  font-size: 32rpx;
+}
+.input-item.input-item-full{
+	display: block;
+  padding: 20rpx 0 ;
+}
+.input-item.input-item-full .input-item-label{
+	width: 100%;
+}
+.input-item.input-item-full .input-item-content{
+	width: 100%;
+}
+.input-item.input-item-full textarea{
+	height: 180rpx;
+	border: 1rpx solid #e8e8e8;
+	padding: 10rpx;
+  line-height: 44rpx;
+}
+.input-item.input-item-full .img-upload{
+	padding: 0;
+}
+.input-item.input-item-adaption .input-item-label{
+	width: auto;
+	margin-right: 20rpx;
+}
+
+textarea{
+	width: 100%;
+	padding: 20rpx;
+	box-sizing: border-box;
+}
+.abs-right{
+  position: absolute;
+  top: 20rpx;
+  right:2px;
+  font-size: 30rpx;
+  color: #333;
+}
+.label-msg{
+  font-size: 24rpx;
+  color: #aaa;
+}
+.proxy-box{
+  margin-top: 20rpx;
+}
+.proxy-msg{
+  font-size: 24rpx;
+  color: #00a0e9;
+}
+.hide{
+  display: none;
+}
+.show{
+  display: block;
+}
+.product-info-img{
+  padding: 20rpx;
+	margin: 20rpx 0;
+	background: #fff;
+}
+.image-num{
+  float: right;
+  color: #666;
+}
+.product-upload{
+  margin: 10px 0;
+}
+.submit-btn{
+  padding: 10rpx 0;
+  background: #00a0e9;
+  color: #fff;
+  margin: 20rpx;
+  font-size: 32rpx;
+}

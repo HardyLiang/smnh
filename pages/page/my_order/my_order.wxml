@@ -1,0 +1,36 @@
+<import src="paid_list_template/paid_list_template.wxml" />
+<import src="shipped_list_template/shipped_list_template.wxml" />
+<!--导航条-->
+<view class="navbar">
+  <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+</view>
+<!--待发货-->
+<view hidden="{{currentTab!==0}}">
+  <view>
+    <view class='order-top-view'>
+      <text>姓名：曹萌雅</text>
+      <text>普通户</text>
+      <text>待发货订单总数：<text class='color-blue'>26</text></text>
+    </view>
+    <!-- 列表 -->
+    <view class="paid-template">
+      <template is="paidTemplate" />
+    </view>
+  </view>
+</view>
+
+<!--已发货-->
+<view hidden="{{currentTab!==1}}">
+  <view>
+    <view class='order-top-view'>
+      <text>姓名：曹萌雅</text>
+      <text>普通户</text>
+      <text>已发货订单总数：<text class='color-blue'>666</text></text>
+    </view>
+  </view>
+  <!-- template -->
+   <view class="paid-template">
+      <template is="shippedListTemplate" />
+    </view>
+    <!-- //template -->
+</view>

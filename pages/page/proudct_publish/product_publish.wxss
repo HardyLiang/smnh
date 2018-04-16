@@ -1,0 +1,58 @@
+@import "product_list_template/product_list_template.wxss";
+.pro-info{
+  background: #fff;
+  display: flex;
+}
+.pro-info>view{
+  font-size: 24rpx;
+  color: #666;
+}
+.pro-info-detail{
+   width: 340rpx; 
+}
+.pro-info-dec{
+  margin: 8rpx 0;
+}
+.pro-info-dec view {
+  line-height: 58rpx;
+} 
+.pro-info-head{
+  width: 190rpx;
+  height: 190rpx;
+}
+.pro-info-detail text{
+  display: block;
+  line-height: 58rpx;
+}
+.pro-info-detail text:first-child{
+  font-size: 32rpx;
+  color: #000;
+  line-height: 58rpx;
+  margin-top: 8rpx;
+}
+.pro-info-head image{
+  width: 152rpx;
+  height: 152rpx;
+  margin: 16rpx;
+  border-radius: 50%;
+}
+.color-red{
+  display: inline-block;
+  color: #ff2b2b;
+}
+.pro-new{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 20rpx 3%;
+  background: #fff;
+}
+.pro-new-btn{
+  width: 94%;
+  padding: 0;
+  background: #00a0e9;
+  color: #fff;
+  margin: 0;
+}
+

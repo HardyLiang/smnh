@@ -1,0 +1,8 @@
+.paid-view-btn{
+  color: #f38001;
+  border: 1px solid #f38001;
+}
+.goods-status{
+  line-height: 32px;
+  color: #f38001;
+}
