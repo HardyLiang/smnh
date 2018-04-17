@@ -31,3 +31,28 @@ page{
   margin-top: -8rpx;
   right: 28rpx;
 }
+.pro-btn{
+  float: right;
+  border-radius: 5px;
+  margin: 0 10rpx;
+  padding: 0 20rpx;
+  background: #fff;
+  color: #777;
+  height: 68rpx;
+  line-height: 70rpx;
+  font-size: 28rpx;
+}
+.c-blue{
+  color: #00a0e9;
+}
+.c-blue::after{
+  content: '';
+  border: 1px solid #00a0e9;
+}
+.c-orange{
+  color: #f16b00;
+}
+.c-orange::after{
+  content: '';
+  border: 1px solid #f16b00;
+}

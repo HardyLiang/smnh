@@ -4,92 +4,68 @@ const app = getApp()
 
 Page({
   data: {
-    // motto: 'Hello World',
-    // userInfo: {},
-    // hasUserInfo: false,
-    // canIUse: wx.canIUse('button.open-type.getUserInfo')
     imgUrls: [
-      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-    ],
+      '../images/img_main_auto_0.png',
+      '../images/img_main_auto_1.png',
+      '../images/img_main_auto_2.png'
+    ], 
     indicatorDots: true,
     autoplay: true,
     interval: 5000,
     duration: 1000,
-
-
+    indexmenu: [],
   },
-  //事件处理函数
-  // bindViewTap: function() {
-  //   wx.navigateTo({
-  //     url: '../logs/logs'
-  //   })
-  // },
-  onProductTap: function (event) {
-    wx.navigateTo({
-      url: "../page/proudct_publish/product_publish"
-    })
-  },
-  onOrderTap: function (event) {
-    wx.navigateTo({
-      url: "../page/my_order/my_order"
-    })
-  },
-  onShopTap: function (event) {
-    wx.navigateTo({
-      url: "../page/my_shop/my_shop"
-    })
-  },
-  onIncomeTap: function (event) {
-    wx.navigateTo({
-      url: "../page/my_income/my_income"
-    })
-  },
-  onInfoTap: function (event) {
-    wx.navigateTo({
-      url: "../page/info_list/info_list"
-    })
-  },
-  onWechatTap: function (event) {
-    wx.navigateTo({
-      url: "../page/wechat_bind/wechat_bind"
+  fetchData: function () {
+    this.setData({
+      indexmenu: [
+        {
+          'icon': '../images/ic_main_release_products.png',
+          'text': '产品发布',
+          'url': 'product_publish'
+        },
+        {
+          'icon': '../images/ic_main_order_delivery.png',
+          'text': '我的订单',
+          'url': 'my_order'
+        },
+        {
+          'icon': '../images/ic_main_farmer_shop.png',
+          'text': '我的店铺',
+          'url': 'my_shop'
+        },
+        {
+          'icon': '../images/ic_main_my_income.png',
+          'text': '我的收入',
+          'url': 'my_income'
+        },
+        {
+          'icon': '../images/ic_main_info_edit.png',
+          'text': '我的信息',
+          'url': 'info_list'
+        },
+        {
+          'icon': '../images/ic_main_wei_xin.png',
+          'text': '微信绑定',
+          'url': 'wechat_bind'
+        }
+      ]
+      
     })
   },
   onLoad: function () {
-    // if (app.globalData.userInfo) {
-    //   this.setData({
-    //     userInfo: app.globalData.userInfo,
-    //     hasUserInfo: true
-    //   })
-    // } else if (this.data.canIUse){
-    //   // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-    //   // 所以此处加入 callback 以防止这种情况
-    //   app.userInfoReadyCallback = res => {
-    //     this.setData({
-    //       userInfo: res.userInfo,
-    //       hasUserInfo: true
-    //     })
-    //   }
-    // } else {
-    //   // 在没有 open-type=getUserInfo 版本的兼容处理
-    //   wx.getUserInfo({
-    //     success: res => {
-    //       app.globalData.userInfo = res.userInfo
-    //       this.setData({
-    //         userInfo: res.userInfo,
-    //         hasUserInfo: true
-    //       })
-    //     }
-    //   })
-    // }
+    this.fetchData();
+  //  我的消息列表
+    this.setData({
+      msgList: [
+        { url: "url", title: "这里是测试公告点击" },
+        { url: "url", title: "撒的开发急啊是快点发就332222222" },
+        { url: "url", title: "公告哈 点击加了收快递费静安寺开发就是" }]
+    });
   },
-  // getUserInfo: function(e) {
-  //   console.log(e)
-  //   app.globalData.userInfo = e.detail.userInfo
-  //   this.setData({
-  //     userInfo: e.detail.userInfo,
-  //     hasUserInfo: true
-  //   })
-  // }
+    changeRoute: function (url) {
+    wx.navigateTo({
+      url: `../page/${url}/${url}`
+    })
+  }
+ 
 })

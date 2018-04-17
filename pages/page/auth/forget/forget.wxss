@@ -30,19 +30,23 @@
 	display: block;
   padding: 20rpx 0 ;
 }
-.picker{width: 100%;height: 60rpx;}
-.res-title{
-font-size: 32rpx;
-padding-top: 26rpx;
-color: #00a0e9;
-}
-.agree-box{
-  padding: 10rpx 30rpx
-}
 .submit-btn{
   padding: 10rpx 0;
   background: #00a0e9;
   color: #fff;
   margin: 20rpx;
   font-size: 32rpx;
+}
+.get-code{
+  position: absolute;
+  right: 0;
+  top: 20rpx;
+  border: 1px solid #00a0e9;
+  font-size: 24rpx;
+  color: #00a0e9;
+  padding: 0 10rpx;
+  height:50rpx;
+  line-height: 50rpx; 
+  border-radius: 3px;
+  z-index: 100;
 }

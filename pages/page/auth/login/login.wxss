@@ -1,89 +1,111 @@
-.form-box{
-    width: 100%;
-    height: auto;
-    overflow: hidden;
-    padding: 0 40rpx;
-    margin-top: 96rpx;
-    background: #fff;
+page {
+  background: -webkit-linear-gradient(top, #00a7ee 0%, #00a0e9 100%);
+  height: 100%;
+}
+.login-top{
+margin: 12px auto 18px;
+}
+.login-top image {
+  display: block;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+  border: 15rpx solid rgba(255, 255, 255, 0.5);
+  margin: 0 auto;
 }
 
-.form-item{
-    position: relative;
-    background: #fff;
-    height: 96rpx;
-    border-bottom: 1px solid #d9d9d9;
+.form-box {
+  width: 92%;
+  height: auto;
+  overflow: hidden;
+  padding: 0 4%;
+  margin-top: 96rpx;
 }
 
-.form-item .username, .form-item .password, .form-item .code{
-    position: absolute;
-    top: 26rpx;
-    left: 0;
-    display: block;
-    width: 100%;
-    height: 44rpx;
-    background: #fff;
-    color: #333;
-    font-size: 30rpx;
+.form-item {
+  position: relative;
+  background: #fff;
+  border-radius: 50rpx;
+  height: 100rpx;
+  margin-bottom: 15px;
 }
 
-.form-item-code{
-    margin-top:32rpx;
-    height: auto;
-    overflow: hidden;
-    width: 100%;
+.form-icon {
+  width: 44rpx;
+  height: 44rpx;
+  position: absolute;
+  top: 26rpx;
+  left: 40rpx;
+  z-index: 100;
 }
 
-.form-item-code .form-item{
-    float: left;
-    width: 350rpx;
+.form-item .username, .form-item .password, .form-item .code {
+  position: absolute;
+  top: 10rpx;
+  left: 100rpx;
+  z-index: 100;
+  min-width: 500rpx;
+  display: block;
+  font-size: 32rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #00a7ee;
 }
 
-.form-item-code .code-img{
-    float: right;
-    margin-top: 4rpx;
-    height: 88rpx;
-    width: 236rpx;
+.form-item .clear {
+  position: absolute;
+  top: 26rpx;
+  right: 40rpx;
+  z-index: 2;
+  display: block;
+  height: 44rpx;
+  width: 44rpx;
 }
 
-.form-item .clear{
-    position: absolute;
-    top: 26rpx;
-    right: 18rpx;
-    z-index: 2;
-    display: block;
-    background: #fff;
-    height: 44rpx;
-    width: 44rpx;
+/*
+.login-btn {
+  margin: 60rpx 0 40rpx 0;
+  height: 96rpx;
+  line-height: 96rpx;
+  color: #fff;
+  font-size: 30rpx;
+  width: 100%;
+  background: #b4282d;
+  border-radius: 6rpx;
+}
+*/
+.login-text{
+  font-size: 30rpx;
+  line-height: 80rpx;
+  color: #fff;
+}
+.form-item-text {
+  margin-top: 10px;
+  height: 60rpx;
+  width: 100%;
 }
 
-.login-btn{
-    margin: 60rpx 0 40rpx 0;
-    height: 96rpx;
-    line-height: 96rpx;
-    color: #fff;
-    font-size: 30rpx;
-    width: 100%;
-    background: #b4282d;
-    border-radius: 6rpx;
+.form-item-text .register {
+  display: block;
+  height: 60rpx;
+  float: left;
+  font-size: 30rpx;
+  color: #fff;
 }
 
-.form-item-text{
-    height: 35rpx;
-    width: 100%;
+.form-item-text .reset {
+  display: block;
+  height: 60rpx;
+  float: right;
+  font-size: 34rpx;
+  color: #fff;
 }
 
-.form-item-text .register{
-    display: block;
-    height: 34rpx;
-    float: left;
-    font-size: 28rpx;
-    color: #999;
-}
-
-.form-item-text .reset{
-    display: block;
-    height: 34rpx;
-    float: right;
-    font-size: 28rpx;
-    color: #999;
+.submit-btn {
+  padding: 10rpx 0;
+  background: #8fc320;
+  color: #fff;
+  margin: 20rpx 0;
+  font-size: 32rpx;
+  border-radius: 40px;
 }

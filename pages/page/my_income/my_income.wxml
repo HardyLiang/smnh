@@ -10,14 +10,14 @@
   <view class='income-list'>
     <navigator url="my_income_list/my_income_list">
       <view class='income-item'>
-        <view class='income-item-list'>已结算</view>
+        <view class='income-item-list'><image class="income-icon" src="../../images/ic_settlement_left_blue.png"></image>已结算</view>
         <text>90元</text>
         <view class="navigator-arrow"></view>
       </view>
     </navigator>
     <navigator url="../my_order/my_order">
       <view class='income-item'>
-        <view class='income-item-list'> 我的订单 </view>
+        <view class='income-item-list'><image class="income-icon" src="../../images/ic_order_left_blue.png"></image>我的订单</view>
         <view class="navigator-arrow"></view>
       </view>
     </navigator>

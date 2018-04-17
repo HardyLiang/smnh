@@ -64,7 +64,7 @@
 .paid-btn-item{
   overflow: hidden;
 }
-.paid-btn{
+/* .paid-btn{
   padding: 0 35rpx;
   color: #00a0e9;
   font-size: 14px;
@@ -75,4 +75,4 @@
   float: right;
   border-radius: 4px;
   margin:0 10rpx;
-}
+} */

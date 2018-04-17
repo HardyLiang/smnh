@@ -13,7 +13,7 @@
       <template is="GoodInfoTemplate" />
     </view>
     <view class='paid-btn-item'>
-      <view class='paid-btn'>发货</view>
+      <button  class="pro-btn c-blue"> 发 货 </button>
     </view>
   </view>
 

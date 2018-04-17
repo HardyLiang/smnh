@@ -26,9 +26,9 @@
       </view>
     </view> -->
     <view class='paid-btn-item'>
-      <text class='goods-status'>已发货</text>
-      <view class='paid-btn'>修改物流</view>
-      <view class='paid-btn paid-view-btn'>查看物流</view>
+      <button  class="pro-btn c-blue"> 已发货 </button>
+      <button  class="pro-btn c-orange"> 修改物流 </button>
+      <button  class="pro-btn c-blue"> 查看物流 </button>
     </view>
   </view>
 
