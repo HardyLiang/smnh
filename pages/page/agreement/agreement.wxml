@@ -1,2 +1,3 @@
-<!--pages/page/agreement/agreement.wxml-->
-<text>pages/page/agreement/agreement.wxml</text>
+<view>
+<web-view src="http://www.e-smnh.com/wap/index.htm"></web-view>
+</view>

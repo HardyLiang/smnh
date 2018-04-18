@@ -39,7 +39,7 @@ page {
   height: 40rpx;
   margin-right: 6px;
   vertical-align: top;
-  margin-top: 21rpx;
+  margin-top: 28rpx;
 }
 .income-item text {
   float: right;

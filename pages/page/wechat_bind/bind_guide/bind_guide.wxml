@@ -1,1 +1,10 @@
-
+<view style='height:{{winHeight}}px'>
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="swiper-style" indicator-color="rgba(0, 0, 0, .3)" indicator-active-color="#00a0e9" >
+      <block wx:for="{{imgUrls}}" wx:key="{{item}}">
+        <swiper-item>
+          <image src="{{item.imgs}}" class="slide-image" style='height:{{winHeight}}px' />
+         <view class='slide-text'>{{item.text}}</view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>

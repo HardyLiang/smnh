@@ -1,2 +1,7 @@
-<!--pages/page/operation_guide/operation_guide.wxml-->
-<text>pages/page/operation_guide/operation_guide.wxml</text>
+<!-- 菜单 -->
+<view class="nav-block">
+  <navigator class='wrap-item' wx:for="{{indexmenu}}" wx:key="{{item.url}}" url="">
+    <image src="{{item.icon}}" class='wrap_icon'></image>
+    <text>{{item.text}}</text>
+  </navigator>
+</view>

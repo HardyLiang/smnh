@@ -1,1 +1,25 @@
-/* pages/page/operation_guide/operation_guide.wxss */
+.nav-block {
+  background: #fff;
+  padding: 2px 0 10px;
+  overflow: hidden;
+}
+
+.wrap-item {
+  float: left;
+  width: 33.3%;
+  padding: 14rpx 0;
+  text-align: center;
+  position: relative;
+}
+
+.wrap_icon {
+  display: block;
+  margin: 20rpx auto 10rpx;
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.wrap-item>text {
+  font-size: 14px;
+  color: #4e4e4e;
+}

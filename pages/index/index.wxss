@@ -49,7 +49,7 @@
   height: 32rpx;
   margin-right: 5px;
   vertical-align: top;
-  margin-top: 10rpx;
+  margin-top: 14rpx;
 }
 
 .message-style {

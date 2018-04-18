@@ -4,7 +4,6 @@ Page({
   data: {
     username: '',
     password: '',
-    // code: '',
     loginErrorCount: 0
   },
   onLoad: function (options) {
@@ -16,7 +15,6 @@ Page({
     wx.navigateTo({
       url: "../../../index/index"
     })
-    console.log(11);
   },
   onReady: function () {
 

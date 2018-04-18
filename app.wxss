@@ -6,24 +6,27 @@
   justify-content: space-between;
   padding: 200rpx 0;
   box-sizing: border-box;
-} 
-page{
+}
+
+page {
   background: #f0f0f0;
-  font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+  font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
   font-size: 16px;
   min-height: 100%;
 }
+
 .navigator-arrow {
   padding-right: 26rpx;
   position: relative;
 }
+
 .navigator-arrow:after {
   content: " ";
   display: inline-block;
   height: 18rpx;
   width: 18rpx;
   border-width: 2rpx 2rpx 0 0;
-  border-color: #888888;
+  border-color: #888;
   border-style: solid;
   transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
   position: absolute;
@@ -31,7 +34,8 @@ page{
   margin-top: -8rpx;
   right: 28rpx;
 }
-.pro-btn{
+
+.pro-btn {
   float: right;
   border-radius: 5px;
   margin: 0 10rpx;
@@ -42,17 +46,25 @@ page{
   line-height: 70rpx;
   font-size: 28rpx;
 }
-.c-blue{
+
+.color-blue {
   color: #00a0e9;
 }
-.c-blue::after{
+
+.c-blue {
+  color: #00a0e9;
+}
+
+.c-blue::after {
   content: '';
   border: 1px solid #00a0e9;
 }
-.c-orange{
+
+.c-orange {
   color: #f16b00;
 }
-.c-orange::after{
+
+.c-orange::after {
   content: '';
   border: 1px solid #f16b00;
 }

@@ -1,0 +1,11 @@
+<import src="package_template/package_template.wxml" />
+<view>
+  <view class='package-list'>
+  <!-- 包裹列表 -->
+  <template is="packageTemplate" />
+  </view>
+  <view>
+  <button class="package-btn c-blue">确认发货</button>
+    <button  class="package-btn c-orange">添加物流</button> 
+  </view>
+</view>

@@ -36,3 +36,9 @@
 .mt28{
   margin-top: 28rpx;
 }
+.submit-btn{
+  background: #00a0e9;
+  color: #fff;
+  margin: 20rpx;
+  font-size: 32rpx;
+}

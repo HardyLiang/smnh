@@ -1,8 +1,8 @@
 <view class='page-container'>
   <text class='code-text color-orange'>绑定您的微信用于收取货款</text>
   <view class='code-box'>
-    <image src='../../images/11.jpg'></image>
-    <text class='code-msg-txt'>长按保存图中二维码</text>
+    <image src='../../images/bg_wei_xin_gong_zong_hao_kuang_default.png' class='code-img-box'></image>
+    <image src='../../images/bg_wei_xin_gong_zong_hao.png' class='code-img'></image>
   </view>
   <view class='wechat-bind-msg'>
     <text>操作指引：</text>
@@ -10,5 +10,7 @@
      <text>2、识别二维码关注“实名农户”</text>
      <text>3、进入商城个人中心-农户认证</text>
   </view>
-  <view class='view-detail-btn'> 查看详细操作指引 </view>
+  <navigator url="bind_guide/bind_guide">
+   <view class='view-detail-btn'> 查看详细操作指引 </view>
+   </navigator>
 </view>

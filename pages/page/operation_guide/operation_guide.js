@@ -1,66 +1,49 @@
 // pages/page/operation_guide/operation_guide.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-  
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-  
+    this.fetchData();
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  fetchData: function () {
+    this.setData({
+      indexmenu: [
+        {
+          'icon': '../../images/ic_web_order_delivery.png',
+          'text': '订单发货',
+          'url': ''
+        },
+        {
+          'icon': '../../images/ic_web_info_edit.png',
+          'text': '修改个人信息',
+          'url': ''
+        },
+        {
+          'icon': '../../images/ic_web_share_shop.png',
+          'text': '分享店铺',
+          'url': ''
+        },
+        {
+          'icon': '../../images/ic_web_release_products.png',
+          'text': '发布产品',
+          'url': ''
+        },
+        {
+          'icon': '../../images/ic_web_management_release.png',
+          'text': '管理已发布',
+          'url': ''
+        },
+        {
+          'icon': '../../images/ic_web_farmer_register.png',
+          'text': '实名开店',
+          'url': ''
+        },
+        {
+          'icon': '../../images/ic_web_more.png',
+          'text': '更多',
+          'url': ''
+        }
+      ]
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

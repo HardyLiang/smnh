@@ -1,7 +1,8 @@
-page{
+page {
   background: #fff;
 }
-.page-container{
+
+.page-container {
   display: flex;
   flex-direction: column;
   min-height: 100%;
@@ -10,41 +11,57 @@ page{
   padding: 25rpx 0;
   background: #fff;
 }
-.code-text{
+
+.code-text {
   font-size: 15px;
   line-height: 30px;
 }
-.color-orange{
+
+.color-orange {
   color: #f38001;
 }
-.code-box{
-  width: 494rpx;
+
+.code-box {
+  position: relative;
+   width: 500rpx;
+  height: 522rpx;
 }
-.code-box image{
+
+.code-img-box {
+  position: absolute;
+  top: 0;
+  left:0;
+  display: block;
+  margin: 20rpx auto 30rpx;
+  width: 500rpx;
+  height: 522rpx;
+}
+
+.code-img {
+  position: absolute;
+  top: 10rpx;
+  left:45rpx;
   display: block;
   margin: 58rpx auto 30rpx;
-  width: 378rpx;
-  height: 378rpx;
+  width: 410rpx;
+  height: 410rpx;
 }
-.code-msg-txt{
-  display: block;
-  text-align: center;
-  font-size: 16px;
-  color: #00a0e9;
-}
-.wechat-bind-msg{
+
+.wechat-bind-msg {
   width: 500rpx;
   margin-top: 50rpx;
   margin-bottom: 50rpx;
 }
-.wechat-bind-msg text{
+
+.wechat-bind-msg text {
   display: block;
   font-size: 15px;
   color: #00a0e9;
   line-height: 30px;
 }
-.view-detail-btn{
-  padding:0 58rpx;
+
+.view-detail-btn {
+  padding: 0 58rpx;
   background-color: #00a0e9;
   color: #fff;
   border-radius: 5px;

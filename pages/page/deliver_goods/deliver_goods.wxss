@@ -1,0 +1,10 @@
+@import "package_template/package_template.wxss";
+.package-btn{
+  float: right;
+  border-radius: 5px;
+  margin: 30rpx 2.5%;
+  width: 44%;
+  height: 80rpx;
+  line-height: 81rpx;
+  font-size: 30rpx;
+}

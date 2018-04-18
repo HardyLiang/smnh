@@ -7,10 +7,11 @@
 }
 
 .user-head {
-  width: 180rpx;
-  height: 180rpx;
+  width: 170rpx;
+  height: 170rpx;
   border-radius: 50%;
   overflow: hidden;
+  margin-bottom: 10px;
 }
 
 .user-cell {
@@ -53,7 +54,13 @@
 .user-list-item>view:first-child {
  flex: 1;
 }
-
+.income-icon{
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 8px;
+  vertical-align: top;
+  margin-top: 24rpx;
+}
 /* .user-list-item:last-child {
   border-bottom: none;
 } */
