@@ -2,27 +2,29 @@
 <view class='login-top'>
 <image src='../../../images/11.jpg' ></image>
 </view>
+ 
     <view class="form-box">
+     <form bindsubmit='startLogin'>
     	<view class="form-item">
         <image src='../../../images/ic_login_blue_id_left.png' class='form-icon'></image>
-    		<input class="username" value="{{username}}" bindinput="bindUsernameInput" placeholder="账号" auto-focus placeholder-class="phcolor"/>
+    		<input class="username" value="{{username}}" bindinput="bindUsernameInput" placeholder="账号" auto-focus placeholder-class="phcolor" name="username"/>
     		<image wx:if="{{ username.length > 0 }}" id="clear-username" class="clear" src="../../../images/ic_manual_left.png" catchtap="clearInput"></image>
     	</view>
 
     	<view class="form-item">
       <image src='../../../images/ic_login_blue_pass_left.png' class='form-icon'></image>
-    		<input class="password" value="{{password}}" password bindinput="bindPasswordInput" placeholder="密码" placeholder-class="phcolor"/>
+    		<input class="password" value="{{password}}" password bindinput="bindPasswordInput" placeholder="密码" placeholder-class="phcolor" name="password"/>
     		<image class="clear" id="clear-password" wx:if="{{ password.length > 0 }}" src="../../../images/ic_pass_gray_hide.png"  ></image>
     	</view>
       <view class='login-text'>首次登录请使用手机短信收到的初始密码</view>
 
-    	<button class='submit-btn' catchtap="startLogin">登录</button>
-
+    	<button class='submit-btn' catchtap="" form-type='submit'>登录</button>
+ </form>
     	<view class="form-item-text">
     		<navigator url="../register/register" class="register">注册账号</navigator>
 			<navigator url="../forget/forget" class="reset">忘记密码</navigator>
 
     	</view>
-
     </view>
+   
 </view>
