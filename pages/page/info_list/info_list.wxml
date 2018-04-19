@@ -37,6 +37,6 @@
     <view class='base-item'>
       <text>发货地址：</text>广东省广州市天河区新塘街道软件路12号</view>
   </view>
-  <button class='submit-btn'>编辑信息</button>
-  <!-- <button class='submit-btn'>保存</button> -->
+  <button class='big-btn'>编辑信息</button>
+  <!-- <button class='big-btn'>保存</button> -->
 </view>

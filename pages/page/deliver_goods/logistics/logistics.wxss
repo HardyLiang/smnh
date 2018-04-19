@@ -1,1 +1,20 @@
-/* pages/page/deliver_goods/logistics/logistics.wxss */
+page{
+  background: #fff;
+}
+.logistics-list{
+  padding: 10px;
+}
+.txt-style{
+  display: inline-block;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 20px;
+  background: #f0f0f0;
+  font-size: 32rpx;
+  border-radius: 3px;color: #666;
+  margin: 8px 15px 5px 0;
+}
+.active{
+  background: #00a9e0;
+  color: #fff;
+}

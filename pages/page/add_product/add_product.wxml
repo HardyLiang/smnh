@@ -92,7 +92,7 @@
 
     </view>
     <view>
-    <button class='submit-btn'>确认发布</button>
+    <button class='big-btn'>确认发布</button>
     </view>
 </view>
     <!-- //产品detail -->

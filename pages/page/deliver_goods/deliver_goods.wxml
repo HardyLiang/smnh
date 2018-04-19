@@ -2,10 +2,10 @@
 <view>
   <view class='package-list'>
   <!-- 包裹列表 -->
-  <template is="packageTemplate" />
+  <template is="packageTemplate"  wx:for="{{packageLists}}" wx:key/>
   </view>
   <view>
-  <button class="package-btn c-blue">确认发货</button>
-    <button  class="package-btn c-orange">添加物流</button> 
+  <button class="package-btn c-blue" >确认发货</button>
+    <button  class="package-btn c-orange" bindtap="insert">添加物流</button> 
   </view>
 </view>

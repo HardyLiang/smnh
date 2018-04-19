@@ -1,12 +1,13 @@
 <template name="packageTemplate">
-  <view class='package-item'>
+  <view class='package-item' >
    <view class='form-group'>
-   <view class='package-title'>包裹 <icon class='icon-small' type='cancel'></icon></view>
+   <view class='package-title'>包裹 <icon class='icon-small' type='cancel' bindtap="delBind"></icon></view>
     <view class="input-item">
       <text class="input-item-label">物流公司</text>
-      <view class="input-item-content">
-        <input type="number" placeholder="请选择物流公司" ></input>
+      <view class="input-item-content" bindtap=''>
+        <input type="number" placeholder="请选择物流公司" disabled='false'></input>
       </view>
+      <view class='icon-select-arrow'></view>
     </view>
     <view class="input-item">
       <text class="input-item-label">物流单号</text>
@@ -17,8 +18,9 @@
     <view class="input-item">
       <text class="input-item-label">产品</text>
       <view class="input-item-content">
-        <input type="text" placeholder="请选择产品" ></input>
+        <input type="text" placeholder="请选择产品" disabled='false'></input>
       </view>
+      <view class='icon-select-arrow'></view>
     </view>
   </view>
   </view>

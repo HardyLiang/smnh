@@ -39,10 +39,3 @@ color: #00a0e9;
 .agree-box{
   padding: 10rpx 30rpx
 }
-.submit-btn{
-  padding: 10rpx 0;
-  background: #00a0e9;
-  color: #fff;
-  margin: 20rpx;
-  font-size: 32rpx;
-}

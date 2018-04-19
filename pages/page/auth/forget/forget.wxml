@@ -34,5 +34,5 @@
     </view>
   
   </view>
-   <button class='submit-btn'>确定</button>
+   <button class='big-btn'>确定</button>
 </view>

@@ -4,13 +4,6 @@
 	margin: 20rpx 0;
 	background: #fff;
 }
-/* .input-list{
-	padding: 0 20rpx;
-	margin: 20rpx 0;
-	background: #fff;
-	border-top: 1rpx solid #ddd;
-	border-bottom: 1rpx solid #ddd;
-} */
 .input-item{
 	padding: 20rpx;
 	line-height: 2;
@@ -97,11 +90,4 @@ textarea{
 }
 .product-upload{
   margin: 10px 0;
-}
-.submit-btn{
-  padding: 10rpx 0;
-  background: #00a0e9;
-  color: #fff;
-  margin: 20rpx;
-  font-size: 32rpx;
 }

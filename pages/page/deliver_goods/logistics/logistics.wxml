@@ -1,2 +1,4 @@
-<!--pages/page/deliver_goods/logistics/logistics.wxml-->
-<text>pages/page/deliver_goods/logistics/logistics.wxml</text>
+<view class='logistics-list'>
+  <text wx:for="{{companyItem}}" class="txt-style {{state==index?'active':''}}"
+   bindtap="selectCompany" data-key='{{index}}' wx:key>{{item}}</text>
+</view>

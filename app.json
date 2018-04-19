@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/page/deliver_goods/deliver_goods",
     "pages/page/user/user",
     "pages/page/auth/login/login",
     "pages/page/my_order/my_order",
@@ -21,9 +20,11 @@
     "pages/page/operation_guide/operation_guide",
     "pages/page/agreement/agreement",
     "pages/page/add_product/product_classify/product_classify",
-    "pages/page/about_soft/about_soft",
-    
-    "pages/page/deliver_goods/logistics/logistics"
+    "pages/page/deliver_goods/check_logistics/check_logistics",
+    "pages/page/deliver_goods/logistics/logistics",
+    "pages/page/deliver_goods/deliver_goods",
+    "pages/page/about_soft/about_soft"
+   
   ],
   "window": {
     "backgroundTextStyle": "light",

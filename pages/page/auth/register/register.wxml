@@ -107,9 +107,9 @@
     <view class="input-item-content">
       <label bindtap="">
         <checkbox />我已阅读
-        <text class='c-blue'>《“实名农户平台”服务协议》</text>
+        <text class='color-blue'>《“实名农户平台”服务协议》</text>
       </label>
     </view>
   </view>
-  <button class='submit-btn'>注册</button>
+  <button class='big-btn'>注册</button>
 </view>

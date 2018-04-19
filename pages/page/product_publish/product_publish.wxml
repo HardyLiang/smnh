@@ -27,6 +27,6 @@
   </view>
   <!-- 底部按钮 -->
   <view class='pro-new'>
-  <button class='pro-new-btn' bindtap='AddProductTap'>发布新产品</button>
+  <button class='big-btn' bindtap='AddProductTap'>发布新产品</button>
   </view>
 </view>
