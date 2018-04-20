@@ -14,14 +14,32 @@ Page({
   },
 
   startLogin: function (e) {
+    util.choosePhoto(5,function(res){
+      console.log("=============");
+      var list =res;
+      var size =res.length;
+      console.log(list);
+      util.drawCanvas(list,function(res){
+        console.log("drawCanvas");
+        console.log(res);
+      });
+    });
+
     console.log(11);
     //获得表单数据
     var objData = e.detail.value;
     console.log(e.detail.value);
     app.func.onLogin("440684198812271518","123456",function(res){
       console.log(res.data);
+      console.log()
     })
+<<<<<<< Updated upstream
 
+=======
+    // wx.switchTab({
+    //   url: '../../../index/index',
+    // })
+>>>>>>> Stashed changes
   },
   onReady: function () {
 
