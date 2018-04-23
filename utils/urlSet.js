@@ -1,5 +1,5 @@
-// var baseUrl ="http://61.28.113.182:9595";
-var baseUrl ="https://xz-weixin.e-tecsun.com";
+var baseUrl ="http://61.28.113.182:9595";
+// var baseUrl ="https://xz-weixin.e-tecsun.com";
 //登陆
 var login = baseUrl +"/siboss/iface/app/login";
 //忘记密码获取验证码

@@ -7,9 +7,9 @@ Page({
     username: '440684198812271518',
     usernameHide: true,
     password: '123456',
-    passwordSrc: '../../../images/ic_pass_gray_hide.png',
-    passFocus: false,
-    passFlag: true,
+    passwordSrc:'../../../images/ic_pass_gray_hide.png',
+    passFocus:false,
+    passFlag:true,
     loginErrorCount: 0,
     hidden: true,
     typeFlag: 'password'
@@ -54,8 +54,9 @@ Page({
       //保存关键数据
       var farmerId = res.data.id;
       var idCard = res.data.certNum;
-      var name = res.data.name;
-      var areaId = res.areaId;
+
+      var name =res.data.name;
+      var areaId =res.areaId;
       var authorizeStatus = res.data.authorizeStatus;
       var deviceId = res.data.deviceId;
       wx.setStorageSync('farmerId', farmerId);
@@ -66,7 +67,7 @@ Page({
       wx.setStorageSync('deviceId', deviceId);
       app.globalData.userName = name;
       app.globalData.idCard = idCard;
-
+      
       wx.showToast({
         title: '登录成功',
         icon: "success",
@@ -122,7 +123,7 @@ Page({
     if (this.data.passFlag) {
       this.setData({
         passFlag: false,
-        passFocus: true,
+        passFocus:true,
         typeFlag: 'text',
         passwordSrc: '../../../images/ic_pass_gray_show.png'
       });
@@ -140,11 +141,12 @@ Page({
     console.log("-----------")
     console.log(e.detail.value)
     wx.setStorageSync("username", e.detail.value)
-    if (e.detail.value) {
+   
+    if (e.detail.value){
       this.setData({
         usernameHide: true
       })
-    } else {
+    }else{
       this.setData({
         usernameHide: false
       })

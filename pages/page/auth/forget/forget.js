@@ -19,10 +19,7 @@ Page({
      })
     getApp().func.checkMobileByCard(username,function (res){
       console.log(res);
-      wx.showToast({
-        title: res.data,
-      })
-
+     
     })
   
   },
