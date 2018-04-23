@@ -13,6 +13,7 @@
 
 .consignee-info {
   color: #757575;
+  position: relative;
 }
 
 .consignee-info>text {

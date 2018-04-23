@@ -38,6 +38,7 @@ Page({
     console.log(11);
     //调用登录方法
     app.func.onLogin(name, password,function(messgae,res){
+
       console.log(res.data);
       //隐藏loading弹窗
       that.isHideLoading();
@@ -81,6 +82,7 @@ Page({
     })
 
    
+
   },
   onReady: function () {
 

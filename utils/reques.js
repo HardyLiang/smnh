@@ -214,12 +214,12 @@ function getSale(card, cb) {
   wx.request({
     url: urlSet.getSale,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json"
     },
     method: "post",
-    data: util.json2Form({
+    data: {
       card: card
-    }),
+    },
     complete: function (res) {
       var message = res.data.message;
       console.log(message);

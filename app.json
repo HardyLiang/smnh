@@ -1,5 +1,6 @@
 {
   "pages": [
+    
     "pages/index/index",
     "pages/page/user/user",
     "pages/page/auth/login/login",
@@ -34,7 +35,7 @@
   },
   "tabBar": {
     "color": "#ccc",
-    "selectedColor": "#fb2f31",
+    "selectedColor": "#00a0e9",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
