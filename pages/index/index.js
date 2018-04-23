@@ -14,6 +14,7 @@ Page({
     interval: 5000,
     duration: 1000,
     indexmenu: [],
+ 
   },
   fetchData: function () {
     this.setData({
@@ -54,6 +55,7 @@ Page({
   },
   onLoad: function () {
     this.fetchData();
+    // console.log(url);
   //  我的消息列表
     this.setData({
       msgList: [
@@ -62,7 +64,12 @@ Page({
         { url: "url", title: "公告哈 点击加了收快递费静安寺开发就是" }]
     });
   },
-    changeRoute: function (url) {
+  hrefLink: function (e) {
+      console.log(e);
+      var url = e.currentTarget.dataset.id;
+      if (!util.checkIsLogin()) {
+        return;
+      }
     wx.navigateTo({
       url: `../page/${url}/${url}`
     })

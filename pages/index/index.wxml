@@ -10,10 +10,11 @@
   </view>
   <!-- 菜单 -->
   <view class="nav-block">
-    <navigator class='wrap-item' wx:for="{{indexmenu}}" wx:key="{{item.url}}" url="../page/{{item.url}}/{{item.url}}">
+  <!-- url="../page/{{item.url}}/{{item.url}}"  -->
+    <view class='wrap-item' wx:for="{{indexmenu}}" wx:key="{{item.url}}" bindtap='hrefLink' data-id="{{item.url}}">
       <image src="{{item.icon}}" class='wrap_icon'></image>
       <text>{{item.text}}</text>
-    </navigator>
+    </view>
   </view>
   <!-- /菜单 -->
   <!-- 我的消息 -->

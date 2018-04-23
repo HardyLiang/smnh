@@ -97,7 +97,7 @@ margin: 12px auto 18px;
   display: block;
   height: 60rpx;
   float: right;
-  font-size: 34rpx;
+  font-size: 32rpx;
   color: #fff;
 }
 
