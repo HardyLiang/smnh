@@ -9,18 +9,24 @@ function onLogin(usename, pass, cb) {
   wx.request({
     url: urlSet.login,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "content-type": "application/json;charset=UTF-8"
     },
     method: "post",
-    data: util.json2Form({ certNum: usename, password: passwork, type: "1" }),
+    data: { certNum: usename, password: passwork, type: "1" },
     complete: function (res) {
       var message = res.data.message;
+      var statusCode= res.data.statusCode;
       console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      console.log("statusCode"+statusCode);
+      if (statusCode!=null&&"200"==statusCode){
+        return typeof cb == "function" && cb(message,res.data)
+      }else{
+        return typeof cb == "function" && cb(message,false)
+      }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb('登录失败！',false)
     }
   })
 
@@ -228,7 +234,7 @@ function getSale(card, cb) {
 
 }
 //通过身份证获取手机号
-function checkMobileByCard(card, cb) {
+function checkMobileByCard(idCard, cb) {
   console.log("checkMobileByCard");
   wx.request({
     url: urlSet.checkMobileByCard,
@@ -237,8 +243,9 @@ function checkMobileByCard(card, cb) {
     },
     method: "post",
     data: util.json2Form({
-      card: card
-    }),
+      card: idCard
+    })
+    ,
     complete: function (res) {
       var message = res.data.message;
       console.log(message);
@@ -278,7 +285,7 @@ function getFPUser(mgrid, cb) {
 
 }
 //获取扶贫单位信息
-function getFPManager(mgrid, cb) {
+function getFPManager(cb) {
   console.log("getFPManager");
   wx.request({
     url: urlSet.getFPManager,

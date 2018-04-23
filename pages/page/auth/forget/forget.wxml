@@ -3,7 +3,7 @@
     <view class="input-item">
       <text class="input-item-label">身份证号</text>
       <view class="input-item-content">
-        <input type="number" placeholder="" value='934593485349534999'></input>
+        <input type="number" placeholder="" value='{{icCardValue}}'></input>
       </view>
     </view>
     <view class="input-item">

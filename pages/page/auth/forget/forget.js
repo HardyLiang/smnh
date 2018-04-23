@@ -5,13 +5,25 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    icCardValue: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var username = wx.getStorageSync('username')
+    console.log(username);
+    this.setData({
+      icCardValue: username
+     })
+    getApp().func.checkMobileByCard(username,function (res){
+      console.log(res);
+      wx.showToast({
+        title: res.data,
+      })
+
+    })
   
   },
 

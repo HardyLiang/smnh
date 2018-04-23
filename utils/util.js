@@ -100,6 +100,18 @@ function drawCanvas(imgurl,cb) {
     }
   }, this)
 }
+//检测空值
+function checkNullContent(content,tip){
+  if ("" == this.trim(content)) {
+  wx.showToast({
+    title: tip,
+    image: '../../../images/ic_img_delete_pressed.png'
+  })
+  return true;
+}else{
+  return false;
+}
+}
 
 module.exports = {
   json2Form: json2Form,
@@ -108,5 +120,6 @@ module.exports = {
   previewImage: previewImage,
   choosePhoto: choosePhoto,
   drawCanvas: drawCanvas,
+  checkNullContent: checkNullContent,
 
 }

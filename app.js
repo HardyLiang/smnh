@@ -41,6 +41,8 @@ App({
     farmerId:""  //农户id
   },
   func: {
-    onLogin: http.onLogin
+    onLogin: http.onLogin,
+    getFPManager: http.getFPManager,
+    checkMobileByCard: http.checkMobileByCard,
   }  
 })
