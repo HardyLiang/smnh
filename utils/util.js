@@ -112,6 +112,17 @@ function checkNullContent(content,tip){
   return false;
 }
 }
+//注销登录清楚数据；
+function clearStorageData(){
+  //清除微信的缓存
+  wx.clearStorageSync();
+  //设置全局信息为空
+  getApp().globalData.userName="";
+  getApp().globalData.idCard="";
+  getApp().globalData.farmerId="";
+
+}
+
 
 module.exports = {
   json2Form: json2Form,
@@ -121,5 +132,5 @@ module.exports = {
   choosePhoto: choosePhoto,
   drawCanvas: drawCanvas,
   checkNullContent: checkNullContent,
-
+  clearStorageData: clearStorageData,
 }
