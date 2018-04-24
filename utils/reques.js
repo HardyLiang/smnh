@@ -38,18 +38,23 @@ function fotgetPass(idCard, mobile, cb) {
   wx.request({
     url: urlSet.forgotPass,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
-    data: util.json2Form({ certNum: idCard, phone: mobile, type: "1" }),
+    data: { certNum: idCard, phone: mobile, type: "1" },
     complete: function (res) {
+      console.log(res);
       var message = res.data.message;
-      console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      var statusCode=res.data.statusCode;
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("获取验证码失败！",false)
     }
   })
 
@@ -57,22 +62,27 @@ function fotgetPass(idCard, mobile, cb) {
 }
 //更新密码
 function updatePassword(idCard, newPass, moblie, strCode, cb) {
+  var md5pass = md5.hexMD5(newPass);
   console.log("updatePassword");
   wx.request({
     url: urlSet.updatePassword,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
-    data: util.json2Form({ certNum: idCard, password: mobile, phone: mobile, code: strCode, type: "1" }),
+    data: { certNum: idCard, password: md5pass, phone: moblie, code: strCode, type: "1" },
     complete: function (res) {
       var message = res.data.message;
-      console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      var statusCode = res.data.statusCode;
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, true)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("修改密码失败！",false)
     }
   })
 
@@ -86,7 +96,7 @@ function addPersonMsg(name, idCard, mobile, sex, areaId,
   wx.request({
     url: urlSet.addPersonMsg,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -121,18 +131,24 @@ function getPersonMsg(farmerId, cb) {
   wx.request({
     url: urlSet.getPersonMsg,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
-    data: util.json2Form({ id: farmerId }),
+    data: { id: farmerId },
     complete: function (res) {
       var message = res.data.message;
+      var statusCode = res.data.statusCode;
       console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      console.log("statusCode" + statusCode);
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb('获取个人信息失败！',false)
     }
   })
 
@@ -165,7 +181,7 @@ function updateShareCommission(orderId, shareCommission, cb) {
   wx.request({
     url: urlSet.updateShareCommission,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({ id: orderId, shareCommission: shareCommission }),
@@ -188,7 +204,7 @@ function getSetRec(card, pageSize, pageIndex, beginTime, endTime, cb) {
   wx.request({
     url: urlSet.getSetRec,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -239,21 +255,26 @@ function checkMobileByCard(idCard, cb) {
   wx.request({
     url: urlSet.checkMobileByCard,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
-    data: util.json2Form({
-      card: idCard
-    })
+    data: {
+      idCard: idCard
+    }
     ,
     complete: function (res) {
       var message = res.data.message;
+      var statusCode =res.data.statusCode;
       console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("获取手机号失败！",false)
     }
   })
 
@@ -265,7 +286,7 @@ function getFPUser(mgrid, cb) {
   wx.request({
     url: urlSet.getFPUser,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -313,7 +334,7 @@ function checkWXBoundStatus(card, cb) {
   wx.request({
     url: urlSet.checkWXBoundStatus,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -338,7 +359,7 @@ function findBank(accNo, cb) {
   wx.request({
     url: urlSet.findBank,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -384,7 +405,7 @@ function getAgreementMessageInfo(messId, cb) {
   wx.request({
     url: urlSet.getAgreementMessageInfo,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -409,7 +430,7 @@ function getAgreementMessageList(card, pageIndex, cb) {
   wx.request({
     url: urlSet.getAgreementMessageList,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -434,7 +455,7 @@ function getStoreStatusByCard(card, cb) {
   wx.request({
     url: urlSet.getStoreStatusByCard,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -480,7 +501,7 @@ function checkPersonHeadImg(idCard, cb) {
   wx.request({
     url: urlSet.checkPersonHeadImg,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -504,7 +525,7 @@ function updateGoodInventory(id, goodsInventory, cb) {
   wx.request({
     url: urlSet.updateGoodInventory,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -529,7 +550,7 @@ function getLogisticsInfo(oid, cb) {
   wx.request({
     url: urlSet.getLogisticsInfo,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -553,7 +574,7 @@ function getPersonShopURL(card, cb) {
   wx.request({
     url: urlSet.getPersonShopURL,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -577,7 +598,7 @@ function addGoodsDetailPicSort(busId, id, serial, cb) {
   wx.request({
     url: urlSet.addGoodsDetailPicSort,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -603,7 +624,7 @@ function updateGoodsDetailPicture(id, gId, oldPictureUrl, newPictureId, serial, 
   wx.request({
     url: urlSet.updateGoodsDetailPicture,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -632,7 +653,7 @@ function updateGoodsMainPicture(method, gId, changPictureId, newPictureId, cb) {
   wx.request({
     url: urlSet.updateGoodsMainPicture,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -659,7 +680,7 @@ function delTextInfo(busId, imgId, serial, cb) {
   wx.request({
     url: urlSet.delTextInfo,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -686,7 +707,7 @@ function changeTextInfo(startId, nextId, cb) {
   wx.request({
     url: urlSet.changeTextInfo,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -711,7 +732,7 @@ function updateTextInfo(id, picDesc, cb) {
   wx.request({
     url: urlSet.updateTextInfo,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -737,7 +758,7 @@ function addTextInfo(strType, busId, picDesc, serial, managerId, cb) {
   wx.request({
     url: urlSet.addTextInfo,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -765,7 +786,7 @@ function editHTML(id, goodsDetails, goodsDetailsMobile, cb) {
   wx.request({
     url: urlSet.editHTML,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -792,7 +813,7 @@ function clearGoodsDetails(id, cb) {
   wx.request({
     url: urlSet.clearGoodsDetails,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -816,7 +837,7 @@ function checkWorld(world, cb) {
   wx.request({
     url: urlSet.checkWorld,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -840,7 +861,7 @@ function orderShippingUpdate(id, card, shipCode, expressCompanyId, cb) {
   wx.request({
     url: urlSet.orderShippingUpdate,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -867,7 +888,7 @@ function orderShippingSave(id, card, shipCode, expressCompanyId, cb) {
   wx.request({
     url: urlSet.orderShippingSave,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -915,7 +936,7 @@ function getOrder(personId, status, pageSize, pageIndex, cb) {
   wx.request({
     url: urlSet.getOrder,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -943,7 +964,7 @@ function stopProduct(id, cb) {
   wx.request({
     url: urlSet.stopProduct,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -968,7 +989,7 @@ function getProductDetail(type, packageId, cb) {
   wx.request({
     url: urlSet.getProductDetail,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -996,7 +1017,7 @@ function updateOnlyProduct(id, deviceId, productId,
   wx.request({
     url: urlSet.updateOnlyProduct,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -1036,7 +1057,7 @@ function addOnlyProduct( deviceId, productId,
   wx.request({
     url: urlSet.addOnlyProduct,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -1161,7 +1182,7 @@ function updatePersonMsg(id, name,
   wx.request({
     url: urlSet.updatePersonMsg,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -1197,7 +1218,7 @@ function getPicLists(id, type, cb) {
   wx.request({
     url: urlSet.getPicLists,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({
@@ -1223,7 +1244,7 @@ function getProductListDetail(id, type, cb) {
   wx.request({
     url: urlSet.getProductListDetail,
     header: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: util.json2Form({

@@ -1,6 +1,7 @@
 // var api = require('../../../config/api.js');
 var util = require('../../../../utils/util.js');
 var app = getApp();
+var event =require('../../../../utils/event.js')
 
 Page({
   data: {
@@ -73,6 +74,7 @@ Page({
         icon: "success",
         duration: 1000,
         success: function () {
+          event.emit(event.kLoginSuccessEventName, messgae);
           //延迟1秒跳转,跳转回主页
           setTimeout(function () {
             wx.switchTab({
