@@ -5,26 +5,16 @@
     <text class='paid-txt1'>订单时间：2018-04-10</text>
     <text class='paid-txt1'>发货时间：2018-04-10</text>
     <view class='consignee-info'> <view class='copyBtn copyPos'>复制</view>
+    <view selectable="true">
       <text>收件人：宝贝儿</text>
       <text>手机号：14798789876</text>
       <text>地址：河北省衡水市新塘街道软件路13号好水电费sdfasdfasdfa撒打飞机啊</text>
+      </view>
     </view>
     <view class="goods-order">
       <!-- <block wx:for="{{}}" wx:for-item=""></block> -->
       <template is="GoodInfoTemplate" />
     </view>
-    <!-- <view class='goods-container'>
-      <view class='good-img'>
-        <image src='../../images/11.jpg'></image>
-      </view>
-      <view class='good-info'>
-        <text class='item-good-name'>这个是木瓜的商品名称</text>
-        <text class='paid-txt2'>规格：50一斤</text>
-        <text class='paid-txt2'>数量：<text class='color-blue'> x 4</text> </text>
-        <text class='paid-txt2 '>应收金额： <text class='color-blue mr15'> 890.53元</text>
-        <text class='color-blue'> 分销 0.89元</text></text>
-      </view>
-    </view> -->
     <view class='paid-btn-item'>
       <button  class="pro-btn c-blue"> 已发货 </button>
       <button  class="pro-btn c-orange"> 修改物流 </button>

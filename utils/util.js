@@ -37,7 +37,7 @@ function checkIsLogin() {
       success: function (res) {
         if (res.confirm) {
           wx.navigateTo({
-            url: '../../auth/login/login',
+            url: '../page/auth/login/login',
           })
         } else if (res.cancel) {
 
