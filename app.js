@@ -6,6 +6,8 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
+    this.globalData.userName = wx.getStorageSync("userName");
+    this.globalData.idCard = wx.getStorageSync("idCard");
 
     // 登录
     wx.login({
@@ -44,5 +46,9 @@ App({
     onLogin: http.onLogin,
     getFPManager: http.getFPManager,
     checkMobileByCard: http.checkMobileByCard,
+    fotgetPass: http.fotgetPass,
+    updatePassword: http.updatePassword,
+    getPersonMsg: http.getPersonMsg,
+
   }  
 })
