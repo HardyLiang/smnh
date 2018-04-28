@@ -16,7 +16,7 @@
   position: relative;
 }
 
-.consignee-info>text {
+.consignee-info text {
   display: block;
   line-height: 22px;
 }

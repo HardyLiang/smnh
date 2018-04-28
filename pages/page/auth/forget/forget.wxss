@@ -42,4 +42,6 @@
   border-radius: 3px;
   z-index: 100;
 }
-.hidden{display: none}
+.hidden{
+  display: none;
+}

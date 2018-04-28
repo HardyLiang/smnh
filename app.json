@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/page/user/user",
     "pages/page/auth/login/login",
+    "pages/page/user/user",
     "pages/page/my_order/my_order",
     "pages/page/my_income/my_income",
     "pages/page/auth/register/register",
@@ -24,7 +24,6 @@
     "pages/page/deliver_goods/logistics/logistics",
     "pages/page/deliver_goods/deliver_goods",
     "pages/page/about_soft/about_soft"
-   
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -34,9 +33,9 @@
   },
   "tabBar": {
     "color": "#ccc",
-    "selectedColor": "#fb2f31",
-    "borderStyle": "black",
-    "backgroundColor": "#ffffff",
+    "selectedColor": "#00a0e9",
+    "borderStyle": "#eee",  
+    "backgroundColor": "#fff",
     "list": [
       {
         "pagePath": "pages/index/index",
