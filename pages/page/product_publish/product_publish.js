@@ -1,18 +1,37 @@
 // pages/page/proudct_publish/product_publish.js
+var common =require('../../../utils/common.js')
+var util =require('../../../utils/util.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    imgUrlValue:"",
+    name:"",
+    mobile:"",
+    idCard:"",
+    descriptionEvaluate:"",
+    serviceEvaluate:"",
+    shipEvaluate:"",
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    //获取用户的个人信息，首先获取本地缓存数据
+    var res = wx.getStorageSync(common.CC_FARMERINFO);
+    var idCard = util.hideIdCardMiddle(res.data.idCard);
+    this.setData({
+      imgUrlValue: res.data.picPath,
+      name: res.data.name,
+      mobile: res.data.mobile,
+      idCard: idCard,
+      descriptionEvaluate: res.data.descriptionEvaluate,
+      serviceEvaluate: res.data.serviceEvaluate,
+      shipEvaluate: res.data.shipEvaluate,
+    })
   },
   AddProductTap: function (event) {
     wx.navigateTo({

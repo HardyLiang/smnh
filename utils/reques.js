@@ -425,26 +425,25 @@ function getAgreementMessageInfo(messId, cb) {
 }
 
 //获取协议消息列表
-function getAgreementMessageList(card, pageIndex, cb) {
+function getAgreementMessageList(cb) {
   console.log("getAgreementMessageList");
   wx.request({
     url: urlSet.getAgreementMessageList,
     header: {
       "Content-Type": "application/json;charset=UTF-8"
     },
-    method: "post",
-    data: util.json2Form({
-      card: card,
-      pageIndex: pageIndex
-    }),
+    method: "get",
     success: function (res) {
       var message = res.data.message;
-      console.log(message);
-      return typeof cb == "function" && cb(res.data)
-
+      var statusCode = res.data.statusCode;
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("获取消息失败！",false)
     }
   })
 
@@ -1261,8 +1260,32 @@ function getProductListDetail(id, type, cb) {
       return typeof cb == "function" && cb(false)
     }
   })
-
 }
+  function getOpenId(code,appid,secret,cb){
+    wx.request({
+      url: 'https://api.weixin.qq.com/sns/jscode2session?appid='+appid+'&secret='+secret+'&grant_type=authorization_code&js_code=' + code,
+      header: {
+        "content-type": "application/json;charset=UTF-8"
+      },
+      method: "get",
+      complete: function (res) {
+        var openId = res.data.openid;
+        console.log("openId=" + openId);
+        if (openId) {
+          return typeof cb == "function" && cb(openId)
+        } else {
+          return typeof cb == "function" && cb(false)
+        }
+
+      },
+      fail: function () {
+        return typeof cb == "function" && cb(false)
+      }
+    })
+
+  }
+
+
 
 module.exports = {
   onLogin: onLogin,
@@ -1313,6 +1336,6 @@ module.exports = {
   updatePersonMsg: updatePersonMsg,
   getProductListDetail: getProductListDetail,
   getPicLists: getPicLists,
-
+  getOpenId:getOpenId,
 
 }

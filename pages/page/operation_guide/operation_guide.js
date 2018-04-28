@@ -16,7 +16,7 @@ Page({
         {
           'icon': '../../images/ic_web_info_edit.png',
           'text': '修改个人信息',
-          'url': ''
+          'url': 'https://mp.weixin.qq.com/s/pp3zSFo_i0pVFdc4cWHUBQ'
         },
         {
           'icon': '../../images/ic_web_share_shop.png',

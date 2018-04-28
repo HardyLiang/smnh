@@ -1,5 +1,11 @@
+//上线需要配置这里的信息，包括域名，APPID,密钥
 var baseUrl ="http://61.28.113.182:9595";
+
 // var baseUrl ="https://xz-weixin.e-tecsun.com";
+let APPID = 'wx15901d82315115d8';
+let SECRET = '1cfb2641811da6b383054c9febccb036';
+
+
 //登陆
 var login = baseUrl +"/siboss/iface/app/login";
 //忘记密码获取验证码
@@ -154,6 +160,7 @@ module.exports = {
   getSale: getSale,
   getSetRec: getSetRec,
   updateShareCommission: updateShareCommission,
-  getOrderCountInfo: getOrderCountInfo
-
+  getOrderCountInfo: getOrderCountInfo,
+  APPID: APPID,
+  SECRET: SECRET,
 }

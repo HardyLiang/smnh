@@ -7,7 +7,7 @@ Page({
   data: {
     username: '440684198812271518',
     usernameHide: true,
-    password: '123456',
+    password: '1234567',
     passwordSrc:'../../../images/ic_pass_gray_hide.png',
     passFocus:false,
     passFlag:true,

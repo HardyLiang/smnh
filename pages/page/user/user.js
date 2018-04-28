@@ -1,6 +1,7 @@
 var event =require('../../../utils/event.js')
 var app =getApp();
 var util=require('../../../utils/util.js')
+var common =require('../../../utils/common.js')
 Page({
   data: {
     imgValue:"../../images/ic_web_center.png",
@@ -46,7 +47,8 @@ Page({
           btnFlag:true,
           btnValue:"注销登录"
         })
-
+        //保存个人信息列表
+        wx.setStorageSync(common.CC_FARMERINFO, res)
       });
     })
   },

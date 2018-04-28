@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
-const app = getApp()
-var util=require('../../utils/util.js')
+var app = getApp()
+var util = require('../../utils/util.js')
 
 Page({
   data: {
@@ -9,13 +9,13 @@ Page({
       '../images/img_main_auto_0.png',
       '../images/img_main_auto_1.png',
       '../images/img_main_auto_2.png'
-    ], 
+    ],
     indicatorDots: true,
     autoplay: true,
     interval: 5000,
     duration: 1000,
     indexmenu: [],
- 
+
   },
   fetchData: function () {
     this.setData({
@@ -51,29 +51,38 @@ Page({
           'url': 'wechat_bind'
         }
       ]
-      
+
     })
   },
   onLoad: function () {
     this.fetchData();
-    // console.log(url);
-  //  我的消息列表
-    this.setData({
-      msgList: [
-        { url: "url", title: "这里是测试公告点击" },
-        { url: "url", title: "撒的开发急啊是快点发就332222222" },
-        { url: "url", title: "公告哈 点击加了收快递费静安寺开发就是" }]
-    });
+    var that = this;
+    //进来首先是获取系统信息；
+    app.func.getAgreementMessageList(function(message,res){
+      if(res){
+        console.log("获取消息成功");
+        console.log(res);
+        var list =res.data;
+        that.setData({
+          msgList:list
+        })
+      }
+    })
+    //如果有登录信息就直接获取店铺状态
+    
+   
   },
   hrefLink: function (e) {
-      console.log(e);
-      var url = e.currentTarget.dataset.id;
-      if (!util.checkIsLogin()) {
-        return;
-      }
+    console.log(e);
+    var url = e.currentTarget.dataset.id;
+    if (!util.checkIsLogin()) {
+      return;
+    }
     wx.navigateTo({
       url: `../page/${url}/${url}`
     })
   }
- 
+
+
+
 })

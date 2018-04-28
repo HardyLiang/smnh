@@ -123,6 +123,17 @@ function clearStorageData(){
 
 }
 
+//设置身份证号中间部分省略
+function hideIdCardMiddle(idCard){
+ if(idCard.length==18){
+   var newIdCard = idCard.substring(0, 6) + "****" + idCard.substring (16, idCard.length);
+   return newIdCard
+ }else{
+   return idCard;
+ }
+
+}
+
 
 module.exports = {
   json2Form: json2Form,
@@ -133,4 +144,5 @@ module.exports = {
   drawCanvas: drawCanvas,
   checkNullContent: checkNullContent,
   clearStorageData: clearStorageData,
+  hideIdCardMiddle: hideIdCardMiddle,
 }
