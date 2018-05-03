@@ -2,18 +2,18 @@
   <view class='pro-list-item'>
     <view class='goods-top'>
       <view class='product-img'>
-        <image src='../../images/11.jpg'></image>
+        <image src='{{goodsPicturesUrl}}'></image>
       </view>
       <view class='product-detail-info'>
-        <view>这里是商品名称</view>
+        <view>{{goodsName}}</view>
         <view>
-          <text class='pro-status'>已下架</text>
-          <text class='pro-give'>让利：￥7</text>
+          <text class='pro-status'>{{status}}</text>
+          <text class='pro-give'>让利：￥{{shareCommission}}</text>
         </view>
-        <view>规格：5.0（斤）</view>
+        <view>规格：{{goodsGspVal}}</view>
         <view>
-          <text class='pro-sales'>销量：0</text>
-          <text>库存：99897</text>
+          <text class='pro-sales'>销量：{{goodsSalenum}}</text>
+          <text>库存：{{goodsInventory}}</text>
         </view>
       </view>
     </view>
@@ -22,7 +22,8 @@
     <button  class="pro-btn c-blue">重新发布</button>
      <!-- <button class="pro-btn c-blue">停止出售</button>  -->
     <button  class="pro-btn c-orange">修改库存</button>
-    <button class="pro-btn">修改让利</button>
+    <button class="pro-btn" catchtap='modifyShareCommission' data-goodsid="{{goodsId}}"
+    data-sharecommission="{{shareCommission}}" >修改让利</button>
      <button  class="pro-btn">增加让利</button> 
   </view>
    </view>

@@ -1,4 +1,10 @@
 // pages/page/my_income/my_income_list/my_income_list.js
+var common =require('../../../../utils/common.js');
+var util =require('../../../../utils/util.js');
+var app = getApp();
+var pageIndex =1;
+var pageSize =10;
+
 Page({
 
   /**
@@ -12,7 +18,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+      //首先获取身份证
+   var idCard =wx.getStorageSync(common.CC_IDCARD);
+   var beginTime = util.formatTimeFirstDayOfYear(new Date());
+   var endTime = util.formatTimeByHorizontal(new Date());
+   //获取列表
+   this.getSetRec(idCard, this.pageIndex, this.pageSize, beginTime, endTime);
+    
   },
 
   /**
@@ -62,5 +74,21 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  getSetRec:function(idCard,pageIndex,pageSize,beginTime,endTime){
+    var  that =this;
+    app.func.getSetRec(idCard, pageSize, pageIndex, beginTime, endTime,
+    function(message,pageIndex,res){
+      console.log("获取收入列表成功")
+      console.log(res);
+      that.setData({
+        list:res
+      })
+
+    });
+
   }
+
+
 })

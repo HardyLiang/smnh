@@ -48,6 +48,7 @@ Page({
           btnValue:"注销登录"
         })
         //保存个人信息列表
+        wx.setStorageSync(common.CC_MOBILE, res.data.mobile)
         wx.setStorageSync(common.CC_FARMERINFO, res)
       });
     })

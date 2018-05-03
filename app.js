@@ -74,5 +74,11 @@ App({
     getPersonMsg: http.getPersonMsg,
     getOpenId: http.getOpenId,
     getAgreementMessageList:http.getAgreementMessageList,
+    getStoreStatusByCard:http.getStoreStatusByCard,
+    checkWXBoundStatus: http.checkWXBoundStatus,
+    getSale: http.getSale,
+    getSetRec: http.getSetRec,
+    getGoodsInfoByCard: http.getGoodsInfoByCard,
+    updateShareCommission: http.updateShareCommission,
   }
 })

@@ -5,9 +5,9 @@ var event =require('../../../../utils/event.js')
 
 Page({
   data: {
-    username: '440684198812271518',
+    username: '411328198911304627',
     usernameHide: true,
-    password: '1234567',
+    password: '123456',
     passwordSrc:'../../../images/ic_pass_gray_hide.png',
     passFocus:false,
     passFlag:true,

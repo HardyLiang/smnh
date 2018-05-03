@@ -10,15 +10,24 @@ const formatTime = date => {
 
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
+const formatTimeByHorizontal= date => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  return [year, month, day].map(formatNumber).join('-') 
+}
+
+function formatTimeFirstDayOfYear(date){
+  date.setDate(1);
+  date.setMonth(0);
+  return formatTimeByHorizontal(date);
+}
 
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
 
-module.exports = {
-  formatTime: formatTime
-}
 function json2Form(json) {
   var str = [];
   for (var p in json) {
@@ -136,6 +145,9 @@ function hideIdCardMiddle(idCard){
 
 
 module.exports = {
+  formatTime: formatTime,
+  formatTimeByHorizontal: formatTimeByHorizontal,
+  formatTimeFirstDayOfYear: formatTimeFirstDayOfYear,
   json2Form: json2Form,
   checkIsLogin: checkIsLogin,
   trim: trim,

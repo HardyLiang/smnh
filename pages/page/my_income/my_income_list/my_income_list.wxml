@@ -1,6 +1,8 @@
 <view>
-<view class='income-list'>
-  <view class='income-time'>2018-03-43 18:43:21</view>
-  <view class='income-money'>￥100</view>
-</view>
+<block wx:for="{{list}}" wx:key="item">
+ <view class="income-list">
+ <text class='income-time'>{{item.settletime}}</text>
+ <text class='income-money'>￥{{item.clearmoney}}</text>
+ </view>
+</block>
 </view>

@@ -15,18 +15,18 @@ function onLogin(usename, pass, cb) {
     data: { certNum: usename, password: passwork, type: "1" },
     complete: function (res) {
       var message = res.data.message;
-      var statusCode= res.data.statusCode;
+      var statusCode = res.data.statusCode;
       console.log(message);
-      console.log("statusCode"+statusCode);
-      if (statusCode!=null&&"200"==statusCode){
-        return typeof cb == "function" && cb(message,res.data)
-      }else{
-        return typeof cb == "function" && cb(message,false)
+      console.log("statusCode" + statusCode);
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        return typeof cb == "function" && cb(message, false)
       }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb('登录失败！',false)
+      return typeof cb == "function" && cb('登录失败！', false)
     }
   })
 
@@ -45,7 +45,7 @@ function fotgetPass(idCard, mobile, cb) {
     complete: function (res) {
       console.log(res);
       var message = res.data.message;
-      var statusCode=res.data.statusCode;
+      var statusCode = res.data.statusCode;
       if (statusCode != null && "200" == statusCode) {
         return typeof cb == "function" && cb(message, res.data)
       } else {
@@ -54,7 +54,7 @@ function fotgetPass(idCard, mobile, cb) {
 
     },
     fail: function () {
-      return typeof cb == "function" && cb("获取验证码失败！",false)
+      return typeof cb == "function" && cb("获取验证码失败！", false)
     }
   })
 
@@ -82,7 +82,7 @@ function updatePassword(idCard, newPass, moblie, strCode, cb) {
 
     },
     fail: function () {
-      return typeof cb == "function" && cb("修改密码失败！",false)
+      return typeof cb == "function" && cb("修改密码失败！", false)
     }
   })
 
@@ -148,7 +148,7 @@ function getPersonMsg(farmerId, cb) {
 
     },
     fail: function () {
-      return typeof cb == "function" && cb('获取个人信息失败！',false)
+      return typeof cb == "function" && cb('获取个人信息失败！', false)
     }
   })
 
@@ -184,15 +184,19 @@ function updateShareCommission(orderId, shareCommission, cb) {
       "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
-    data: util.json2Form({ id: orderId, shareCommission: shareCommission }),
+    data: { id: orderId, shareCommission: shareCommission },
     complete: function (res) {
       var message = res.data.message;
+      var statusCode = res.data.statusCode;
       console.log(message);
-      return typeof cb == "function" && cb(res.data)
-
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("修改让利金失败！",false)
     }
   })
 
@@ -207,18 +211,25 @@ function getSetRec(card, pageSize, pageIndex, beginTime, endTime, cb) {
       "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
-    data: util.json2Form({
+    data: {
       card: card, pageSize: pageSize, pageIndex: pageIndex,
       beginTime: beginTime, endTime: endTime
-    }),
+    },
     complete: function (res) {
+      console.log(res);
       var message = res.data.message;
-      console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      var statusCode = res.data.statusCode;
+      var pageIndex = res.data.data.pageIndex;
+      var list = res.data.data.lists;
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, pageIndex, list)
+      } else {
+        return typeof cb == "function" && cb(message, pageIndex, false)
+      }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("获取结算列表失败", 0, pageIndex, false)
     }
   })
 
@@ -230,7 +241,7 @@ function getSale(card, cb) {
   wx.request({
     url: urlSet.getSale,
     header: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
     data: {
@@ -238,12 +249,16 @@ function getSale(card, cb) {
     },
     complete: function (res) {
       var message = res.data.message;
-      console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      var statusCode = res.data.statusCode;
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("获取收入失败！", false)
     }
   })
 
@@ -264,7 +279,7 @@ function checkMobileByCard(idCard, cb) {
     ,
     complete: function (res) {
       var message = res.data.message;
-      var statusCode =res.data.statusCode;
+      var statusCode = res.data.statusCode;
       console.log(message);
       if (statusCode != null && "200" == statusCode) {
         return typeof cb == "function" && cb(message, res.data)
@@ -274,7 +289,7 @@ function checkMobileByCard(idCard, cb) {
 
     },
     fail: function () {
-      return typeof cb == "function" && cb("获取手机号失败！",false)
+      return typeof cb == "function" && cb("获取手机号失败！", false)
     }
   })
 
@@ -337,17 +352,21 @@ function checkWXBoundStatus(card, cb) {
       "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
-    data: util.json2Form({
+    data: {
       card: card
-    }),
+    },
     complete: function (res) {
       var message = res.data.message;
-      console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      var statusCode = res.data.statusCode;
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("获取绑定失败！", false)
     }
   })
 
@@ -443,7 +462,7 @@ function getAgreementMessageList(cb) {
       }
     },
     fail: function () {
-      return typeof cb == "function" && cb("获取消息失败！",false)
+      return typeof cb == "function" && cb("获取消息失败！", false)
     }
   })
 
@@ -457,17 +476,35 @@ function getStoreStatusByCard(card, cb) {
       "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
-    data: util.json2Form({
+    data: {
       card: card
-    }),
+    },
     success: function (res) {
       var message = res.data.message;
-      console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      var statusCode = res.data.statusCode;
+
+      if (statusCode != null && "200" == statusCode) {
+        var storeStatus = res.data.data.storeStatus;
+        if ("15" == storeStatus) {
+          message = "正常营业";
+          return typeof cb == "function" && cb(message, true)
+        } else
+          if ("20" == storeStatus) {
+            message = "违规关店";
+            return typeof cb == "function" && cb(message, false)
+          } else
+            if ("25" == storeStatus) {
+              message = "到期关闭";
+              return typeof cb == "function" && cb(message, false)
+            }
+
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("店铺异常！", false)
     }
   })
 
@@ -1049,7 +1086,7 @@ function updateOnlyProduct(id, deviceId, productId,
 }
 
 //农户新增单一农产品登记信息
-function addOnlyProduct( deviceId, productId,
+function addOnlyProduct(deviceId, productId,
   personId, landTypeId, preoutput, minNumber, minPrice, publishDistinctid,
   preoutputUnit, spec, serveCharge, productDescription, productDetailName, cb) {
   console.log("addOnlyProduct");
@@ -1261,29 +1298,56 @@ function getProductListDetail(id, type, cb) {
     }
   })
 }
-  function getOpenId(code,appid,secret,cb){
-    wx.request({
-      url: 'https://api.weixin.qq.com/sns/jscode2session?appid='+appid+'&secret='+secret+'&grant_type=authorization_code&js_code=' + code,
-      header: {
-        "content-type": "application/json;charset=UTF-8"
-      },
-      method: "get",
-      complete: function (res) {
-        var openId = res.data.openid;
-        console.log("openId=" + openId);
-        if (openId) {
-          return typeof cb == "function" && cb(openId)
-        } else {
-          return typeof cb == "function" && cb(false)
-        }
-
-      },
-      fail: function () {
+function getOpenId(code, appid, secret, cb) {
+  wx.request({
+    url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + appid + '&secret=' + secret + '&grant_type=authorization_code&js_code=' + code,
+    header: {
+      "content-type": "application/json;charset=UTF-8"
+    },
+    method: "get",
+    complete: function (res) {
+      var openId = res.data.openid;
+      console.log("openId=" + openId);
+      if (openId) {
+        return typeof cb == "function" && cb(openId)
+      } else {
         return typeof cb == "function" && cb(false)
       }
-    })
 
-  }
+    },
+    fail: function () {
+      return typeof cb == "function" && cb(false)
+    }
+  })
+
+}
+
+//农户农产品列表信息
+function getGoodsInfoByCard(card, cb) {
+  wx.request({
+    url: urlSet.getGoodsInfoByCard + card,
+    header: {
+      "content-type": "application/json;charset=UTF-8"
+    },
+    method: "get",
+    complete: function (res) {
+      var message = res.data.message;
+      var statusCode = res.data.statusCode;
+      console.log(message);
+      console.log("statusCode" + statusCode);
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data.data)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
+
+    },
+    fail: function () {
+      return typeof cb == "function" && cb('获取产品列表失败！', false)
+    }
+  })
+
+}
 
 
 
@@ -1336,6 +1400,7 @@ module.exports = {
   updatePersonMsg: updatePersonMsg,
   getProductListDetail: getProductListDetail,
   getPicLists: getPicLists,
-  getOpenId:getOpenId,
+  getOpenId: getOpenId,
+  getGoodsInfoByCard:getGoodsInfoByCard,
 
 }

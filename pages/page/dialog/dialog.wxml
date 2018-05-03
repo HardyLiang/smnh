@@ -1,0 +1,5 @@
+<view hidden='viewHidden'>
+<modal  title="{{titleMsg}}" confirm-text="{{confirmMsg}}" cancel-text="{{cancleMsg}}" bindcancel="cancel" bindconfirm="confirm">  
+    <input type='text'placeholder="请输入内容" auto-focus value='{{contentMsg}}'/>  
+</modal> 
+</view>

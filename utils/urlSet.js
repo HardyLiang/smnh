@@ -110,6 +110,8 @@ var getSale = baseUrl + "/siboss/iface/common/ap/getSale";
 var getSetRec = baseUrl + "/siboss/iface/common/ap/getSetRec";
 //更改产品让利金
 var updateShareCommission = baseUrl + "/siboss/iface/common/ap/updateShareCommission";
+//农户农产品列表信息
+var getGoodsInfoByCard = baseUrl +"/siboss/iface/common/ap/getGoodsInfoByCard?card=";
 
 module.exports = {
   login: login,
@@ -163,4 +165,5 @@ module.exports = {
   getOrderCountInfo: getOrderCountInfo,
   APPID: APPID,
   SECRET: SECRET,
+  getGoodsInfoByCard: getGoodsInfoByCard,
 }
