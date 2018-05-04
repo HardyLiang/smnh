@@ -45,7 +45,7 @@ var updateOnlyProduct = baseUrl + "/siboss/iface/app/appReg/updateOnlyProduct";
 //单一农产品详细信息
 var getProductDetail = baseUrl + "/siboss/iface/app/appReg/getProductDetail";
 //农户停止出售
-var stopProduct = baseUrl + "/siboss/iface/common/ap/stopProduct";
+var stopProduct = baseUrl + "/siboss/iface/common/ap/soldOutProduct";
 //农户查询消费者订单列表
 var getOrder = baseUrl + "/siboss/iface/common/ap/getOrder";
 //获取快递字典（根据农户身份证）

@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "农户产品",
   "usingComponents": {
-    "modal": "../dialog/dialog"
+    "dialog": "../dialog/dialog"
   }
 }

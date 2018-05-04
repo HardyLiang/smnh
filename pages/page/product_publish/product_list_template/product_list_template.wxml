@@ -20,10 +20,13 @@
  <!-- 按钮 -->
   <view class='goods-bottom'>
     <button  class="pro-btn c-blue">重新发布</button>
-     <!-- <button class="pro-btn c-blue">停止出售</button>  -->
-    <button  class="pro-btn c-orange">修改库存</button>
+      <button class="pro-btn c-blue" data-goodsid="{{id}}"data-index="{{ids}}
+      catchtap='mddifyStopProduct'>停止出售</button>  
+    <button  class="pro-btn c-orange" catchtap='modifyGoodsInventory'
+    data-goodsid="{{goodsId}}"
+    data-goodsinventory="{{goodsInventory}}" data-index="{{ids}}">修改库存</button>
     <button class="pro-btn" catchtap='modifyShareCommission' data-goodsid="{{goodsId}}"
-    data-sharecommission="{{shareCommission}}" >修改让利</button>
+    data-sharecommission="{{shareCommission}}" data-index="{{ids}}">修改让利</button>
      <button  class="pro-btn">增加让利</button> 
   </view>
    </view>

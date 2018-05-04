@@ -80,5 +80,9 @@ App({
     getSetRec: http.getSetRec,
     getGoodsInfoByCard: http.getGoodsInfoByCard,
     updateShareCommission: http.updateShareCommission,
+    updateGoodInventory: http.updateGoodInventory,
+    stopProduct: http.stopProduct,
+
+
   }
 })

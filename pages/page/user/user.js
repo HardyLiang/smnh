@@ -41,9 +41,9 @@ Page({
           imgValue: res.data.picPath,
           mobileValue: res.data.mobile,
           userNameValue: res.data.name,
-          shipValue: '描述：' +res.data.shipEvaluate ,
+          shipValue: '描述：' + res.data.descriptionEvaluate ,
           serviceValue: '服务：' + res.data.serviceEvaluate,
-          storeValue: '发货：' + res.data.storeEvaluate,
+          storeValue: '发货：' + res.data.shipEvaluate,
           btnFlag:true,
           btnValue:"注销登录"
         })

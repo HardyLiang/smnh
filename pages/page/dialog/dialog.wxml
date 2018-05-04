@@ -1,5 +1,13 @@
-<view hidden='viewHidden'>
-<modal  title="{{titleMsg}}" confirm-text="{{confirmMsg}}" cancel-text="{{cancleMsg}}" bindcancel="cancel" bindconfirm="confirm">  
-    <input type='text'placeholder="请输入内容" auto-focus value='{{contentMsg}}'/>  
-</modal> 
+<view class='wx_dialog_container' hidden="{{!isShow}}">
+    <view class='wx-mask'></view>
+    <view class='wx-dialog'>
+        <view class='wx-dialog-title'>{{ title }}</view>
+        <view class='wx-dialog-content'>
+        <input type='number' placeholder='请输入内容' value="{{content}}" bindinput='bindInput'></input>
+        </view>
+        <view class='wx-dialog-footer'>
+          <view class='wx-dialog-btn' catchtap='_cancelEvent'>{{ cancelText }}</view>
+          <view class='wx-dialog-btn' catchtap='_confirmEvent' data-type="{{dialogType}}">{{ confirmText }}</view>
+        </view>
+    </view>
 </view>
