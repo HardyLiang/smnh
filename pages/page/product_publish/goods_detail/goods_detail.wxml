@@ -1,0 +1,29 @@
+<view class='bgcolor-fff'>
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="swiper-style" indicator-color="rgba(255, 255, 255, 1)" indicator-active-color="#00a0e9">
+    <block wx:for="{{imgUrls}}" wx:key="{{item}}">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" mode="widthFix" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class='detail-info'>
+    <view class='goods-name text-twoLine'>这里是名称</view>
+    <view class='list-message'>零售价：
+      <text class='color-orange'>23.5元</text> </view>
+    <view class='list-message'>让利金：
+      <text class='color-orange'>23.5元</text> </view>
+    <view class='list-message'>库存： 9899 </view>
+    <view class='list-message'>规格： 23.5斤 </view>
+    <view class='list-message'>规格描述： 这里是规格描述 </view>
+    <view>
+    <view class='detail-title'>发货描述</view>
+    <text class='list-message'>本产品默认发圆通 中通本产品默认发圆通 中通本产品默认发圆通 中通</text>
+    </view>
+  </view>
+  <view>
+  <view class='detail-title m-rl10'>商品详情</view>
+  <view>
+  这里是产品图片 和文字
+  </view>
+  </view>
+</view>

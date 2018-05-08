@@ -8,6 +8,8 @@
     "pages/page/auth/register/register",
     "pages/page/auth/forget/forget",
     "pages/page/add_product/add_product",
+    "pages/page/product_publish/goods_detail/goods_detail",
+    "pages/page/product_publish/product_publish",
     "pages/logs/logs",
     "pages/page/info_list/info_list",
     "pages/page/my_shop/my_shop",
@@ -17,7 +19,6 @@
     "pages/page/message_list/message_list",
     "pages/page/message_list/message_detail/message_detail",
     "pages/page/operation_guide/operation_guide",
-    "pages/page/product_publish/product_publish",
     "pages/page/agreement/agreement",
     "pages/page/add_product/product_classify/product_classify",
     "pages/page/deliver_goods/check_logistics/check_logistics",
@@ -25,6 +26,7 @@
     "pages/page/deliver_goods/deliver_goods",
     "pages/page/about_soft/about_soft",
     "pages/page/dialog/dialog"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",

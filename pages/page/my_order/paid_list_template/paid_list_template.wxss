@@ -65,15 +65,3 @@
 .paid-btn-item{
   overflow: hidden;
 }
-/* .paid-btn{
-  padding: 0 35rpx;
-  color: #00a0e9;
-  font-size: 14px;
-  border: 1px solid #00a0e9;
-  background: #fff;
-  height: 60rpx;
-  line-height: 60rpx;
-  float: right;
-  border-radius: 4px;
-  margin:0 10rpx;
-} */

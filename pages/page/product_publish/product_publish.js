@@ -1,9 +1,7 @@
-// pages/page/proudct_publish/product_publish.js
 var common = require('../../../utils/common.js')
 var util = require('../../../utils/util.js')
  
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -20,6 +18,7 @@ Page({
     dialogContent:"",
     orderId:"",
     index:0,
+    currentStatus:3
     
   },
 
@@ -42,11 +41,24 @@ Page({
     //获取产品列表
     this.getGoodsInfoByCard(res.data.idCard);
   },
-  AddProductTap: function (event) {
+  goGoodsDetail: function (e) {
+    var detailId = e.currentTarget.dataset.id;
+    // console.log(detailId);
+    wx.navigateTo({
+      url: "goods_detail/goods_detail?id=" + detailId
+    })
+  },
+  AddProductTap: function (e) {
     wx.navigateTo({
       url: "../add_product/add_product"
     })
   },
+  rePublish: function (e) {
+    wx.navigateTo({
+      url: ""
+    })
+  },
+ 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -54,48 +66,6 @@ Page({
     //获得dialog组件
     this.dialog = this.selectComponent("#dialog");
     
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   },
   /**
    *获取产品列表
@@ -116,8 +86,9 @@ Page({
       that.setData({
         list: res
       })
-
+      
     })
+    
   },
   modifyShareCommission:function(e){
    console.log("点击修改让利")
@@ -125,6 +96,8 @@ Page({
    var goodsid =e.currentTarget.dataset.goodsid;
    var shareComission = e.currentTarget.dataset.sharecommission;
    var index = parseInt(e.currentTarget.dataset.index);
+   var goodsStatus = e.currentTarget.dataset.goodsstatus;
+   if (goodsStatus == 1) {
    wx.setStorageSync('dialogContent', shareComission);
    console.log("orderId=" + goodsid + "sharecomission=" + shareComission + "index=" + index)
    this.setData({
@@ -134,7 +107,12 @@ Page({
      index:index
    })
    this.dialog.showDialog();
- 
+   } else {
+     wx.showToast({
+       icon: 'none',
+       title: "还不能修改哦~"
+     })
+   }
   },
   
   /**
@@ -174,20 +152,28 @@ Page({
    * 点击修改库存按钮
    */
   modifyGoodsInventory:function(e){
-    console.log("点击修改库存")
-    console.log(e)
+    // console.log("点击修改库存")
+    // console.log(e)
     var goodsid = e.currentTarget.dataset.goodsid;
     var goodsinventory = e.currentTarget.dataset.goodsinventory;
     var index = parseInt(e.currentTarget.dataset.index);
-    wx.setStorageSync('dialogContent', goodsinventory);
-    console.log("orderId=" + goodsid + "goodsinventory=" + goodsinventory + "index=" + index)
-    this.setData({
-      dialogTitle: "修改库存",
-      dialogContent: goodsinventory,
-      orderId: goodsid,
-      index: index
-    })
-    this.dialog.showDialog();
+    var goodsStatus = e.currentTarget.dataset.goodsstatus;
+    if (goodsStatus ==1){
+      wx.setStorageSync('dialogContent', goodsinventory);
+      console.log("orderId=" + goodsid + "goodsinventory=" + goodsinventory + "index=" + index)
+      this.setData({
+        dialogTitle: "修改库存",
+        dialogContent: goodsinventory,
+        orderId: goodsid,
+        index: index
+      })
+      this.dialog.showDialog();
+    }else{
+      wx.showToast({
+        icon:'none',
+        title: "还不能修改哦~"
+      })
+    }
   },
   /**
    * 修改库存
