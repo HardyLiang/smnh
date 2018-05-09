@@ -82,7 +82,11 @@ App({
     updateShareCommission: http.updateShareCommission,
     updateGoodInventory: http.updateGoodInventory,
     stopProduct: http.stopProduct,
-
+    getOrderCountInfo: http.getOrderCountInfo,
+    getOrder: http.getOrder,
+    getLogisticsInfo: http.getLogisticsInfo,
+    getAllExpCompany: http.getAllExpCompany,
+    
 
   }
 })

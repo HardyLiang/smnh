@@ -1,24 +1,29 @@
 <import src="../goods_info_template/goods_info_template.wxml" />
 <template name="shippedListTemplate">
   <view class="paid-container">
-    <text class='paid-txt1'>订单编号：<text selectable="true"> 82394572389457239483</text><text class='copyBtn'>复制</text></text> 
-    <text class='paid-txt1'>订单时间：2018-04-10</text>
-    <text class='paid-txt1'>发货时间：2018-04-10</text>
-    <view class='consignee-info'> <view class='copyBtn copyPos'>复制</view>
+  <view class='copyBtn' catchtap='copyButton' data-suborderId='{{suborderId}}' data-type='order'>复制</view>
+    <text class='paid-txt1'>订单编号：<text selectable="true"> {{suborderId}}</text></text> 
+    <text class='paid-txt1'>订单时间：{{orderTime}}</text>
+    <text class='paid-txt1'>发货时间：{{sendTime}}</text>
+    <view class='consignee-info'> <view class='copyBtn copyPos' catchtap='copyButton'
+    data-name='{{name}}' data-mobile='{{mobile}}'
+    data-orderAddress='{{orderAddress}}' data-type='receiverInfo'>复制</view>
     <view selectable="true">
-      <text>收件人：宝贝儿</text>
-      <text>手机号：14798789876</text>
-      <text>地址：河北省衡水市新塘街道软件路13号好水电费sdfasdfasdfa撒打飞机啊</text>
+      <text>收件人：{{name}}</text>
+      <text>手机号：{{mobile}}</text>
+      <text>地址：{{orderAddress}}</text>
       </view>
     </view>
     <view class="goods-order">
       <!-- <block wx:for="{{}}" wx:for-item=""></block> -->
-      <template is="GoodInfoTemplate" />
+       <block wx:for="{{goodInfoList}}" wx:key="goodInfoList" >
+      <template is="GoodInfoTemplate" data="{{...item}}"/>
+      </block>
     </view>
     <view class='paid-btn-item'>
       <button  class="pro-btn c-blue"> 已发货 </button>
-      <button  class="pro-btn c-orange"> 修改物流 </button>
-      <button  class="pro-btn c-blue"> 查看物流 </button>
+      <button  class="pro-btn c-orange" catchtap='modifyLogistics'data-oid="{{id}}"> 修改物流 </button>
+      <button  class="pro-btn c-blue" catchtap='viewLogistics'data-oid="{{id}}"> 查看物流 </button>
     </view>
   </view>
 

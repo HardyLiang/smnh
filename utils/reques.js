@@ -165,12 +165,19 @@ function getOrderCountInfo(idCard, cb) {
     method: "GET",
     success: function (res) {
       var message = res.data.message;
+      var statusCode = res.data.statusCode;
       console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      console.log("statusCode" + statusCode);
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
+
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("获取订单数量失败！",false)
     }
   })
 
@@ -595,17 +602,23 @@ function getLogisticsInfo(oid, cb) {
       "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
-    data: util.json2Form({
+    data: {
       oid: oid
-    }),
+    },
     success: function (res) {
       var message = res.data.message;
+      var statusCode = res.data.statusCode;
       console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      console.log("statusCode" + statusCode);
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("获取物流信息失败！",false)
     }
   })
 
@@ -955,19 +968,25 @@ function orderShippingSave(id, card, shipCode, expressCompanyId, cb) {
 function getAllExpCompany(cb) {
   console.log("getAllExpCompany");
   wx.request({
-    url: urlSet.getAllExpCompany + idCard,
+    url: urlSet.getAllExpCompany ,
     header: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "GET",
     success: function (res) {
       var message = res.data.message;
+      var statusCode = res.data.statusCode;
       console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      console.log("statusCode" + statusCode);
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("获取物流公司失败",false)
     }
   })
 
@@ -981,20 +1000,26 @@ function getOrder(personId, status, pageSize, pageIndex, cb) {
       "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
-    data: util.json2Form({
+    data: {
       personId: personId,
       status: status,
       pageSize: pageSize,
       pageIndex, pageIndex
-    }),
+    },
     success: function (res) {
       var message = res.data.message;
+      var statusCode = res.data.statusCode;
       console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      console.log("statusCode" + statusCode);
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, pageIndex,res.data)
+      } else {
+        return typeof cb == "function" && cb(message, 0,false)
+      }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("获取订单失败！",0,false)
     }
   })
 

@@ -8,13 +8,15 @@
 <view hidden="{{currentTab!==0}}">
   <view>
     <view class='order-top-view'>
-      <text>姓名：曹萌雅</text>
-      <text>普通户</text>
-      <text>待发货订单总数：<text class='color-blue'>26</text></text>
+      <text>姓名：{{username}}</text>
+      <text>{{farmerType}}</text>
+      <text>待发货订单总数：<text class='color-blue'>{{notYetCount}}</text></text>
     </view>
     <!-- 列表 -->
-    <view class="paid-template">
-      <template is="paidTemplate" />
+    <view class="paid-template" >
+    <block wx:for="{{notYetList}}" wx:key="item" wx:for-index='ids'>
+      <template is="paidTemplate" data="{{...item,ids:ids}}"/>
+      </block>
     </view>
   </view>
 </view>
@@ -23,14 +25,16 @@
 <view hidden="{{currentTab!==1}}">
   <view>
     <view class='order-top-view'>
-      <text>姓名：曹萌雅</text>
-      <text>普通户</text>
-      <text>已发货订单总数：<text class='color-blue'>666</text></text>
+      <text>姓名：{{username}}</text>
+      <text>{{farmerType}}</text>
+      <text>已发货订单总数：<text class='color-blue'>{{shippedCount}}</text></text>
     </view>
   </view>
   <!-- template -->
    <view class="paid-template">
-      <template is="shippedListTemplate" />
+   <block wx:for="{{alreadyList}}" wx:key="item" wx:for-index='ids'>
+      <template is="shippedListTemplate"  data="{{...item,ids:ids}}"/>
+      </block>
     </view>
     <!-- //template -->
 </view>

@@ -2,10 +2,18 @@
 <view>
   <view class='package-list'>
   <!-- 包裹列表 -->
-  <template is="packageTemplate"  wx:for="{{packageLists}}" wx:key/>
+  <block wx:for="{{packageLists}}" wx:key="item" wx:for-index='ids'>
+  <template is="packageTemplate"  data="{{...item,goodInfoList,ids:ids,logisticsList,index}}" />
+  </block>
   </view>
   <view>
   <button class="package-btn c-blue" >确认发货</button>
     <button  class="package-btn c-orange" bindtap="insert">添加物流</button> 
   </view>
 </view>
+<!-- 页面弹窗 -->
+<view>
+    <text_sheet id='text_sheet'
+    list="{{logisticsList}}"/>
+</view>
+ 

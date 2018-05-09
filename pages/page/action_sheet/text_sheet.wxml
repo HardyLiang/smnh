@@ -1,0 +1,14 @@
+<!--mask-->  
+<view class="drawer_screen" bindtap="showDialog" data-status="close" wx:if="{{showModalStatus}}"></view>  
+<!--content-->  
+<!--使用animation属性指定需要执行的动画-->  
+<view animation="{{animationData}}" class="drawer_attr_box" wx:if="{{showModalStatus}}">  
+  <!--drawer content-->  
+  <view class="drawer_content">
+  <scroll-view>
+  <view class="drawer_title" wx:for="{{list}}" wx:for-index="idx" wx:for-item="itemName" wx:key='item'>
+  {{itemName.companyName}}
+  </view>
+  </scroll-view>  
+  </view>  
+</view>  

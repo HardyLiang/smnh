@@ -166,4 +166,5 @@ module.exports = {
   APPID: APPID,
   SECRET: SECRET,
   getGoodsInfoByCard: getGoodsInfoByCard,
+  getAllExpCompany: getAllExpCompany,
 }

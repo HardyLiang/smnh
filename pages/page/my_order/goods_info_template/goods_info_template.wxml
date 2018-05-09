@@ -1,14 +1,14 @@
 <template name="GoodInfoTemplate">
 <view class='goods-container'>
       <view class='good-img'>
-        <image src='../../images/11.jpg'></image>
+        <image src='{{goods_pic}}'></image>
       </view>
       <view class='good-info'>
-        <text class='item-good-name'>这个是木瓜的商品名称</text>
-        <text class='paid-txt2'>规格：50一斤</text>
+        <text class='item-good-name'>{{goodName}}</text>
+        <text class='paid-txt2'>规格：{{goods_gsp_val}}</text>
         <text class='paid-txt2'>数量：<text class='color-blue'> x 4</text> </text>
-        <text class='paid-txt2 '>应收金额： <text class='color-blue mr15'> 890.53元</text>
-        <text class='color-blue'> 分销 0.89元</text></text>
+        <text class='paid-txt2 '>应收金额： <text class='color-blue mr15'> {{money}}元</text>
+        <text class='color-blue'> 分销 {{goods_share_commission}}元</text></text>
       </view>
 </view>
 </template>

@@ -4,7 +4,7 @@
    <view class='package-title'>包裹 <icon class='icon-small' type='cancel' bindtap="delBind"></icon></view>
     <view class="input-item">
       <text class="input-item-label">物流公司</text>
-      <view class="input-item-content" bindtap=''>
+      <view class="input-item-content" bindtap='chooseLogisitics' data-position="{{ids}}">
         <input type="number" placeholder="请选择物流公司" disabled='false'></input>
       </view>
       <view class='icon-select-arrow'></view>
@@ -17,7 +17,8 @@
     </view>
     <view class="input-item">
       <text class="input-item-label">产品</text>
-      <view class="input-item-content">
+      <view class="input-item-content" data-list="{{goodInfoList}}"
+       data-position="{{ids}}" catchtap='chooseGoods'>
         <input type="text" placeholder="请选择产品" disabled='false'></input>
       </view>
       <view class='icon-select-arrow'></view>

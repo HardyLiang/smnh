@@ -50,6 +50,9 @@ page {
   border-radius: 3px;
   height: 44rpx;
   line-height: 44rpx;
+  position:  absolute;
+  right: 15px;
+  margin-top: 5px;
 }
 .copyPos{
   position: absolute;

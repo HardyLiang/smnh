@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "发货"
+  "navigationBarTitleText": "发货",
+  "usingComponents": {
+    "text_sheet": "../action_sheet/text_sheet"
+  }
 }

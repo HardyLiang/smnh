@@ -29,7 +29,7 @@ let CC_USERTYPE ='userType';
 let CC_FARMERINFO ='farmerinfo';
 let CC_OPENID='openId';
 let CC_WEIXININFO='weixininfo';
-
+let CC_GOODINFOLIST = 'goodInfoList';
 
 
 
@@ -63,3 +63,4 @@ exports.CC_USERTYPE = CC_USERTYPE;
 exports.CC_FARMERINFO = CC_FARMERINFO;
 exports.CC_OPENID = CC_OPENID;
 exports.CC_WEIXININFO = CC_WEIXININFO;
+exports.CC_GOODINFOLIST = CC_GOODINFOLIST;

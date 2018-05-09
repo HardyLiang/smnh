@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/page/my_order/my_order",
     "pages/index/index",
     "pages/page/auth/login/login",
     "pages/page/user/user",
-    "pages/page/my_order/my_order",
     "pages/page/my_income/my_income",
     "pages/page/auth/register/register",
     "pages/page/auth/forget/forget",
@@ -25,8 +25,8 @@
     "pages/page/deliver_goods/logistics/logistics",
     "pages/page/deliver_goods/deliver_goods",
     "pages/page/about_soft/about_soft",
-    "pages/page/dialog/dialog"
-    
+    "pages/page/dialog/dialog",
+    "pages/page/action_sheet/text_sheet"
   ],
   "window": {
     "backgroundTextStyle": "light",
