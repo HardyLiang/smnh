@@ -33,3 +33,43 @@
 .line{  
   border-bottom: 1px solid #f8f8f8;  
 }  
+.goods-container {
+  display: flex;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 15rpx 0;
+  margin: 10rpx 0;
+  align-items:center;
+}
+.good-img {
+  width: 130rpx;
+  height: 130rpx;
+  margin-right: 10rpx;
+}
+.good-info {
+  flex: 3;
+}
+
+.good-info>text {
+  display: block;
+}
+
+.item-good-name {
+  font-size: 15px;
+  margin-bottom: 8rpx;
+}
+
+.paid-txt2 {
+  color: #757575;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.button-container{
+    margin-top:  10px
+}
+
+
+.button-container{
+  margin-top:  10px
+}

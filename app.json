@@ -26,7 +26,7 @@
     "pages/page/deliver_goods/deliver_goods",
     "pages/page/about_soft/about_soft",
     "pages/page/dialog/dialog",
-    "pages/page/action_sheet/text_sheet"
+    "pages/page/action_sheet/action_sheet"
   ],
   "window": {
     "backgroundTextStyle": "light",

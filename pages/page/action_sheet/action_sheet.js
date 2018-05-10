@@ -24,6 +24,7 @@ Component({
     showModalStatus: false,
     list:{},
     index:0,
+    chooseList:[]
   },
 
   /**
@@ -51,14 +52,28 @@ Component({
     * 内部私有方法建议以下划线开头
     * triggerEvent 用于触发事件
     */
-  
+    _confirmChoose(e) {
+    //触发取消回调
+      this.triggerEvent("confirmChoose", { chooseList: this.data.chooseList })
+  },
+   _listenCheckboxChange(e){
+     //触发取消回调
+     this.triggerEvent("listenCheckboxChange")
+     console.log(e.detail.value);
+     var checklist =e.detail.value;
+     var choose = [];
+      for(var i =0 ; i<checklist.length;i++){
+        choose[i] = this.data.list[checklist[i]];
+      }
+      this.setData({
+        chooseList: choose
+      })
+    }
    
-
   },
   showDialog:function(e){
     var status = e.currentTarget.dataset.status;
     this.showManage(status);
-
   },
   showManage: function (currentStatu) {
     /* 动画部分 */
@@ -107,5 +122,6 @@ Component({
         }
       );
     }
-  } 
+  } ,
+  
 })
