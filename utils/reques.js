@@ -1169,7 +1169,7 @@ function getProducts(cb) {
   wx.request({
     url: urlSet.getProducts,
     header: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "GET",
     success: function (res) {
@@ -1191,17 +1191,23 @@ function getProductDict(cb) {
   wx.request({
     url: urlSet.getProductDict,
     header: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "GET",
     success: function (res) {
       var message = res.data.message;
+      var statusCode = res.data.statusCode;
       console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      console.log("statusCode" + statusCode);
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("获取产品大类失败！",false)
     }
   })
 
@@ -1210,19 +1216,25 @@ function getProductDict(cb) {
 function getProductDictSub(id, deviceId, cb) {
   console.log("getProductDictSub");
   wx.request({
-    url: urlSet.getProductDictSub + id + "deviceId=" + deviceId,
+    url: urlSet.getProductDictSub + id + "&deviceId=" + deviceId,
     header: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json;charset=UTF-8"
     },
     method: "GET",
     success: function (res) {
       var message = res.data.message;
+      var statusCode = res.data.statusCode;
       console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      console.log("statusCode" + statusCode);
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("获取产品小类失败！",false)
     }
   })
 

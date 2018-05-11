@@ -87,6 +87,8 @@ App({
     getLogisticsInfo: http.getLogisticsInfo,
     getAllExpCompany: http.getAllExpCompany,
     orderShippingSave: http.orderShippingSave,
+    getProductDict: http.getProductDict,
+    getProductDictSub: http.getProductDictSub,
     
   }
 })

@@ -244,5 +244,9 @@ Page({
       })
 
     });
+  },
+  onUnload:function(){
+    //页面销毁清除页面event接收事件
+    event.remove(event.KDeliverGoodSuccessEventName, this);
   }
 })

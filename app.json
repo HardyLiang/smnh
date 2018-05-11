@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/page/my_order/my_order",
+    
     "pages/index/index",
     "pages/page/auth/login/login",
     "pages/page/user/user",
@@ -26,7 +26,8 @@
     "pages/page/deliver_goods/deliver_goods",
     "pages/page/about_soft/about_soft",
     "pages/page/dialog/dialog",
-    "pages/page/action_sheet/action_sheet"
+    "pages/page/action_sheet/action_sheet",
+    "pages/page/my_order/my_order"
   ],
   "window": {
     "backgroundTextStyle": "light",
