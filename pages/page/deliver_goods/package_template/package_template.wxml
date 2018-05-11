@@ -1,16 +1,15 @@
 <template name="packageTemplate">
   <view class='package-item'>
     <view class='form-group'>
-      <view class='package-title'>包裹
-        <icon class='icon-small' type='cancel' bindtap="delBind"></icon>
+      <view class='package-title'>包裹{{ids+1}}
+        <icon class='icon-small' type='cancel' bindtap="delBind" data-position="{{ids}}"></icon>
       </view>
 
       <view class="input-item">
         <text class="input-item-label">物流公司</text>
-        <picker class="input-item-content" bindchange="bindPickerChange" 
-          value="{{index}}" range="{{logisticsList}}" range-key="{{'companyName'}}">
+        <picker class="input-item-content" bindchange="bindPickerChange" data-position="{{ids}}"  range="{{logisticsList}}" range-key="{{'companyName'}}">
           <view class="picker">
-            {{chooseCompanyName}}
+            {{item.name}}
           </view>
         </picker>
         <view class='icon-select-arrow'></view>
@@ -18,13 +17,13 @@
       <view class="input-item">
         <text class="input-item-label">物流单号</text>
         <view class="input-item-content">
-          <input type="number" placeholder="请输入物流单号"></input>
+          <input type="number" placeholder="请输入物流单号" value="{{item.orderNum}}" bindinput='bindInputOrder' data-orderPosition="{{ids}}"></input>
         </view>
       </view>
       <view class="input-item">
         <text class="input-item-label">产品</text>
         <view class="input-item-content" data-list="{{goodInfoList}}" data-position="{{ids}}" catchtap='chooseGoods'>
-          <input type="text" placeholder="请选择产品" disabled='false' value="{{chooseValue}}"></input>
+          <input type="text" placeholder="请选择产品" disabled='false' value="{{item.goods}}"></input>
         </view>
         <view class='icon-select-arrow'></view>
       </view>

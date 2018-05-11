@@ -86,7 +86,7 @@ App({
     getOrder: http.getOrder,
     getLogisticsInfo: http.getLogisticsInfo,
     getAllExpCompany: http.getAllExpCompany,
+    orderShippingSave: http.orderShippingSave,
     
-
   }
 })

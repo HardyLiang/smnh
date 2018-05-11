@@ -946,20 +946,26 @@ function orderShippingSave(id, card, shipCode, expressCompanyId, cb) {
       "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
-    data: util.json2Form({
+    data: {
       id: id,
       card: card,
       shipCode: shipCode,
       expressCompanyId, expressCompanyId
-    }),
+    },
     success: function (res) {
       var message = res.data.message;
+      var statusCode = res.data.statusCode;
       console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      console.log("statusCode" + statusCode);
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("发货失败！",false)
     }
   })
 

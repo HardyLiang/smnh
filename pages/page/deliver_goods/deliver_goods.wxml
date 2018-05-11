@@ -3,11 +3,11 @@
   <view class='package-list'>
   <!-- 包裹列表 -->
   <block wx:for="{{packageLists}}" wx:key="item" wx:for-index='ids'>
-  <template is="packageTemplate"  data="{{...item,goodInfoList,ids:ids,logisticsList,index,chooseCompanyName,chooseValue}}" />
+  <template is="packageTemplate"  data="{{item,goodInfoList,ids:ids,logisticsList}}" />
   </block>
   </view>
   <view>
-  <button class="package-btn c-blue" >确认发货</button>
+  <button class="package-btn c-blue"  catchtap='confirmDelicer'>确认发货</button>
     <button class="package-btn c-orange" bindtap="insert">添加物流</button> 
   </view>
 </view>
