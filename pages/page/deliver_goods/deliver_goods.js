@@ -1,4 +1,5 @@
 var common = require('../../../utils/common.js')
+var event =require('../../../utils/event.js')
 Page({
 
   data: {
@@ -6,6 +7,7 @@ Page({
     goodInfoList: [],  //这个是传过来的产品列表
     logisticsList: [], //这个是放物流公司的列表
     chooseGoodsPosition:0, //这个是保存每次用户选择的那个产品列表位置
+    orderId:'',//保存每份订单的id
 
   },
   /**
@@ -19,14 +21,16 @@ Page({
 
   },
   onLoad: function (options) {
-    //给列表初始
     var that = this;
+    //先获取产品id
+    var id = options.orderId;
     //获取产品列表
     var goodList = wx.getStorageSync(common.CC_GOODINFOLIST);
     console.log(goodList);
     //给产品列表赋值；
     that.setData({
-      goodInfoList: goodList
+      goodInfoList: goodList,
+      orderId: id
     })
     //获取物流列表
     this.chooseLogisitics();
@@ -36,8 +40,10 @@ Page({
     console.log("添加一个");
     var newItem = {
         name: '请选择物流公司',
+        nameId:"",
         orderNum: '',
-        goods: ''
+        goods: '',
+        goodsId:''
       }
     var packages = this.data.packageLists;
     console.log(newItem)
@@ -117,9 +123,12 @@ Page({
     var position = e.currentTarget.dataset.position;
     var choosePosition = e.detail.value;
     var chooseName = this.data.logisticsList[choosePosition].companyName;
+    var chosseId = this.data.logisticsList[choosePosition].id;
     var mPackageLists = "packageLists[" + position + "].name";
+    var mPackageListsId = "packageLists[" + position + "].nameId";
     this.setData({
-      [mPackageLists]: chooseName
+      [mPackageLists]: chooseName,
+      [mPackageListsId]:chosseId
     })
 
   },
@@ -133,15 +142,19 @@ Page({
     //获取列表信息
     var chooseList = e.detail.chooseList;
     var choose = "";
+    var chooseId ="";
     console.log(chooseList);
     //给产品赋值
     for (var i = 0; i < chooseList.length; i++) {
-      choose = chooseList[i].goodName + " "
+      choose = chooseList[i].goodName + " ";
+      chooseId = chooseList[i].goods_id+",";
     }
     //根据位置更新选择了的产品
     var mPackageLists = "packageLists[" + this.data.chooseGoodsPosition + "].goods";
+    var mPackageListsId = "packageLists[" + this.data.chooseGoodsPosition + "].goodsId";
     this.setData({
-      [mPackageLists]: choose
+      [mPackageLists]: choose,
+      [mPackageListsId]: chooseId
     }) 
   },
   /**
@@ -190,8 +203,46 @@ Page({
     }
     //组装参数
     var idCard = wx.getStorageSync(common.CC_IDCARD);
-    
+    var orderId =this.data.orderId;
+    var params = {
+      card: idCard, id: orderId,
+      ship_info:[]
+    };
+    for (var i = 0; i < this.data.packageLists.length;i++){
+      var ship_info = { ecc_id: "", goods_ids: '', shipCode: "" }
+      ship_info.ecc_id = this.data.packageLists[i].nameId;
+      ship_info.goods_ids = this.data.packageLists[i].goodsId;
+      ship_info.shipCode = this.data.packageLists[i].orderNum;
+      params.ship_info.push(ship_info);
+    }
+    console.log(params);
     //联网发货
-    getApp().func.orderShippingSave();
+    getApp().func.orderShippingSave(params,function(message,res){
+      console.log(message);
+      console.log(res);
+      //发货失败
+      if(!res){
+        wx.showToast({
+          title: message,
+          icon :"none"
+        })
+        return;
+      }
+      //发货成功
+      wx.showModal({
+        title: '提示',
+        content: '发货成功',
+        showCancel:false,
+        success:function(res){
+          if(res.confirm){
+            //关闭页面并且通知上一个页面刷新列表
+            event.emit(event.KDeliverGoodSuccessEventName, '发货成功');
+            wx.navigateBack();
+            
+          }
+        }
+      })
+
+    });
   }
 })

@@ -938,7 +938,7 @@ function orderShippingUpdate(id, card, shipCode, expressCompanyId, cb) {
 
 }
 //录入物流信息
-function orderShippingSave(id, card, shipCode, expressCompanyId, cb) {
+function orderShippingSave(params, cb) {
   console.log("orderShippingSave");
   wx.request({
     url: urlSet.orderShippingSave,
@@ -946,21 +946,16 @@ function orderShippingSave(id, card, shipCode, expressCompanyId, cb) {
       "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
-    data: {
-      id: id,
-      card: card,
-      shipCode: shipCode,
-      expressCompanyId, expressCompanyId
-    },
+    data: params,
     success: function (res) {
       var message = res.data.message;
       var statusCode = res.data.statusCode;
       console.log(message);
       console.log("statusCode" + statusCode);
       if (statusCode != null && "200" == statusCode) {
-        return typeof cb == "function" && cb(message, res.data)
+        return typeof cb == "function" && cb("发货成功！", true)
       } else {
-        return typeof cb == "function" && cb(message, false)
+        return typeof cb == "function" && cb("发货成功！", false)
       }
 
     },

@@ -1,5 +1,6 @@
 var app = getApp()
 var common = require('../../../utils/common.js')
+var event =require('../../../utils/event.js')
 
 Page({
   data: {
@@ -52,6 +53,21 @@ Page({
     //获取已发货
     this.getOrder(idCard, farmerId, alreadyStatus, this.data.pageSize, this.data.pageIndex);
 
+  },
+  onShow:function(e){
+    event.on(event.KDeliverGoodSuccessEventName, this, function (data) {
+      console.log("发货成功待发货页面收到信息");
+      //获取未发货
+      var idCard = wx.getStorageSync(common.CC_IDCARD);
+      var res = wx.getStorageSync(common.CC_FARMERINFO);
+      var farmerId = res.data.id;
+      var status = "2";
+      this.setData({
+        pageSize:10,
+        pageIndex:1
+      })
+      this.getOrder(idCard, farmerId, status, this.data.pageSize, this.data.pageIndex);
+    })
   },
   /**
    * 获取订单
@@ -143,12 +159,13 @@ Page({
     var position = e.currentTarget.dataset.id;
     console.log("第几项发货"+position);
     var goodsList = this.data.notYetList[position].goodInfoList;
+    var orderId = this.data.notYetList[position].id;
     console.log(goodsList.length)
     //发货前存储产品列表
     wx.setStorageSync(common.CC_GOODINFOLIST, goodsList);
     //跳转发货
     wx.navigateTo({
-      url: '../deliver_goods/deliver_goods',
+      url: '../deliver_goods/deliver_goods?orderId=' + orderId,
     })
   }
 
