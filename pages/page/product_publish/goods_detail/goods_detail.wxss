@@ -26,3 +26,19 @@
   font-size: 34rpx;
   line-height: 34px;
 }
+.detail_box {
+    padding: 0 10rpx;
+}
+.detail_box .detail_list .detail_item{
+    margin-bottom: 0px;
+}
+.detail_box .detail_list image {
+    width: 100%;
+}
+
+.detail_box .detail_list .title {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+}

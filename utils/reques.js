@@ -1058,7 +1058,7 @@ function stopProduct(id, cb) {
 }
 
 //单一农产品详细信息
-function getProductDetail(type, packageId, cb) {
+function getProductDetail(typeId, packageId, cb) {
   console.log("getProductDetail");
   wx.request({
     url: urlSet.getProductDetail,
@@ -1066,18 +1066,21 @@ function getProductDetail(type, packageId, cb) {
       "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
-    data: util.json2Form({
-      type: type,
+    data: {
+      type: typeId,
       packageId: packageId
-    }),
+    },
     success: function (res) {
       var message = res.data.message;
-      console.log(message);
-      return typeof cb == "function" && cb(res.data)
-
+      var statusCode = res.data.statusCode;
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        return typeof cb == "function" && cb("获取产品详情信息失败！", false)
+      }
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("获取产品详情信息失败！",false)
     }
   })
 
@@ -1299,7 +1302,7 @@ function updatePersonMsg(id, name,
 
 }
 //单一套餐照片列表跟进信息(APP) 
-function getPicLists(id, type, cb) {
+function getPicLists(id, typeId, cb) {
   console.log("getPicLists");
   wx.request({
     url: urlSet.getPicLists,
@@ -1307,18 +1310,23 @@ function getPicLists(id, type, cb) {
       "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
-    data: util.json2Form({
+    data: {
       id: id,
-      type: type
-    }),
+      type: typeId
+    },
     success: function (res) {
       var message = res.data.message;
+      var statusCode = res.data.statusCode;
       console.log(message);
-      return typeof cb == "function" && cb(res.data)
-
+      console.log("statusCode" + statusCode);
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("获取详情图片失败！",false)
     }
   })
 

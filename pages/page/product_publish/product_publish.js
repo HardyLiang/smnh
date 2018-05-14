@@ -43,7 +43,7 @@ Page({
   },
   goGoodsDetail: function (e) {
     var detailId = e.currentTarget.dataset.id;
-    // console.log(detailId);
+    console.log(detailId);
     wx.navigateTo({
       url: "goods_detail/goods_detail?id=" + detailId
     })

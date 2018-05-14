@@ -89,6 +89,8 @@ App({
     orderShippingSave: http.orderShippingSave,
     getProductDict: http.getProductDict,
     getProductDictSub: http.getProductDictSub,
+    getProductDetail:http.getProductDetail,
+    getPicLists: http.getPicLists,
     
   }
 })
