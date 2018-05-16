@@ -2,6 +2,7 @@
 var md5 = require('../utils/md5.js')
 var urlSet = require('../utils/urlSet.js')
 var util = require('../utils/util.js')
+var that =this;
 //登录方法
 function onLogin(usename, pass, cb) {
   var passwork = md5.hexMD5(pass);
@@ -138,8 +139,6 @@ function getPersonMsg(farmerId, cb) {
     complete: function (res) {
       var message = res.data.message;
       var statusCode = res.data.statusCode;
-      console.log(message);
-      console.log("statusCode" + statusCode);
       if (statusCode != null && "200" == statusCode) {
         return typeof cb == "function" && cb(message, res.data)
       } else {
@@ -911,7 +910,7 @@ function checkWorld(world, cb) {
 
 }
 //修改物流信息
-function orderShippingUpdate(id, card, shipCode, expressCompanyId, cb) {
+function orderShippingUpdate(params, cb) {
   console.log("orderShippingUpdate");
   wx.request({
     url: urlSet.orderShippingUpdate,
@@ -919,20 +918,20 @@ function orderShippingUpdate(id, card, shipCode, expressCompanyId, cb) {
       "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
-    data: util.json2Form({
-      id: id,
-      card: card,
-      shipCode: shipCode,
-      expressCompanyId, expressCompanyId
-    }),
+    data: params,
     success: function (res) {
       var message = res.data.message;
+      var statusCode = res.data.statusCode;
       console.log(message);
-      return typeof cb == "function" && cb(res.data)
-
+      console.log("statusCode" + statusCode);
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb("修改物流成功！", true)
+      } else {
+        return typeof cb == "function" && cb("修改物流失败！", false)
+      }
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("修改物流失败！",false)
     }
   })
 
@@ -955,7 +954,7 @@ function orderShippingSave(params, cb) {
       if (statusCode != null && "200" == statusCode) {
         return typeof cb == "function" && cb("发货成功！", true)
       } else {
-        return typeof cb == "function" && cb("发货成功！", false)
+        return typeof cb == "function" && cb("发货失败！", false)
       }
 
     },
@@ -1012,15 +1011,18 @@ function getOrder(personId, status, pageSize, pageIndex, cb) {
       var statusCode = res.data.statusCode;
       console.log(message);
       console.log("statusCode" + statusCode);
+      var rowCount = parseInt(res.data.data.rowCount);
+      var mPageSize =parseInt(res.data.data.pageSize);
+      var maxPage = rowCount % mPageSize == 0 ? rowCount / mPageSize : Math.ceil(rowCount / mPageSize);
       if (statusCode != null && "200" == statusCode) {
-        return typeof cb == "function" && cb(message, pageIndex,res.data)
+        return typeof cb == "function" && cb(message, pageIndex, res.data, maxPage)
       } else {
-        return typeof cb == "function" && cb(message, 0,false)
+        return typeof cb == "function" && cb(message, 0,false,-1)
       }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb("获取订单失败！",0,false)
+      return typeof cb == "function" && cb("获取订单失败！",0,false,-1)
     }
   })
 
@@ -1407,6 +1409,65 @@ function getGoodsInfoByCard(card, cb) {
 
 }
 
+//新登录方法
+function onNewLogin(usename, pass, cb) {
+ 
+  wx.request({
+    url: "http://test.e-smnh.com/app/iskyshop_seller_login.htm",
+    header: {
+      "content-type": "application/x-www-form-urlencoded"
+    },
+    method: "post",
+    data: util.json2Form({ userName: usename, password: pass}),
+    complete: function (res) {
+      var token = res.data.token;
+      var userName = res.data.userName;
+      var code =res.data.code;
+      console.log(res);
+      console.log("code" + code + "token=" + token + "userName=" + userName);
+      if (code != null && "100" == code) {
+        return typeof cb == "function" && cb(userName, res.data)
+      } else {
+        return typeof cb == "function" && cb(userName, false)
+      }
+
+    },
+    fail: function () {
+      return typeof cb == "function" && cb('登录失败！', false)
+    }
+  })
+
+}
+//新登录方法
+function getOrderNew(useId, token,verify, cb) {
+
+  wx.request({
+    url: "http://test.e-smnh.com/app/seller/goods_list.htm",
+    header: {
+      "content-type": "application/x-www-form-urlencoded;" ,
+      "verify": verify
+    },
+    method: "post",
+    data: util.json2Form({ user_id: useId, token: token }),
+    complete: function (res) {
+      var code = res.data.code;
+      util.verifyCode(code);
+      console.log(res);
+      console.log("code" + code + "token=" + token + "userName=" + userName);
+      if (code != null && "100" == code) {
+        return typeof cb == "function" && cb(userName, res.data)
+      } else {
+        return typeof cb == "function" && cb(userName, false)
+      }
+
+    },
+    fail: function () {
+      return typeof cb == "function" && cb('登录失败！', false)
+    }
+  })
+
+}
+
 
 
 module.exports = {
@@ -1460,5 +1521,7 @@ module.exports = {
   getPicLists: getPicLists,
   getOpenId: getOpenId,
   getGoodsInfoByCard:getGoodsInfoByCard,
+  onNewLogin: onNewLogin,
+  getOrderNew: getOrderNew,
 
 }

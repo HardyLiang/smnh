@@ -11,6 +11,7 @@ Page({
     dayIncome: '',  //今日金额
     noIncome: '',   //待结算
     tradeIncome: '', //交易中
+    isReFresh:false,//刷新
   },
   onLoad: function (options) {
     //首先获取手机
@@ -24,6 +25,13 @@ Page({
   getSale: function(card){
     var that =this;
     app.func.getSale(card,function(message,res){
+      if (that.data.isReFresh) {//判断是否刷新操作
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
+        that.setData({
+          isReFresh: false
+        })
+      }
         if(!res){
           console.log("获取收入失败！")
           return;
@@ -42,8 +50,20 @@ Page({
       })
 
     })
+  },
+  /**
+   * 下拉刷新
+   */
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading(); //在标题栏中显示加载
+    this.setData({
+      isReFresh: true
+    })
+    //首先获取手机
+    var idCard = wx.getStorageSync(common.CC_IDCARD);
+    //联网获取收入
+    this.getSale(idCard);
   }
-  
 
 
 })

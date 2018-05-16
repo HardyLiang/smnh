@@ -18,7 +18,8 @@ Page({
     bankAccount: "",
     bankType: "",
     bankAddress: "",
-    detailAddress: ""
+    detailAddress: "", 
+    isReFresh: false,//是否刷新
   },
 
   /**
@@ -111,6 +112,71 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    wx.showNavigationBarLoading(); //在标题栏中显示加载
 
+  },
+  /**
+   * 下拉刷新
+   */
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading(); //在标题栏中显示加载
+    this.setData({
+      isReFresh:true
+    })
+    this.getPersonMsg();
+  },
+  getPersonMsg:function(){
+    var that =this;
+    var farmerId = wx.getStorageSync(common.CC_FARMERID);
+    getApp().func.getPersonMsg(farmerId,function(message,res){
+      console.log(res)
+      if (that.data.isReFresh) {//判断是否刷新操作
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
+        that.setData({
+          isReFresh: false
+        })
+      }
+      if(!res){
+        return;
+      }
+      var sex;
+      if (res.data.sex == "1") {
+        sex = "男";
+      } else {
+        sex = "女"
+      }
+      var bankType;
+      if (res.data.priorpub == "B") {
+        bankType = "公司账户"
+      } else
+        if (res.data.priorpub == "C") {
+          bankType = "个人账户"
+        }
+      var personType;
+      if (res.data.personType == "2") {
+        personType = "普通"
+      } else
+        if (res.data.personType == "1") {
+          personType = "贫困"
+        }
+
+      that.setData({
+        imgUrlValue: res.data.picPath,
+        name: res.data.name,
+        sex: sex,
+        farmerType: personType,
+        mobile: res.data.mobile,
+        idCard: res.data.idCard,
+        bankNum: res.data.bankNumber,
+        bankName: res.data.bankName,
+        bankAccount: res.data.accountName,
+        bankType: bankType,
+        bankAddress: res.data.bankAddressName,
+        detailAddress: res.data.sendAddressName
+      })
+      console.log("更新成功" + sex + personType)
+
+    })
   }
 })

@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "我的收入"
+  "navigationBarTitleText": "我的收入",
+  "enablePullDownRefresh": true
+
 }

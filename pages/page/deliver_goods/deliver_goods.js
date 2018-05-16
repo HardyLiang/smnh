@@ -5,9 +5,12 @@ Page({
   data: {
     packageLists: [],  //这个是每个包裹的列表
     goodInfoList: [],  //这个是传过来的产品列表
+    shipInfoList:[], //这个是传过来的物流列表
     logisticsList: [], //这个是放物流公司的列表
     chooseGoodsPosition:0, //这个是保存每次用户选择的那个产品列表位置
     orderId:'',//保存每份订单的id
+    orderType:"",//此字段为当前页面的总体类型，“modify”是修改物流 ，“send”是发布产品
+    confirmText:"",//确认按钮的文本显示
 
   },
   /**
@@ -16,34 +19,57 @@ Page({
   onReady: function () {
     //获得dialog组件
     this.action_sheet = this.selectComponent("#action_sheet");
-    //首次进来添加一列数据
-    this.insert();
+   
 
   },
   onLoad: function (options) {
     var that = this;
-    //先获取产品id
+    //先获取产品id 与类型
     var id = options.orderId;
+    var orderType =options.type;
+    console.log(options)
     //获取产品列表
     var goodList = wx.getStorageSync(common.CC_GOODINFOLIST);
-    console.log(goodList);
+    var shipList = wx.getStorageSync(common.CC_SHIPINFOLIST);
+    console.log(shipList);
+    var confirmText = orderType=="modify"? "确认修改":"确认发货";
     //给产品列表赋值；
     that.setData({
       goodInfoList: goodList,
-      orderId: id
+      orderId: id,
+      shipInfoList: shipList,
+      orderType:orderType,
+      confirmText:confirmText
     })
     //获取物流列表
     this.chooseLogisitics();
+    //判断类型，如果是修改物流的话，给物流包裹赋值
+    if (orderType=="modify"){
+      for (var i = 0; i < shipList.length;i++){
+        var goodsName ="";
+        var goodsId="";
+        for (var y = 0; y < shipList[i].shipGoodInfoList.length; y++){
+          goodsName = goodsName + shipList[i].shipGoodInfoList[y].goodName+" ";
+          goodsId = goodsId + shipList[i].shipGoodInfoList[y].goods_id + ",";
+        }
+        this.insert(shipList[i].express_company_name, 
+          shipList[i].express_company_id, shipList[i].shipCode, goodsName, goodsId);
+      }
+    
+    }else
+      if (orderType=="send"){//如果是发货的话就添加一个空的
+        this.insert("请选择物流公司", "", "", "", "");
+    }
   },
   // 添加物流
-  insert: function () {
+  insert: function (name,nameId,orderNum,goods,goodsId) {
     console.log("添加一个");
     var newItem = {
-        name: '请选择物流公司',
-        nameId:"",
-        orderNum: '',
-        goods: '',
-        goodsId:''
+        name: name,
+        nameId: nameId,
+        orderNum: orderNum,
+        goods: goods,
+        goodsId: goodsId
       }
     var packages = this.data.packageLists;
     console.log(newItem)
@@ -175,7 +201,6 @@ Page({
   confirmDelicer :function(e){
     console.log("确认发货")
     console.log(e)
-   
     //检测发货信息是否填完整；
     for (var i = 0; i < this.data.packageLists.length;i++){
       var position =i+1;
@@ -216,15 +241,24 @@ Page({
       params.ship_info.push(ship_info);
     }
     console.log(params);
+    if (this.data.orderType =="send"){
+      this.orderShippingSave(params);
+    }else
+      if (this.data.orderType == "modify"){
+        this.orderShippingUpdate(params);
+      }
+   
+  },
+  orderShippingSave:function(params){
     //联网发货
-    getApp().func.orderShippingSave(params,function(message,res){
+    getApp().func.orderShippingSave(params, function (message, res) {
       console.log(message);
       console.log(res);
       //发货失败
-      if(!res){
+      if (!res) {
         wx.showToast({
           title: message,
-          icon :"none"
+          icon: "none"
         })
         return;
       }
@@ -232,13 +266,43 @@ Page({
       wx.showModal({
         title: '提示',
         content: '发货成功',
-        showCancel:false,
-        success:function(res){
-          if(res.confirm){
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
             //关闭页面并且通知上一个页面刷新列表
             event.emit(event.KDeliverGoodSuccessEventName, '发货成功');
             wx.navigateBack();
-            
+
+          }
+        }
+      })
+
+    });
+  },
+  orderShippingUpdate: function (params){
+    //联网修改物流
+    getApp().func.orderShippingUpdate(params, function (message, res) {
+      console.log(message);
+      console.log(res);
+      //修改失败
+      if (!res) {
+        wx.showToast({
+          title: message,
+          icon: "none"
+        })
+        return;
+      }
+      //修改成功
+      wx.showModal({
+        title: '提示',
+        content: '修改物流成功',
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+            //关闭页面并且通知上一个页面刷新列表
+            event.emit(event.KLogisiticsModifySuccessEventName, '修改物流成功');
+            wx.navigateBack();
+
           }
         }
       })
@@ -248,5 +312,8 @@ Page({
   onUnload:function(){
     //页面销毁清除页面event接收事件
     event.remove(event.KDeliverGoodSuccessEventName, this);
-  }
+    event.remove(event.KLogisiticsModifySuccessEventName, this);
+
+  },
+
 })

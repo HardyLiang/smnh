@@ -7,7 +7,7 @@
   </block>
   </view>
   <view>
-  <button class="package-btn c-blue"  catchtap='confirmDelicer'>确认发货</button>
+  <button class="package-btn c-blue"  catchtap='confirmDelicer'>{{confirmText}}</button>
     <button class="package-btn c-orange" bindtap="insert">添加物流</button> 
   </view>
 </view>

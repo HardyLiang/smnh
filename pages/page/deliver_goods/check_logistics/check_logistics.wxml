@@ -2,11 +2,40 @@
 <view class="navbar">
   <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
 </view>
-<!--包裹列表-->
-<view hidden="{{currentTab!==0}}">
- 11111111111
+<!--物流公司-->
+<view class='goods-container'>  
+<image class='good-img' src='../../../images/ic_logistics.png'></image>  
+<view class='good-info'> 
+    <text>物流公司: {{itemGoodName}}</text>  
+    <text>物流单号: {{expressShipCode}}</text>  
+  </view> 
+  </view>  
+<!--商品列表-->
+<block wx:for="{{goodlist}}" wx:key="item"> 
+<view class='goods-container'>
+      <view class='good-img'>
+        <image src='{{item.goods_pic}}'></image>
+      </view>
+      <view class='good-info'>
+        <text class='item-good-name'>{{item.goodName}}</text>
+        <text class='paid-txt2'>规格：{{item.goods_gsp_val}}</text>
+        <text class='paid-txt2'>数量：<text class='color-blue'> x {{item.goods_count}}</text> </text>
+        <text class='paid-txt2 '>应收金额： <text class='color-blue mr15'> {{item.money}}元</text></text>
+      </view>
 </view>
-<!--已发货-->
-<view hidden="{{currentTab!==1}}">
- 232423423423
+</block>
+
+<!--物流详情-->
+<view class="logistics">
+<block wx:for="{{logisticsList}}" wx:key="{{item}}">
+  <view class='logistics-list'>  
+    <view class='icon {{0==index?"in":"no_in"}}'></view>  
+    <view class='logistics_centent'>  
+      <text>{{item.context}}</text>  
+      <text>{{item.time}}</text>  
+    </view>  
+    <view class='on'></view>  
+  </view>  
+</block>
+<view class='icon no_in'></view> 
 </view>

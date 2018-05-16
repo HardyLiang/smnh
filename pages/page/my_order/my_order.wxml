@@ -38,3 +38,7 @@
     </view>
     <!-- //template -->
 </view>
+<view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+    <image class="weui-loading" hidden='{{isHideLoadIcon}}'src="../../images/ic_gif_loading.gif"></image>
+    <view class="weui-loadmore_tips">{{loadmoreTip}}</view>
+  </view>

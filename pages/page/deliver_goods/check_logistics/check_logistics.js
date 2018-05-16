@@ -1,8 +1,12 @@
 var app = getApp()
 Page({
   data: {
-    navbar: [],
-    currentTab: 0
+    navbar: [],//包裹列表
+    goodlist:[],//发货的商品列表
+    logisticsList:[],//物流信息
+    currentTab: 0,
+    itemGoodName:"",
+    expressShipCode:""
   },
   navbarTap: function (e) {
     this.setData({
@@ -15,7 +19,6 @@ Page({
      var oid =options.oid;
     //联网获取物流信息
      this.getLogisticsInfo(oid);
-
 
   }
 ,
@@ -44,11 +47,17 @@ Page({
       }
       console.log(list)
       that.setData({
-        navbar: list
+        navbar: list,
+        goodlist: tansInfoList[0].transGoodInfo,
+        logisticsList: tansInfoList[0].transInfo,
+        itemGoodName: tansInfoList[0].express_company_name,
+        expressShipCode: tansInfoList[0].express_ship_code
       })
+     
+    
     });
    
-
+    
   }
 
 }) 

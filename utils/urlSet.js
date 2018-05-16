@@ -2,6 +2,8 @@
 //上线需要配置这里的信息，包括域名，APPID,密钥
 var baseUrl ="http://61.28.113.182:9595";
 // var baseUrl ="https://xz-weixin.e-tecsun.com";
+// var baseUrl ="http://114.67.49.72:80";
+// var baseUrl ="http://test.e-smnh.com/app/iskyshop_seller_login.htm";
 let APPID = 'wx15901d82315115d8';
 let SECRET = '1cfb2641811da6b383054c9febccb036';
 

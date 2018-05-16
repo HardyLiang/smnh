@@ -1,6 +1,5 @@
 {
   "pages": [
-   "pages/page/product_publish/product_publish",
     "pages/index/index",
     "pages/page/auth/login/login",
     "pages/page/user/user",
@@ -9,7 +8,7 @@
     "pages/page/auth/forget/forget",
     "pages/page/add_product/add_product",
     "pages/page/product_publish/goods_detail/goods_detail",
-    
+    "pages/page/product_publish/product_publish",
     "pages/logs/logs",
     "pages/page/info_list/info_list",
     "pages/page/my_shop/my_shop",

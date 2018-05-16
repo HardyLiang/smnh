@@ -91,6 +91,8 @@ App({
     getProductDictSub: http.getProductDictSub,
     getProductDetail:http.getProductDetail,
     getPicLists: http.getPicLists,
-    
+    orderShippingUpdate: http.orderShippingUpdate,
+    onNewLogin: http.onNewLogin,
+    getOrderNew: http.getOrderNew,
   }
 })

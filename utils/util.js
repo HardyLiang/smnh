@@ -142,6 +142,27 @@ function hideIdCardMiddle(idCard){
  }
 
 }
+/**
+ * 检测code
+ */
+function verifyCode(code, message) {
+  if (code == -100) {
+    wx.showModal({
+      title: '提示',
+      content: message,
+      showCancel: false,
+      success: function (res) {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: '../page/auth/login/login',
+          })
+        }
+      }
+    })
+    return;
+  }
+
+}
 
 
 module.exports = {
@@ -157,4 +178,5 @@ module.exports = {
   checkNullContent: checkNullContent,
   clearStorageData: clearStorageData,
   hideIdCardMiddle: hideIdCardMiddle,
+  verifyCode: verifyCode,
 }

@@ -22,7 +22,7 @@
     </view>
     <view class='paid-btn-item'>
       <button  class="pro-btn c-blue"> 已发货 </button>
-      <button  class="pro-btn c-orange" catchtap='modifyLogistics'data-oid="{{id}}"> 修改物流 </button>
+      <button  class="pro-btn c-orange" catchtap='modifyLogistics'data-id="{{ids}}"> 修改物流 </button>
       <button  class="pro-btn c-blue" catchtap='viewLogistics'data-oid="{{id}}"> 查看物流 </button>
     </view>
   </view>

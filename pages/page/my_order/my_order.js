@@ -1,25 +1,51 @@
 var app = getApp()
 var common = require('../../../utils/common.js')
 var event =require('../../../utils/event.js')
+let typeSend="send";
+let typeModify="modify";
+let tipLoading ="正在加载";
+let tipAlready ="全部加载完毕";
 
 Page({
   data: {
     navbar: ['待发货', '已发货'],
     currentTab: 0,
-    orderNum: '985345833453534594583453',
+    orderNum: '',
     username: "",
     farmerType: "",
     notYetCount: "",
     shippedCount: "",
     pageSize: 10,
-    pageIndex: 1,
-
-
+    pageIndex: 1,//未发货页码
+    pageIndex1:1,//已发货页码
+    isFirstEnter:true,//第一次进入页面
+    isReFresh:false,//是否刷新
+    isLoadMore:false,//是否加载更多
+    isHideLoadMore: false,//是否隐藏加载更多
+    isHideLoadIcon: false,//是否隐藏loading图标
+    loadmoreTip: "正在加载",//加载文字
+    typeNotYetStatus:false,//未发货加载更多页面状态，如果是true,表示这个页面已经加载完了
+    typeAlreadyStatus: false,//已发货加载更多页面状态，如果是true,表示这个页面已经加载完了
   },
   navbarTap: function (e) {
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
+    console.log("选择当前页面" + this.data.currentTab + "状态===" + this.data.typeNotYetStatus)
+    if (this.data.currentTab == 0 ){
+       this.setData({
+         isHideLoadMore: false,//是否隐藏加载更多
+         isHideLoadIcon: this.data.typeNotYetStatus ? true : false,//是否隐藏loading图标
+         loadmoreTip: this.data.typeNotYetStatus ? tipAlready : tipLoading,//加载文字
+       })
+    }else
+      if (this.data.currentTab == 1 ){
+        this.setData({
+          isHideLoadMore: false,//是否隐藏加载更多
+          isHideLoadIcon: this.data.typeAlreadyStatus ? true : false,//是否隐藏loading图标
+          loadmoreTip: this.data.typeAlreadyStatus ? tipAlready : tipLoading,//加载文字
+        })
+    }
   },
   // 复制待发货订单编号
   copyPaidNum: function () {
@@ -29,76 +55,113 @@ Page({
   },
   onLoad: function () {
     //获取个人信息
-    var name = wx.getStorageSync(common.CC_USERNAME);
-    var idCard = wx.getStorageSync(common.CC_IDCARD);
-    var res = wx.getStorageSync(common.CC_FARMERINFO);
-    var farmerId = res.data.id;
-    var status = "2";
-    var alreadyStatus = "3";
-    console.log("name=" + name + "idCard=" + idCard + "farmerID=" + farmerId);
-    var personType;
-    if (res.data.personType == "2") {
-      personType = "普通户"
-    } else
-      if (res.data.personType == "1") {
-        personType = "贫困户"
-      }
-    //信息赋值
-    this.setData({
-      username: name,
-      farmerType: personType
-    })
-    //获取未发货
-    this.getOrder(idCard, farmerId, status, this.data.pageSize, this.data.pageIndex);
-    //获取已发货
-    this.getOrder(idCard, farmerId, alreadyStatus, this.data.pageSize, this.data.pageIndex);
+    this.getOrderByStatus(typeSend);
+    this.getOrderByStatus(typeModify);
 
   },
   onShow:function(e){
+    var that =this;
     event.on(event.KDeliverGoodSuccessEventName, this, function (data) {
       console.log("发货成功待发货页面收到信息");
-      //获取未发货
-      var idCard = wx.getStorageSync(common.CC_IDCARD);
-      var res = wx.getStorageSync(common.CC_FARMERINFO);
-      var farmerId = res.data.id;
-      var status = "2";
-      this.setData({
-        pageSize:10,
-        pageIndex:1
-      })
-      this.getOrder(idCard, farmerId, status, this.data.pageSize, this.data.pageIndex);
+      //发货成功两边的列表都要刷新
+      that.getOrderByStatus(typeSend);
+      that.getOrderByStatus(typeModify);
     })
+    event.on(event.KLogisiticsModifySuccessEventName, this, function (data) {
+      console.log("修改物流成功已发货发货页面收到信息");
+      //修改物流成功只是需要刷新已发货列表
+      that.getOrderByStatus(typeModify);
+    })
+    
   },
   /**
    * 获取订单
    */
   getOrder: function (idCard, farmerId, status, pageSize, pageIndex) {
+    console.log("pageIndex ========"+pageIndex)
     var that = this;
+    if (that.data.isFirstEnter ){//如果是第一次进来就显示loading
+      wx.showLoading()
+      that.setData({
+        isFirstEnter:false
+      })
+    }
     //联网获取订单数量和订单
     getApp().func.getOrderCountInfo(idCard, function (message, res) {
-      console.log("获取订单数量成功");
-      console.log(res);
+      if(!res){
+        return;
+      }
       that.setData({
         notYetCount: res.data[0].notYetCount,
         shippedCount: res.data[0].shippedCount,
       })
     })
 
-    getApp().func.getOrder(farmerId, status, pageSize, pageIndex, function (message, pageIndex, res) {
+  getApp().func.getOrder(farmerId, status, pageSize, pageIndex, function (message, mPageIndex, res,maxPage) {
+      wx.hideLoading();
       console.log("获取订单数据成功");
       console.log(res);
-      if (status != null && status == "2") {//未发货
-        console.log("未发货");
+      if(that.data.isReFresh){//判断是否刷新操作
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
         that.setData({
-          notYetList: res.data.lists
-        });
-      } else
-        if (status != null && status == "3") {//已发货
-          console.log("已发货");
+          isReFresh:false
+        })
+      }
+      if (that.data.isLoadMore) {//判断是否是加载更多操作
+        console.log("mPageIndex=" + mPageIndex + "maxPage="+maxPage);
+        var mTypeNotYetStatus = that.data.typeNotYetStatus;
+        var mTypeAlreadyStatus = that.data.typeAlreadyStatus;
+        if (mPageIndex==maxPage){
           that.setData({
-            alreadyList: res.data.lists
-          });
+            isLoadMore: false,//是否加载更多
+            loadmoreTip: tipAlready,//加载文字
+            isHideLoadMore: false,//是否隐藏加载更多
+            isHideLoadIcon: true,//是否隐藏loading图标
+            typeNotYetStatus: that.data.currentTab == 0 ? true : mTypeNotYetStatus,
+            typeAlreadyStatus: that.data.currentTab == 1 ? true : mTypeAlreadyStatus
+          })
         }
+        
+      }
+      if(!res){
+        return;
+      }
+        if (status != null && status == "2") {//未发货
+          console.log("未发货");
+          var list = that.data.notYetList;
+          if (that.data.pageIndex==1){
+             list =[];
+             list = res.data.lists;
+           }else{
+             for (var i = 0; i < res.data.lists.length; i++) {
+               list.push(res.data.lists[i]);
+             }
+             console.log("加载更多")
+             console.log(list);
+           }
+          that.setData({
+            notYetList: list,
+          });
+          
+        } else
+          if (status != null && status == "3") {//已发货
+            console.log("已发货");
+            var alreadyList = that.data.alreadyList;
+            if (pageIndex == 1) {
+              alreadyList=[];
+              alreadyList = res.data.lists;
+            } else {
+              for (var i = 0; i < res.data.lists.length; i++) {
+                alreadyList.push(res.data.lists[i]);
+              }
+            }
+            that.setData({
+              alreadyList: alreadyList,
+            });
+          }
+        
+     
     })
 
 
@@ -149,7 +212,17 @@ Page({
    * 修改物流
    */
   modifyLogistics: function (e) {
-
+    console.log(e)
+    var position = e.currentTarget.dataset.id;
+    console.log("第几项修改物流" + position);
+    var shipInfoList = this.data.alreadyList[position].shipInfoList;
+    var orderId = this.data.alreadyList[position].id;
+    //修改前存储产品物流信息
+    wx.setStorageSync(common.CC_SHIPINFOLIST, shipInfoList);
+    //跳转修改物流
+    wx.navigateTo({
+      url: '../deliver_goods/deliver_goods?orderId=' + orderId+"&type="+"modify",
+    })
   },
   /**
    * 发货
@@ -165,8 +238,97 @@ Page({
     wx.setStorageSync(common.CC_GOODINFOLIST, goodsList);
     //跳转发货
     wx.navigateTo({
-      url: '../deliver_goods/deliver_goods?orderId=' + orderId,
+      url: '../deliver_goods/deliver_goods?orderId=' + orderId+"&type="+"send",
     })
+  },
+  /**
+   * 根据列表状态获取列表
+   */
+  getOrderByStatus:function(statusType){
+    //获取未发货
+    var name = wx.getStorageSync(common.CC_USERNAME);
+    var idCard = wx.getStorageSync(common.CC_IDCARD);
+    var res = wx.getStorageSync(common.CC_FARMERINFO);
+    var farmerId = res.data.id;
+    var status = "2";
+    var statusAlready = "3";
+    var personType;
+    if (res.data.personType == "2") {
+      personType = "普通户"
+    } else
+      if (res.data.personType == "1") {
+        personType = "贫困户"
+      }
+    //信息赋值
+    this.setData({
+      username: name,
+      farmerType: personType,
+    })
+    if (statusType == typeModify) {//如果是修改物流
+        this.getOrder(idCard, farmerId, statusAlready, this.data.pageSize, this.data.pageIndex1);
+      } else 
+      if (statusType == typeSend) {//未发货
+        this.getOrder(idCard, farmerId, status, this.data.pageSize, this.data.pageIndex);
+      } 
+    
+   
+   
+    
+  },
+  /**
+   * 下拉刷新
+   */
+  onPullDownRefresh:function(){
+    wx.showNavigationBarLoading(); //在标题栏中显示加载
+    var mPageIndex=this.data.pageIndex;
+    var mPageIndex1 = this.data.pageIndex1;
+    var mTypeNotYetStatus = this.data.typeNotYetStatus;
+    var mTypeAlreadyStatus = this.data.typeAlreadyStatus;
+    this.setData({
+      isReFresh: true,
+      pageIndex: this.data.currentTab == 0 ? 1 : mPageIndex,
+      pageIndex1: this.data.currentTab == 1 ? 1 : mPageIndex1,
+      isHideLoadMore: false,
+      isHideLoadIcon: false,
+      loadmoreTip: tipLoading,
+      typeNotYetStatus: this.data.currentTab == 0 ? false:mTypeNotYetStatus,
+      typeAlreadyStatus: this.data.currentTab == 1 ? false : mTypeAlreadyStatus,
+    })
+    this.getOrderByStatus(this.data.currentTab == 0 ? typeSend : typeModify);
+    console.log("刷新" + this.data.currentTab)
+   
+  },
+  onReachBottom:function(){
+    console.log("到达底部加载更多");
+   
+    if (this.data.currentTab==0){//如果当前是未发货
+      if (this.data.typeNotYetStatus){
+        return;
+      }
+      var mPageIndex = this.data.pageIndex + 1;
+      this.setData({
+        isLoadMore: true,
+        pageIndex: mPageIndex,
+        isHideLoadMore: false,
+        isHideLoadIcon: false,
+        loadmoreTip: tipLoading
+      })
+      this.getOrderByStatus(typeSend);
+    }else{
+      if (this.data.typeAlreadyStatus) {
+        return;
+      }
+      var mPageIndex = this.data.pageIndex1 + 1;
+      this.setData({
+        isLoadMore: true,
+        pageIndex1: mPageIndex,
+        isHideLoadMore: false,
+        isHideLoadIcon: false,
+        loadmoreTip: tipLoading
+      })
+      this.getOrderByStatus(typeModify);
+    }
+   
   }
 
 

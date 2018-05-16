@@ -1,6 +1,7 @@
 let kLoginSuccessEventName = 'kLoginSuccessEventName'    //登录成功的通知
 let KDeliverGoodSuccessEventName ="KDeliverGoodSuccessEventName";//发货成功的通知
 let KChooseGoodItemSuccessEventName ="KChooseGoodItemSuccessEventName";//用户成功选择子类产品返回
+let KLogisiticsModifySuccessEventName = "KLogisiticsModifySuccessEventName";//修改物流成功
 
 let kProductRecommendPurchaseSuccessEvent = 'kProductRecommendPurchaseSuccessEvent' //购买推介成功的通知
 
@@ -40,6 +41,7 @@ function emit(name, data) {
 exports.kLoginSuccessEventName = kLoginSuccessEventName;
 exports.KDeliverGoodSuccessEventName = KDeliverGoodSuccessEventName;
 exports.KChooseGoodItemSuccessEventName = KChooseGoodItemSuccessEventName;
+exports.KLogisiticsModifySuccessEventName = KLogisiticsModifySuccessEventName;
 exports.on = on;
 exports.remove = remove;
 exports.emit = emit;
