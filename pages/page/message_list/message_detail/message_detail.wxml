@@ -1,7 +1,7 @@
 <view class='message-detail'>
-  <text>2018-03-22 11:33:22</text>
+  <text>{{time}}</text>
   <view >
-    <view class='message-title'>这里是标题这里是标题这里是标题这里是标题这里是标题</view>
-    <view class='message-txt'><text>sa阿萨德了发几十块的了放假啊速度快法纪是d</text></view>
+    <view class='message-title'>{{title}}</view>
+    <view class='message-txt'><text>{{content}}</text></view>
   </view>
 </view>

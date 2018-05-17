@@ -1,0 +1,5 @@
+<!--pages/page/operation_guide/operation_detail/operation_detail.wxml-->
+<view>
+<web-view src="{{urlValue}}"></web-view>
+</view>
+

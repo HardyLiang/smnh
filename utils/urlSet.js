@@ -116,6 +116,7 @@ var updateShareCommission = baseUrl + "/siboss/iface/common/ap/updateShareCommis
 var getGoodsInfoByCard = baseUrl +"/siboss/iface/common/ap/getGoodsInfoByCard?card=";
 
 module.exports = {
+  baseUrl: baseUrl,
   login: login,
   forgotPass: forgotPass,
   updatePassword: updatePassword,

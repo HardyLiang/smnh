@@ -1,22 +1,33 @@
 // pages/page/message_list/message_list.js
+var common =require('../../../utils/common.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    messageList:[]
   },
-  onMessageDetail: function (event) {
+  onMessageDetail: function (e) {
+    var position =e.currentTarget.dataset.position;
     wx.navigateTo({
-      url: "message_detail/message_detail"
+      url: "message_detail/message_detail?id=" + position
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    //获取消息列表
+    var list = wx.getStorageSync(common.CC_MESSAGELIST);
+    console.log(list);
+    //给消息列表赋值
+    if(list!=null&&list.length>0){
+      this.setData({
+        messageList:list
+      })
+    }
+
   },
 
   /**

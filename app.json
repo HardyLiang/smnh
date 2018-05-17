@@ -26,7 +26,8 @@
     "pages/page/about_soft/about_soft",
     "pages/page/dialog/dialog",
     "pages/page/action_sheet/action_sheet",
-    "pages/page/my_order/my_order"
+    "pages/page/my_order/my_order",
+    "pages/page/operation_guide/operation_detail/operation_detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

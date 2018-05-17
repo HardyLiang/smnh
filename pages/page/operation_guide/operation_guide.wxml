@@ -1,6 +1,6 @@
 <!-- 菜单 -->
 <view class="nav-block">
-  <navigator class='wrap-item' wx:for="{{indexmenu}}" wx:key="{{item.url}}" url="">
+  <navigator class='wrap-item' wx:for="{{indexmenu}}" wx:key="{{item}}" url="{{item.url}}">
     <image src="{{item.icon}}" class='wrap_icon'></image>
     <text>{{item.text}}</text>
   </navigator>

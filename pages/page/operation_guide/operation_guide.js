@@ -1,4 +1,5 @@
 // pages/page/operation_guide/operation_guide.js
+
 Page({
   data: {
   },
@@ -11,32 +12,32 @@ Page({
         {
           'icon': '../../images/ic_web_order_delivery.png',
           'text': '订单发货',
-          'url': ''
+          'url': 'operation_detail/operation_detail?status=ddfh'
         },
         {
           'icon': '../../images/ic_web_info_edit.png',
           'text': '修改个人信息',
-          'url': 'https://mp.weixin.qq.com/s/pp3zSFo_i0pVFdc4cWHUBQ'
+          'url': 'operation_detail/operation_detail?status=xggrxx'
         },
         {
           'icon': '../../images/ic_web_share_shop.png',
           'text': '分享店铺',
-          'url': ''
+          'url': 'operation_detail/operation_detail?status=fxdp'
         },
         {
           'icon': '../../images/ic_web_release_products.png',
           'text': '发布产品',
-          'url': ''
+          'url': 'operation_detail/operation_detail?status=fbcp'
         },
         {
           'icon': '../../images/ic_web_management_release.png',
           'text': '管理已发布',
-          'url': ''
+          'url': 'operation_detail/operation_detail?status=glyfb'
         },
         {
           'icon': '../../images/ic_web_farmer_register.png',
           'text': '实名开店',
-          'url': ''
+          'url': 'operation_detail/operation_detail?status=smkd'
         },
         {
           'icon': '../../images/ic_web_more.png',

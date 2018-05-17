@@ -631,17 +631,23 @@ function getPersonShopURL(card, cb) {
       "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
-    data: util.json2Form({
+    data: {
       card: card
-    }),
+    },
     success: function (res) {
       var message = res.data.message;
+      var statusCode = res.data.statusCode;
       console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      console.log("statusCode" + statusCode);
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("获取农户店铺URL失败！",false)
     }
   })
 

@@ -1,14 +1,15 @@
 <view class='message-center'>
   <!-- 列表 -->
+  <block wx:for="{{messageList}}" wx:key="{{item}}" wx:for-index='ids'>
   <view class='message-item'>
-    <text>2018-03-22 11:33:22</text>
-    <view class='border-blue' bindtap='onMessageDetail'>
+    <text>{{item.createTime}}</text>
+    <view class='border-blue' bindtap='onMessageDetail' data-position="{{ids}}">
       <view class='message-box'>
-        <view>这里是标题这里是标题这里是标题这里是标题这里是标题</view>
-        <view class='text-twoLine'>这里是内容这里是内容这里是里是内</view>
+        <view>{{item.title}}</view>
+        <view class='text-twoLine'>{{item.message}}</view>
       </view>
       <view class="navigator-arrow"></view>
     </view>
   </view>
-
+ </block>
 </view>

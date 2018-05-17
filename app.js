@@ -94,5 +94,6 @@ App({
     orderShippingUpdate: http.orderShippingUpdate,
     onNewLogin: http.onNewLogin,
     getOrderNew: http.getOrderNew,
+    getPersonShopURL:http.getPersonShopURL
   }
 })

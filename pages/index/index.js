@@ -67,6 +67,7 @@ Page({
         that.setData({
           msgList:list
         })
+        wx.setStorageSync(common.CC_MESSAGELIST, res.data);
       }
     })
     this.checkUserData();
