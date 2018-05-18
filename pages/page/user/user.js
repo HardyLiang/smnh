@@ -11,12 +11,17 @@ Page({
     serviceValue:'服务：5.0',
     storeValue:'发货：5.0',
     btnFlag:false,
-    btnValue:"登录农户账户"
+    btnValue:"登录农户账户",
   
   },
-  onLoad: function (options) {
+  onLoad: function (option) {
     console.log('user===onLoad');
-    
+    let { avatar } = option
+    if (avatar) {
+      this.setData({
+        src: avatar
+      })
+    }
   },
   onShow: function (options) {
     console.log('user=====onShow');
@@ -91,5 +96,25 @@ Page({
       })
     }
    
+  },
+  /**
+   * 
+   */
+  uploadImg:function(){
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success(res) {
+        const src = res.tempFilePaths[0]
+
+        wx.redirectTo({
+          url: `../upload/upload?src=${src}`
+        })
+      }
+    })
   }
+ 
+  
+ 
 })

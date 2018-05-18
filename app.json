@@ -32,12 +32,9 @@
     "pages/page/auth/company_info/company_info",
     "pages/page/auth/company_idCard/company_idCard",
     "pages/page/auth/company_license/company_license",
-    "pages/page/auth/register_company/register_company"
+    "pages/page/auth/register_company/register_company",
+    "pages/page/upload/upload"
 
-
-
-
-    
   ],
   "window": {
     "backgroundTextStyle": "light",

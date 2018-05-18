@@ -1,7 +1,8 @@
+<import src="../we-cropper/we-cropper.wxml"/>
 <view>
   <navigator url="../info_list/info_list">
     <view class='user-info'>
-      <image src='{{imgValue}}' class='user-head'></image>
+      <image src='{{imgValue}}' class='user-head' catchtap='uploadImg'></image>
       <text class='user-cell' >{{mobileValue}}</text>
       <text class='user-name' >{{userNameValue}}</text>
       <text class='user-grade'> 
