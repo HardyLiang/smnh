@@ -1,0 +1,18 @@
+<view class='pdt-15'>
+<view class='license-photo-box'>
+<!-- start -->
+        <view class="weui-uploader__files">
+          <block wx:for="{{imageList}}" wx:for-item="image">
+            <view class="weui-uploader__file">
+              <image src="{{image}}" data-src="{{image}}" bindtap="previewImage" class='license-photo' mode="widthFix" ></image>
+            </view>
+          </block>
+        </view>
+        <view >
+          <view  bindtap="chooseImage"><image src='../../../images/company_license.png' class='license-bg-img'></image></view>
+        </view>
+      <!-- end -->
+</view>
+<button class='middle-btn'  bindtap="chooseImage">重新上传</button>
+<button class='middle-btn bg-blue' bindtap='nextUpLoadIdCard'>下一步</button>
+</view>

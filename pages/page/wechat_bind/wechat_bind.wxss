@@ -1,71 +1,38 @@
-page {
-  background: #fff;
+page{background: #fff;}
+.user-head{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: block;
+  margin: 15px auto 8px;
+  background: red;
 }
-
-.page-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  align-items: center;
-  justify-content: space-between;
-  padding: 25rpx 0;
-  background: #fff;
-}
-
-.code-text {
-  font-size: 15px;
-  line-height: 30px;
-}
-
-.color-orange {
-  color: #f38001;
-}
-
-.code-box {
-  position: relative;
-   width: 500rpx;
-  height: 522rpx;
-}
-
-.code-img-box {
+.get-code{
   position: absolute;
-  top: 0;
-  left:0;
-  display: block;
-  margin: 20rpx auto 30rpx;
-  width: 500rpx;
-  height: 522rpx;
-}
-
-.code-img {
-  position: absolute;
-  top: 10rpx;
-  left:45rpx;
-  display: block;
-  margin: 58rpx auto 30rpx;
-  width: 410rpx;
-  height: 410rpx;
-}
-
-.wechat-bind-msg {
-  width: 500rpx;
-  margin-top: 50rpx;
-  margin-bottom: 50rpx;
-}
-
-.wechat-bind-msg text {
-  display: block;
-  font-size: 15px;
+  right: 0;
+  top: 20rpx;
+  border: 1px solid #00a0e9;
+  font-size: 24rpx;
   color: #00a0e9;
-  line-height: 30px;
+  padding: 0 10rpx;
+  height:50rpx;
+  line-height: 50rpx; 
+  border-radius: 3px;
+  z-index: 100;
+}
+.hidden{
+  display: none;
 }
 
-.view-detail-btn {
-  padding: 0 58rpx;
-  background-color: #00a0e9;
-  color: #fff;
-  border-radius: 5px;
-  height: 88rpx;
-  line-height: 88rpx;
-  font-size: 15px;
+.txt-center{
+  display: block;
+  text-align: center;
+  margin-top: 5px;
+  line-height: 30px;
+  font-size: 30rpx;
+  color: #999;
 }
+.success-bind{
+ 
+}
+.text-bind-time{}

@@ -1,0 +1,27 @@
+@import "../../../style/public.wxss"; 
+page{background: #fff;}
+.pdt-15{padding-top: 15px;}
+.license-photo-box{
+  width: 620rpx;
+  height: 875rpx;
+  margin:  0 auto 15px;
+  position: relative;
+  overflow: hidden;
+}
+.license-bg-img{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0
+
+}
+.license-photo{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  max-height: 100%;
+}

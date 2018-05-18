@@ -1,14 +1,14 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/page/auth/register/register",
+    "pages/page/product_publish/product_publish",
     "pages/page/auth/login/login",
     "pages/page/user/user",
     "pages/page/my_income/my_income",
-    "pages/page/auth/register/register",
     "pages/page/auth/forget/forget",
     "pages/page/add_product/add_product",
     "pages/page/product_publish/goods_detail/goods_detail",
-    "pages/page/product_publish/product_publish",
     "pages/logs/logs",
     "pages/page/info_list/info_list",
     "pages/page/my_shop/my_shop",
@@ -27,7 +27,17 @@
     "pages/page/dialog/dialog",
     "pages/page/action_sheet/action_sheet",
     "pages/page/my_order/my_order",
-    "pages/page/operation_guide/operation_detail/operation_detail"
+    "pages/page/operation_guide/operation_detail/operation_detail",
+    "pages/page/auth/register_person/register_person",
+    "pages/page/auth/company_info/company_info",
+    "pages/page/auth/company_idCard/company_idCard",
+    "pages/page/auth/company_license/company_license",
+    "pages/page/auth/register_company/register_company"
+
+
+
+
+    
   ],
   "window": {
     "backgroundTextStyle": "light",

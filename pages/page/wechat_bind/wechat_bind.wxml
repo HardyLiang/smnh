@@ -1,16 +1,59 @@
-<view class='page-container'>
-  <text class='code-text color-orange'>绑定您的微信用于收取货款</text>
-  <view class='code-box'>
-    <image src='../../images/bg_wei_xin_gong_zong_hao_kuang_default.png' class='code-img-box'></image>
-    <image src='../../images/bg_wei_xin_gong_zong_hao.png' class='code-img'></image>
+<!-- 未认证 -->
+<view style='display:none;'>
+  <form bindsubmit='bindSubmit'>
+    <image src='{{imgValue}}' class='user-head'></image>
+    <view class='form-group'>
+      <view class="input-item">
+        <text class="input-item-label">店铺名称</text>
+        <view class="input-item-content">
+          <input type="number" placeholder="" value='{{stroeName}}' name="stroeName"></input>
+        </view>
+      </view>
+      <view class="input-item">
+        <text class="input-item-label">微信号</text>
+        <view class="input-item-content">
+          <input type="text" placeholder="" value='{{password}}' name="password"></input>
+        </view>
+      </view>
+      <view class="input-item">
+        <text class="input-item-label">验证码</text>
+        <view class="input-item-content">
+          <input type="number" placeholder="输入您收到的验证码" name="vercode"></input>
+        </view>
+        <view class="{{selected1?'phone_huo':'hidden'}}" bindtap="getphone">获取验证码</view>
+        <view class="{{selected?'phone_huo2':'hidden'}}" bindtap="countdown">{{second}}s后重新获取</view>
+      </view>
+    </view>
+    <button class='big-btn' form-type='submit'>提交</button>
+  </form>
+</view>
+
+<!-- 绑定成功 -->
+<view class='success-bind'>
+  <icon type='success' size='90'></icon>
+  <text>已绑定！</text>
+  <view class='form-group'>
+    <view class="input-item">
+      <text class="input-item-label">绑定店铺</text>
+      <view class="input-item-content">
+        <input type="number" placeholder="" value='{{stroeName}}' name="stroeName"></input>
+      </view>
+    </view>
+    <view class="input-item">
+      <text class="input-item-label">身份证号</text>
+      <view class="input-item-content">
+        <input type="text" placeholder="" value='{{idCard}}' name="idCard"></input>
+      </view>
+    </view>
+    <!-- <view class="input-item">
+      <text class="input-item-label">验证码</text>
+      <view class="input-item-content">
+        <input type="number" placeholder="输入您收到的验证码" name="vercode"></input>
+      </view>
+      <view class="{{selected1?'phone_huo':'hidden'}}" bindtap="getphone">获取验证码</view>
+      <view class="{{selected?'phone_huo2':'hidden'}}" bindtap="countdown">{{second}}s后重新获取</view>
+    </view> -->
+    <text class='text-bind-time'>绑定时间：2018-10-11 12：12：12</text>
   </view>
-  <view class='wechat-bind-msg'>
-    <text>操作指引：</text>
-     <text>1、打开手机微信扫一扫</text>
-     <text>2、识别二维码关注“实名农户”</text>
-     <text>3、进入商城个人中心-农户认证</text>
-  </view>
-  <navigator url="bind_guide/bind_guide">
-   <view class='view-detail-btn'> 查看详细操作指引 </view>
-   </navigator>
+  <button class='red-big-btn' form-type='submit'>解绑</button>
 </view>

@@ -1,0 +1,30 @@
+<view>
+<view class='idCard-photoBox'>
+<text class='text-tsg'>（拍身份证时，建议横屏拍摄）</text>
+<!-- start -->
+        <view class='idCard-photoZ'>
+          <block wx:for="{{imageListZ}}" wx:for-item="image">
+              <image src="{{image}}" data-src="{{image}}"class='idCard-photo' mode="widthFix" ></image> 
+          </block>
+        
+          <view  bindtap="chooseImageIdCardZ" class='choose-bindtap'></view>
+          <image src='../../../images/person_idCardZ.png' class='idCard-bg-img'></image>
+        </view>
+      <!-- end -->
+</view> 
+
+<view class='idCard-photoBox'>
+<!-- start -->
+        <view class='idCard-photoZ'>
+          <block wx:for="{{imageListF}}" wx:for-item="image">
+              <image src="{{image}}" data-src="{{image}}" class='idCard-photo' mode="widthFix" ></image> 
+          </block>
+       
+          <view  bindtap="chooseImageIdCardF" class='choose-bindtap'></view>
+          <image src='../../../images/person_idCardF.png' class='idCard-bg-img'></image>
+        </view>
+      <!-- end -->
+</view>
+<button class='middle-btn'>返回</button>
+<button class='middle-btn bg-blue' bindtap='nextcompanyInfo'>下一步</button>
+</view>

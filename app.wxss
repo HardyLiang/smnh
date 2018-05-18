@@ -100,9 +100,36 @@ page {
   margin: 20rpx;
   font-size: 32rpx;
 }
+.red-big-btn{
+  padding: 10rpx 0;
+  background: #e6182d;
+  color: #fff;
+  margin: 20rpx;
+  font-size: 32rpx;
+}
 .bgcolor-fff{
   background: #fff;
 }
+/* 两个按钮 */
+.middle-btn{
+  width: 45%;
+  float: left;
+  border-radius: 3px;
+  margin: 0 2.5%;
+  background: #fff; 
+  color: #00a0e9;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  border: 1px solid #00a0e9;
+  position: relative;
+}
+.middle-btn:after{
+  content: '';
+  border: none;
+}
+.bg-blue{background: #00a0e9;color: #fff;}
+
 .text-oneLine{
    overflow: hidden;
   white-space: nowrap;
@@ -118,4 +145,62 @@ page {
 }
 .m-rl10{
   margin: 0 10px;
+}
+/* input */
+.form-group{
+	padding: 0 20rpx;
+	margin: 20rpx 0;
+	background: #fff;
+}
+
+.input-item{
+	padding: 20rpx;
+	line-height: 2;
+	display: flex;
+	font-size: 32rpx;
+	border-bottom: 1rpx solid #e8e8e8;
+  position: relative;
+}
+.input-item:first-child{
+	border-top: 0;
+}
+.input-item-label{
+	display: block;
+	width: 5em;
+	color: #333;
+}
+.input-item-content{
+  margin-top: 6rpx;
+	color: #333;
+	flex:1;
+  font-size: 32rpx;
+}
+.input-item.input-item-full{
+	display: block;
+  padding: 20rpx 0 ;
+}
+.picker{width: 100%;height: 60rpx;min-width: 70rpx;}
+.res-title{
+font-size: 32rpx;
+padding-top: 26rpx;
+color: #00a0e9;
+}
+.agree-box{
+  padding: 10rpx 30rpx
+}
+.phone_huo{
+  display: inline-block;
+  padding: 2px 10px 1px;
+  background: #00a0e9;
+  color: #fff;
+  font-size: 24rpx;
+  border-radius: 3px;
+}
+.phone_huo2{
+  display: inline-block;
+  padding: 2px 10px 1px;
+  background: #eee;
+  color: #666;
+  font-size: 24rpx;
+  border-radius: 3px;
 }

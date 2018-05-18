@@ -1,0 +1,87 @@
+<view>
+ <!-- 收货 -->
+  <view class='form-group'>
+    <view class='res-title'>收货地址</view>
+    <view class="input-item">
+      <text class="input-item-label">所在地区</text>
+      <picker mode="region" bindchange="AddressChange" value="{{Address}}" custom-item="{{customItem}}">
+        <view class="picker">
+          {{Address[0]}}，{{Address[1]}}，{{Address[2]}}
+        </view>
+      </picker>
+    </view>
+    <view class="input-item">
+      <text class="input-item-label">详细地址</text>
+      <view class="input-item-content">
+        <input type="text" placeholder="请输入详细发货地址"></input>
+      </view>
+    </view>
+  </view>
+  <!-- //收货信息 -->
+  <!-- 银行信息 -->
+  <view class='form-group'>
+    <view class='res-title'>银行信息</view>
+    <view class="input-item">
+      <text class="input-item-label">银行账号</text>
+      <view class="input-item-content">
+        <input type="number" placeholder="请输入您的银行卡号"></input>
+      </view>
+    </view>
+    <view class="input-item">
+      <text class="input-item-label">开户行</text>
+      <picker class="input-item-content" bindchange="bindBankChange" value="{{bankIndex}}" range="{{bank}}">
+        <view class="picker">
+          {{bank[bankIndex]}}
+        </view>
+      </picker>
+    </view>
+    <view class="input-item">
+      <text class="input-item-label">持卡人</text>
+      <view class="input-item-content">
+        <input type="text" placeholder="请输入持卡人姓名"></input>
+      </view>
+    </view>
+    <view class="input-item">
+      <text class="input-item-label">开户省市</text>
+      <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+        <view class="picker">
+          {{region[0]}}，{{region[1]}}
+        </view>
+      </picker>
+    </view>
+    <view class="input-item">
+      <text class="input-item-label">开户类型</text>
+      <picker class="input-item-content" bindchange="bankTypeChange" value="{{bankTypeindex}}" range="{{bankType}}">
+        <view class="picker">
+          {{bankType[bankTypeindex]}}
+        </view>
+      </picker>
+    </view>
+  </view>
+  <!-- //银行信息 -->
+  <view class='form-group'>
+    <view class='res-title'>联系人信息</view>
+    <view class="input-item">
+      <text class="input-item-label">姓名</text>
+      <view class="input-item-content">
+        <input type="text" placeholder="请输入您的姓名"></input>
+      </view>
+    </view>
+    <view class="input-item">
+      <text class="input-item-label">手机号码</text>
+      <view class="input-item-content">
+        <input type="number" placeholder="请输入您的手机号码" value=''></input>
+      </view>
+    </view> 
+  </view>
+ 
+  <button class='big-btn'>确认开店</button>
+   <view class='agree-box'>
+    <view class="input-item-content">
+      <label bindtap="">
+        点击确认开店表示您已阅读并同意
+        <text class='color-blue'>“实名农户平台”服务协议</text>
+      </label>
+    </view>
+  </view>
+</view>

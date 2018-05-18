@@ -1,0 +1,25 @@
+<view>
+  <view class='form-group'>
+    <view class='res-title'>企业信息</view>
+    <view class="input-item">
+      <text class="input-item-label">企业名称</text>
+      <view class="input-item-content">
+        <input type="text" placeholder="请输入企业名称" value=''></input>
+      </view>
+    </view>
+    <view class="input-item">
+      <text class="input-item-label">法人姓名</text>
+      <view class="input-item-content">
+        <input type="text" placeholder="请输入公司法人姓名"></input>
+      </view>
+    </view>
+    <view class="input-item">
+      <text class="input-item-label input-width" >法人身份证号</text>
+      <view class="input-item-content">
+        <input type="number" placeholder="请输入法人身份证号" value=''></input>
+      </view>
+    </view> 
+  </view>
+  
+  <button class='big-btn' bindtap='nextRegister'>下一步</button>
+</view>

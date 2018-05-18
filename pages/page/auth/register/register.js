@@ -1,99 +1,21 @@
-// pages/page/auth/register/register.js
 Page({
   data: {
     index: 0,
-    sex: ['男', '女', '其他'],
-    Farmerindex:0,
-    FarmerType:['贫困户','普通户'],
-    region: ['广东省', '广州市'],
-    Address: ['广东省', '广州市','天河区'],
-    customItem: '全部',
-    bankTypeindex:0,
-    bankType: ['个人账户', '公司账户'],
-    bankIndex:0,
-    bank: ['建设银行', '建设银行']
+    stroeType: ['个人店铺', '企业店铺', '县域家乡']
   },
-  bindSexChange: function (e) {
-    // console.log('picker携带值', e.detail.value)
+  stroeTypeChange: function (e) {
     this.setData({
       index: e.detail.value
     })
   },
-  bindFarmerChange: function (e) {
-    this.setData({
-      Farmerindex: e.detail.value
+  nextRegister: function (e) {
+    wx.navigateTo({
+      url: `../register_company/register_company`
     })
   },
-  bindRegionChange: function (e) {
-    this.setData({
-      region: e.detail.value
-    })
-  },
-  AddressChange: function (e) {
-    this.setData({
-      Address: e.detail.value
-    })
-  },
-  bankTypeChange: function (e) {
-    this.setData({
-      bankTypeindex: e.detail.value
-    })
-  },
-  bindBankChange: function (e) {
-    this.setData({
-      bankIndex: e.detail.value
-    })
-  },
+
   onLoad: function (options) {
   
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })
