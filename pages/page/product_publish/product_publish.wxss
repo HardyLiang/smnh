@@ -1,4 +1,7 @@
 @import "product_list_template/product_list_template.wxss";
+.product-list{
+  margin-bottom: 70px;
+}
 .pro-info{
   background: #fff;
   display: flex;

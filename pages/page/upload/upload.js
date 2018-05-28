@@ -3,7 +3,7 @@ import WeCropper from '../we-cropper/we-cropper.js'
 const device = wx.getSystemInfoSync()
 const width = device.windowWidth
 const height = device.windowHeight - 50
-
+console.log(height)
 Page({
   data: {
     cropperOpt: {
@@ -20,16 +20,16 @@ Page({
       }
     }
   },
-  touchStart (e) {
+  touchStart(e) {
     this.wecropper.touchStart(e)
   },
-  touchMove (e) {
+  touchMove(e) {
     this.wecropper.touchMove(e)
   },
-  touchEnd (e) {
+  touchEnd(e) {
     this.wecropper.touchEnd(e)
   },
-  getCropperImage () {
+  getCropperImage() {
     this.wecropper.getCropperImage((avatar) => {
       if (avatar) {
         //  获取到裁剪后的图片
@@ -41,14 +41,14 @@ Page({
       }
     })
   },
-  uploadTap () {
+  uploadTap() {
     const self = this
 
     wx.chooseImage({
       count: 1, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success (res) {
+      success(res) {
         const src = res.tempFilePaths[0]
         //  获取裁剪图片资源后，给data添加src属性及其值
 
@@ -56,7 +56,10 @@ Page({
       }
     })
   },
-  onLoad (option) {
+  onLoad(option) {
+    console.log(this.data.cropperOpt.height)
+    var res = wx.getSystemInfoSync()
+    console.log(res.windowHeight)
     const { cropperOpt } = this.data
 
     if (option.src) {

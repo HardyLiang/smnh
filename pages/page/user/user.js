@@ -108,7 +108,7 @@ Page({
       success(res) {
         const src = res.tempFilePaths[0]
 
-        wx.redirectTo({
+        wx.navigateTo({
           url: `../upload/upload?src=${src}`
         })
       }

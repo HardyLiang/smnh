@@ -1,19 +1,10 @@
-var sourceType = [ ['camera'], ['album'], ['camera', 'album'] ]
-var sizeType = [ ['compressed'], ['original'], ['compressed', 'original'] ]
+
 var event =require('../../../utils/event.js')
 Page({
   data: {
     showView: false,  //是否分销
 
     imageList: [],
-    sourceTypeIndex: 2,
-    // sourceType: ['拍照', '相册', '拍照或相册'],
-
-    sizeTypeIndex: 2,
-    // sizeType: ['压缩', '原图', '压缩或原图'],
-
-    countIndex: 8,
-    count: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     chooseGoods:"", //显示用户选择的产品类型，
     chosseGoodsId:"",//存放用户选择的产品的Id
  
@@ -30,36 +21,43 @@ Page({
       showView: (!that.data.showView)
     })
   },
-  
-  sourceTypeChange: function (e) {
-    this.setData({
-      sourceTypeIndex: e.detail.value
-    })
-  },
-  sizeTypeChange: function (e) {
-    this.setData({
-      sizeTypeIndex: e.detail.value
-    })
-  },
-  countChange: function (e) {
-    this.setData({
-      countIndex: e.detail.value
-    })
-  },
+
   // 上传图片
-  chooseImage: function () {
-    var that = this
+  chooseImage: function () {//这里是选取图片的方法
+    var that = this,
+      imageList = this.data.imageList;
+    console.log(imageList.length)
+    if (imageList.length <= 4){ 
     wx.chooseImage({
-      sourceType: sourceType[this.data.sourceTypeIndex],
-      sizeType: sizeType[this.data.sizeTypeIndex],
-      count: this.data.count[this.data.countIndex],
+      count: 5 - imageList.length, // 最多可以选择的图片张数，默认9
+      sizeType: ['original', 'compressed'], // original 原图，compressed 压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
       success: function (res) {
-        console.log(res)
+        // const src = res.tempFilePaths[0]
+        var imgsrc = res.tempFilePaths;
+        // wx.navigateTo({
+        //   url: `../upload/upload?imgsrc=${imgsrc}`
+        // })
+        // var imgsrc = res.tempFilePaths;
+        imageList = imageList.concat(imgsrc);
         that.setData({
-          imageList: res.tempFilePaths
-        })
+          imageList: imageList
+        });
+      },
+      fail: function () {
+        // fail
+      },
+      complete: function () {
+        // complete
       }
     })
+    return;
+    }else{
+      wx.showToast({
+        icon: 'none',
+        title: "最多只能上传5张哦~"
+      })
+    }
   },
   // 预览图片
   previewImage: function (e) {

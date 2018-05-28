@@ -1,7 +1,7 @@
 <view>
   <view class='mess-head'>
     <view class='mess-radius'></view>
-    <image src='{{imgUrlValue}}'></image>
+    <image src='{{imgUrlValue}}' catchtap='uploadImg'></image>
   </view>
   <!-- 基本信息 -->
   <view class='base-message'>

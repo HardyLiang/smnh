@@ -32,7 +32,18 @@ page{background: #fff;}
   font-size: 30rpx;
   color: #999;
 }
-.success-bind{
- 
+.success-bind icon{
+  display: block;
+  margin: 10px auto;
+  text-align: center;
 }
-.text-bind-time{}
+.txt-bind-success{
+  display: block;
+  color: #00a0e9;
+  text-align: center;
+}
+.text-bind-time{
+  color: #999;
+  line-height: 36px;
+  font-size: 26rpx;
+}

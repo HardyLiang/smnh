@@ -3,7 +3,7 @@
 <view class="cropper-wrapper">
     <template is="we-cropper" data="{{...cropperOpt}}"/>
     <view class="cropper-buttons">
-        <view
+        <view 
                 class="upload"
                 bindtap="uploadTap">
             重新选择
