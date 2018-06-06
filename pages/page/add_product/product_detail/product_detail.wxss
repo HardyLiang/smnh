@@ -1,0 +1,53 @@
+@import "../add_product.wxss";
+.upload-detail-info{
+  overflow: hidden
+}
+.uploadList{
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  box-shadow: 1px 5px 6px #eee;
+  position: relative;
+}
+.icon-delete-detail{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+}
+.upload-type-text{
+  font-size: 15px;
+  color: #000;
+  font-weight: bold;
+  line-height: 24px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+}
+.upload-imgBox{
+  min-height: 70px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+}
+.detail-text{
+  width: 100%;
+  line-height: 26px;
+  font-size: 16px;
+  max-height: 70px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+}
+.add-btn{
+  width: 100px;
+  height: 30px;
+  line-height: 32px;
+  color: #00a0e9;
+  font-size: 13px;
+  margin: 10px;
+  background: #fff;
+  float: left;
+}
+.add-btn:hover{
+  background: #f5f5f5;
+}

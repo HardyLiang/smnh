@@ -64,36 +64,9 @@
     </view>
   </view>
   <!-- 产品主图 -->
-  <view class='product-info-img'>
-    <text class="product-title">产品主图 <text class='label-msg'>（第一张必传，最多可上传5张）</text>
-    <text class="image-num">{{imageList.length}}/5</text></text>
-    <view class='product-upload'>
-      <!-- start -->
-      <view class="weui-uploader__bd">
-        <view class="weui-uploader__files">
-          <block wx:for="{{imageList}}" wx:for-item="image">
-            <view class="weui-uploader__file">
-              <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
-            </view>
-          </block>
-        </view>
-        <view class="weui-uploader__input-box">
-          <view class="weui-uploader__input" bindtap="chooseImage"></view>
-        </view>
-      </view>
-      <!-- end -->
-    </view>
+  <view class='form-group'>
+    <view class='input-item input-item-full' bindtap='onProductImg'>产品主图</view>
+    <view class='input-item input-item-full' bindtap='onProductDetail'>产品详情</view>
   </view>
-    <!-- //产品主图 -->
-    <!-- 产品detail -->
-<view class='product-info-img'>
-    <text class="product-title">产品详情</text>
-    <view class='upload-detail-info'>
-
-    </view>
-    <view>
-    <button class='big-btn'>确认发布</button>
-    </view>
-</view>
-    <!-- //产品detail -->
+   <button class='big-btn' form-type='submit'>确认发布</button>
 </view>

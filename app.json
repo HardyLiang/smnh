@@ -1,15 +1,13 @@
 {
   "pages": [
-    "pages/page/add_product/add_product",
+    
     "pages/index/index",
     "pages/page/auth/register/register",
-    
     "pages/page/product_publish/product_publish",
     "pages/page/auth/login/login",
     "pages/page/user/user",
     "pages/page/my_income/my_income",
     "pages/page/auth/forget/forget",
-   
     "pages/page/product_publish/goods_detail/goods_detail",
     "pages/logs/logs",
     "pages/page/info_list/info_list",
@@ -35,8 +33,11 @@
     "pages/page/auth/company_idCard/company_idCard",
     "pages/page/auth/company_license/company_license",
     "pages/page/auth/register_company/register_company",
-    "pages/page/upload/upload"
-
+    "pages/page/upload/upload",
+    "pages/page/add_product/product_detail/product_detail",
+    "pages/page/add_product/add_product",
+    "pages/page/add_product/product_img/product_img"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",

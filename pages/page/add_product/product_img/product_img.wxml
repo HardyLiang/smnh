@@ -1,0 +1,25 @@
+  <view class='product-info-img'>
+    <text class="product-title">产品主图 <text class='label-msg'>（第一张必传，最多可上传5张）</text>
+   </text>
+    <view class='up-image'> + 上传封面图 
+    <image src='{{imgUrlValue}}' catchtap='uploadImg' mode='aspectFill' class='up-image-info'></image>
+    </view>
+    <view class='product-upload'>
+      <!-- start -->
+      <view class="weui-uploader__bd">
+        <view class="weui-uploader__files">
+          <block wx:for="{{imageList}}" wx:for-item="image">
+            <view class="weui-uploader__file">
+              <image class="weui-uploader__img" src="{{image}}"   data-index="{{index}}" bindtap="previewImage"  mode='aspectFill'></image>
+              <image src='../../../images/icon_delete.png' data-index="{{index}}"   catchtap="deleteImg"class='icon-delete-small' ></image>
+            </view>
+          </block>
+        </view>
+        <view class="weui-uploader__input-box">
+          <view class="weui-uploader__input" bindtap="chooseImage"></view>
+        </view>
+      </view>
+      <!-- end -->
+    </view>
+  </view>
+  <button class='big-btn' form-type='submit'>确认上传</button>
