@@ -58,10 +58,10 @@ Page({
   },
   // 预览图片
   previewImage: function (e) {
-    var imageList = e.currentTarget.dataset.index;
+    var index = e.currentTarget.dataset.index;
     var imageList = this.data.imageList;
     wx.previewImage({
-      current: imgs[index],
+      current: imageList[index],
       urls: this.data.imageList
     })
   },

@@ -1,66 +1,70 @@
-// pages/page/add_product/product_detail/product_detail.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-  
+    photoBoxList:[""],
+    imgUrlDetail:'',
+    textBoxList:[""],//添加文字部分
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
   
   },
-
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+    * 上传详情图 只能一张
+    */
+  chooseDetailImage: function (e) {
+    var that = this;
+    console.log(e)
+      wx.chooseImage({
+        count: 1, // 最多可以选择的图片张数，默认9
+        sizeType: ['original', 'compressed'], // original 原图，compressed 压缩图，默认二者都有
+        sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
+        success: function (res) {
+          console.log(res)
+          // var indexPic = res.currentTarget.dataset.indexPic;
+          var imgUrlDetail = res.tempFilePaths;
+          that.setData({
+            imgUrlDetail: imgUrlDetail
+          });
+          console.log(1231231)
+        },
+        fail: function () {
+          wx.showToast({
+            icon: 'none',
+            title: "上传失败~"
+          })
+        },
+        complete: function () {
+          // complete
+        }
+      })
+   
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  // 添加图片部分
+  insertPhoto: function (imgUrlDetail) {
+    console.log(111);
+    var newPhoto = {
+      imgUrlDetail: imgUrlDetail
+    }
+    var photoBox = this.data.photoBoxList;
+    console.log(newPhoto)
+    photoBox.push(newPhoto);
+    console.log(photoBox)
+    this.setData({
+      photoBoxList: photoBox
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
+  // 添加文字部分
+  insertText: function (textVal) {
+    var newTextarea = {
+      textVal: textVal
+    }
+    var textBox = this.data.textBoxList;
+    console.log(newTextarea)
+    textBox.push(newTextarea);
+    console.log(textBox)
+    this.setData({
+      textBoxList: textBox
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
+  //删除文字事件
 })
