@@ -11,7 +11,6 @@
   <!-- 菜单 -->
   <view class="nav-block">
     <view class='wrap-item' wx:for="{{indexmenu}}" wx:key="{{item.url}}" bindtap='hrefLink' data-id="{{item.url}}">
-
       <image src="{{item.icon}}" class='wrap_icon'></image>
       <text>{{item.text}}</text>
     </view>
@@ -21,14 +20,15 @@
   <view class='message-item'>
     <view class='message-style'>
       <image class="message-icon" src="../images/ic_notice_blue_default.png"></image>我的消息
-      <text>2018-04-08 12:12:12</text>
+      <!-- <text>2018-04-08 12:12:12</text> -->
     </view>
     <view class='message-list'>
       <swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="2000">
         <block wx:for="{{msgList}}" wx:for-index='ids'wx:key="item">
           <navigator url="../page/message_list/message_detail/message_detail?id={{ids}}" open-type="navigate">
             <swiper-item>
-              <view class="swiper_item">{{item.title}}</view>
+              <view class="swiper_item">{{item.title}} </view>
+              <!-- <text>{{item.createTime}}</text> -->
             </swiper-item>
           </navigator>
         </block>

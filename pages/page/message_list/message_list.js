@@ -1,10 +1,5 @@
-// pages/page/message_list/message_list.js
 var common =require('../../../utils/common.js')
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     messageList:[]
   },

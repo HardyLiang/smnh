@@ -1,5 +1,5 @@
 <view class='message-detail'>
-  <text>{{time}}</text>
+  <text >{{time}}</text>
   <view >
     <view class='message-title'>{{title}}</view>
     <view class='message-txt'><text>{{content}}</text></view>

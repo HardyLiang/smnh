@@ -1,15 +1,20 @@
-<view class='message-center'>
+<view class='message-center' wx:if="{{messageList.length > 0}}">
   <!-- 列表 -->
   <block wx:for="{{messageList}}" wx:key="{{item}}" wx:for-index='ids'>
-  <view class='message-item'>
-    <text>{{item.createTime}}</text>
-    <view class='border-blue' bindtap='onMessageDetail' data-position="{{ids}}">
-      <view class='message-box'>
-        <view>{{item.title}}</view>
-        <view class='text-twoLine'>{{item.message}}</view>
+    <view class='message-item'>
+      <text>{{item.createTime}}</text>
+      <view class='border-blue' bindtap='onMessageDetail' data-position="{{ids}}">
+        <view class='message-box'>
+          <view class='text-oneLine'>{{item.title}}</view>
+          <view class='text-twoLine'>{{item.message}}</view>
+        </view>
+        <view class="navigator-arrow"></view>
       </view>
-      <view class="navigator-arrow"></view>
     </view>
-  </view>
- </block>
+  </block>
+
+</view>
+<view class='list-none' wx:else>
+  <image src="../../images/icon_none.png" mode='widthfix' />
+  <text>暂无数据</text>
 </view>
