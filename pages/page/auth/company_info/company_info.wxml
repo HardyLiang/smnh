@@ -4,11 +4,10 @@
     <view class='res-title'>收货地址</view>
     <view class="input-item">
       <text class="input-item-label">所在地区</text>
-      <picker mode="region" bindchange="AddressChange" value="{{Address}}" custom-item="{{customItem}}">
-        <view class="picker">
-          {{Address[0]}}，{{Address[1]}}，{{Address[2]}}
-        </view>
-      </picker>
+      <addr-select bind:select="selectArea" data-typeid="detail"
+      addressLeven="4">
+    <view class="input-item-content">{{addressValue}}</view>
+  </addr-select>
     </view>
     <view class="input-item">
       <text class="input-item-label">详细地址</text>
@@ -34,6 +33,7 @@
           {{bank[bankIndex]}}
         </view>
       </picker>
+
     </view>
     <view class="input-item">
       <text class="input-item-label">持卡人</text>
@@ -43,11 +43,10 @@
     </view>
     <view class="input-item">
       <text class="input-item-label">开户省市</text>
-      <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
-        <view class="picker">
-          {{region[0]}}，{{region[1]}}
-        </view>
-      </picker>
+      <addr-select bind:select="selectArea" data-typeid="bank"
+       addressLeven="2">
+    <view class="input-item-label">{{bankAddressValue}}</view>
+  </addr-select>
     </view>
     <view class="input-item">
       <text class="input-item-label">开户类型</text>

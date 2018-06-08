@@ -4,19 +4,24 @@
     <view class="input-item">
       <text class="input-item-label">企业名称</text>
       <view class="input-item-content">
-        <input type="text" placeholder="请输入企业名称" value=''></input>
+        <input type="text" placeholder="请输入企业名称" value='{{companyName}}'data-index="1"
+         bindinput='bingContentChange'></input>
       </view>
     </view>
     <view class="input-item">
       <text class="input-item-label">法人姓名</text>
       <view class="input-item-content">
-        <input type="text" placeholder="请输入公司法人姓名"></input>
+        <input type="text" placeholder="请输入公司法人姓名" value='{{legalPersonName}}'
+        data-index="2"
+        bindinput='bingContentChange'></input>
       </view>
     </view>
     <view class="input-item">
       <text class="input-item-label input-width" >法人身份证号</text>
       <view class="input-item-content">
-        <input type="number" placeholder="请输入法人身份证号" value=''></input>
+        <input type="number" placeholder="请输入法人身份证号" value='{{legalPersonIdCard}}'
+        data-index="3"
+        bindinput='bingContentChange'></input>
       </view>
     </view> 
   </view>

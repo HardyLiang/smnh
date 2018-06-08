@@ -13,7 +13,11 @@ page {
   font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
   font-size: 16px;
   min-height: 100%;
+  width: 100%;
   height: 100%;
+  overflow-x: hidden;
+   -webkit-user-select: none;
+    user-select: none;
 }
 /* 向右箭头 */
 .navigator-arrow {

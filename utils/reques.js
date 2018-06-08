@@ -1145,7 +1145,7 @@ function addOnlyProduct(deviceId, productId,
       "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
-    data: util.json2Form({
+    data: {
       deviceId: deviceId,
       productId: productId,
       personId: personId,
@@ -1159,15 +1159,24 @@ function addOnlyProduct(deviceId, productId,
       serveCharge: serveCharge,
       productDescription: productDescription,
       productDetailName: productDetailName
-    }),
+    },
     success: function (res) {
       var message = res.data.message;
+      if(message){
+        message ="发布失败！"
+      }
+      var statusCode = res.data.statusCode;
       console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      console.log("statusCode" + statusCode);
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("发布失败！",false)
     }
   })
 

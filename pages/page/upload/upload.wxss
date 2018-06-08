@@ -4,7 +4,7 @@ page{
   background: #000;
 }
 .cropper{
-    position: absolute;
+    position:   absolute;
     top: 0;
     left: 0;
 }

@@ -4,6 +4,7 @@ const device = wx.getSystemInfoSync()
 const width = device.windowWidth
 const height = device.windowHeight - 50
 console.log(height)
+
 Page({
   data: {
     cropperOpt: {
@@ -61,7 +62,7 @@ Page({
     var res = wx.getSystemInfoSync()
     console.log(res.windowHeight)
     const { cropperOpt } = this.data
-
+    
     if (option.src) {
       cropperOpt.src = option.src
       new WeCropper(cropperOpt)

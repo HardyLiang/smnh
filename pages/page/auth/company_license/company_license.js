@@ -1,7 +1,9 @@
+var util=require("../../../../utils/util.js")
+var common = require("../../../../utils/common.js");
+var app = getApp();
 Page({
   data: {
-    imageList: [],
-   
+    imageList:[],
   },
   onLoad: function () {
     // 生命周期函数--监听页面加载
@@ -9,24 +11,25 @@ Page({
   },
   // 下一步
   nextUpLoadIdCard: function (e) {
+    if (util.checkEmpty(this.data.imageList,'亲，请上传营业执照喔!')){
+      return;
+    }
     wx.navigateTo({
       url: `../company_idCard/company_idCard`
     })
   },
   // 上传图片
   chooseImage: function () {
-    var that = this
-    wx.chooseImage({
-      count: 1, // 默认9
-      sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
-        console.log(res)
-        that.setData({
-          imageList: res.tempFilePaths
-        })
-      }
+    var that = this;
+    util.choosePhoto(1,function(res){
+      console.log(res)
+      that.setData({
+        imageList: res
+        });
+      app.globalData.userRegister[common.CC_BUSINESS_LICENSE] = res[0];
+        console.log(app.globalData.userRegister)
     })
+    
   },
   // 预览图片
   previewImage: function (e) {

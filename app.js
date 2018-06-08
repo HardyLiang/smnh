@@ -63,7 +63,9 @@ App({
     userInfo: null,
     userName: "", //农户姓名
     idCard: "",   //农户身份证
-    farmerId: ""  //农户id
+    farmerId: "" , //农户id;
+    userRegister:{},//用户注册参数暂存；
+    productPublic:{},//用户发布产品参数暂存；
   },
   func: {
     onLogin: http.onLogin,
@@ -94,6 +96,7 @@ App({
     orderShippingUpdate: http.orderShippingUpdate,
     onNewLogin: http.onNewLogin,
     getOrderNew: http.getOrderNew,
-    getPersonShopURL:http.getPersonShopURL
+    getPersonShopURL:http.getPersonShopURL,
+    addOnlyProduct:http.addOnlyProduct,
   }
 })

@@ -1,12 +1,22 @@
 
 var event = require('../../../utils/event.js')
+var common= require('../../../utils/common.js')
+var util =require('../../../utils/util.js')
+var event=require('../../../utils/event.js')
+var app=getApp()
 Page({
   data: {
     showView: false,  //是否分销
-
     imageList: [],
     chooseGoods: "", //显示用户选择的产品类型，
-    chosseGoodsId: "",//存放用户选择的产品的Id
+    chosseGoodsId: "",//存放用户选择的产品的Id，
+    goodname: "",//产品名称
+    miniNumber: "",//零售价
+    spec: "",//规格
+    specdescription: "",//规格描述
+    stock: "",//库存
+    profit: "",//让利
+    remark: ""//发货说明
 
   },
 
@@ -101,6 +111,7 @@ Page({
         chooseGoods: data.goodsName,
         chosseGoodsId: data.goodsId
       })
+      app.globalData.productPublic[common.CC_PRODUCT_TYPE] = data.goodsId;
     })
 
   },
@@ -108,6 +119,120 @@ Page({
     //页面销毁清除页面event接收事件
     event.remove(event.KChooseGoodItemSuccessEventName, this);
   },
+  /**
+   * 用户输入绑定
+   */
+  bindInputChange: function (e) {
+    console.log(e)
+    var typeName = e.currentTarget.dataset.typename;
+    var content = e.detail.value;
+    console.log(content);
+    if (!typeName) {
+      return;
+    }
+    switch(typeName){
+      case "goodname":
+        console.log("goodname")
+        app.globalData.productPublic[common.CC_PRODUCT_NAME] = content;
+        this.setData({
+          goodname:content
+        })
+      break;
+      case "mininumber":
+        console.log("mininumber")
+        app.globalData.productPublic[common.CC_PRODUCT_MININUMBER] = content;
+        this.setData({
+          mininumber: content
+        })
+        break;
+      case "spec":
+        console.log("spec")
+        app.globalData.productPublic[common.CC_PRODUCT_SPEC] = content;
+        this.setData({
+          spec: content
+        })
+        break;
+      case "specdescription":
+        console.log("specdescription")
+        app.globalData.productPublic[common.CC_PRODUCT_SPEC_DESCRIPTION] = content;
+        this.setData({
+          specdescription: content
+        })
+        break;
+      case "stock":
+        console.log("stock")
+        app.globalData.productPublic[common.CC_PRODUCT_STOCK] = content;
+        this.setData({
+          stock: content
+        })
+        break;
+      case "profit":
+        console.log("profit")
+        app.globalData.productPublic[common.CC_PRODUCT_PROFIT] = content;
+        this.setData({
+          profit: content
+        })
+        break;
+      case "remark":
+        console.log("remark")
+        app.globalData.productPublic[common.CC_PRODUCT_REMARK] = content;
+        this.setData({
+          remark: content
+        })
+        break;
+        default:
+        break;
+
+
+    }
+    console.log(app.globalData.productPublic)
+
+  },
+  /**
+   * 确认发布
+   */
+  nextRegister: function (e) {
+    console.log("下一步")
+    //首先检测用户每个参数是否填写完整；
+    // if (util.checkEmpty(this.data.chooseGoods,"请选择产品类型")){
+    //   return;
+    // }
+    // if (util.checkEmpty(this.data.goodname, "请输入产品名称")) {
+    //   return;
+    // }
+    // console.log(this.data.mininumber)
+    // if (util.checkEmpty(this.data.mininumber, "请输入零售价")) {
+    //   return;
+    // }
+    // if (util.checkEmpty(this.data.spec, "请添加规格")) {
+    //   return;
+    // }
+    
+    // if (util.checkEmpty(this.data.stock, "请输入库存")) {
+    //   return;
+    // }
+    //联网获取数据
+    app.func.addOnlyProduct("deviceId", "productId",
+      "personId", "landTypeId", "preoutput", "minNumber", "minPrice", "publishDistinctid",
+      "preoutputUnit", "spec", "serveCharge", "productDescription", "productDetailName", function(message,res){
+        if(!res){//失败
+          wx.showModal({
+            title: '提示',
+            content: message,
+            showCancel:false
+          })
+          return;
+        }else{//成功，跳转回产品列表页
+        //通知我的产品列表页面告诉他老子发布成功了
+          event.emit(event.KProductPublishSuccess, message);
+          //这个页面就关闭了；
+          wx.navigateBack();
+        }
+      });
+   
+ 
+
+  }
 
 
 

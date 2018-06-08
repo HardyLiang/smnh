@@ -163,6 +163,40 @@ function verifyCode(code, message) {
   }
 
 }
+/**
+ * 检测是否为空
+ */
+function checkEmpty(content,message){
+  if(content==null||content==""){
+    wx.showModal({
+      title: '提示',
+      content: message,
+      showCancel:false
+    })
+    return true;
+  }else{
+    return false;
+  }
+
+}
+/**
+ * 检测数组是否为空
+ */
+function checkListEmpty(content, message) {
+  if (content == null || content.length==0) {
+    wx.showModal({
+      title: '提示',
+      content: message,
+      showCancel: false
+    })
+    return true;
+  } else {
+    return false;
+  }
+
+}
+
+
 
 
 module.exports = {
@@ -179,4 +213,6 @@ module.exports = {
   clearStorageData: clearStorageData,
   hideIdCardMiddle: hideIdCardMiddle,
   verifyCode: verifyCode,
+  checkEmpty: checkEmpty,
+  checkListEmpty: checkListEmpty,
 }

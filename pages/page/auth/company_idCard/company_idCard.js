@@ -1,3 +1,6 @@
+var util=require('../../../../utils/util.js')
+var common =require('../../../../utils/common.js')
+var app=getApp();
 Page({
   data: {
     imageListZ: [],
@@ -10,6 +13,13 @@ Page({
   },
   // 下一步
   nextcompanyInfo: function (e) {
+    if (util.checkListEmpty(this.data.imageListZ,"亲，请上传身份证正面照喔！")){
+      return;
+    }
+    if (util.checkListEmpty(this.data.imageListF, "亲，请上传身份证反面照喔！")) {
+      return;
+    }
+
     wx.navigateTo({
       url: `../company_info/company_info`
     })
@@ -26,6 +36,8 @@ Page({
         that.setData({
           imageListZ: res.tempFilePaths
         })
+        app.globalData.userRegister[common.CC_IDCARD_FRONT] =that.data.imageListZ[0];
+        console.log(app.globalData.userRegister)
       }
     })
   },
@@ -41,6 +53,8 @@ Page({
         that.setData({
           imageListF: res.tempFilePaths
         })
+        app.globalData.userRegister[common.CC_IDCARD_BACK] = that.data.imageListF[0];
+        console.log(app.globalData.userRegister)
       }
     })
   },

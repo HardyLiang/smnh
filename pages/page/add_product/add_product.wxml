@@ -9,32 +9,39 @@
     <view class="input-item">
       <text class="input-item-label">产品名称</text>
       <view class="input-item-content">
-        <input type="text" placeholder="请输入产品名称"></input>
+        <input type="text" placeholder="请输入产品名称" value='{{goodname}}'
+        bindinput='bindInputChange' data-typeName="goodname"></input>
       </view>
     </view>
     <view class="input-item">
       <text class="input-item-label">零售价</text>
       <view class="input-item-content">
-        <input type="number" placeholder="请输入零售价"></input>
+        <input type="number" placeholder="请输入零售价"
+        value='{{mininumber}}' bindinput='bindInputChange'
+        data-typeName="mininumber"></input>
         <view class='abs-right'>元</view>
       </view>
     </view>
     <view class="input-item">
       <text class="input-item-label">规格</text>
       <view class="input-item-content">
-        <input type="text" placeholder="请输入规格"></input>
+        <input type="text" placeholder="请输入规格" value="{{spec}}"
+        bindinput='bindInputChange'data-typeName="spec"></input>
       </view>
     </view>
     <view class="input-item">
       <text class="input-item-label">规格描述</text>
       <view class="input-item-content">
-        <input type="text" placeholder="请输入规格描述"></input>
+        <input type="text" placeholder="请输入规格描述" value="{{specdescription}}"
+        bindinput='bindInputChange'data-typeName="specdescription"></input>
       </view>
     </view>
     <view class="input-item">
       <text class="input-item-label">库存</text>
       <view class="input-item-content">
-        <input type="number" placeholder="请输入库存"></input>
+        <input type="number" placeholder="请输入库存" 
+        value='{{stock}}'  bindinput='bindInputChange'
+        data-typeName="stock"></input>
         <view class='abs-right'>件</view>
       </view>
     </view>
@@ -50,7 +57,8 @@
         <view class="input-item">
           <text class="input-item-label">让利金</text>
           <view class="input-item-content">
-            <input type="number" placeholder="请输入让利金"></input>
+            <input type="number" placeholder="请输入让利金" value='{{profit}}'
+             bindinput='bindInputChange'data-typeName="profit"></input>
             <view class='abs-right'>元</view>
           </view>
         </view>
@@ -60,13 +68,10 @@
     <!-- 发货说明 -->
     <view class="input-item input-item-full">
       <text class="input-item-label">发货说明 <text class='label-msg'>（需要修改请点击下方输入）</text></text>
-      <textarea placeholder="请输入您的发货说明信息~"></textarea>
+      <textarea placeholder="请输入您的发货说明信息~"  bindinput='bindInputChange' value='{{remark}}'
+      data-typeName='remark'></textarea>
     </view>
   </view>
-  <!-- 产品主图 -->
-  <view class='form-group'>
-    <view class='input-item input-item-full' bindtap='onProductImg'>产品主图</view>
-    <view class='input-item input-item-full' bindtap='onProductDetail'>产品详情</view>
-  </view>
-   <button class='big-btn' form-type='submit'>确认发布</button>
+  <!-- 下一步 -->
+  <button class='big-btn' bindtap='nextRegister'>确认发布</button>
 </view>
