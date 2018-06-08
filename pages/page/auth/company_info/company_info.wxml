@@ -45,7 +45,7 @@
       <text class="input-item-label">开户省市</text>
       <addr-select bind:select="selectArea" data-typeid="bank"
        addressLeven="2">
-    <view class="input-item-label">{{bankAddressValue}}</view>
+    <view class="input-item-content">{{bankAddressValue}}</view>
   </addr-select>
     </view>
     <view class="input-item">

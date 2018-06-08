@@ -1,5 +1,5 @@
 <!-- 未认证 -->
-<view style='display:none;'>
+<view >
   <form bindsubmit='bindSubmit'>
     <image src='{{imgValue}}' class='user-head'></image>
     <view class='form-group'>
@@ -29,7 +29,7 @@
 </view>
 
 <!-- 绑定成功 -->
-<view class='success-bind'>
+<view class='success-bind' style='display:none;'>
   <icon type='success' size='80'></icon>
   <text class='txt-bind-success'>已绑定！</text>
   <view class='form-group'>

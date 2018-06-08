@@ -4,7 +4,7 @@
         <view class="weui-uploader__files">
           <block wx:for="{{imageList}}" wx:for-item="image" wx:key="index">
             <view class="weui-uploader__file">
-              <image src="{{image}}" data-src="{{image}}" bindtap="previewImage" class='license-photo' mode="widthFix" ></image>
+              <image src="{{image}}" data-src="{{image}}" bindtap="previewImage" class='license-photo' mode="aspectFill" ></image>
             </view>
           </block>
         </view>

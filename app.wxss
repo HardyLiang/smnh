@@ -102,7 +102,7 @@ page {
    padding: 6rpx 0; 
   background: #00a0e9;
   color: #fff;
-  margin: 10rpx 20rpx;
+  margin: 10rpx 120rpx;
   font-size: 32rpx;
 }
 .red-big-btn{
