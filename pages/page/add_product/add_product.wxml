@@ -72,6 +72,11 @@
       data-typeName='remark'></textarea>
     </view>
   </view>
+
+  <view class='form-group'>
+    <view class='input-item' bindtap='onProductImg'>产品主图</view>
+    <view class='input-item' bindtap='onProductDetail'>产品详情</view>
+  </view>
   <!-- 下一步 -->
   <button class='big-btn' bindtap='nextRegister'>确认发布</button>
 </view>
