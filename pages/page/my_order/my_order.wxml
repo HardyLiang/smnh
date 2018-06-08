@@ -13,13 +13,22 @@
       <text>待发货订单总数：<text class='color-blue'>{{notYetCount}}</text></text>
     </view>
     <!-- 列表 -->
-    <view class="paid-template" >
-    <block wx:for="{{notYetList}}" wx:key="item" wx:for-index='ids'>
-      <template is="paidTemplate" data="{{...item,ids:ids}}"/>
+    <view class="paid-template" wx:if="notYetList.length > 0">
+      <block wx:for="{{notYetList}}" wx:key="item" wx:for-index='ids'>
+        <template is="paidTemplate" data="{{...item,ids:ids}}" />
       </block>
     </view>
+    <view class='list-none' wx:else>
+      <image src="../../images/icon_none.png" mode='widthfix' />
+      <text>暂无数据</text>
+    </view>
+
   </view>
+
+
+
 </view>
+
 
 <!--已发货-->
 <view hidden="{{currentTab!==1}}">
@@ -31,14 +40,18 @@
     </view>
   </view>
   <!-- template -->
-   <view class="paid-template">
-   <block wx:for="{{alreadyList}}" wx:key="item" wx:for-index='ids'>
-      <template is="shippedListTemplate"  data="{{...item,ids:ids}}"/>
-      </block>
+  <view class="paid-template" wx:if="alreadyList.length > 0">
+    <block wx:for="{{alreadyList}}" wx:key="item" wx:for-index='ids'>
+      <template is="shippedListTemplate" data="{{...item,ids:ids}}" />
+    </block>
+  </view>
+   <view class='list-none' wx:else>
+      <image src="../../images/icon_none.png" mode='widthfix' />
+      <text>暂无数据</text>
     </view>
-    <!-- //template -->
+  <!-- //template -->
 </view>
 <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
-    <image class="weui-loading" hidden='{{isHideLoadIcon}}'src="../../images/ic_gif_loading.gif"></image>
-    <view class="weui-loadmore_tips">{{loadmoreTip}}</view>
-  </view>
+  <image class="weui-loading" hidden='{{isHideLoadIcon}}' src="../../images/ic_gif_loading.gif"></image>
+  <view class="weui-loadmore_tips">{{loadmoreTip}}</view>
+</view>

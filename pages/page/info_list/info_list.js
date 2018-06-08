@@ -1,5 +1,3 @@
-// pages/page/info_list/info_list.js
-
 var common = require('../../../utils/common.js')
 Page({
 

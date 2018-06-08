@@ -1,8 +1,9 @@
 <view class='bgcolor-fff'>
+ <view class='icon-edit'><image src="../../../images/icon_edit.png"  mode='widthfix'/></view>
   <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="swiper-style" indicator-color="rgba(255, 255, 255, 1)" indicator-active-color="#00a0e9">
     <block wx:for="{{imgUrls}}" wx:key="{{item}}">
       <swiper-item>
-        <image src="{{item.picPath}}" class="slide-image" mode="widthFix" />
+        <image src="{{item.picPath}}" class="slide-image" mode='aspectFill'/>
       </swiper-item>
     </block>
   </swiper>

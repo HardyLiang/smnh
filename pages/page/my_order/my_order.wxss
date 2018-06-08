@@ -81,4 +81,5 @@ page {
 .weui-loadmore_tips {
   display: inline-block;
   vertical-align: middle;
+  color: #aaa;
 }

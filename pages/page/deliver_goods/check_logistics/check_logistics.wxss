@@ -27,7 +27,7 @@
   display: flex;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
-  padding: 15rpx 0;
+  padding: 15rpx;
   margin: 10rpx 0;
   background: white
 }

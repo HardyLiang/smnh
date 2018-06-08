@@ -4,7 +4,7 @@
     <image src='{{imgUrlValue}}' catchtap='uploadImg'></image>
   </view>
   <!-- 基本信息 -->
-  <view class='base-message'>
+  <view class='base-message mt28'>
     <view class='base-title'>基本信息</view>
     <view class='base-item'>
       <text>姓 名：</text>{{name}}</view>
