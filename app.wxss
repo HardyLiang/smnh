@@ -159,7 +159,7 @@ page {
 }
 
 .input-item{
-	padding: 20rpx;
+	padding: 20rpx 10rpx;
 	line-height: 2;
 	display: flex;
 	font-size: 32rpx;
@@ -172,7 +172,7 @@ page {
 .input-item-label{
 	display: block;
 	width: 5em;
-	color: #333;
+	color: #505050;
 }
 .input-item-content{
   margin-top: 6rpx;

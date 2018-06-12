@@ -9,47 +9,68 @@
     <view class="input-item">
       <text class="input-item-label">产品名称</text>
       <view class="input-item-content">
-        <input type="text" placeholder="请输入产品名称" value='{{goodname}}'
-        bindinput='bindInputChange' data-typeName="goodname"></input>
+        <input type="text" placeholder="请输入产品名称" value='{{goodname}}' bindinput='bindInputChange' data-typeName="goodname"></input>
       </view>
     </view>
     <view class="input-item">
       <text class="input-item-label">零售价</text>
       <view class="input-item-content">
-        <input type="number" placeholder="请输入零售价"
-        value='{{mininumber}}' bindinput='bindInputChange'
-        data-typeName="mininumber"></input>
-        <view class='abs-right'>元</view>
-      </view>
-    </view>
-    <view class="input-item">
-      <text class="input-item-label">规格</text>
-      <view class="input-item-content">
-        <input type="text" placeholder="请输入规格" value="{{spec}}"
-        bindinput='bindInputChange'data-typeName="spec"></input>
-      </view>
-    </view>
-    <view class="input-item">
-      <text class="input-item-label">规格描述</text>
-      <view class="input-item-content">
-        <input type="text" placeholder="请输入规格描述" value="{{specdescription}}"
-        bindinput='bindInputChange'data-typeName="specdescription"></input>
+        <input type="number" placeholder="请输入零售价" value='{{mininumber}}' bindinput='bindInputChange' data-typeName="mininumber"></input>
+        <!-- <view class='abs-right'>元</view> -->
       </view>
     </view>
     <view class="input-item">
       <text class="input-item-label">库存</text>
       <view class="input-item-content">
-        <input type="number" placeholder="请输入库存" 
-        value='{{stock}}'  bindinput='bindInputChange'
-        data-typeName="stock"></input>
-        <view class='abs-right'>件</view>
+        <input type="number" placeholder="请输入库存" value='{{stock}}' bindinput='bindInputChange' data-typeName="stock"></input>
+        <!-- <view class='abs-right'>件</view> -->
       </view>
     </view>
+  </view>  
+  <!-- 新增规格 -->
+  <view class='form-group pos-re' data-index="{{index}}"
+   wx:for="{{normLists}}" wx:key="item" >
+    <view class='delete-box'>
+      <image src='../../images/ic_img_delete_pressed.png' class='delete-button' 
+      data-index="{{index}}" bindtap='deleteNormList'></image>
+    </view>
+    <view class="input-item">
+      <text class="input-item-label">规格</text>
+      <view class="input-item-content">
+        <input type="text" placeholder="请输入规格" value='{{item.newNormName}}'></input>
+      </view>
+    </view>
+    <view class="input-item">
+      <text class="input-item-label">价格</text>
+      <view class="input-item-content">
+        <input type="text" placeholder="给商品定个好价格" value='{{item.newPrice}}'></input>
+      </view>
+    </view>
+    <view class="input-item">
+      <text class="input-item-label">库存</text>
+      <view class="input-item-content">
+        <input type="text" placeholder="设置一个合理库存" value='{{item.newInventory}}'></input>
+      </view>
+    </view>
+  </view>
+  <view class='proxy-box main-add-btn' bindtap='addNormList'>
+    <image src='../../images/ic_img_delete_pressed.png' class='add-gg'></image>
+    <text >新增规格</text>
+  </view>
+  <!-- 多规格编辑的时候 -->
+  <view class='proxy-box main-add-btn' bindtap='editMoreNorm'>
+    <!-- <image src='../../images/ic_img_delete_pressed.png' class='add-gg'></image> -->
+    <text >修改规格</text>
+  </view>
+  <!-- end -->
+  <view class='form-group'>
     <!-- 分销说明 -->
     <view class='proxy-box'>
       <view class="input-item-content">
         <label bindtap="onChangeShowState">
-          <checkbox value="我要分销" /> 我要分销
+          <icon size='22' type='success' wx:if="{{showView}}"></icon>
+          <icon size='24' type='circle' wx:else></icon>
+          我要分销
           <text class='proxy-msg'>(我分出一部分利润，让别人帮我卖)</text>
         </label>
       </view>
@@ -57,22 +78,21 @@
         <view class="input-item">
           <text class="input-item-label">让利金</text>
           <view class="input-item-content">
-            <input type="number" placeholder="请输入让利金" value='{{profit}}'
-             bindinput='bindInputChange'data-typeName="profit"></input>
+            <input type="number" placeholder="请输入让利金" value='{{profit}}' bindinput='bindInputChange' data-typeName="profit"></input>
             <view class='abs-right'>元</view>
           </view>
         </view>
       </view>
     </view>
     <!-- //分销说明 -->
+  </view>
+  <view class='form-group'>
     <!-- 发货说明 -->
     <view class="input-item input-item-full">
-      <text class="input-item-label">发货说明 <text class='label-msg'>（需要修改请点击下方输入）</text></text>
-      <textarea placeholder="请输入您的发货说明信息~"  bindinput='bindInputChange' value='{{remark}}'
-      data-typeName='remark'></textarea>
+      <text class="input-item-label2">发货说明 <text class='label-msg'>（需要修改请点击下方输入）</text></text>
+      <textarea placeholder="请输入您的发货说明信息~" bindinput='bindInputChange' value='{{remark}}' data-typeName='remark'></textarea>
     </view>
   </view>
-
   <view class='form-group'>
     <view class='input-item' bindtap='onProductImg'>产品主图</view>
     <view class='input-item' bindtap='onProductDetail'>产品详情</view>

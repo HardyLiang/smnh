@@ -16,7 +16,8 @@ Page({
     specdescription: "",//规格描述
     stock: "",//库存
     profit: "",//让利
-    remark: ""//发货说明
+    remark: "",//发货说明
+    normLists: [], //规格列表
 
   },
 
@@ -99,6 +100,44 @@ Page({
   onProductDetail: function (event) {
     wx.navigateTo({
       url: "product_detail/product_detail"
+    })
+  },
+  /**
+* 编辑更多规格
+*/
+  editMoreNorm: function (event) {
+    wx.navigateTo({
+      url: "edit_more_norm/edit_more_norm"
+    })
+  },
+  
+  /**
+* 新增规格
+*/
+  addNormList: function (newNormName, newPrice,newInventory) {
+    var newNormItem = {
+      newNormName: newNormName,
+      newPrice: newPrice,
+      newInventory: newInventory,
+    }
+    var normList = this.data.normLists;
+    console.log(newNormItem)
+    normList.push(newNormItem);
+    this.setData({
+      normLists: normList
+    })
+  },
+  /**
+* 删除规格列表
+*/
+  deleteNormList: function (e) {
+    var normIndex = e.currentTarget.dataset.index;
+    console.log(e);
+    console.log(normIndex);
+    var newNormList = this.data.normLists;
+    newNormList.splice(normIndex);
+    this.setData({
+      normLists: newNormList
     })
   },
   onShow: function () {

@@ -1,101 +1,114 @@
- @import "../../style/public.wxss"; 
-.form-group{
-	padding: 0 20rpx;
-	margin: 20rpx 0;
-	background: #fff;
-}
-.input-item{
-	padding: 20rpx;
-	line-height: 2;
-	display: flex;
-	font-size: 32rpx;
-	border-bottom: 1rpx solid #e8e8e8;
-  position: relative;
-}
-.input-item:first-child{
-	border-top: 0;
-}
-.input-item-label{
-	display: block;
-	width: 5em;
-	color: #333;
-}
-.input-item-content{
-  margin-top: 6rpx;
-	color: #333;
-	flex:1;
-  font-size: 32rpx;
-}
-.input-item.input-item-full{
-	display: block;
-  padding: 20rpx 0 ;
-}
-.input-item.input-item-full .input-item-label{
-	width: 100%;
-}
-.input-item.input-item-full .input-item-content{
-	width: 100%;
-}
+@import "../../style/public.wxss";
+.input-item-content label{line-height: 24px;height: 24px}
+.input-item-content icon{vertical-align:top;height: 24px;}
 .input-item.input-item-full textarea{
 	height: 180rpx;
 	border: 1rpx solid #e8e8e8;
-	padding: 16rpx 10rpx;
+	padding: 10rpx;
   line-height: 44rpx;
-  border-radius: 4px;
 }
-.input-item.input-item-full .img-upload{
-	padding: 0;
-}
-.input-item.input-item-adaption .input-item-label{
-	width: auto;
-	margin-right: 20rpx;
+.input-item textarea {
+  width: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #eee;
 }
 
-textarea{
-	width: 100%;
-	padding: 20rpx;
-	box-sizing: border-box;
-}
-.abs-right{
+.abs-right {
   position: absolute;
   top: 20rpx;
-  right:2px;
+  right: 2px;
   font-size: 30rpx;
   color: #333;
 }
-.label-msg{
+
+.label-msg {
   font-size: 24rpx;
   color: #aaa;
 }
-.proxy-box{
+
+.proxy-box {
   margin-top: 20rpx;
+  padding: 5px 0;
 }
-.proxy-msg{
+
+.proxy-msg {
   font-size: 24rpx;
   color: #00a0e9;
 }
-.hide{
+
+.hide {
   display: none;
 }
-.show{
+
+.show {
   display: block;
 }
-.product-info-img{
+
+.product-info-img {
   padding: 20rpx;
-	margin: 20rpx 0;
-	background: #fff;
+  margin: 20rpx 0;
+  background: #fff;
 }
-.image-num{
+
+.image-num {
   float: right;
   color: #666;
 }
-.product-upload{
+
+.product-upload {
   margin: 10px 0;
 }
-.up-image-info{
+
+.up-image-info {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
+
+.main-add-btn {
+  line-height: 22px;
+  font-size: 32rpx;
+  color: #505050;
+  padding: 0 10px;
+}
+
+.add-gg {
+  vertical-align: top;
+  transform: rotate(45deg);
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.pos-re {
+  position: relative;
+}
+
+.delete-box {
+  width: 30px;
+  height: 300rpx;
+  background:#fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 11;
+}
+
+.delete-button {
+  position: absolute;
+  top: 50%;
+  right: 2px;
+  z-index: 12;
+  width: 22px;
+  height: 22px;
+  margin-top: -11px;
+  display: inline-block;
+  border: 3px solid #fff;
+  border-radius: 50%;
+}
+

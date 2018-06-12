@@ -1,0 +1,21 @@
+ <view class="form-group">
+    <view class="input-item">
+      <text class="input-item-label">规格</text>
+      <view class="input-item-content">
+        <input type="text" placeholder="" value='{{normName}}'></input>
+      </view>
+    </view>
+    <view class="input-item">
+      <text class="input-item-label">价格</text>
+      <view class="input-item-content">
+        <input type="text" placeholder="给商品定个好价格" value='{{goodname}}'></input>
+      </view>
+    </view>
+    <view class="input-item">
+      <text class="input-item-label">库存</text>
+      <view class="input-item-content">
+        <input type="text" placeholder="设置一个合理库存" value='{{goodname}}' bindinput='bindInputChange' data-typeName="goodname"></input>
+      </view>
+    </view>
+  </view>
+  <button class='big-btn' bindtap='nextRegister'>保存</button>

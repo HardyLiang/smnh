@@ -1,13 +1,13 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/page/add_product/add_product",
     "pages/page/info_list/info_list",
     "pages/page/my_order/my_order",
     "pages/page/auth/register/register",
     "pages/page/product_publish/goods_detail/goods_detail",
     "pages/page/auth/login/login",
     "pages/page/auth/company_info/company_info",
-    "pages/page/add_product/add_product",
     "pages/page/product_publish/product_publish",
     "pages/page/user/user",
     "pages/page/my_income/my_income",
@@ -38,7 +38,8 @@
     "pages/page/add_product/product_img/product_img",
     "pages/page/auth/authorize/authorize",
     "pages/page/addr-select/index",
-    "pages/page/dialog-modal/index"
+    "pages/page/dialog-modal/index",
+    "pages/page/add_product/edit_more_norm/edit_more_norm"
   ],
   "window": {
     "backgroundTextStyle": "light",
