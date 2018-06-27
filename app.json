@@ -1,15 +1,17 @@
 {
   
   "pages": [
-    "pages/page/my_order/my_order",
+    "pages/page/add_product/add_product",
     "pages/index/index",
+    "pages/page/my_order/my_order",
+    "pages/page/product_publish/product_publish",
     "pages/page/auth/register/register",
     "pages/page/auth/register_person/register_person",
     "pages/page/info_list/info_list",
     "pages/page/auth/login/login",
     "pages/page/add_product/product_detail/product_detail",
     "pages/page/add_product/product_img/product_img",
-    "pages/page/add_product/add_product",
+    
     "pages/page/product_publish/goods_detail/goods_detail",
     "pages/page/deliver_goods/deliver_goods",
     "pages/page/user/user",
@@ -35,9 +37,7 @@
     "pages/page/auth/company_idCard/company_idCard",
     "pages/page/auth/register_company/register_company",
     "pages/page/upload/upload",
-    
     "pages/page/auth/company_info/company_info",
-    
     "pages/page/auth/authorize/authorize",
     "pages/page/addr-select/index",
     "pages/page/dialog-modal/index",

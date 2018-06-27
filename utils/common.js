@@ -62,14 +62,18 @@ let CC_REGISTER_SEX ="sex";
 let CC_BUSINESS_CATEGORY ="gcMainId";
 let CC_SEND_ADDRESSID = "sendAddressId";
 //产品发布；
-let CC_PRODUCT_TYPE="productType";//产品类型
-let CC_PRODUCT_NAME="productName";//产品名称
-let CC_PRODUCT_MININUMBER="productPrice";//零售价
+let CC_PRODUCT_TYPE ="gc_id";//产品类型
+let CC_PRODUCT_TYPE_NAME = "goodsName";//产品类型对应的名称
+let CC_PRODUCT_NAME="dsbName";//产品名称
+let CC_PRODUCT_MININUMBER ="goodsPrice";//零售价
 let CC_PRODUCT_SPEC="spec";
-let CC_PRODUCT_SPEC_DESCRIPTION="specdescription";
-let CC_PRODUCT_STOCK="stock";
-let CC_PRODUCT_PROFIT ="profit"
-let CC_PRODUCT_REMARK="remark"
+let CC_PRODUCT_SPEC_DESCRIPTION ="packDetails";
+let CC_PRODUCT_STOCK ="goodsInventory";
+let CC_PRODUCT_PROFIT ="goodsExtra2"
+let CC_PRODUCT_REMARK ="goodsDetails"
+let CC_PRODUCT_INV_TYPE ="inventory_type"
+let CC_PRODUCT_AREA_ID = "area_id"
+let CC_PRODUCT_SPECS_INFO = "specs_info"
 //微信保存信息
 let CC_SESSION_KEY ="session_key"
 //
@@ -140,5 +144,9 @@ exports.CC_STORE_URL = CC_STORE_URL;
 exports.CC_SEND_ADDRESSID = CC_SEND_ADDRESSID;
 exports.CC_BANKTYPE = CC_BANKTYPE;
 exports.CC_SESSION_KEY = CC_SESSION_KEY;
+exports.CC_PRODUCT_TYPE_NAME = CC_PRODUCT_TYPE_NAME;
+exports.CC_PRODUCT_INV_TYPE = CC_PRODUCT_INV_TYPE;
+exports.CC_PRODUCT_AREA_ID = CC_PRODUCT_AREA_ID;
+exports.CC_PRODUCT_SPECS_INFO = CC_PRODUCT_SPECS_INFO;
 
 

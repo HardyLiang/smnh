@@ -41,7 +41,7 @@ var getProductDictSub = baseUrl + "/siboss/iface/comm/getProductDictSub?id=";
 //查询全部农产品
 var getProducts = baseUrl + "/siboss/iface/comm/getProducts?name=";
 //农户新增单一农产品登记信息
-var addOnlyProduct = baseUrl + "/siboss/iface/app/appReg/addOnlyProduct";
+var addOnlyProduct = baseUrl + "app/seller/add_goods.htm";
 //修改单一农产品信息
 var updateOnlyProduct = baseUrl + "/siboss/iface/app/appReg/updateOnlyProduct";
 //单一农产品详细信息

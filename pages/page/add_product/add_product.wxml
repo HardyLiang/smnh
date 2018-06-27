@@ -20,12 +20,29 @@
       </view>
     </view>
     <view class="input-item">
+    <text class="input-item-label">库存配置</text>
+    <radio-group class="radio-group" bindchange="radioChange">
+    <radio class='' checked='true' value='all'>全局配置</radio>
+    <radio class=''value="spec">规格配置</radio>
+    </radio-group>
+    </view>
+    <!-- 全局规格 -->
+    <view class="{{showInv?'':''}}">
+    <view class="input-item">
       <text class="input-item-label">库存</text>
       <view class="input-item-content">
         <input type="number" placeholder="请输入库存" value='{{stock}}' bindinput='bindInputChange' data-typeName="stock"></input>
         <!-- <view class='abs-right'>件</view> -->
       </view>
+      </view>
+       <view class="input-item">
+      <text class="input-item-label">规格</text>
+      <view class="input-item-content">
+        <input type="text" placeholder="请输入规格" value='{{allItem.name}}'
+        bindinput='bindInputChange' data-typeName="allItemName"></input>
+      </view>
     </view>
+   </view>
   </view>  
   <!-- 新增规格 -->
   <view class='form-group pos-re' data-index="{{index}}"
@@ -37,19 +54,21 @@
     <view class="input-item">
       <text class="input-item-label">规格</text>
       <view class="input-item-content">
-        <input type="text" placeholder="请输入规格" value='{{item.newNormName}}'></input>
+        <input type="text" placeholder="请输入规格" value='{{item.name}}'
+        data-index='{{index}}'  data-type="inv" bindinput='bindTypeInput'></input>
       </view>
     </view>
     <view class="input-item">
       <text class="input-item-label">价格</text>
       <view class="input-item-content">
-        <input type="text" placeholder="给商品定个好价格" value='{{item.newPrice}}'></input>
+        <input type="text" placeholder="给商品定个好价格" value='{{item.price}}'
+        data-index='{{index}}' data-type="invPrice" bindinput='bindTypeInput'></input>
       </view>
     </view>
     <view class="input-item">
       <text class="input-item-label">库存</text>
       <view class="input-item-content">
-        <input type="text" placeholder="设置一个合理库存" value='{{item.newInventory}}'></input>
+        <input type="text" placeholder="设置一个合理库存" value='{{item.count}}' data-index='{{index}}' data-type="invStory" bindinput='bindTypeInput'></input>
       </view>
     </view>
   </view>

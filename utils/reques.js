@@ -7,8 +7,6 @@ let user_id = wx.getStorageSync("user_id");
 let token = wx.getStorageSync("token");
 let verify = wx.getStorageSync("verify");
 
-
-
 //登录方法
 function onLogin(usename, pass, cb) {
   var passwork = md5.hexMD5(pass);
@@ -1186,31 +1184,16 @@ function updateOnlyProduct(id, deviceId, productId,
 }
 
 //农户新增单一农产品登记信息
-function addOnlyProduct(deviceId, productId,
-  personId, landTypeId, preoutput, minNumber, minPrice, publishDistinctid,
-  preoutputUnit, spec, serveCharge, productDescription, productDetailName, cb) {
+function addOnlyProduct(params, cb) {
   console.log("addOnlyProduct");
   wx.request({
-    url: urlSet.addOnlyProduct,
+    url: urlSet.addOnlyProduct + "?user_id=" + user_id + "&token=" + token,
     header: {
-      "Content-Type": "application/json;charset=UTF-8"
+      "Content-Type": "application/x-www-form-urlencoded;",
+      "verify": verify
     },
     method: "post",
-    data: {
-      deviceId: deviceId,
-      productId: productId,
-      personId: personId,
-      landTypeId: landTypeId,
-      preoutput: preoutput,
-      minNumber: minNumber,
-      minPrice: minPrice,
-      publishDistinctid: publishDistinctid,
-      preoutputUnit: preoutputUnit,
-      spec: spec,
-      serveCharge: serveCharge,
-      productDescription: productDescription,
-      productDetailName: productDetailName
-    },
+    data: util.json2Form(params) ,
     success: function (res) {
       var message = res.data.message;
       if(message){
