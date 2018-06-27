@@ -27,7 +27,7 @@
     </radio-group>
     </view>
     <!-- 全局规格 -->
-    <view class="{{showInv?'':''}}">
+    <view class="{{showInv?'hide':'show'}}">
     <view class="input-item">
       <text class="input-item-label">库存</text>
       <view class="input-item-content">
@@ -45,6 +45,7 @@
    </view>
   </view>  
   <!-- 新增规格 -->
+  <view class="{{showInv?'show':'hide'}}">
   <view class='form-group pos-re' data-index="{{index}}"
    wx:for="{{normLists}}" wx:key="item" >
     <view class='delete-box'>
@@ -80,6 +81,7 @@
   <view class='proxy-box main-add-btn' bindtap='editMoreNorm'>
     <!-- <image src='../../images/ic_img_delete_pressed.png' class='add-gg'></image> -->
     <text >修改规格</text>
+  </view>
   </view>
   <!-- end -->
   <view class='form-group'>

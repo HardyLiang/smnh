@@ -61,6 +61,16 @@ Page({
     })
     console.log(that.data.dishesList)
   })
+    // 获取屏幕高度
+    var leftHeight = 0;
+    wx.getSystemInfo({
+      success: function (res) {
+        leftHeight = res.windowHeight - 40
+      }
+    })
+    this.setData({
+      leftHeight: leftHeight
+    })
   },
   /**
    * 小类点击
