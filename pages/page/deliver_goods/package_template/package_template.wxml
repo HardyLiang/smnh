@@ -7,7 +7,7 @@
 
       <view class="input-item">
         <text class="input-item-label">物流公司</text>
-        <picker class="input-item-content" bindchange="bindPickerChange" data-position="{{ids}}"  range="{{logisticsList}}" range-key="{{'companyName'}}">
+        <picker class="input-item-content" bindchange="bindPickerChange" data-position="{{ids}}"  range="{{logisticsList}}" range-key="{{'name'}}">
           <view class="picker">
             {{item.name}}
           </view>

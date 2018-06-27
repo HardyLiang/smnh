@@ -1,22 +1,22 @@
 <import src="../goods_info_template/goods_info_template.wxml" />
 <template name="paidTemplate">
   <view class="paid-container" >
-  <view class='copyBtn'catchtap='copyButton' data-suborderId='{{suborderId}}' data-type='order' >复制           </view>
-    <text class='paid-txt1' >订单编号： <text>{{suborderId}}</text>
+  <view class='copyBtn'catchtap='copyButton' data-suborderId='{{orderId}}' data-type='order' >复制           </view>
+    <text class='paid-txt1' >订单编号： <text>{{orderId}}</text>
   </text> 
-    <text class='paid-txt1'>订单时间：{{orderTime}}</text>
+    <text class='paid-txt1'>订单时间：{{addTime}}</text>
     <view class='consignee-info'> <view class='copyBtn'
-    catchtap='copyButton'data-name='{{name}}' data-mobile='{{mobile}}'
-    data-orderAddress='{{orderAddress}}' data-type='receiverInfo'>复制</view>
+    catchtap='copyButton'data-name='{{receiverName}}' data-mobile='{{receiverTelephone}}'
+    data-orderAddress='{{receiverInfo}}' data-type='receiverInfo'>复制</view>
     <view >
-      <text>收件人：{{name}}</text>
-      <text>手机号：{{mobile}}</text>
-      <text>地址：{{orderAddress}}</text>
+      <text>收件人：{{receiverName}}</text>
+      <text>手机号：{{receiverTelephone}}</text>
+      <text>地址：{{receiverInfo}}</text>
       </view>
     </view>
     <view class="goods-order">
       <!-- <block wx:for="{{}}" wx:for-item=""></block> -->
-       <block wx:for="{{goodInfoList}}" wx:key="goodInfoList" >
+       <block wx:for="{{goods_info}}" wx:key="goodInfoList" >
       <template is="GoodInfoTemplate" data="{{...item}}" />
       </block>
     </view>

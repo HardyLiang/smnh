@@ -19,12 +19,20 @@ Page({
     var openID = wx.getStorageSync(common.CC_OPENID);
     var userIdCard = wx.getStorageSync(common.CC_IDCARD);
     var userMobile = wx.getStorageSync(common.CC_MOBILE);
-    console.log("openID=" + openID + "  userIdCard=" + userIdCard + "  userMobile=" + userMobile)
+    var farmerInfo = wx.getStorageSync(common.CC_FARMERINFO);
+    console.log(farmerInfo)
+    var isBand = farmerInfo.data.farmer_idcard_status
+    console.log("openID=" + openID + "  userIdCard=" + userIdCard + "  userMobile=" + userMobile
+      + "isBand=" + isBand)
     this.setData({
       idCard: userIdCard,
       mobile: userMobile,
     })
+    if(!isBand){//未绑定
+     
+    }else{
 
+    }
   },
   /**
      * 生命周期函数--监听页面初次渲染完成

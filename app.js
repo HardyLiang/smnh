@@ -94,9 +94,16 @@ App({
     getProductDetail:http.getProductDetail,
     getPicLists: http.getPicLists,
     orderShippingUpdate: http.orderShippingUpdate,
-    onNewLogin: http.onNewLogin,
     getOrderNew: http.getOrderNew,
     getPersonShopURL:http.getPersonShopURL,
     addOnlyProduct:http.addOnlyProduct,
+    getIdCardCheck: http.getIdCardCheck,
+    getmobileCheck: http.getmobileCheck,
+    addPersonMsg: http.addPersonMsg,
+    checkWork: http.checkWork,
+    getBusinessCategory: http.getBusinessCategory,
+    getStoreTypeList: http.getStoreTypeList,
+    
+
   }
 })

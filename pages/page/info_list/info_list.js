@@ -26,6 +26,7 @@ Page({
   onLoad: function (options) {
     //获取用户的个人信息，首先获取本地缓存数据
     var res = wx.getStorageSync(common.CC_FARMERINFO);
+    console.log(res)
     var sex;
     if (res.data.sex == "1") {
       sex = "男";
@@ -48,12 +49,12 @@ Page({
       }
 
     this.setData({
-      imgUrlValue: res.data.picPath,
-      name: res.data.name,
+      imgUrlValue: res.data.store_logo,
+      name: res.data.store_name,
       sex: sex,
       farmerType: personType,
-      mobile: res.data.mobile,
-      idCard: res.data.idCard,
+      mobile: res.data.store_telephone,
+      idCard: res.data.sCard,
       bankNum: res.data.bankNumber,
       bankName: res.data.bankName,
       bankAccount: res.data.accountName,

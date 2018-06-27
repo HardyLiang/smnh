@@ -19,6 +19,7 @@ let CC_SEND_ADDRESS_NAME ='sendAddressName';
 let CC_SERVICEEVALUATE ='serviceEvaluate';
 let CC_SHIP_EVALUATE ='shipEvaluate';
 let CC_STORE_EVALUATE ='storeEvaluate';
+let CC_STORE_URL= 'storeURL';
 let CC_SEX ='sex';
 let CC_USERTYPE ='userType';
 let CC_FARMERINFO ='farmerinfo';
@@ -38,24 +39,28 @@ let CC_PHOTO_TYPE_PRODUCT_MAIN = 8;
 /** 商品列表 */
 let CC_PHOTO_TYPE_PRODUCT_LIST = 5;
 //注册信息；
-let CC_HEAD_IMG="headImg";//头像
-let CC_SHOP_NAME="shopName"; //店铺名称
-let CC_SHOP_TYPE="shopType"; //店铺类型
+let CC_HEAD_IMG="logoUrl";//头像
+let CC_SHOP_NAME ="storeName"; //店铺名称
+let CC_SHOP_TYPE ="personType"; //店铺类型
 let CC_COMPANY_NAME ="companyName";//公司名称
 let CC_LEGAL_NAME ="legalPersonName";//公司法人名称
 let CC_LEGAL_IDCARD ="legalPersonIdCard";//公司法人身份证
 let CC_BUSINESS_LICENSE = "businessLicense";//公司营业执照
 let CC_IDCARD_FRONT = "idCardFront";//身份证正面
 let CC_IDCARD_BACK = "idCardBack";//身份证反面
-let CC_ADDRESS = "address";//地址
-let CC_ADDRESS_DETAIL = "addressDetail";//详细地址
-let CC_BANKADDRESS = 'bankAddress';
+let CC_ADDRESS = "areaId";//地址
+let CC_ADDRESS_DETAIL = "address";//详细地址
+let CC_BANKADDRESS = 'bankAddressId';
 let CC_BANKCODE = 'bankCode';
-let CC_BANKNAME = 'bankName';
-let CC_BANKACCOUNT = 'bankAccount';
-let CC_REGISTER_NAME="registerName";
-let CC_REGISTER_MOBILE="registerMobile";
-
+let CC_BANKNAME = 'accountName';
+let CC_BANKACCOUNT = 'bankNumber';
+let CC_BANKTYPE = 'bankType';
+let CC_REGISTER_NAME ="name";
+let CC_REGISTER_MOBILE ="mobile";
+let CC_REGISTER_IDCARD ="idCard";
+let CC_REGISTER_SEX ="sex";
+let CC_BUSINESS_CATEGORY ="gcMainId";
+let CC_SEND_ADDRESSID = "sendAddressId";
 //产品发布；
 let CC_PRODUCT_TYPE="productType";//产品类型
 let CC_PRODUCT_NAME="productName";//产品名称
@@ -65,6 +70,10 @@ let CC_PRODUCT_SPEC_DESCRIPTION="specdescription";
 let CC_PRODUCT_STOCK="stock";
 let CC_PRODUCT_PROFIT ="profit"
 let CC_PRODUCT_REMARK="remark"
+//微信保存信息
+let CC_SESSION_KEY ="session_key"
+//
+
 
 exports.CC_USERNAME = CC_USERNAME;
 exports.CC_IDCARD = CC_IDCARD;
@@ -116,6 +125,8 @@ exports.CC_IDCARD_BACK = CC_IDCARD_BACK;
 exports.CC_ADDRESS_DETAIL = CC_ADDRESS_DETAIL;
 exports.CC_REGISTER_NAME = CC_REGISTER_NAME;
 exports.CC_REGISTER_MOBILE = CC_REGISTER_MOBILE;
+exports.CC_REGISTER_IDCARD = CC_REGISTER_IDCARD;
+exports.CC_REGISTER_SEX = CC_REGISTER_SEX;
 exports.CC_PRODUCT_TYPE = CC_PRODUCT_TYPE;
 exports.CC_PRODUCT_NAME = CC_PRODUCT_NAME;
 exports.CC_PRODUCT_MININUMBER = CC_PRODUCT_MININUMBER;
@@ -124,5 +135,10 @@ exports.CC_PRODUCT_SPEC_DESCRIPTION = CC_PRODUCT_SPEC_DESCRIPTION;
 exports.CC_PRODUCT_STOCK = CC_PRODUCT_STOCK;
 exports.CC_PRODUCT_PROFIT = CC_PRODUCT_PROFIT;
 exports.CC_PRODUCT_REMARK = CC_PRODUCT_REMARK;
+exports.CC_BUSINESS_CATEGORY = CC_BUSINESS_CATEGORY;
+exports.CC_STORE_URL = CC_STORE_URL;
+exports.CC_SEND_ADDRESSID = CC_SEND_ADDRESSID;
+exports.CC_BANKTYPE = CC_BANKTYPE;
+exports.CC_SESSION_KEY = CC_SESSION_KEY;
 
 

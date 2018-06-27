@@ -16,29 +16,29 @@ Page({
   onLoad: function (options) {
     var that =this;
       //首先联网获取农户店铺URL
-    var card = wx.getStorageSync(common.CC_IDCARD);
-    getApp().func.getPersonShopURL(card,function(message,res){
-       console.log(res);
-       if(!res){
-         wx.showModal({
-           title: '提示',
-           content: message,
-           showCancel:false,
-           success:function(res){
-             if(res.confirm){
-               wx.navigateBack();
-             }
-           }
-         })
-         return;
-       }
+    var farmerInfo = wx.getStorageSync(common.CC_FARMERINFO);
+    var storeUrl =farmerInfo.data.store_url;
+    var storeName =farmerInfo.data.store_name;
+    if (!storeUrl){
+      wx.showModal({
+        title: '提示',
+        content: '获取店铺URL失败',
+        showCancel:false,
+        success:function(res){
+          if(res.confirm){
+            wx.navigateBack();
+            return;
+          }
+        }
+      })
+    }
        //成功给URL赋值
        that.setData({
-         urlValue: res.data.shopURL,
-         title: res.data.storeName
+         urlValue: storeUrl,
+         title: storeName
        })
        console.log(that.data.urlValue)
-    })
+       console.log(that.data.title)
   },
 
   /**

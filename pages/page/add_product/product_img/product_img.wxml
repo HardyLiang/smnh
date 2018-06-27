@@ -8,7 +8,7 @@
       <!-- start -->
       <view class="weui-uploader__bd">
         <view class="weui-uploader__files">
-          <block wx:for="{{imageList}}" wx:for-item="image">
+          <block wx:for="{{imageList}}" wx:for-item="image" wx:key="index">
             <view class="weui-uploader__file">
               <image class="weui-uploader__img" src="{{image}}"   data-index="{{index}}" bindtap="previewImage"  mode='aspectFill'></image>
               <image src='../../../images/icon_delete.png' data-index="{{index}}"   catchtap="deleteImg"class='icon-delete-small' ></image>
@@ -22,4 +22,4 @@
       <!-- end -->
     </view>
   </view>
-  <button class='big-btn' form-type='submit'>确认上传</button>
+  <button class='big-btn' catchtap='confirmUpLoad'>确认上传</button>

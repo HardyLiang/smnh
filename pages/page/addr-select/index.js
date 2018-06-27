@@ -4,10 +4,16 @@ import zIndexMarge from "../dialog-modal/z-index-marge";
 // cityList = cityList.sort(function (a, b) {
 // 	return a.id > b.id ? -1 : 1
 // })
+var urlSet =require("../../../utils/urlSet.js")
+var util=require("../../../utils/util.js")
 
 function getAreaList(id, cb){
+   var message ='';
+   if(id!="0"){
+     message = "?area_id=" + id;
+   }
   wx.request({
-    url: "http://61.28.113.182:9595/siboss/iface/comm/getDistinctListById?distinctId=" + id,
+    url: urlSet.getAddress + message,
     header: {
       "Content-Type": "application/json;charset=UTF-8"
     },
@@ -15,6 +21,7 @@ function getAreaList(id, cb){
     success: function (res) {
       var message = res.data.message;
       console.log(message);
+      console.log(res);
       return typeof cb == "function" && cb(res.data)
     },
     fail: function () {
@@ -26,16 +33,17 @@ function getCurrentItemList(index,pid, defaultSelect,cb) {
 	let list = []
 	let selectid, selectitem;
   getAreaList(pid,function(res){
-    var resultList =res.result;
+    var resultList =res.data;
     console.log(resultList)
+    console.log("resultList")
     for (let i = resultList.length - 1; i >= 0; i--) {
       let item = resultList[i]
-      if (item.distinct_id == pid) {
-        selectid=item.distinct_id;
+      if (item.area_id == pid) {
+        selectid = item.area_id;
         selectitem=item;
       }
-        if (defaultSelect&&defaultSelect[index]==item.name){
-            selectid = item.distinct_id;
+      if (defaultSelect && defaultSelect[index] == item.area_name){
+          selectid = item.area_id;
             selectitem=item;
       }
       list.push(item)
@@ -110,17 +118,7 @@ Component({
 			var tempResult, selectid
 			var hasFixGh = true
       var that =this;
-			// addrSelect = addrSelect.filter((item) => {
-      //   if (item.distinct_id || (item.name && hasFixGh)) {
-			// 		return true
-			// 	}
-			// 	hasFixGh = false
-			// 	return false
-			// }).map((item) => {
-			// 	item.name = (item.name + '').replace(/^\s+|\s+$/g, '')
-			// 	return item
-			// })
-     
+		
       console.log(addrSelect)
 
 			let _addrSelect = []
@@ -134,7 +132,7 @@ Component({
           }
           if (tempResult.selectid) {
             if (tempResult.selectitem) {
-              addrSelect[0] = tempResult.selectitem.name
+              addrSelect[0] = tempResult.selectitem.area_name
             }
             _addrSelect.push(addrSelect[0])
           }
@@ -231,7 +229,7 @@ Component({
 				name: dataset.itemName,
 				id: dataset.itemId
 			}
-     
+      console.log(_addrSelect);
       if (this.data.addressLeven != 0 && this.data.addressLeven == nextTab){
         that.triggerEvent('select', that.data._addrSelect)
         this.close();

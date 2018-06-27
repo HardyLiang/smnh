@@ -4,6 +4,7 @@ var app = getApp()
 var util = require('../../utils/util.js')
 var event = require('../../utils/event.js')
 var common =require('../../utils/common.js')
+var pageIndex=1;
 Page({
   data: {
     imgUrls: [
@@ -59,7 +60,7 @@ Page({
     this.fetchData();
     var that = this;
     //进来首先是获取系统信息；
-    app.func.getAgreementMessageList(function(message,res){
+    app.func.getAgreementMessageList(pageIndex,function(message,res){
       if(res){
         console.log("获取消息成功");
         console.log(res);
@@ -103,21 +104,6 @@ Page({
   checkUserData: function(){
     //如果有登录信息就直接获取店铺状态
     if ("" != util.trim(getApp().globalData.userName) && "" != util.trim(getApp().globalData.idCard)) {
-      app.func.getStoreStatusByCard(getApp().globalData.idCard, function (message, res) {
-        console.log("获取店铺状态");
-        console.log(res);
-        if (!res) {
-          wx.showModal({
-            title: '提示',
-            content: message,
-            showCancel: false,
-            success: function (res) {
-              if (res.confirm) {
-                //点击确认
-              }
-            }
-          })
-        }else{
           //检测用户是否进行了微信绑定
           app.func.checkWXBoundStatus(getApp().globalData.idCard,function(message,res){
            console.log("微信"+message);
@@ -140,13 +126,6 @@ Page({
             })
           }
           });
-
-        }
-
-      });
-
-
-
     }
 
   }

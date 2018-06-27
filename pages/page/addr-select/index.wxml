@@ -54,14 +54,14 @@
               <view class="area2-swiper-inner">
                 <view
                   wx:for="{{addrListItem}}"
-                  wx:key="{{item.name}}"
+                  wx:key="{{item.area_name}}"
                   catch:tap="clickSelectArea"
-                  data-item-name="{{item.name}}"
-                  data-item-id="{{item.distinct_id}}"
+                  data-item-name="{{item.area_name}}"
+                  data-item-id="{{item.area_id}}"
                   data-current-tab="{{addrListIndex}}"
-                  class="area2-swiper-item {{item.name==_addrSelect[addrListIndex].name?'on':''}}"
+                  class="area2-swiper-item {{item.area_name==_addrSelect[addrListIndex].area_name?'on':''}}"
                 >
-                  <view class="area2-swiper-areaname">{{item.name}}</view>
+                  <view class="area2-swiper-areaname">{{item.area_name}}</view>
                 </view>
               </view>
             </scroll-view>

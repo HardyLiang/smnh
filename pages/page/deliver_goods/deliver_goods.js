@@ -45,21 +45,26 @@ Page({
     this.chooseLogisitics();
     //判断类型，如果是修改物流的话，给物流包裹赋值
     if (orderType=="modify"){
+      console.log('修改物流')
       for (var i = 0; i < shipList.length;i++){
         var goodsName ="";
         var goodsId="";
         for (var y = 0; y < shipList[i].shipGoodInfoList.length; y++){
-          goodsName = goodsName + shipList[i].shipGoodInfoList[y].goodName+" ";
+          goodsName = goodsName + shipList[i].shipGoodInfoList[y].goods_name+" ";
           goodsId = goodsId + shipList[i].shipGoodInfoList[y].goods_id + ",";
         }
+        console.log('goodsName=' + goodsName + "goodsId=" + goodsId)
         this.insert(shipList[i].express_company_name, 
-          shipList[i].express_company_id, shipList[i].shipCode, goodsName, goodsId);
+          shipList[i].company_id, shipList[i].shipCode, goodsName, goodsId);
       }
     
     }else
       if (orderType=="send"){//如果是发货的话就添加一个空的
         this.insert("请选择物流公司", "", "", "", "");
     }
+  },
+  insertGoods:function(){
+    this.insert("请选择物流公司", "", "", "", "");
   },
   // 添加物流
   insert: function (name,nameId,orderNum,goods,goodsId) {
@@ -125,6 +130,7 @@ Page({
     wx.showLoading();
     //获取快递
     getApp().func.getAllExpCompany(function (message, res) {
+      console.log(res);
       wx.hideLoading();
       if (!res) {
         wx.showToast({
@@ -133,6 +139,7 @@ Page({
         return;
       }
       var list = res.data;
+      console.log("list");
       console.log(list);
       that.setData({
         logisticsList: list
@@ -148,7 +155,7 @@ Page({
     var that = this;
     var position = e.currentTarget.dataset.position;
     var choosePosition = e.detail.value;
-    var chooseName = this.data.logisticsList[choosePosition].companyName;
+    var chooseName = this.data.logisticsList[choosePosition].name;
     var chosseId = this.data.logisticsList[choosePosition].id;
     var mPackageLists = "packageLists[" + position + "].name";
     var mPackageListsId = "packageLists[" + position + "].nameId";
@@ -172,7 +179,7 @@ Page({
     console.log(chooseList);
     //给产品赋值
     for (var i = 0; i < chooseList.length; i++) {
-      choose = chooseList[i].goodName + " ";
+      choose = chooseList[i].goods_name + " ";
       chooseId = chooseList[i].goods_id+",";
     }
     //根据位置更新选择了的产品
@@ -230,17 +237,20 @@ Page({
     var idCard = wx.getStorageSync(common.CC_IDCARD);
     var orderId =this.data.orderId;
     var params = {
-      card: idCard, id: orderId,
-      ship_info:[]
+      id: orderId,
+      jsonStr:''
     };
+    var  list =[];
     for (var i = 0; i < this.data.packageLists.length;i++){
       var ship_info = { ecc_id: "", goods_ids: '', shipCode: "" }
       ship_info.ecc_id = this.data.packageLists[i].nameId;
       ship_info.goods_ids = this.data.packageLists[i].goodsId;
       ship_info.shipCode = this.data.packageLists[i].orderNum;
-      params.ship_info.push(ship_info);
+      list.push(ship_info);
     }
+    params.jsonStr = JSON.stringify(list);
     console.log(params);
+    //联网发货
     if (this.data.orderType =="send"){
       this.orderShippingSave(params);
     }else

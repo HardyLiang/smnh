@@ -6,12 +6,19 @@ Page({
     logisticsList:[],//物流信息
     currentTab: 0,
     itemGoodName:"",
-    expressShipCode:""
+    expressShipCode:"",
+    transList:[]
   },
   navbarTap: function (e) {
+    var position = parseInt(e.currentTarget.dataset.idx) ;
     this.setData({
-      currentTab: e.currentTarget.dataset.idx
+      currentTab: e.currentTarget.dataset.idx,
+      goodlist: this.data.transList[position].transGoodInfo,
+      logisticsList: this.data.transList[position].transInfo,
+      itemGoodName: this.data.transList[position].express_company_name,
+      expressShipCode: this.data.transList[position].express_ship_code
     })
+   
   },
   onLoad: function (options){
     console.log(options)
@@ -29,12 +36,18 @@ Page({
     })
     getApp().func.getLogisticsInfo(oid,function(message,res){
       wx.hideLoading();
+      console.log("获取物流返回");
       console.log(res);
       //如果失败
       if(!res){
-        wx.showToast({
-          title: message,
-        })
+       wx.showModal({
+         title: '提示',
+         content: message,
+         showCancel:false,
+         success:function(res){
+           wx.navigateBack()
+         }
+       })
         return;
       }
       //成功
@@ -51,7 +64,8 @@ Page({
         goodlist: tansInfoList[0].transGoodInfo,
         logisticsList: tansInfoList[0].transInfo,
         itemGoodName: tansInfoList[0].express_company_name,
-        expressShipCode: tansInfoList[0].express_ship_code
+        expressShipCode: tansInfoList[0].express_ship_code,
+        transList: tansInfoList
       })
      
     

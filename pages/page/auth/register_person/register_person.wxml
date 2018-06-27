@@ -4,19 +4,24 @@
     <view class="input-item">
       <text class="input-item-label">身份证号</text>
       <view class="input-item-content">
-        <input type="text" placeholder="请输入您的身份证号" value=''></input>
+        <input type="text" placeholder="请输入您的身份证号" value='{{idCard}}'
+        bindblur='bindblurIdCard'
+        ></input>
+        {{tipIdcardMessage}}
       </view>
     </view>
     <view class="input-item">
       <text class="input-item-label">姓名</text>
       <view class="input-item-content">
-        <input type="text" placeholder="请输入您的姓名"></input>
+        <input type="text" placeholder="请输入您的姓名" bindblur='bindblurIdName' value='{{name}}'></input>
       </view>
     </view>
     <view class="input-item">
       <text class="input-item-label">手机号码</text>
       <view class="input-item-content">
-        <input type="number" placeholder="" value=''></input>
+        <input type="number" placeholder="请输入您的手机号" value='{{mobile}}'  bindblur='bindblurIdMobile'
+         ></input>
+         {{tipMobileMessage}}
       </view>
     </view> 
     <view class="input-item">
@@ -43,20 +48,63 @@
 
     <view class="input-item">
       <text class="input-item-label">所在地区</text>
-      <picker mode="region" bindchange="AddressChange" value="{{Address}}" custom-item="{{customItem}}">
-        <view class="picker">
-          {{Address[0]}}，{{Address[1]}}，{{Address[2]}}
-        </view>
-      </picker>
+      <addr-select bind:select="selectArea" data-typeid="detail"
+      addressLeven="4">
+    <view class="input-item-label">{{addressValue}}</view>
+  </addr-select>
     </view>
     <view class="input-item">
       <text class="input-item-label">详细地址</text>
       <view class="input-item-content">
-        <input type="text" placeholder="请输入详细发货地址"></input>
+        <input type="text" placeholder="请输入详细发货地址" bindblur='bindblurIdDetailAddress'
+        value="{{detailAddress}}"></input>
       </view>
     </view>
   </view>
   <!-- //收货信息 -->
+   <!-- 银行信息 -->
+  <view class='form-group'>
+    <view class='res-title'>银行信息</view>
+    <view class="input-item">
+      <text class="input-item-label">银行账号</text>
+      <view class="input-item-content">
+        <input type="number" placeholder="请输入您的银行卡号" bindinput='bindInputBank'
+        value='{{bankAccount}}'></input>
+      </view>
+    </view>
+    <view class="input-item">
+      <text class="input-item-label">开户行</text>
+      <picker class="input-item-content" bindchange="bindBankChange" value="{{bankIndex}}" range="{{bank}}">
+        <view class="picker">
+          {{bank[bankIndex]}}
+        </view>
+      </picker>
+
+    </view>
+    <view class="input-item">
+      <text class="input-item-label">持卡人</text>
+      <view class="input-item-content">
+        <input type="text" placeholder="请输入持卡人姓名" bindinput='bindInputBankName'
+         value="{{bankName}}"></input>
+      </view>
+    </view>
+    <view class="input-item">
+      <text class="input-item-label">开户省市</text>
+      <addr-select bind:select="selectArea" data-typeid="bank"
+       addressLeven="2">
+    <view class="input-item-content">{{bankAddressValue}}</view>
+  </addr-select>
+    </view>
+    <view class="input-item">
+      <text class="input-item-label">开户类型</text>
+      <picker class="input-item-content" bindchange="bankTypeChange" value="{{bankTypeindex}}" range="{{bankType}}">
+        <view class="picker">
+          {{bankType[bankTypeindex]}}
+        </view>
+      </picker>
+    </view>
+  </view>
+  <!-- //银行信息 -->
   <view class='agree-box'>
     <view class="input-item-content">
       <label bindtap="">
@@ -65,5 +113,5 @@
       </label>
     </view>
   </view>
-  <button class='big-btn'>确认开店</button>
+  <button class='big-btn' catchtap='registerShop'>确认开店</button>
 </view>

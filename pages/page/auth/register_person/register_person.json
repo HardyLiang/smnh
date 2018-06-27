@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "开店"
+  "navigationBarTitleText": "开店",
+  "usingComponents": {
+    "addr-select": "../../addr-select/index"
+  }
 }

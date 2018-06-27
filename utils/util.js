@@ -1,5 +1,4 @@
 var app = getApp();
-
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -180,6 +179,22 @@ function checkEmpty(content,message){
 
 }
 /**
+ * 检测是否为空
+ */
+function checkEmptyChoose(content, message) {
+  if (content == null || content == "" || content.search("请选择")!=-1) {
+    wx.showModal({
+      title: '提示',
+      content: message,
+      showCancel: false
+    })
+    return true;
+  } else {
+    return false;
+  }
+
+}
+/**
  * 检测数组是否为空
  */
 function checkListEmpty(content, message) {
@@ -195,7 +210,35 @@ function checkListEmpty(content, message) {
   }
 
 }
-
+/**
+ * 检测敏感词，很多地方都用就可以写成公用方法
+ */
+function checkWorkIsSensitive(message, cb){
+  getApp().func.checkWork(message,function(message,res){
+  if (!res){
+      return typeof cb == "function" && cb(false)
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '存在敏感词！'+res,
+        showCancel:false,
+         success:function(res){
+           if(res.confirm){
+             return typeof cb == "function" && cb(true)
+           }
+         }
+      })
+    
+    }
+  })
+}
+/**
+ * 自动登录
+ * (默认密码状态)
+ */
+function autoLogin(idCard){
+ 
+}
 
 
 
@@ -215,4 +258,8 @@ module.exports = {
   verifyCode: verifyCode,
   checkEmpty: checkEmpty,
   checkListEmpty: checkListEmpty,
+  checkEmptyChoose: checkEmptyChoose,
+  checkWorkIsSensitive: checkWorkIsSensitive,
+  autoLogin: autoLogin,
+
 }

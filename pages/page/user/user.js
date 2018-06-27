@@ -22,6 +22,8 @@ Page({
         src: avatar
       })
     }
+
+ 
   },
   onShow: function (options) {
     console.log('user=====onShow');
@@ -32,7 +34,7 @@ Page({
       var farmerId =wx.getStorageSync('farmerId');
       console.log("farmerId=" + farmerId);
       //联网刷新数据
-      app.func.getPersonMsg(farmerId,function(message,res){
+      app.func.getPersonMsg(function(message,res){
         console.log(res)
         if (!res){
           wx.showToast({
@@ -43,9 +45,9 @@ Page({
         console.log()
         //获取信息成功.给页面赋值
         that.setData({
-          imgValue: res.data.picPath,
-          mobileValue: res.data.mobile,
-          userNameValue: res.data.name,
+          imgValue: res.data.store_logo,
+          mobileValue: res.data.store_telephone,
+          userNameValue: res.data.store_name,
           shipValue: '描述：' + res.data.descriptionEvaluate ,
           serviceValue: '服务：' + res.data.serviceEvaluate,
           storeValue: '发货：' + res.data.shipEvaluate,
@@ -55,6 +57,30 @@ Page({
         //保存个人信息列表
         wx.setStorageSync(common.CC_MOBILE, res.data.mobile);
         wx.setStorageSync(common.CC_FARMERINFO, res);
+        wx.setStorageSync(common.CC_STORE_URL, res.data.store_url);
+        var storeStatus= res.data.store_status;
+        setTimeout(function(){
+          if (storeStatus != "15") {
+            var message = "店铺异常,请联系客服！";
+            if (storeStatus == "20") {
+              message = "违规关店,请联系客服!"
+            } else
+              if (storeStatus == "10") {
+                message = "店铺待审核,请联系客服"
+              }
+            wx.showModal({
+              title: '注意',
+              content: message,
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+                 //店铺违规了。。应该做神马东西
+                }
+              }
+            })
+          }
+        },2000);
+       
       });
     })
   },

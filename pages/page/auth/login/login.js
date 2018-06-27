@@ -5,9 +5,9 @@ var event =require('../../../../utils/event.js')
 
 Page({
   data: {
-    username: '411328198911304627',
+    username: '440684198812271518',
     usernameHide: true,
-    password: '123456',
+    password: '198812271',
     passwordSrc:'../../../images/ic_pass_gray_hide.png',
     passFocus:false,
     passFlag:true,
@@ -18,6 +18,7 @@ Page({
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     // 页面渲染完成
+    
 
   },
 
@@ -40,7 +41,6 @@ Page({
     console.log(11);
     //调用登录方法
     app.func.onLogin(name, password, function (messgae, res) {
-      console.log(res.data);
       //隐藏loading弹窗
       that.isHideLoading();
       //判断是否登录成功；
@@ -52,23 +52,6 @@ Page({
         });
         return;
       }
-      //保存关键数据
-      var farmerId = res.data.id;
-      var idCard = res.data.certNum;
-
-      var name =res.data.name;
-      var areaId =res.areaId;
-      var authorizeStatus = res.data.authorizeStatus;
-      var deviceId = res.data.deviceId;
-      wx.setStorageSync('farmerId', farmerId);
-      wx.setStorageSync('idCard', idCard)
-      wx.setStorageSync('userName', name);
-      wx.setStorageSync('areaId', areaId);
-      wx.setStorageSync('authorizeStatus', authorizeStatus);
-      wx.setStorageSync('deviceId', deviceId);
-      app.globalData.userName = name;
-      app.globalData.idCard = idCard;
-      
       wx.showToast({
         title: '登录成功',
         icon: "success",

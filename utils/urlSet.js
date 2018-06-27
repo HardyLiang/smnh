@@ -1,23 +1,23 @@
 
 //上线需要配置这里的信息，包括域名，APPID,密钥
-var baseUrl ="http://61.28.113.182:9595";
+// var baseUrl ="http://61.28.113.182:9595";
 // var baseUrl ="https://xz-weixin.e-tecsun.com";
 // var baseUrl ="http://114.67.49.72:80";
 // var baseUrl ="http://test.e-smnh.com/app/iskyshop_seller_login.htm";
-let APPID = 'wx15901d82315115d8';
-let SECRET = '1cfb2641811da6b383054c9febccb036';
-
+var baseUrl ="http://test.e-smnh.com/"
+let APPID = 'wx00ebf9a68438faf5';
+let SECRET = '52ad3e6d8c872b95b3142645fbfbab79';
 
 //登陆
-var login = baseUrl +"/siboss/iface/app/login";
+var login = baseUrl +"app/iskyshop_seller_login.htm";
 //忘记密码获取验证码
-var forgotPass = baseUrl +"/siboss/iface/app/forgetPassword";
+var forgotPass = baseUrl +"app/iskyshop_seller_code.htm";
 //修改密码
-var updatePassword = baseUrl +"/siboss/iface/app/updatePassword";
+var updatePassword = baseUrl +"app/iskyshop_seller_password.htm";
 //录入农户信息（注册）
-var addPersonMsg = baseUrl +"/siboss/iface/app/appReg/addPersonMsg";
+var addPersonMsg = baseUrl +"app/iskyshop_seller_add.htm";
 //农户的详细信息(TSB/APP)
-var getPersonMsg = baseUrl +"/siboss/iface/app/manager/getPersonMsg";
+var getPersonMsg = baseUrl + "app/seller/store_information.htm"
 //获取订单数量
 var getOrderCountInfo = baseUrl +"/siboss/iface/common/ap/getOrderCountInfo?card=";
 //单一/套餐照片列表跟进信息(APP) 
@@ -35,7 +35,7 @@ var getDictionary = baseUrl + "/siboss/iface/comm/getDictionary?groupId=";
 //根据区域编码获取区域子集列表
 var getDistinctListById = baseUrl + "/siboss/iface/comm/getDistinctListById?distinctId=";
 //获取产品字典表所有产品大类
-var getProductDict = baseUrl + "/siboss/iface/comm/getProductDict";
+var getProductDict = baseUrl + "app/seller/goods_class_mini.htm";
 //根据产品大类查询产品子类
 var getProductDictSub = baseUrl + "/siboss/iface/comm/getProductDictSub?id=";
 //查询全部农产品
@@ -49,15 +49,13 @@ var getProductDetail = baseUrl + "/siboss/iface/app/appReg/getProductDetail";
 //农户停止出售
 var stopProduct = baseUrl + "/siboss/iface/common/ap/soldOutProduct";
 //农户查询消费者订单列表
-var getOrder = baseUrl + "/siboss/iface/common/ap/getOrder";
-//获取快递字典（根据农户身份证）
-var getAllExpressCompany = baseUrl + "/siboss/iface/common/ap/getAllExpressCompany?idCard=";
+var getOrder = baseUrl + "app/seller/order_list_mini.htm";
 //获取快递字典（全部）
-var getAllExpCompany = baseUrl + "/siboss/iface/common/ap/getAllExpCompany";
+var getAllExpCompany = baseUrl + "app/seller/express_company_list.htm";
 //录入物流信息
-var orderShippingSave = baseUrl + "/siboss/iface/common/ap/orderShippingSave";
+var orderShippingSave = baseUrl + "app/seller/order_shipping_save_mini.htm";
 //修改物流信息
-var orderShippingUpdate = baseUrl + "/siboss/iface/common/ap/orderShippingUpdate";
+var orderShippingUpdate = baseUrl + "app/seller/order_shipping_code_save_mini.htm";
 //检测敏感词汇
 var checkWorld = baseUrl + "/siboss/iface/common/ap/checkWorld";
 //清空产品详情图片
@@ -81,7 +79,7 @@ var addGoodsDetailPicSort = baseUrl + "/siboss/iface/app/managerpic/addGoodsDeta
 //获取农户店铺URL
 var getPersonShopURL = baseUrl + "/siboss/iface/common/ap/getPersonShopURL";
 //获取订单物流信息
-var getLogisticsInfo = baseUrl + "/siboss/iface/common/ap/getLogisticsInfo";
+var getLogisticsInfo = baseUrl + "app/seller/express_info.htm";
 //修改库存
 var updateGoodInventory = baseUrl + "/siboss/iface/common/ap/updateGoodInventory";
 //检测农户头像认证示意图
@@ -91,9 +89,9 @@ var farmerPrototal = baseUrl + "/help/contract/agreement.html";
 //获取农户店铺状态
 var getStoreStatusByCard = baseUrl + "/siboss/iface/common/ap/getStoreStatusByCard";
 //获取协议消息列表
-var getAgreementMessageList = baseUrl + "/siboss/iface/common/ap/getAgreementMessageList";
+var getAgreementMessageList = baseUrl + "app/seller/message_list.htm";
 //获取协议消息详细信息
-var getAgreementMessageInfo = baseUrl + "/siboss/iface/common/ap/getAgreementMessageInfo";
+var getAgreementMessageInfo = baseUrl + "app/seller/message_list.htm";
 //查询所有银行总行
 var getAllBank = baseUrl + "/siboss/iface/comm/getAllBank";
 //根据银行卡号获取银行信息
@@ -105,7 +103,7 @@ var getFPManager = baseUrl + "/siboss/iface/common/ap/getFPManager?";
 //获取扶贫干部信息
 var getFPUser = baseUrl + "/siboss/iface/common/ap/getFPUser?";
 //通过身份证获取手机号
-var checkMobileByCard = baseUrl + "/siboss/iface/common/ap/checkMobileByCard";
+var checkMobileByCard = baseUrl + "app/iskyshop_seller_mobile.htm";
 //获取农户收入信息
 var getSale = baseUrl + "/siboss/iface/common/ap/getSale";
 //获取农户结算记录
@@ -113,7 +111,24 @@ var getSetRec = baseUrl + "/siboss/iface/common/ap/getSetRec";
 //更改产品让利金
 var updateShareCommission = baseUrl + "/siboss/iface/common/ap/updateShareCommission";
 //农户农产品列表信息
-var getGoodsInfoByCard = baseUrl +"/siboss/iface/common/ap/getGoodsInfoByCard?card=";
+var getGoodsInfoByCard = baseUrl +"app/seller/goods_list_mini.htm";
+//获取地址
+var getAddress = baseUrl +"app/iskyshop_area_list.htm";
+//检测身份证是否注册
+var checkIdcard = baseUrl +"app/iskyshop_seller_idCard_check.htm";
+//检测手机号是否注册
+var checkMobile = baseUrl +"app/iskyshop_seller_mobile_check.htm";
+//检测敏感词
+var checkWork = baseUrl +"app/iskyshop_message_check.htm";
+//获取经营类目
+var businessCategory = baseUrl + "app/iskyshop_seller_gc_main.htm";
+//获取店铺类型分类
+var getStoreTypeList = baseUrl + "app/iskyshop_store_type_list.htm";
+//微信绑定
+var bandWX=baseUrl+'app/seller/farmer_idcard_save.htm';
+//微信解绑
+var unBandWX = baseUrl +"app/seller/farmer_idcard_out_save.htm";
+
 
 module.exports = {
   baseUrl: baseUrl,
@@ -138,7 +153,6 @@ module.exports = {
   getProductDetail: getProductDetail,
   stopProduct: stopProduct,
   getOrder: getOrder,
-  getAllExpressCompany: getAllExpressCompany,
   orderShippingSave: orderShippingSave,
   orderShippingUpdate: orderShippingUpdate,
   clearGoodsDetails: clearGoodsDetails,
@@ -170,4 +184,12 @@ module.exports = {
   SECRET: SECRET,
   getGoodsInfoByCard: getGoodsInfoByCard,
   getAllExpCompany: getAllExpCompany,
+  getAddress:getAddress,
+  checkIdcard: checkIdcard,
+  checkMobile:checkMobile,
+  checkWork: checkWork,
+  businessCategory:businessCategory,
+  getStoreTypeList: getStoreTypeList,
+  bandWX: bandWX,
+  unBandWX: unBandWX,
 }

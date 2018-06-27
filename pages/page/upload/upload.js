@@ -1,5 +1,5 @@
 import WeCropper from '../we-cropper/we-cropper.js'
-
+var event =require('../../../utils/event.js')
 const device = wx.getSystemInfoSync()
 const width = device.windowWidth
 const height = device.windowHeight - 50
@@ -18,7 +18,8 @@ Page({
         y: (height - 300) / 2,
         width: 300,
         height: 300
-      }
+      },
+      backCropMessgae:""
     }
   },
   touchStart(e) {
@@ -31,12 +32,15 @@ Page({
     this.wecropper.touchEnd(e)
   },
   getCropperImage() {
+    var that =this;
     this.wecropper.getCropperImage((avatar) => {
+      console.log("点击确认")
+      console.log(avatar)
       if (avatar) {
-        //  获取到裁剪后的图片
-        wx.redirectTo({
-          url: `../index/index?avatar=${avatar}`
-        })
+        //  获取到裁剪后的图片,发送消息给原来的页面告诉他路径
+        event.emit(that.data.backCropMessgae, avatar)
+        //关闭当前页面
+        wx.navigateBack()
       } else {
         console.log('获取图片失败，请稍后重试')
       }
@@ -44,7 +48,7 @@ Page({
   },
   uploadTap() {
     const self = this
-
+   
     wx.chooseImage({
       count: 1, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -52,18 +56,20 @@ Page({
       success(res) {
         const src = res.tempFilePaths[0]
         //  获取裁剪图片资源后，给data添加src属性及其值
-
         self.wecropper.pushOrign(src)
       }
     })
   },
   onLoad(option) {
-    console.log(this.data.cropperOpt.height)
+    console.log(option)
     var res = wx.getSystemInfoSync()
     console.log(res.windowHeight)
-    const { cropperOpt } = this.data
+    this.setData({
+      backCropMessgae: option.cropBack
+    })
     
-    if (option.src) {
+    const { cropperOpt } = this.data
+       if (option.src) {
       cropperOpt.src = option.src
       new WeCropper(cropperOpt)
         .on('ready', (ctx) => {

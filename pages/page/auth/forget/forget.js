@@ -23,7 +23,7 @@ Page({
     var that = this;
     //进入页面首先根据身份证加载我们得手机号码
     //获取身份证
-    var idCard = wx.getStorageSync('idCard')
+    var idCard = wx.getStorageSync('username')
     console.log(idCard);
     //给页面赋值
     this.setData({
@@ -40,10 +40,11 @@ Page({
         return;
       }
       //给页面手机号赋值
-      that.setData({
-        mobile: res.data
-      });
-      console.log(res.data);
+      if (res.data.mobile!=null&&res.data.mobile!=""){
+        that.setData({
+          mobile: res.data.mobile,
+        });
+      }
     })
 
   },
@@ -117,7 +118,7 @@ Page({
       })
     }
     //联网获取数据
-    app.func.fotgetPass(this.data.icCardValue, this.data.mobile, function (message, res) {
+    app.func.fotgetPass(this.data.icCardValue,this.data.mobile, function (message, res) {
       console.log(res)
       if (!res) {
         wx.showToast({
@@ -201,7 +202,7 @@ Page({
       return;
     }
     //联网更新密码
-    app.func.updatePassword(idCard,newPass,mobile,verCode,function(message,res){
+    app.func.updatePassword(idCard,newPass,verCode,function(message,res){
       //判断返回的信息
       if(!res){
         wx.showToast({

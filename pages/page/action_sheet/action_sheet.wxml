@@ -9,13 +9,13 @@
   <checkbox-group bindchange="_listenCheckboxChange" data-index="{{index}}">
   <label class="goods-container" wx:for="{{list}}"  wx:key='item' wx:for-index="idx"> 
     <view class='good-img'>
-        <image src='{{item.goods_pic}}'></image>
+        <image src='{{item.goods_mainphoto_path}}'></image>
       </view>
       <view class='good-info'>
-        <text class='item-good-name'>{{item.goodName}}</text>
+        <text class='item-good-name'>{{item.goods_name}}</text>
         <text class='paid-txt2'>数量：<text class='color-blue'> x {{item.goods_count}}</text> </text>
         <text class='paid-txt2 '>应收金额： <text class='color-blue mr15'> {{item.money}}元</text>
-        <text class='color-blue'> 分销 {{item.goods_share_commission}}元</text></text>
+        <text class='color-blue'> 分销 {{item.share_commission}}元</text></text>
       </view>
   <checkbox class="goods-checkbox" value='{{idx}}' />
   </label>

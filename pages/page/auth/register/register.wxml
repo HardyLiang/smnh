@@ -5,22 +5,22 @@
       <text class="input-item-label">店铺名称</text>
       <view class="input-item-content">
         <input type="text" placeholder="给你店铺起一个漂亮的名字" value='{{storeName}}'
-        bindinput='bindStoreNameChange'></input>
+        bindblur='bindStoreNameChange' bindinput='bindStoreNameInput'></input>
       </view>
     </view>
     <view class="input-item">
       <text class="input-item-label">店铺类型</text>
-      <picker class="input-item-content" bindchange="stroeTypeChange" value="{{index}}" range="{{stroeType}}">
+      <picker class="input-item-content" bindchange="stroeTypeChange" value="{{index}}" range="{{stroeType}}"  range-key='gradeName'>
         <view class="picker">
-          {{stroeType[index]}}
+          {{stroeType[index].gradeName}}
         </view>
       </picker>
     </view>
-    <view class="input-item">
+    <view class="input-item" hidden='true'>
       <text class="input-item-label">经营类目</text>
-      <picker class="input-item-content" bindchange="" value="{{}}" range="{{}}">
+      <picker class="input-item-content" bindchange="businessCategoryChange" value="{{businessCategoryIndex}}" range="{{businessCategory}}" range-key='className'>
         <view class="picker">
-          {{}}
+          {{businessCategory[businessCategoryIndex].className}}
         </view>
       </picker>
     </view>

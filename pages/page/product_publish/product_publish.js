@@ -28,11 +28,11 @@ Page({
   onLoad: function (options) {
     //获取用户的个人信息，首先获取本地缓存数据
     var res = wx.getStorageSync(common.CC_FARMERINFO);
-    var idCard = util.hideIdCardMiddle(res.data.idCard);
+    var idCard = util.hideIdCardMiddle(res.data.sCard);
     this.setData({
-      imgUrlValue: res.data.picPath,
-      name: res.data.name,
-      mobile: res.data.mobile,
+      imgUrlValue: res.data.store_logo,
+      name: res.data.store_name,
+      mobile: res.data.store_telephone,
       idCard: idCard,
       descriptionEvaluate: res.data.descriptionEvaluate,
       serviceEvaluate: res.data.serviceEvaluate,
@@ -84,7 +84,7 @@ Page({
       console.log('获取产品列表成功');
       console.log(res);
       that.setData({
-        list: res
+        list: res.goods_list
       })
       
     })

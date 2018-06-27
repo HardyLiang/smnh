@@ -15,7 +15,6 @@ Page({
     farmerType: "",
     notYetCount: "",
     shippedCount: "",
-    pageSize: 10,
     pageIndex: 1,//未发货页码
     pageIndex1:1,//已发货页码
     isFirstEnter:true,//第一次进入页面
@@ -77,27 +76,17 @@ Page({
   /**
    * 获取订单
    */
-  getOrder: function (idCard, farmerId, status, pageSize, pageIndex) {
-    console.log("pageIndex ========"+pageIndex)
+  getOrder: function (status,pageIndex,pageSize) {
     var that = this;
-    if (that.data.isFirstEnter ){//如果是第一次进来就显示loading
+    if (that.data.isFirstEnter){//如果是第一次进来就显示loading
       wx.showLoading()
       that.setData({
         isFirstEnter:false
       })
     }
-    //联网获取订单数量和订单
-    getApp().func.getOrderCountInfo(idCard, function (message, res) {
-      if(!res){
-        return;
-      }
-      that.setData({
-        notYetCount: res.data[0].notYetCount,
-        shippedCount: res.data[0].shippedCount,
-      })
-    })
 
-  getApp().func.getOrder(farmerId, status, pageSize, pageIndex, function (message, mPageIndex, res,maxPage) {
+
+  getApp().func.getOrder(status,pageIndex, function (message, mPageIndex, res,maxPage) {
       wx.hideLoading();
       console.log("获取订单数据成功");
       console.log(res);
@@ -108,56 +97,67 @@ Page({
           isReFresh:false
         })
       }
-      if (that.data.isLoadMore) {//判断是否是加载更多操作
-        console.log("mPageIndex=" + mPageIndex + "maxPage="+maxPage);
+
+      if (!res) {
+        wx.showModal({
+          title: '提示',
+          content: message,
+          showCancel:false,
+          success:function(res){
+          }
+        })
+          return;
+      }
+      
+      if (mPageIndex == maxPage) {//如果当前页面是最大页面
+        console.log("mPageIndex=" + mPageIndex );
         var mTypeNotYetStatus = that.data.typeNotYetStatus;
         var mTypeAlreadyStatus = that.data.typeAlreadyStatus;
-        if (mPageIndex==maxPage){
-          that.setData({
-            isLoadMore: false,//是否加载更多
-            loadmoreTip: tipAlready,//加载文字
-            isHideLoadMore: false,//是否隐藏加载更多
-            isHideLoadIcon: true,//是否隐藏loading图标
-            typeNotYetStatus: that.data.currentTab == 0 ? true : mTypeNotYetStatus,
-            typeAlreadyStatus: that.data.currentTab == 1 ? true : mTypeAlreadyStatus
-          })
-        }
-        
+         that.setData({
+           isLoadMore: false,//是否加载更多
+           loadmoreTip: tipAlready,//加载文字
+           isHideLoadMore: false,//是否隐藏加载更多
+           isHideLoadIcon: true,//是否隐藏loading图标
+           typeNotYetStatus: status == "1" ? true : mTypeNotYetStatus,
+           typeAlreadyStatus: status == "2" ? true : mTypeAlreadyStatus
+         }) 
       }
       if(!res){
         return;
       }
-        if (status != null && status == "2") {//未发货
+        if (status != null && status == "1") {//未发货
           console.log("未发货");
           var list = that.data.notYetList;
           if (that.data.pageIndex==1){
              list =[];
-             list = res.data.lists;
+             list = res.data;
            }else{
-             for (var i = 0; i < res.data.lists.length; i++) {
-               list.push(res.data.lists[i]);
+             for (var i = 0; i < res.data.length; i++) {
+               list.push(res.data[i]);
              }
              console.log("加载更多")
              console.log(list);
            }
           that.setData({
             notYetList: list,
+            notYetCount:res.count
           });
           
         } else
-          if (status != null && status == "3") {//已发货
+          if (status != null && status == "2") {//已发货
             console.log("已发货");
             var alreadyList = that.data.alreadyList;
             if (pageIndex == 1) {
               alreadyList=[];
-              alreadyList = res.data.lists;
+              alreadyList = res.data;
             } else {
-              for (var i = 0; i < res.data.lists.length; i++) {
-                alreadyList.push(res.data.lists[i]);
+              for (var i = 0; i < res.data.length; i++) {
+                alreadyList.push(res.data[i]);
               }
             }
             that.setData({
               alreadyList: alreadyList,
+              shippedCount:res.count
             });
           }
         
@@ -215,10 +215,12 @@ Page({
     console.log(e)
     var position = e.currentTarget.dataset.id;
     console.log("第几项修改物流" + position);
-    var shipInfoList = this.data.alreadyList[position].shipInfoList;
+    var shipInfoList = this.data.alreadyList[position].ship_info;
     var orderId = this.data.alreadyList[position].id;
+    var goodInfoList = this.data.alreadyList[position].goods_info;
     //修改前存储产品物流信息
     wx.setStorageSync(common.CC_SHIPINFOLIST, shipInfoList);
+    wx.setStorageSync(common.CC_GOODINFOLIST, goodInfoList);
     //跳转修改物流
     wx.navigateTo({
       url: '../deliver_goods/deliver_goods?orderId=' + orderId+"&type="+"modify",
@@ -231,7 +233,7 @@ Page({
     console.log(e)
     var position = e.currentTarget.dataset.id;
     console.log("第几项发货"+position);
-    var goodsList = this.data.notYetList[position].goodInfoList;
+    var goodsList = this.data.notYetList[position].goods_info;
     var orderId = this.data.notYetList[position].id;
     console.log(goodsList.length)
     //发货前存储产品列表
@@ -250,8 +252,8 @@ Page({
     var idCard = wx.getStorageSync(common.CC_IDCARD);
     var res = wx.getStorageSync(common.CC_FARMERINFO);
     var farmerId = res.data.id;
-    var status = "2";
-    var statusAlready = "3";
+    var status = "1";
+    var statusAlready = "2";
     var personType;
     if (res.data.personType == "2") {
       personType = "普通户"
@@ -265,10 +267,10 @@ Page({
       farmerType: personType,
     })
     if (statusType == typeModify) {//如果是修改物流
-        this.getOrder(idCard, farmerId, statusAlready, this.data.pageSize, this.data.pageIndex1);
+        this.getOrder( statusAlready,this.data.pageIndex1,this.data.pageSize);
       } else 
       if (statusType == typeSend) {//未发货
-        this.getOrder(idCard, farmerId, status, this.data.pageSize, this.data.pageIndex);
+        this.getOrder(status, this.data.pageIndex,this.data.pageSize);
       } 
     
    
