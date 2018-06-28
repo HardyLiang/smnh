@@ -1,6 +1,7 @@
 var common = require('../../../utils/common.js')
 var util = require('../../../utils/util.js')
- 
+let tipLoading = "正在加载";
+let tipAlready = "全部加载完毕";
 Page({
   /**
    * 页面的初始数据
@@ -18,8 +19,14 @@ Page({
     dialogContent:"",
     orderId:"",
     index:0,
-    currentStatus:3
-    
+    currentStatus:3,
+    pageIndex: 1,//页数
+    isLoadMore: false,//是否加载更多
+    isHideLoadMore: false,//是否隐藏加载更多
+    isHideLoadIcon: false,//是否隐藏loading图标
+    loadmoreTip: "正在加载",//加载文字
+    typeAlreadyStatus:false,//是否加载全部完毕
+    productlist:[],//产品列表
   },
 
   /**
@@ -39,7 +46,7 @@ Page({
       shipEvaluate: res.data.shipEvaluate
     })
     //获取产品列表
-    this.getGoodsInfoByCard(res.data.idCard);
+    this.getGoodsInfoByCard(this.data.pageIndex);
   },
   goGoodsDetail: function (e) {
     var detailId = e.currentTarget.dataset.id;
@@ -70,9 +77,9 @@ Page({
   /**
    *获取产品列表
    */
-  getGoodsInfoByCard: function (card) {
+  getGoodsInfoByCard: function (pageIndex) {
     var that = this;
-    getApp().func.getGoodsInfoByCard(card, function (message, res) {
+    getApp().func.getGoodsInfoByCard(pageIndex, function (message, res) {
       if (!res) {
         wx.showModal({
           title: '提示',
@@ -81,12 +88,33 @@ Page({
         })
         return;
       }
-      console.log('获取产品列表成功');
+      console.log('获取产品列表成功'+pageIndex);
       console.log(res);
-      that.setData({
-        list: res.goods_list
-      })
-      
+      if (pageIndex==1){
+        that.setData({
+          productlist: res.data
+        })
+        console.log(that.data.productlist);
+      }else{
+        var list = that.data.productlist;
+        for (var i = 0; i < res.data.length; i++) {
+          list.push(res.data[i]);
+        }
+        that.setData({
+          productlist: list
+        })
+      }
+      if (res.data.length<12){
+        this.setData({
+          isLoadMore: false,
+          isHideLoadMore: false,
+          isHideLoadIcon: true,
+          loadmoreTip: tipAlready,
+          typeAlreadyStatus:true
+        })
+      }
+
+     
     })
     
   },
@@ -267,5 +295,23 @@ Page({
         this.updateGoodInventory(this.data.orderId,content,this.data.index);
     }
     
+  },
+  /**
+   * 下拉刷新
+   */
+  onReachBottom :function(e){
+    console.log("到达底部加载更多");
+    if (this.data.typeAlreadyStatus){//如果加载全部就返回
+      return;
+    }
+    var mPageIndex = this.data.pageIndex + 1;
+    this.setData({
+      isLoadMore: true,
+      pageIndex: mPageIndex,
+      isHideLoadMore: false,
+      isHideLoadIcon: false,
+      loadmoreTip: tipLoading
+    })
+    this.getGoodsInfoByCard(this.data.pageIndex)
   }
 })

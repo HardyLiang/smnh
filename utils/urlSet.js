@@ -49,7 +49,7 @@ var getProductDetail = baseUrl + "/siboss/iface/app/appReg/getProductDetail";
 //农户停止出售
 var stopProduct = baseUrl + "/siboss/iface/common/ap/soldOutProduct";
 //农户查询消费者订单列表
-var getOrder = baseUrl + "app/seller/order_list_mini.htm";
+var getOrder = baseUrl + "app/order_list_mini.htm";
 //获取快递字典（全部）
 var getAllExpCompany = baseUrl + "app/seller/express_company_list.htm";
 //录入物流信息
@@ -111,7 +111,7 @@ var getSetRec = baseUrl + "/siboss/iface/common/ap/getSetRec";
 //更改产品让利金
 var updateShareCommission = baseUrl + "/siboss/iface/common/ap/updateShareCommission";
 //农户农产品列表信息
-var getGoodsInfoByCard = baseUrl +"app/seller/goods_list_mini.htm";
+var getGoodsInfoByCard = baseUrl +"app/goods_list_mini.htm";
 //获取地址
 var getAddress = baseUrl +"app/iskyshop_area_list.htm";
 //检测身份证是否注册

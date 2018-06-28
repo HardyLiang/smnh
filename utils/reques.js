@@ -1442,7 +1442,7 @@ function getOpenId(code, appid, secret, cb) {
 }
 
 //农户农产品列表信息
-function getGoodsInfoByCard(card, cb) {
+function getGoodsInfoByCard(pageindex,cb) {
   wx.request({
     url: urlSet.getGoodsInfoByCard,
     header: {
@@ -1450,10 +1450,11 @@ function getGoodsInfoByCard(card, cb) {
       "verify": verify
     },
     method: "post",
-    data: util.json2Form({ user_id: user_id, token: token }),
+    data: util.json2Form({ user_id: user_id, token: token ,
+      currentPage: pageindex}),
     complete: function (res) {
-      var message = res.errMsg;
-      var statusCode = res.statusCode;
+      var message = res.data.message;
+      var statusCode = res.data.statusCode;
       console.log(res);
       console.log(message);
       console.log("statusCode" + statusCode);

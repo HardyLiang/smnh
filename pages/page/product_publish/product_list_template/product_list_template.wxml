@@ -2,34 +2,34 @@
   <view class='pro-list-item'>
     <view class='goods-top' bindtap='goGoodsDetail' data-id="{{id}}">
       <view class='product-img'>
-        <image src='{{goods_main_photo}}'></image>
+        <image src='{{goodsPicturesUrl}}'></image>
       </view>
       <view class='product-detail-info'>
-        <view>{{goods_name}}</view>
+        <view>{{goodsName}}</view>
         <view>
-          <text class='pro-status'>{{goods_status}}</text>
+          <text class='pro-status'>{{status}}</text>
           <text class='pro-give'>让利：￥{{shareCommission}}</text>
         </view>
-        <view>规格：{{goodsGspVal}}</view>
+        <view>单价:{{goodsPrice}}</view>
         <view>
-          <text class='pro-sales'>销量：{{goods_salenum}}</text>
-          <text>库存：{{goods_inventory}}</text>
+          <text class='pro-sales'>销量：{{goodsSalenum}}</text>
+          <text>库存：{{goodsInventory}}</text>
         </view>
       </view>
     </view>
     <!-- 按钮 -->
     <view class='goods-bottom'>
-      <view wx:if="{{goodsStatus==3||goodsStatus==5||goodsStatus==6||goodsStatus==7}}">
+      <view wx:if="{{status=='在仓库中'||status=='违规下架'}}">
         <button class="pro-btn c-blue"  bingTap="rePublish">重新发布</button>
       </view>
-      <view wx:elif="{{goodsStatus==1}}">
+      <view wx:elif="{{status=='上架'}}">
         <button class="pro-btn c-blue" data-goodsid="{{id}}" data-index="{{ids}}
       catchtap='mddifyStopProduct' >停止出售</button>  
       </view>  
-    <button  class=" pro-btn {{goodsStatus==1?'c-orange' :''}}" catchtap='modifyGoodsInventory'
-    data-goodsid="{{goodsId}}" data-goodsStatus="{{goodsStatus}}"
+    <button  class=" pro-btn {{status=='上架'?'c-orange' :''}}" catchtap='modifyGoodsInventory'
+    data-goodsid="{{goodsId}}" data-goodsStatus="{{status}}"
     data-goodsinventory="{{goodsInventory}} " data-index="{{ids}} ">修改库存</button>
-    <button class="pro-btn {{goodsStatus==1?'c-blue' :''}}" catchtap='modifyShareCommission' data-goodsid="{{goodsId}} " data-goodsStatus="{{goodsStatus}}"
+    <button class="pro-btn {{status=='上架'?'c-blue' :''}}" catchtap='modifyShareCommission' data-goodsid="{{goodsId}} " data-goodsStatus="{{status}}"
     data-sharecommission="{{shareCommission}} " data-index="{{ids}} ">修改让利</button>
      
   </view>

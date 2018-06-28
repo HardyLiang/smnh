@@ -26,7 +26,7 @@ Page({
       count:"",
       name:""
     }],
-
+    packDetails:""//全局规格的时候的规格描述
   },
 
   onLoad: function () {
@@ -43,10 +43,8 @@ Page({
      
     } else {
       app.globalData.productPublic[common.CC_PRODUCT_AREA_ID] = "4525664";
-      app.globalData.productPublic["goodsDetails"] =this.data.remark;
+      app.globalData.productPublic["goodsDetails"] =this.data.remark; 
       
-      app.globalData.productPublic["dsbGoodsUnit"] = "(斤)";
-      app.globalData.productPublic["packDetails"] = "12个";
       wx.showModal({
         title: '提示',
         content: '亲，你没有设置发货地址，请进入我的信息进行修改！',
@@ -260,10 +258,15 @@ Page({
         break;
       case "allItemName":
         var mAllItem = 'allItem[' + 0 + '].name';
+        app.globalData.productPublic[common.CC_PRODUCT_DSB_GOOD_UNIT] = content;
         this.setData({
           [mAllItem]: content
         })
       break;
+      case "packDetails":
+       this.setData({
+         packDetails:content
+       })
       default:
         break;
 
@@ -301,6 +304,7 @@ Page({
     }else
       if (this.data.invType == "all"){//全局配置
         params[common.CC_PRODUCT_SPECS_INFO] = JSON.stringify(this.data.allItem);
+        params[common.CC_PRODUCT_PACK_DETAILS] = this.data.packDetails;
       }
     //联网获取数据
     app.func.addOnlyProduct(params, function (message, res) {

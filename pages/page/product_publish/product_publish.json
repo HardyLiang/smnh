@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "农户产品",
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "dialog": "../dialog/dialog"
   }

@@ -248,9 +248,9 @@ Page({
    */
   getOrderByStatus:function(statusType){
     //获取未发货
-    var name = wx.getStorageSync(common.CC_USERNAME);
-    var idCard = wx.getStorageSync(common.CC_IDCARD);
     var res = wx.getStorageSync(common.CC_FARMERINFO);
+    var name = getApp().globalData.userName;
+    var idCard = getApp().globalData.idCard;
     var farmerId = res.data.id;
     var status = "1";
     var statusAlready = "2";
