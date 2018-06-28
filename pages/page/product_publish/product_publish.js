@@ -90,6 +90,7 @@ Page({
       }
       console.log('获取产品列表成功'+pageIndex);
       console.log(res);
+
       if (pageIndex==1){
         that.setData({
           productlist: res.data
@@ -113,8 +114,7 @@ Page({
           typeAlreadyStatus:true
         })
       }
-
-     
+      
     })
     
   },

@@ -237,7 +237,7 @@ function checkWorkIsSensitive(message, cb){
  * (默认密码状态)
  */
 function autoLogin(idCard){
- 
+
 }
 
 

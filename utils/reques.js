@@ -1450,6 +1450,7 @@ function getGoodsInfoByCard(pageindex,cb) {
       "verify": verify
     },
     method: "post",
+
     data: util.json2Form({ user_id: user_id, token: token ,
       currentPage: pageindex}),
     complete: function (res) {
