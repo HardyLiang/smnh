@@ -27,6 +27,10 @@
   <block wx:for="{{productlist}}" wx:key="item" wx:for-index='ids'>
     <template is="productListTemplate" data="{{...item,ids:ids}}" />
     </block>
+    <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
+  <image class="weui-loading" hidden='{{isHideLoadIcon}}' src="../../images/ic_gif_loading.gif"></image>
+  <view class="weui-loadmore_tips">{{loadmoreTip}}</view>
+</view>
   </view>
 
 <view class='list-none' wx:else>
@@ -40,10 +44,7 @@
   <button class='big-btn' bindtap='AddProductTap'>发布新产品</button>
   </view>
 </view>
-<view class="weui-loadmore" hidden="{{isHideLoadMore}}">
-  <image class="weui-loading" hidden='{{isHideLoadIcon}}' src="../../images/ic_gif_loading.gif"></image>
-  <view class="weui-loadmore_tips">{{loadmoreTip}}</view>
-</view>
+
 <!-- 页面弹窗 -->
 <view >
     <dialog id='dialog' 
