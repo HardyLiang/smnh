@@ -71,21 +71,10 @@ Page({
         wx.setStorageSync(common.CC_MESSAGELIST, res.data);
       }
     })
-    this.checkUserData();
     
    
   },
-  onShow:function(){
-    var that =this;
-    event.on(event.kLoginSuccessEventName, this, function (data) {
-      console.log("我去主页我收到信息了");
-      //页面没有消失，但是我们这边已经收到消息了，所以要加延迟，要不然会出现问题
-      setTimeout(function () {
-        that.checkUserData();
-      },1500)
-    
-       
-    })
+  onShow:function(){   
   },
   hrefLink: function (e) {
     console.log(e);
@@ -97,38 +86,7 @@ Page({
       url: `../page/${url}/${url}`
     })
   },
-  /**
-   * 
-   * 主页检测用户数据
-   */
-  checkUserData: function(){
-    //如果有登录信息就直接获取店铺状态
-    if ("" != util.trim(getApp().globalData.userName) && "" != util.trim(getApp().globalData.idCard)) {
-          //检测用户是否进行了微信绑定
-          app.func.checkWXBoundStatus(getApp().globalData.idCard,function(message,res){
-           console.log("微信"+message);
-           console.log(res);
-           var openId = res.data.openId;
-           wx.setStorageSync(common.CC_WEIXININFO, res);
-           if(""==openId){
-            wx.showModal({
-              title: '提示',
-              content: '微信未绑定！',
-              confirmText:'去绑定',
-              success:function(res){
-                if (res.confirm) {
-                  //点击确认
-                wx.navigateTo({
-                  url: '../page/wechat_bind/wechat_bind',
-                })
-                }
-              }
-            })
-          }
-          });
-    }
-
-  }
+ 
 
 
 

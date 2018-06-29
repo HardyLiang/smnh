@@ -55,9 +55,10 @@ Page({
           btnValue:"注销登录"
         })
         //保存个人信息列表
-        wx.setStorageSync(common.CC_MOBILE, res.data.mobile);
+        wx.setStorageSync(common.CC_MOBILE, res.data.store_telephone);
         wx.setStorageSync(common.CC_FARMERINFO, res);
         wx.setStorageSync(common.CC_STORE_URL, res.data.store_url);
+        wx.setStorageSync(common.CC_BAND_STATUS, res.data.farmer_idcard_status);
         var storeStatus= res.data.store_status;
         setTimeout(function(){
           if (storeStatus != "15") {

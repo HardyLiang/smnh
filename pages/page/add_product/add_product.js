@@ -37,14 +37,12 @@ Page({
     app.globalData.productPublic[common.CC_PRODUCT_INV_TYPE] = 'all';
     //默认进去就获取店铺的发货地址
     var farmerInfo = wx.getStorageSync(common.CC_FARMERINFO);
-    var areaId = farmerInfo.area_id;
+    var areaId = farmerInfo.data.area_id;
     if (areaId != null && areaId != "") {//地址不为空的时候给组参进行赋值
       app.globalData.productPublic[common.CC_PRODUCT_AREA_ID] = areaId;
      
     } else {
-      app.globalData.productPublic[common.CC_PRODUCT_AREA_ID] = "4525664";
       app.globalData.productPublic["goodsDetails"] =this.data.remark; 
-      
       wx.showModal({
         title: '提示',
         content: '亲，你没有设置发货地址，请进入我的信息进行修改！',
@@ -316,6 +314,9 @@ Page({
         })
         return;
       } else {//成功，跳转回产品列表页
+      wx.showToast({
+        title: message,
+      })
         //通知我的产品列表页面告诉他老子发布成功了
         event.emit(event.KProductPublishSuccess, message);
         //这个页面就关闭了；

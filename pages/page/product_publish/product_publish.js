@@ -79,7 +79,7 @@ Page({
    */
   getGoodsInfoByCard: function (pageIndex) {
     var that = this;
-    getApp().func.getGoodsInfoByCard(pageIndex, function (message, res) {
+    getApp().func.getGoodsInfoByCard(pageIndex, function (message, res,maxPage) {
       if (!res) {
         wx.showModal({
           title: '提示',
@@ -105,8 +105,8 @@ Page({
           productlist: list
         })
       }
-      if (res.data.length<12){
-        this.setData({
+      if (maxPage==1||pageIndex==maxPage){
+        that.setData({
           isLoadMore: false,
           isHideLoadMore: false,
           isHideLoadIcon: true,

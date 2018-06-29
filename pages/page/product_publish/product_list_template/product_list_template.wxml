@@ -2,18 +2,18 @@
   <view class='pro-list-item'>
     <view class='goods-top' bindtap='goGoodsDetail' data-id="{{id}}">
       <view class='product-img'>
-        <image src='{{goods_main_photo}}'></image>
+        <image src='{{goodsPicturesUrl}}'></image>
       </view>
       <view class='product-detail-info'>
-        <view>{{goods_name}}</view>
+        <view>{{goodsName}}</view>
         <view>
-          <text class='pro-status'>{{goods_status}}</text>
+          <text class='pro-status'>{{status}}</text>
           <text class='pro-give'>让利：￥{{shareCommission}}</text>
         </view>
         <view>单价:{{goodsPrice}}</view>
         <view>
-          <text class='pro-sales'>销量：{{goods_salenum}}</text>
-          <text>库存：{{goods_inventory}}</text>
+          <text class='pro-sales'>销量：{{goodsSalenum}}</text>
+          <text>库存：{{goodsInventory}}</text>
         </view>
       </view>
     </view>

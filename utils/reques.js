@@ -2,7 +2,7 @@
 var md5 = require('../utils/md5.js')
 var urlSet = require('../utils/urlSet.js')
 var util = require('../utils/util.js')
-var that =this;
+var that = this;
 let user_id = wx.getStorageSync("user_id");
 let token = wx.getStorageSync("token");
 let verify = wx.getStorageSync("verify");
@@ -17,41 +17,41 @@ function onLogin(usename, pass, cb) {
       "content-type": "application/x-www-form-urlencoded"
     },
     method: "post",
-    data: util.json2Form({ userName: usename, password: passwork}),
+    data: util.json2Form({ userName: usename, password: passwork }),
     complete: function (res) {
       console.log(res)
       var statusCode = res.statusCode;
-      var code =res.data.code;
+      var code = res.data.code;
       console.log(code)
-      if (statusCode = 200 && code=="100") {
-          var service_id = res.data.service_id;
-          var mToken = res.data.token;
-          var name = res.data.userName;
-          var mUserId = res.data.user_id;
-          var mVerify = res.data.verify;
-          //保存至值
-          wx.setStorageSync("user_id", mUserId);
-          wx.setStorageSync("verify", mVerify)
-          wx.setStorageSync("token", mToken);
-          //保存后要获取一次要不然不是最新的值
-          user_id = wx.getStorageSync("user_id");
-          token = wx.getStorageSync("token");
-          verify = wx.getStorageSync("verify");
-          //保存关键数据
-          getApp().globalData.userName = name;
-          getApp().globalData.idCard = usename;
-          return typeof cb == "function" && cb("登录成功！", res)
-        } else
+      if (statusCode = 200 && code == "100") {
+        var service_id = res.data.service_id;
+        var mToken = res.data.token;
+        var name = res.data.userName;
+        var mUserId = res.data.user_id;
+        var mVerify = res.data.verify;
+        //保存至值
+        wx.setStorageSync("user_id", mUserId);
+        wx.setStorageSync("verify", mVerify)
+        wx.setStorageSync("token", mToken);
+        //保存后要获取一次要不然不是最新的值
+        user_id = wx.getStorageSync("user_id");
+        token = wx.getStorageSync("token");
+        verify = wx.getStorageSync("verify");
+        //保存关键数据
+        getApp().globalData.userName = name;
+        getApp().globalData.idCard = usename;
+        return typeof cb == "function" && cb("登录成功！", res)
+      } else
         if (code == "-100") {
-            return typeof cb == "function" && cb("用户不存在", false)
+          return typeof cb == "function" && cb("用户不存在", false)
         } if (code == "-300") {
-            return typeof cb == "function" && cb("密码错误！", false)
-          }else{
-          return typeof cb == "function" && cb("登录失败", false)
-          }
-      
-      
-     
+          return typeof cb == "function" && cb("密码错误！", false)
+        } else {
+        return typeof cb == "function" && cb("登录失败", false)
+      }
+
+
+
 
     },
     fail: function () {
@@ -62,10 +62,10 @@ function onLogin(usename, pass, cb) {
 }
 
 //忘记密码,获取忘记密码验证码
-function fotgetPass(idCard,mobile, cb) {
+function fotgetPass(idCard, mobile, cb) {
   console.log("fotgetPass");
   wx.request({
-    url: urlSet.forgotPass + "?userName=" + idCard + "&mobile=" + mobile ,
+    url: urlSet.forgotPass + "?userName=" + idCard + "&mobile=" + mobile,
     header: {
       "Content-Type": "application/json;charset=UTF-8"
     },
@@ -129,20 +129,20 @@ function addPersonMsg(params,
     complete: function (res) {
       console.log(res);
       var message = res.data.message;
-      var statusCode=res.data.statusCode;
-      if(statusCode=="200"){
-        return typeof cb == "function" && cb(message,res.data)
-      }else{
-        if (message == null || message==""){
-          message="注册失败！"
+      var statusCode = res.data.statusCode;
+      if (statusCode == "200") {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        if (message == null || message == "") {
+          message = "注册失败！"
         }
         return typeof cb == "function" && cb(message, false)
       }
-     
+
 
     },
     fail: function () {
-      return typeof cb == "function" && cb("注册失败！",false)
+      return typeof cb == "function" && cb("注册失败！", false)
     }
   })
 
@@ -195,7 +195,7 @@ function getOrderCountInfo(idCard, cb) {
     success: function (res) {
       var message = res.data.message;
       var statusCode = res.data.statusCode;
-      var count =res.data.count;
+      var count = res.data.count;
       console.log(message);
       console.log("statusCode" + statusCode + " count=" + count);
       if (statusCode != null && "200" == statusCode) {
@@ -207,7 +207,7 @@ function getOrderCountInfo(idCard, cb) {
 
     },
     fail: function () {
-      return typeof cb == "function" && cb("获取订单数量失败！",false)
+      return typeof cb == "function" && cb("获取订单数量失败！", false)
     }
   })
 
@@ -233,7 +233,7 @@ function updateShareCommission(orderId, shareCommission, cb) {
       }
     },
     fail: function () {
-      return typeof cb == "function" && cb("修改让利金失败！",false)
+      return typeof cb == "function" && cb("修改让利金失败！", false)
     }
   })
 
@@ -477,10 +477,10 @@ function getAgreementMessageInfo(messId, cb) {
 }
 
 //获取协议消息列表
-function getAgreementMessageList(pageIndex,cb) {
+function getAgreementMessageList(pageIndex, cb) {
   console.log("getAgreementMessageList");
   wx.request({
-    url: urlSet.getAgreementMessageList ,
+    url: urlSet.getAgreementMessageList,
     header: {
       "Content-Type": "application/x-www-form-urlencoded;",
       "verify": verify
@@ -488,7 +488,7 @@ function getAgreementMessageList(pageIndex,cb) {
     method: "post",
     data: util.json2Form({
       user_id: user_id,
-      token:token,
+      token: token,
       currentPage: pageIndex
     }),
     success: function (res) {
@@ -620,7 +620,7 @@ function updateGoodInventory(id, goodsInventory, cb) {
 
     },
     fail: function () {
-      return typeof cb == "function" && cb("修改库存失败！",false)
+      return typeof cb == "function" && cb("修改库存失败！", false)
     }
   })
 
@@ -650,15 +650,15 @@ function getLogisticsInfo(oid, cb) {
       if (statusCode != null && "200" == statusCode) {
         return typeof cb == "function" && cb(message, res.data)
       } else {
-        if(message==null||message==""){
-          message ="获取物流信息失败！"
+        if (message == null || message == "") {
+          message = "获取物流信息失败！"
         }
         return typeof cb == "function" && cb(message, false)
       }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb("获取物流信息失败！",false)
+      return typeof cb == "function" && cb("获取物流信息失败！", false)
     }
   })
 
@@ -688,7 +688,7 @@ function getPersonShopURL(card, cb) {
 
     },
     fail: function () {
-      return typeof cb == "function" && cb("获取农户店铺URL失败！",false)
+      return typeof cb == "function" && cb("获取农户店铺URL失败！", false)
     }
   })
 
@@ -979,7 +979,7 @@ function orderShippingUpdate(params, cb) {
       }
     },
     fail: function () {
-      return typeof cb == "function" && cb("修改物流失败！",false)
+      return typeof cb == "function" && cb("修改物流失败！", false)
     }
   })
 
@@ -1008,7 +1008,7 @@ function orderShippingSave(params, cb) {
 
     },
     fail: function () {
-      return typeof cb == "function" && cb("发货失败！",false)
+      return typeof cb == "function" && cb("发货失败！", false)
     }
   })
 
@@ -1036,13 +1036,13 @@ function getAllExpCompany(cb) {
 
     },
     fail: function () {
-      return typeof cb == "function" && cb("获取物流公司失败",false)
+      return typeof cb == "function" && cb("获取物流公司失败", false)
     }
   })
 
 }
 //农户查询消费者订单列表
-function getOrder(status,pageIndex, cb) {
+function getOrder(status, pageIndex, cb) {
   console.log("getOrder");
   wx.request({
     url: urlSet.getOrder,
@@ -1052,32 +1052,32 @@ function getOrder(status,pageIndex, cb) {
     },
     method: "post",
     data: util.json2Form({
-      user_id:user_id,
+      user_id: user_id,
       token: token,
       type: status,
-      currentPage:pageIndex
+      currentPage: pageIndex
     }),
     success: function (res) {
       var message = res.data.message;
       var statusCode = res.data.statusCode;
-      var count =res.data.count;
-      var maxPage =0;
-      if(count<=12){
-        maxPage=1;
-      }else{
-        maxPage = Math.ceil( count/12);
+      var count = res.data.count;
+      var maxPage = 0;
+      if (count <= 12) {
+        maxPage = 1;
+      } else {
+        maxPage = Math.ceil(count / 12);
       }
       console.log(message);
       console.log("statusCode" + statusCode + "maxPage=" + maxPage);
       if (statusCode != null && "200" == statusCode) {
         return typeof cb == "function" && cb(message, pageIndex, res.data, maxPage)
       } else {
-        return typeof cb == "function" && cb(message, pageIndex,false,1)
+        return typeof cb == "function" && cb(message, pageIndex, false, 1)
       }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb("获取订单失败！", pageIndex,false,1)
+      return typeof cb == "function" && cb("获取订单失败！", pageIndex, false, 1)
     }
   })
 
@@ -1092,7 +1092,7 @@ function stopProduct(id, cb) {
       "Content-Type": "application/json;charset=UTF-8"
     },
     method: "post",
-    data:{
+    data: {
       id: id
     },
     success: function (res) {
@@ -1108,7 +1108,7 @@ function stopProduct(id, cb) {
 
     },
     fail: function () {
-      return typeof cb == "function" && cb("下架失败！",false)
+      return typeof cb == "function" && cb("下架失败！", false)
     }
   })
 
@@ -1137,7 +1137,7 @@ function getProductDetail(typeId, packageId, cb) {
       }
     },
     fail: function () {
-      return typeof cb == "function" && cb("获取产品详情信息失败！",false)
+      return typeof cb == "function" && cb("获取产品详情信息失败！", false)
     }
   })
 
@@ -1193,24 +1193,25 @@ function addOnlyProduct(params, cb) {
       "verify": verify
     },
     method: "post",
-    data: util.json2Form(params) ,
+    data: util.json2Form(params),
     success: function (res) {
       var message = res.data.message;
-      if(message){
-        message ="发布失败！"
-      }
+
       var statusCode = res.data.statusCode;
       console.log(message);
       console.log("statusCode" + statusCode);
       if (statusCode != null && "200" == statusCode) {
-        return typeof cb == "function" && cb(message, res.data)
+        return typeof cb == "function" && cb(message, res)
       } else {
+        if (message == null || message == "") {
+          message = "发布失败！"
+        }
         return typeof cb == "function" && cb(message, false)
       }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb("发布失败！",false)
+      return typeof cb == "function" && cb("发布失败！", false)
     }
   })
 
@@ -1267,7 +1268,7 @@ function getProductDict(cb) {
 
     },
     fail: function () {
-      return typeof cb == "function" && cb("获取产品大类失败！",false)
+      return typeof cb == "function" && cb("获取产品大类失败！", false)
     }
   })
 
@@ -1294,7 +1295,7 @@ function getProductDictSub(id, deviceId, cb) {
 
     },
     fail: function () {
-      return typeof cb == "function" && cb("获取产品小类失败！",false)
+      return typeof cb == "function" && cb("获取产品小类失败！", false)
     }
   })
 
@@ -1383,7 +1384,7 @@ function getPicLists(id, typeId, cb) {
       }
     },
     fail: function () {
-      return typeof cb == "function" && cb("获取详情图片失败！",false)
+      return typeof cb == "function" && cb("获取详情图片失败！", false)
     }
   })
 
@@ -1442,7 +1443,7 @@ function getOpenId(code, appid, secret, cb) {
 }
 
 //农户农产品列表信息
-function getGoodsInfoByCard(pageindex,cb) {
+function getGoodsInfoByCard(pageindex, cb) {
   wx.request({
     url: urlSet.getGoodsInfoByCard,
     header: {
@@ -1450,24 +1451,31 @@ function getGoodsInfoByCard(pageindex,cb) {
       "verify": verify
     },
     method: "post",
-
-    data: util.json2Form({ user_id: user_id, token: token ,
-      currentPage: pageindex}),
+    data: util.json2Form({
+      user_id: user_id, token: token,
+      currentPage: pageindex
+    }),
     complete: function (res) {
       var message = res.data.message;
       var statusCode = res.data.statusCode;
-      console.log(res);
-      console.log(message);
-      console.log("statusCode" + statusCode);
-      if (statusCode != null && "200" == statusCode) {
-        return typeof cb == "function" && cb(message, res.data)
+      var count = res.data.count;
+      var maxPage = 0;
+      if (count <= 12) {
+        maxPage = 1;
       } else {
-        return typeof cb == "function" && cb(message, false)
+        maxPage = Math.ceil(count / 12);
+      }
+      console.log(message);
+      console.log("statusCode" + statusCode + "maxPage=" + maxPage);
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data, maxPage)
+      } else {
+        return typeof cb == "function" && cb(message, false, 1)
       }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb('获取产品列表失败！', false)
+      return typeof cb == "function" && cb('获取产品列表失败！', false, 1)
     }
   })
 
@@ -1475,18 +1483,18 @@ function getGoodsInfoByCard(pageindex,cb) {
 
 //新登录方法
 function onNewLogin(usename, pass, cb) {
- 
+
   wx.request({
     url: "http://test.e-smnh.com/app/iskyshop_seller_login.htm",
     header: {
       "content-type": "application/x-www-form-urlencoded"
     },
     method: "post",
-    data: util.json2Form({ userName: usename, password: pass}),
+    data: util.json2Form({ userName: usename, password: pass }),
     complete: function (res) {
       var token = res.data.token;
       var userName = res.data.userName;
-      var code =res.data.code;
+      var code = res.data.code;
       console.log(res);
       console.log("code" + code + "token=" + token + "userName=" + userName);
       if (code != null && "100" == code) {
@@ -1503,12 +1511,12 @@ function onNewLogin(usename, pass, cb) {
 
 }
 //新登录方法
-function getOrderNew(useId, token,verify, cb) {
+function getOrderNew(useId, token, verify, cb) {
 
   wx.request({
     url: "http://test.e-smnh.com/app/seller/goods_list.htm",
     header: {
-      "content-type": "application/x-www-form-urlencoded;" ,
+      "content-type": "application/x-www-form-urlencoded;",
       "verify": verify
     },
     method: "post",
@@ -1531,7 +1539,7 @@ function getOrderNew(useId, token,verify, cb) {
   })
 
 }
-function getIdCardCheck(idCard,cb){
+function getIdCardCheck(idCard, cb) {
   wx.request({
     url: urlSet.checkIdcard + "?idCard=" + idCard,
     header: {
@@ -1542,12 +1550,12 @@ function getIdCardCheck(idCard,cb){
       console.log(res)
       var message = res.data.message;
       var statusCode = res.statusCode
-      if(statusCode==200){
-        return typeof cb == "function" && cb(message,true)
-      }else{
-        return typeof cb == "function" && cb(message,false)
+      if (statusCode == 200) {
+        return typeof cb == "function" && cb(message, true)
+      } else {
+        return typeof cb == "function" && cb(message, false)
       }
-    
+
     },
     fail: function () {
       return typeof cb == "function" && cb(false)
@@ -1574,7 +1582,7 @@ function getmobileCheck(idCard, cb) {
 
     },
     fail: function () {
-      return typeof cb == "function" && cb("获取失败",false)
+      return typeof cb == "function" && cb("获取失败", false)
     }
   })
 
@@ -1582,7 +1590,7 @@ function getmobileCheck(idCard, cb) {
 /**
  * 检测敏感词
  */
-function checkWork(message,cb){
+function checkWork(message, cb) {
   wx.request({
     url: urlSet.checkWork + "?message=" + message,
     header: {
@@ -1597,22 +1605,22 @@ function checkWork(message,cb){
         return typeof cb == "function" && cb(message, res.data.data)
       } else
         if (statusCode == "0") {
-        return typeof cb == "function" && cb(message, false)
-      }
+          return typeof cb == "function" && cb(message, false)
+        }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb("查询失败",false)
+      return typeof cb == "function" && cb("查询失败", false)
     }
   })
 }
 /**
  *获取经营类目 
  */
-function getBusinessCategory(cb){
+function getBusinessCategory(cb) {
 
   wx.request({
-    url: urlSet.businessCategory ,
+    url: urlSet.businessCategory,
     header: {
       "Content-Type": "application/json;charset=UTF-8"
     },
@@ -1668,7 +1676,7 @@ function getStoreTypeList(cb) {
 /**
  * 绑定微信
  */
-function bandWX(unionID ,cb){
+function bandWX(encryptedData, session_key, iv, cb) {
   wx.request({
     url: urlSet.bandWX,
     header: {
@@ -1676,26 +1684,108 @@ function bandWX(unionID ,cb){
       "verify": verify
     },
     method: "post",
-    data: util.json2Form({ user_id: useId, token: token }),
+    data: util.json2Form({
+      user_id: user_id, token: token,
+      encryptedData: encryptedData,
+      sessionKey: session_key,
+      iv: iv
+    }),
     complete: function (res) {
-      var code = res.data.code;
-      util.verifyCode(code);
       console.log(res);
-      console.log("code" + code + "token=" + token + "userName=" + userName);
-      if (code != null && "100" == code) {
-        return typeof cb == "function" && cb(userName, res.data)
+      var statusCode = res.data.statusCode
+      var message = res.data.message;
+      console.log(message);
+      console.log(statusCode);
+      if (statusCode == "200") {
+        return typeof cb == "function" && cb(message, res.data)
       } else {
-        return typeof cb == "function" && cb(userName, false)
+        if (message == null || message == "") {
+          message = "绑定失败！"
+        }
+        return typeof cb == "function" && cb(message, false)
       }
-
     },
     fail: function () {
-      return typeof cb == "function" && cb('登录失败！', false)
+      return typeof cb == "function" && cb("绑定失败！", false)
     }
   })
 
 }
+/**
+ * 解绑微信
+ */
+function unBandWX(cb) {
+  wx.request({
+    url: urlSet.unBandWX,
+    header: {
+      "content-type": "application/x-www-form-urlencoded;",
+      "verify": verify
+    },
+    method: "post",
+    data: util.json2Form({
+      user_id: user_id, token: token
+    }),
+    complete: function (res) {
+      console.log(res);
+      var statusCode = res.data.statusCode
+      var message = res.data.message;
+      console.log(message);
+      console.log(statusCode);
+      if (statusCode == "200") {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        if (message == null || message == "") {
+          message = "解绑失败！"
+        }
+        return typeof cb == "function" && cb(message, false)
+      }
+    },
+    fail: function () {
+      return typeof cb == "function" && cb("解绑失败！", false)
+    }
+  })
 
+}
+/**
+ * 上传图片
+*/
+function upLoadPicture(id,message,method,filePath,cb) {
+  wx.uploadFile({
+    url: urlSet.uploadPicture,
+    filePath: filePath,
+    name: 'uploadfile_ant',
+    header: {
+      "content-type": "multipart/form-data;",
+      "verify": verify
+    },
+    method: "post",
+    formData: util.json2Form({
+      user_id: user_id, 
+      token: token,
+      id: id,
+      message: message,
+      method: method
+    }),
+    success: function (res) {
+      console.log(res);
+      var statusCode = res.data.statusCode
+      var message = res.data.message;
+      console.log(message);
+      console.log(statusCode);
+      if (statusCode == "200") {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        if (message == null || message == "") {
+          message = "上传失败！"
+        }
+        return typeof cb == "function" && cb(message, false)
+      }
+    },
+    fail: function () {
+      return typeof cb == "function" && cb("上传失败！", false)
+    }
+  })
+}
 
 
 
@@ -1749,11 +1839,13 @@ module.exports = {
   getProductListDetail: getProductListDetail,
   getPicLists: getPicLists,
   getOpenId: getOpenId,
-  getGoodsInfoByCard:getGoodsInfoByCard,
+  getGoodsInfoByCard: getGoodsInfoByCard,
   getOrderNew: getOrderNew,
   getIdCardCheck: getIdCardCheck,
   getmobileCheck: getmobileCheck,
   checkWork: checkWork,
   getBusinessCategory: getBusinessCategory,
   getStoreTypeList: getStoreTypeList,
+  bandWX: bandWX,
+  upLoadPicture: upLoadPicture,
 }

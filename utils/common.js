@@ -66,20 +66,32 @@ let CC_PRODUCT_TYPE ="gc_id";//产品类型
 let CC_PRODUCT_TYPE_NAME = "goodsName";//产品类型对应的名称
 let CC_PRODUCT_NAME="dsbName";//产品名称
 let CC_PRODUCT_MININUMBER ="goodsPrice";//零售价
-let CC_PRODUCT_SPEC="spec";
+let CC_PRODUCT_SPEC="spec";        
 let CC_PRODUCT_SPEC_DESCRIPTION ="packDetails";
-let CC_PRODUCT_STOCK ="goodsInventory";
-let CC_PRODUCT_PROFIT ="goodsExtra2"
-let CC_PRODUCT_REMARK ="goodsDetails"
-let CC_PRODUCT_INV_TYPE ="inventory_type"
-let CC_PRODUCT_AREA_ID = "area_id"
+let CC_PRODUCT_STOCK ="goodsInventory"; //库存
+let CC_PRODUCT_PROFIT ="goodsExtra2" //让利金
+let CC_PRODUCT_REMARK ="goodsDetails" //发货说明
+let CC_PRODUCT_INV_TYPE ="inventory_type"//全局还是配置规格
+let CC_PRODUCT_AREA_ID = "area_id"  //发货地址ID
 let CC_PRODUCT_SPECS_INFO = "specs_info"
 let CC_PRODUCT_DSB_GOOD_UNIT = "dsbGoodsUnit"
 let CC_PRODUCT_PACK_DETAILS = "packDetails"
 //微信保存信息
-let CC_SESSION_KEY ="session_key"
-//
-
+let CC_SESSION_KEY = "session_key"//session_key
+let CC_IV_KEY = "iv";//iv秘钥
+let CC_ENCRY_KEY = "encryptedData";//加密的unitonID
+let CC_NICK_NAME = "nickName";//微信昵称
+//上传图片状态
+let CC_UPLOAD_STATUS_MAIN = "1";//商品主图
+let CC_UPLOAD_STATUS_HEAD = "2";//农户头像
+let CC_UPLOAD_STATUS_IDCARD = "3";//身份证
+let CC_UPLOAD_STATUS_BIS_LICENSE = "4";//营业执照
+let CC_UPLOAD_STATUS_COMMITMENT = "5";//承诺书
+let CC_UPLOAD_STATUS_MAIN_OTHER = "6";//商品图片，不是主图
+//上传图片商品ID
+let CC_PRODUCT_ID="productID";
+//农户绑定状态
+let CC_BAND_STATUS ="farmer_idcard_status"
 
 exports.CC_USERNAME = CC_USERNAME;
 exports.CC_IDCARD = CC_IDCARD;
@@ -152,5 +164,14 @@ exports.CC_PRODUCT_AREA_ID = CC_PRODUCT_AREA_ID;
 exports.CC_PRODUCT_SPECS_INFO = CC_PRODUCT_SPECS_INFO;
 exports.CC_PRODUCT_DSB_GOOD_UNIT = CC_PRODUCT_DSB_GOOD_UNIT;
 exports.CC_PRODUCT_PACK_DETAILS = CC_PRODUCT_PACK_DETAILS;
-
-
+exports.CC_IV_KEY = CC_IV_KEY;
+exports.CC_ENCRY_KEY = CC_ENCRY_KEY;
+exports.CC_NICK_NAME = CC_NICK_NAME;
+exports.CC_UPLOAD_STATUS_MAIN = CC_UPLOAD_STATUS_MAIN;
+exports.CC_UPLOAD_STATUS_HEAD = CC_UPLOAD_STATUS_HEAD;
+exports.CC_UPLOAD_STATUS_IDCARD = CC_UPLOAD_STATUS_IDCARD;
+exports.CC_UPLOAD_STATUS_BIS_LICENSE = CC_UPLOAD_STATUS_BIS_LICENSE;
+exports.CC_UPLOAD_STATUS_COMMITMENT = CC_UPLOAD_STATUS_COMMITMENT;
+exports.CC_UPLOAD_STATUS_MAIN_OTHER = CC_UPLOAD_STATUS_MAIN_OTHER;
+exports.CC_PRODUCT_ID = CC_PRODUCT_ID;
+exports.CC_BAND_STATUS = CC_BAND_STATUS;

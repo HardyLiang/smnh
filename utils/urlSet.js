@@ -5,6 +5,7 @@
 // var baseUrl ="http://114.67.49.72:80";
 // var baseUrl ="http://test.e-smnh.com/app/iskyshop_seller_login.htm";
 var baseUrl ="http://test.e-smnh.com/"
+
 let APPID = 'wx00ebf9a68438faf5';
 let SECRET = '52ad3e6d8c872b95b3142645fbfbab79';
 
@@ -128,7 +129,8 @@ var getStoreTypeList = baseUrl + "app/iskyshop_store_type_list.htm";
 var bandWX=baseUrl+'app/seller/farmer_idcard_save.htm';
 //微信解绑
 var unBandWX = baseUrl +"app/seller/farmer_idcard_out_save.htm";
-
+//上传图片
+var uploadPicture = baseUrl + "app/seller/uploadPicture.htm";
 
 module.exports = {
   baseUrl: baseUrl,
@@ -192,4 +194,5 @@ module.exports = {
   getStoreTypeList: getStoreTypeList,
   bandWX: bandWX,
   unBandWX: unBandWX,
+  uploadPicture: uploadPicture,
 }

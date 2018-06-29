@@ -21,6 +21,7 @@ Page({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称
           wx.getUserInfo({
             success: function (res) {
+              console.log("重新授权成功")
               console(res.userInfo)
             }
           })
@@ -78,8 +79,12 @@ Page({
   
   },
   bindGetUserInfo: function (e) {
-    console.log(e.detail.userInfo);
+    console.log(e)
     wx.setStorageSync(common.CC_HEAD_IMG, e.detail.userInfo.avatarUrl);
+    wx.setStorageSync(common.CC_ENCRY_KEY, e.detail.encryptedData);
+    wx.setStorageSync(common.CC_IV_KEY, e.detail.iv);
+    wx.setStorageSync(common.CC_NICK_NAME, e.detail.userInfo.nickName);
+
     event.emit(event.KGetUserInfoSuccess, e.detail.userInfo.avatarUrl);
     wx.navigateBack();
   }

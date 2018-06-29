@@ -38,6 +38,34 @@ App({
         success: function (res) {
           if (res.code) {
             console.log("成功获取用户信息")
+             //成功获取用户信息
+            wx.getUserInfo({
+              success: function(resUser) {
+                console.log(resUser)
+                that.setData({
+                  imgValue: resUser.userInfo.avatarUrl
+                })
+                var encryptedData = resUser.encryptedData;//加密数据需要解码
+                var iv = resUser.iv;
+                console.log("encryptedData=" + encryptedData + "iv=" + iv)
+                wx.setStorageSync(common.CC_IV_KEY, iv);
+                wx.setStorageSync(common.CC_ENCRY_KEY, encryptedData);
+              },
+        fail: function (res) {
+          console.log("失败" + res)
+          wx.showModal({
+            title: '警告',
+            content: '尚未进行授权，请点击确定跳转到授权页面进行授权。',
+            success: function (res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+                wx.navigateTo({
+                  url: '../page/auth/authorize/authorize',
+                });
+              }
+            }
+          })
+        }})
             var appid = urlSet.APPID;
             var secret = urlSet.SECRET;
             that.func.getOpenId(res.code, appid,secret
@@ -103,6 +131,8 @@ App({
     checkWork: http.checkWork,
     getBusinessCategory: http.getBusinessCategory,
     getStoreTypeList: http.getStoreTypeList,
+    bandWX: http.bandWX,
+    upLoadPicture: http.upLoadPicture,
     
 
   }

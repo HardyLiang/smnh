@@ -6,10 +6,12 @@ Page({
     imgUrlValue: "",
     imageList: [],
     cropBack:"prodectImgBack",//这个是设置裁剪返回的消息名称，可自定义，但是要唯一；
-
+    
   },
 
   onLoad: function () {
+    //获取商品Id;
+
 
   },
   /**
@@ -87,7 +89,7 @@ Page({
       that.setData({
         imgUrlValue: data
       })
-
+    
     });
   },
   onUnload: function (options) {
@@ -104,7 +106,7 @@ Page({
       return;
     }
     //将图片先上传到服务上并返回路径作为产品发布的入参；
-  
+    getApp().func.upLoadPicture();
     
 
   }
