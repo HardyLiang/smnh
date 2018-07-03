@@ -1426,7 +1426,9 @@ function getOpenId(code, appid, secret, cb) {
       console.log(res)
       var openId = res.data.openid;
       var sessionKey = res.data.session_key;
+      var unionId = res.data.unionid;
       wx.setStorageSync("session_key", sessionKey);
+      wx.setStorageSync("unionId", unionId)
       console.log("openId=" + openId);
       if (openId) {
         return typeof cb == "function" && cb(openId)
@@ -1753,19 +1755,18 @@ function upLoadPicture(id,message,method,filePath,cb) {
   wx.uploadFile({
     url: urlSet.uploadPicture,
     filePath: filePath,
-    name: 'uploadfile_ant',
+    name: 'imgFile',
     header: {
       "content-type": "multipart/form-data;",
       "verify": verify
     },
-    method: "post",
-    formData: util.json2Form({
+    formData: {
       user_id: user_id, 
       token: token,
       id: id,
       message: message,
       method: method
-    }),
+    },
     success: function (res) {
       console.log(res);
       var statusCode = res.data.statusCode

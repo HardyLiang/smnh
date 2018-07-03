@@ -24,7 +24,7 @@
         <view class="{{selected?'phone_huo2':'hidden'}}" bindtap="countdown">{{second}}s后重新获取</view>
       </view>
     </view>
-    <button class='big-btn' form-type='submit'>提交</button>
+    <button class='big-btn' form-type='submit'>绑定</button>
   </form>
 </view>
 

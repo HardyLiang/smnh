@@ -1,6 +1,6 @@
 <view>
   <view class='form-group'>
-    <view class='res-title'>个人信息</view>
+    <view class='res-title'>{{infoType}}</view>
     <view class="input-item">
       <text class="input-item-label">身份证号</text>
       <view class="input-item-content">

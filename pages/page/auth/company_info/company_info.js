@@ -71,6 +71,51 @@ Page({
     if (util.checkEmpty(this.data.mobile, "亲，请输入电话号码!")) {
       return;
     }
+    console.log(getApp().globalData.userRegister)
+    
+    getApp().func.addPersonMsg(getApp().globalData.userRegister, function (message, res) {
+      console.log("注册返回成功")
+      console.log(res)
+      if (!res) {
+        wx.showModal({
+          title: '提示',
+          content: message,
+          showCancel: false
+        })
+        return;
+      } else {
+        wx.showModal({
+          title: '提示',
+          content: message,
+          showCancel: false,
+          success: function (res) {
+            if (res.confirm) {//注册成功直接登录
+              var that = this;
+              var idCard = that.data.idCard;
+              var password = idCard.substr(6, 8) + idCard.substr(16, 1);
+              console.log(password);
+              getApp().func.onLogin(idCard, password, function (message, res) {
+                if (res) {//如果登录成功
+                  event.emit(event.kLoginSuccessEventName, message);
+                  setTimeout(function () {
+                    wx.switchTab({
+                      url: '../../../index/index',
+                    })
+                  }, 1000);
+
+                } else {//登录失败，跳转登录页面
+                  wx.navigateTo({
+                    url: '../../auth/login/login',
+                  })
+                }
+              })
+            }
+          }
+        })
+      }
+
+
+    })
 
   },
   /**

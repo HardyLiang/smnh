@@ -10,14 +10,17 @@ let kProductRecommendPurchaseSuccessEvent = 'kProductRecommendPurchaseSuccessEve
 var events = {};
 
 function on(name, self, callback) {
+    console.log(events)
     var tuple = [self, callback];
     var callbacks = events[name];
     if (Array.isArray(callbacks)) {
+        callbacks=[];
         callbacks.push(tuple);
     }
     else {
         events[name] = [tuple];
     }
+  
 }
 
 function remove(name, self) {
@@ -27,6 +30,7 @@ function remove(name, self) {
             return tuple[0] != self;
         })
     }
+
 }
 
 function emit(name, data) {

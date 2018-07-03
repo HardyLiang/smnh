@@ -50,7 +50,7 @@ Page({
 
     this.setData({
       imgUrlValue: res.data.store_logo,
-      name: res.data.store_name,
+      name: res.data.true_name,
       sex: sex,
       farmerType: personType,
       mobile: res.data.store_telephone,
@@ -152,5 +152,33 @@ Page({
         })
       }
     })
+  },
+  /**
+   * 修改信息
+   */
+  bindEditInfo:function(res){
+    
+
+
+    //如果是公司，修改是让用户选择修改哪种信息；
+    wx.showActionSheet({
+      itemList: ['修改基本信息', '修改营业执照', '修改身份证'],
+      success: function (res) {
+        console.log(res.tapIndex)
+        if (res.tapIndex==0){
+          console.log(res.tapIndex)
+        }else
+          if (res.tapIndex == 1){
+            console.log(res.tapIndex)
+          } else
+            if (res.tapIndex == 2) {
+              console.log(res.tapIndex)
+            }
+      },
+      fail: function (res) {
+        console.log(res.errMsg)
+      }
+    })
+
   }
 })

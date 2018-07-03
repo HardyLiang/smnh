@@ -74,7 +74,7 @@
     </view> 
   </view>
  
-  <button class='big-btn'>确认开店</button>
+  <button class='big-btn' bindtap='bindregister'>确认开店</button>
    <view class='agree-box'>
     <view class="input-item-content">
       <label bindtap="">

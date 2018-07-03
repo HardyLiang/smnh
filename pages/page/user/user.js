@@ -6,13 +6,13 @@ Page({
   data: {
     imgValue:"../../images/ic_web_center.png",
     mobileValue:'暂无电话',
-    userNameValue:'昵称',
+    userNameValue:'暂无店铺名称',
     shipValue:'描述：5.0',
     serviceValue:'服务：5.0',
     storeValue:'发货：5.0',
     btnFlag:false,
     btnValue:"登录农户账户",
-  
+    cropBack: "headImgBack",//这个是设置裁剪返回的消息名称，可自定义，但是要唯一；
   },
   onLoad: function (option) {
     console.log('user===onLoad');
@@ -33,6 +33,7 @@ Page({
       var name =wx.getStorageSync("userName");
       var farmerId =wx.getStorageSync('farmerId');
       console.log("farmerId=" + farmerId);
+      event.remove(event.kLoginSuccessEventName, that);
       //联网刷新数据
       app.func.getPersonMsg(function(message,res){
         console.log(res)
@@ -83,7 +84,32 @@ Page({
         },2000);
        
       });
+     
     })
+    //收到剪切返回
+    event.on(this.data.cropBack, this, function (data) {
+      console.log("我收到裁剪图片啦" + data);
+      var imgUrl=data;
+      //联网修改图片
+      getApp().func.upLoadPicture('', '', common.CC_UPLOAD_STATUS_HEAD, imgUrl,function (message, res) {
+        if (!res) {
+          wx.showModal({
+            title: '提示',
+            content: message,
+            showCancel: false
+          })
+        } else {
+          wx.showToast({
+            title: message,
+          })
+          that.setData({
+            imgValue: data
+          })
+        }
+      });
+      event.remove(that.data.cropBack, that);
+    });
+  
   },
   onReady: function (options) {
     console.log('user=====onReady');
@@ -95,6 +121,7 @@ Page({
     console.log('user=====onUnload');
     //页面销毁清除页面event接收事件
     event.remove(event.kLoginSuccessEventName,this);
+    event.remove(this.data.cropBack, this);
   }, 
   LoginTap:function(){
     if (this.data.btnFlag){
@@ -128,20 +155,18 @@ Page({
    * 
    */
   uploadImg:function(){
+    var that =this;
     wx.chooseImage({
       count: 1, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success(res) {
         const src = res.tempFilePaths[0]
-
         wx.navigateTo({
-          url: `../upload/upload?src=${src}`
+          url: `../upload/upload?src=${src}&cropBack=` + that.data.cropBack
         })
       }
     })
-  }
- 
-  
- 
+  },
+
 })

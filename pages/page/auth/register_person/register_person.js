@@ -3,6 +3,7 @@ var util =require("../../../../utils/util.js")
 var event =require("../../../../utils/event.js")
 Page({
   data: {
+    infoType:"个人信息",//抬头信息
     index: 0,
     idCard:"",
     name:"",
@@ -67,8 +68,23 @@ Page({
     })
   },
   onLoad: function (options) {
+    console.log(options)
     //进来这个页面默认性别是男
     getApp().globalData.userRegister[common.CC_REGISTER_SEX] = "1";
+
+    //获取过来的企业状态
+    var regType = options.type;
+    if(regType!=null&&regType=="company"){//公司注册
+      this.setData({
+        infoType: "联系人信息"
+      })
+
+    }else
+      if (regType != null && regType == "person"){//个人注册
+      this.setData({
+        infoType:"个人信息"
+      })
+      }
   },
 
   /**

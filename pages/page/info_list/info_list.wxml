@@ -37,6 +37,6 @@
     <view class='base-item'>
       <text>发货地址：</text>{{detailAddress}}</view>
   </view>
-  <button class='big-btn'>编辑信息</button>
+  <button class='big-btn' catchtap='bindEditInfo'>编辑信息</button>
   <!-- <button class='big-btn'>保存</button> -->
 </view>

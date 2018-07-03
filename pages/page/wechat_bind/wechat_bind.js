@@ -6,6 +6,7 @@ Page({
   data: {
     imgValue:"",
     mobile: "",
+    idCard: "",
     vercode: "",
     second: 60,
     selected: false,
@@ -32,9 +33,13 @@ Page({
     var ivData = wx.getStorageSync(common.CC_IV_KEY); 
     var sessionKey = wx.getStorageSync(common.CC_SESSION_KEY);
     var userMobile = wx.getStorageSync(common.CC_MOBILE);
+    var userIdCard = getApp().globalData.idCard;
+    if(userIdCard==""){
+      userIdCard = farmerInfo.data.sCard;
+    }
 
     console.log(farmerInfo)
-    var isBand = farmerInfo.data.farmer_idcard_status
+    var isBand = wx.getStorageSync(common.CC_BAND_STATUS);
     console.log("openID=" + openID + "  userName=" + userName + "  userMobile=" + userMobile
       + "isBand=" + isBand)
     this.setData({
@@ -45,7 +50,8 @@ Page({
       imgValue: imgUrl,
       nickName: userName,
       storeName: storeName,
-      isShowBand:isBand
+      isShowBand:isBand,
+      idCard:userIdCard
     })
    
   },
@@ -62,16 +68,28 @@ Page({
    */
   getphone: function () {
     var that = this;
-    console.log(this.data.idCard);
-    console.log(this.data.mobile);
-    //先检测身份证等信息是否为空
-    if (util.trim(this.data.idCard) == "") {
-      wx.showToast({
-        title: '身份证为空',
-        icon: 'none'
-      })
-    }
     //联网获取数据
+    app.func.fotgetPass(that.data.idCard, that.data.mobile, function (message, res) {
+      console.log(res)
+      if (!res) {
+        wx.showToast({
+          title: message,
+          icon: 'none'
+        })
+        return;
+      }
+      //设置按钮是否可点
+      that.setData({
+        selected: true,
+        selected1: false,
+      });
+      countdown(that);
+      var verCode = res.data;
+      console.log(verCode);
+      that.setData({
+        vercode: verCode
+      })
+    })
 
     
 
@@ -85,27 +103,20 @@ Page({
     console.log(e.detail.value);
     var verCode = e.detail.value.vercode;
     //检测用户输入值情况
-    // if (verCode == null || util.trim(verCode) == "") {
-    //   wx.showToast({
-    //     title: '请输入验证码！',
-    //     icon: 'none'
-    //   })
-    //   return;
-    // }
-    // if (password != this.data.password) {
-    //   wx.showToast({
-    //     title: '请输入正确的密码！',
-    //     icon: 'none'
-    //   })
-    //   return;
-    // }
-    // if (verCode != this.data.vercode) {
-    //   wx.showToast({
-    //     title: '请输入正确的验证码！',
-    //     icon: 'none'
-    //   })
-    //   return;
-    // }
+    if (verCode == null || util.trim(verCode) == "") {
+      wx.showToast({
+        title: '请输入验证码！',
+        icon: 'none'
+      })
+      return;
+    }
+    if (verCode != this.data.vercode) {
+      wx.showToast({
+        title: '请输入正确的验证码！',
+        icon: 'none'
+      })
+      return;
+    }
     //联网获取
     getApp().func.bandWX(this.data.encryptedData, this.data.session_key, this.data.iv, function(message,res){
       console.log(res);
@@ -135,7 +146,7 @@ Page({
 
 // 解绑微信
   unbindBtn: function (e) {
-    var that =this;
+  var that =this;
    console.log(111);
    this.setData({
      dialogTitle: "输入收到的验证码",

@@ -32,24 +32,21 @@ App({
     //从缓存上面获取openID 
     var openId = (wx.getStorageSync(common.CC_OPENID))
     console.log("openId==" + openId)
-    if (!openId) {//如果没有openId 就联网进行获取
-      console.log('没有openID 申请')
       wx.login({
         success: function (res) {
+          console.log(res)
           if (res.code) {
             console.log("成功获取用户信息")
              //成功获取用户信息
             wx.getUserInfo({
               success: function(resUser) {
                 console.log(resUser)
-                that.setData({
-                  imgValue: resUser.userInfo.avatarUrl
-                })
                 var encryptedData = resUser.encryptedData;//加密数据需要解码
                 var iv = resUser.iv;
                 console.log("encryptedData=" + encryptedData + "iv=" + iv)
                 wx.setStorageSync(common.CC_IV_KEY, iv);
                 wx.setStorageSync(common.CC_ENCRY_KEY, encryptedData);
+                wx.setStorageSync(common.CC_HEAD_IMG, resUser.userInfo.avatarUrl)
               },
         fail: function (res) {
           console.log("失败" + res)
@@ -66,6 +63,8 @@ App({
             }
           })
         }})
+            if (!openId) {//如果没有openId 就联网进行获取
+              console.log('没有openID 申请')
             var appid = urlSet.APPID;
             var secret = urlSet.SECRET;
             that.func.getOpenId(res.code, appid,secret
@@ -77,15 +76,15 @@ App({
               }else{
                 console.log("获取openId失败");
               }
-            })
+              })
+            }
           } 
         },
         fail: function () {
           console.log("没有获取到")
         }
       })
-    }
-
+     
   },
   globalData: {
     userInfo: null,

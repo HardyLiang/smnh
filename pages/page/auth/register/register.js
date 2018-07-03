@@ -37,7 +37,7 @@ Page({
     console.log("下一步"+this.data.shopName)
     if (this.data.shopName.indexOf("旗舰店")==-1){
       wx.navigateTo({
-        url: `../register_person/register_person`
+        url: `../register_person/register_person?type=person`
       })
     }else{
       wx.navigateTo({

@@ -21,9 +21,9 @@ Page({
     if (util.checkEmpty(this.data.legalPersonIdCard,"请输入法人身份证号")) {
       return;
     }
-    
+    //跳转到文字层
     wx.navigateTo({
-      url: `../company_license/company_license`
+      url: `../register_person/register_person?type=company`
     })
   },
   bingContentChange:function(e){
