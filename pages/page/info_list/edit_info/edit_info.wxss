@@ -1,0 +1,44 @@
+
+.base-message {
+  background: #fff;
+  padding: 32rpx 25rpx;
+}
+
+.base-title {
+  color: #00a0e9;
+  line-height: 30px;
+  margin-bottom: 10rpx;
+  font-size: 16px;
+}
+
+.base-item {
+  font-size: 15px;
+  line-height: 40px;
+  display: flex;
+}
+
+.base-item text {
+  color: #666;
+  display: inline-block;
+  width: 180rpx;
+  text-align: right;
+}
+
+.mt28 {
+  margin-top: 28rpx;
+}
+
+
+.edit_input {
+  border-bottom: 1px solid #eee;
+  flex: 1;
+  line-height: 30px;
+  margin-top: 10px;
+}
+.input-item-pick{
+   border-bottom: 1px solid #eee;
+  flex: 1;
+  height: 26px;
+  line-height: 20px;
+  margin-top: 6px;
+}

@@ -14,15 +14,19 @@
   flex-wrap: wrap;
   align-content: center;
   justify-content: space-around;
-  background: #fff;
-  padding: 2px 0 10px;
+  width: 99%;
+  margin: 0 auto;
+  padding: 2px 0 5px;
 }
 
 .wrap-item {
-  width: 33.3%;
-  padding: 5rpx 0;
+  width: 49%;
+  padding: 25rpx 0 40rpx;
+  margin: 2px .5%;
   text-align: center;
   position: relative;
+  border-radius: 4px;
+  background: #fff;
 }
 
 .wrap_icon {

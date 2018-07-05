@@ -1,6 +1,6 @@
 <view>
   <view>
-    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="swiper-style" indicator-color="rgba(255, 255, 255, 1)" indicator-active-color="#00a0e9">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="swiper-style" indicator-color="rgba(255, 255, 255, .21)" indicator-active-color="rgba(255, 255, 255, .9)">
       <block wx:for="{{imgUrls}}" wx:key="{{item}}">
         <swiper-item>
           <image src="{{item}}" class="slide-image" />
