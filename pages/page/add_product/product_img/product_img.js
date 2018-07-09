@@ -6,11 +6,29 @@ Page({
     imgUrlValue: "",
     imageList: [],
     cropBack:"prodectImgBack",//这个是设置裁剪返回的消息名称，可自定义，但是要唯一；
-    
+    status:""
   },
 
-  onLoad: function () {
+  onLoad: function (options) {
+    var that =this;
+    //获取传过来的状态
+    var typeStatus = options.type
+   
+    if(typeStatus=="modify"){
+      var main = wx.getStorageSync(common.CC_PRODUCT_GOOD_MAIN);
+      var secList = wx.getStorageSync(common.CC_PRODUCT_GOOD_SEC_LIST);
+        that.setData({
+          imgUrlValue: main,
+          imageList: secList,
+          status: typeStatus
+        })
+    
+
+    }else{
+    }
+  
     //获取商品Id;
+     
 
 
   },
@@ -106,7 +124,15 @@ Page({
       return;
     }
     //将图片先上传到服务上并返回路径作为产品发布的入参；
-    getApp().func.upLoadPicture();
+    
+    if (this.data.typeStatus=="modify"){
+
+    }else{
+
+    }
+    getApp().func.upLoadPicture(id, method, filePath, function (message, res) {
+
+    });
     
 
   }

@@ -33,7 +33,6 @@ Page({
       var name =wx.getStorageSync("userName");
       var farmerId =wx.getStorageSync('farmerId');
       console.log("farmerId=" + farmerId);
-      event.remove(event.kLoginSuccessEventName, that);
       //联网刷新数据
       app.func.getPersonMsg(function(message,res){
         console.log(res)
@@ -46,40 +45,67 @@ Page({
         console.log()
         //获取信息成功.给页面赋值
         that.setData({
-          imgValue: res.data.store_logo,
-          mobileValue: res.data.store_telephone,
-          userNameValue: res.data.store_name,
-          shipValue: '描述：' + res.data.descriptionEvaluate ,
-          serviceValue: '服务：' + res.data.serviceEvaluate,
-          storeValue: '发货：' + res.data.shipEvaluate,
+          imgValue: res.data.store_information.store_logo,
+          mobileValue: res.data.store_information.store_telephone,
+          userNameValue: res.data.store_information.store_name,
+          shipValue: '描述：' + res.data.store_information.descriptionEvaluate ,
+          serviceValue: '服务：' + res.data.store_information.serviceEvaluate,
+          storeValue: '发货：' + res.data.store_information.shipEvaluate,
           btnFlag:true,
           btnValue:"注销登录"
         })
         //保存个人信息列表
-        wx.setStorageSync(common.CC_MOBILE, res.data.store_telephone);
-        wx.setStorageSync(common.CC_FARMERINFO, res);
-        wx.setStorageSync(common.CC_STORE_URL, res.data.store_url);
-        wx.setStorageSync(common.CC_BAND_STATUS, res.data.farmer_idcard_status);
-        var storeStatus= res.data.store_status;
+        wx.setStorageSync(common.CC_MOBILE, res.data.store_information.store_telephone);
+        
+        wx.setStorageSync(common.CC_STORE_URL, res.data.store_information.store_url);
+        wx.setStorageSync(common.CC_BAND_STATUS, res.data.store_information.farmer_idcard_status);
+        var storeStatus = res.data.store_information.store_status;
+        var storeAll = res.data.store_information.store_all
         setTimeout(function(){
           if (storeStatus != "15") {
             var message = "店铺异常,请联系客服！";
             if (storeStatus == "20") {
               message = "违规关店,请联系客服!"
-            } else
-              if (storeStatus == "10") {
-                message = "店铺待审核,请联系客服"
-              }
-            wx.showModal({
-              title: '注意',
-              content: message,
-              showCancel: false,
-              success: function (res) {
-                if (res.confirm) {
-                 //店铺违规了。。应该做神马东西
+              wx.showModal({
+                title: '注意',
+                content: message,
+                showCancel: false,
+                success: function (res) {
+                  if (res.confirm) {
+                    //店铺违规了。。应该做神马东西
+                  }
                 }
+              })
+            } else
+              if (storeStatus == "10" || storeStatus == "11") {
+                if (storeAll && storeStatus != "11"){
+                  message = "店铺待审核,请耐心等待"
+                }else
+                  if (storeAll && storeStatus == "11"){
+                  message = "店铺审核失败，请重新上传相关信息！"
+                }else{
+                    message ="请上传相关证件审核以激活店铺"
+                }
+                wx.showModal({
+                  title: '注意',
+                  content: message,
+                  cancelText:"上传执照",
+                  confirmText: "上传证件",
+                  success: function (res) {
+                    if (res.confirm) {//跳转上传身份证
+                      wx.navigateTo({
+                        url: '../page/auth/company_idCard/company_idCard?type=modify',
+                      })
+                    }else
+                      if (res.cancel){//跳转上传营业执照
+                        wx.navigateTo({
+                          url: '../page/auth/company_license/company_license?type=modify',
+                        })
+                    }
+                  }
+                })
               }
-            })
+            
           }
         },2000);
        
@@ -92,6 +118,7 @@ Page({
       var imgUrl=data;
       //联网修改图片
       getApp().func.upLoadPicture('', '', common.CC_UPLOAD_STATUS_HEAD, imgUrl,function (message, res) {
+        console.log(res)
         if (!res) {
           wx.showModal({
             title: '提示',
@@ -103,7 +130,7 @@ Page({
             title: message,
           })
           that.setData({
-            imgValue: data
+            imgValue:res
           })
         }
       });

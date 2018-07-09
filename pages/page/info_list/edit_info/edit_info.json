@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "编辑信息"
+  "navigationBarTitleText": "编辑信息",
+  "usingComponents": {
+    "addr-select": "../../../page/addr-select/index"
+  }
 }

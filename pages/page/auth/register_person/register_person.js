@@ -20,7 +20,7 @@ Page({
     bankTypeindex: 0,
     bankType: ['个人账户', '公司账户'],
     bankIndex: 0,
-    bank: ['建设银行', '中国银行'],
+    bank: [],
     addressValue: "请选择发货地区",
     detailAddress:"",
     bankAccount: "",//银行户口
@@ -66,11 +66,19 @@ Page({
     this.setData({
       bankIndex: e.detail.value
     })
+    var index =e.detail.value
+    var bankName = this.data.bank[index].bankName;
+    var bankId =this.data.bank[index].id;
+    console.log("bankName=" + bankName + "bankId=" + bankId);
+    getApp().globalData.userRegister[common.CC_BANK_TYPE_ID] = bankId;
   },
   onLoad: function (options) {
+    var that =this;
     console.log(options)
     //进来这个页面默认性别是男
     getApp().globalData.userRegister[common.CC_REGISTER_SEX] = "1";
+    //进来默认是个人账户
+    getApp().globalData.userRegister[common.CC_BANKCODE] = "个人账户";
 
     //获取过来的企业状态
     var regType = options.type;
@@ -85,6 +93,18 @@ Page({
         infoType:"个人信息"
       })
       }
+    //获取银行信息
+    getApp().func.getBankType(function (message,res){
+      console.log("获取银行成功")
+      console.log(res)
+      that.setData({
+        bank: res.data
+
+      })
+      getApp().globalData.userRegister[common.CC_BANK_TYPE_ID] = res.data[0].id;
+    })
+
+      
   },
 
   /**
@@ -205,7 +225,7 @@ Page({
    * 注册店铺
    */
   registerShop:function(){
-   
+    var that = this;
 
     if (util.checkEmpty(this.data.idCard,"请输入您的身份证号码!")){
       return;
@@ -249,7 +269,6 @@ Page({
           showCancel: false,
           success:function(res){
             if(res.confirm){//注册成功直接登录
-              var that = this;
               var idCard = that.data.idCard;
               var password = idCard.substr(6, 8) + idCard.substr(16, 1);
               console.log(password);
@@ -301,23 +320,13 @@ Page({
     getApp().globalData.userRegister[common.CC_BANKNAME] = bankCotentName;
   },
   /**
-   * 开户行监听
-   */
-  bindBankChange:function(e){
-    console.log(e)
-    var position = e.detail.value
-    var name = this.data.bank[position];
-    getApp().globalData.userRegister[common.CC_BANKCODE] = name;
-    console.log(getApp().globalData.userRegister[common.CC_BANKCODE])
-  },
-  /**
    * 开户类型
    */
   bankTypeChange:function(e){
     console.log(e)
     var position = e.detail.value
     var name = this.data.bankType[position];
-    getApp().globalData.userRegister[common.CC_BANKTYPE] = name;
-    console.log(getApp().globalData.userRegister[common.CC_BANKTYPE])
+    getApp().globalData.userRegister[common.CC_BANKCODE] = name;
+    console.log(getApp().globalData.userRegister[common.CC_BANKCODE])
   }
 })

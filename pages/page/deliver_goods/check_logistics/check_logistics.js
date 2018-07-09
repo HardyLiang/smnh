@@ -50,7 +50,23 @@ Page({
        })
         return;
       }
+      
       //成功
+      //先检测是否没有物流信息
+      if (res.data==null||res.data==""){
+         var mesg =res.message;
+         wx.showModal({
+           title: '提示',
+           content: mesg,
+           showCancel:false,
+           success:function(res){
+             if(res.confirm){
+               wx.navigateBack();
+               return;
+             }
+           }
+         })
+      }
       var tansInfoList = res.data.tansInfoList;
       console.log(tansInfoList.length)
       var list =[];

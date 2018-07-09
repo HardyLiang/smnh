@@ -1,6 +1,5 @@
 var common = require('../../../utils/common.js');
 var util = require('../../../utils/util.js');
-
 var app = getApp();
 Page({
   data: {
@@ -20,12 +19,15 @@ Page({
     nickName:"",
     storeName:"",
     isShowBand:false,
+    bandTime:"",
+    vrcode:""//保存用户输入地vrCode
   },
   onLoad: function (options) {
     //进入这个页面，我们会获取用户的openID，身份证，手机
     var openID = wx.getStorageSync(common.CC_OPENID);
     var farmerInfo = wx.getStorageSync(common.CC_FARMERINFO);
-    var storeName = farmerInfo.data.store_name;
+    var storeName = farmerInfo.data.store_information.store_name;
+    var bandTime = farmerInfo.data.store_information.farmer_idcard_date;
     var imgUrl = wx.getStorageSync(common.CC_HEAD_IMG);
     var openID = wx.getStorageSync(common.CC_OPENID);
     var userName = wx.getStorageSync(common.CC_NICK_NAME);
@@ -35,8 +37,9 @@ Page({
     var userMobile = wx.getStorageSync(common.CC_MOBILE);
     var userIdCard = getApp().globalData.idCard;
     if(userIdCard==""){
-      userIdCard = farmerInfo.data.sCard;
+      userIdCard = farmerInfo.data.user_information.sCard;
     }
+    
 
     console.log(farmerInfo)
     var isBand = wx.getStorageSync(common.CC_BAND_STATUS);
@@ -51,7 +54,8 @@ Page({
       nickName: userName,
       storeName: storeName,
       isShowBand:isBand,
-      idCard:userIdCard
+      idCard:userIdCard,
+      bandTime:bandTime
     })
    
   },
@@ -103,20 +107,20 @@ Page({
     console.log(e.detail.value);
     var verCode = e.detail.value.vercode;
     //检测用户输入值情况
-    if (verCode == null || util.trim(verCode) == "") {
-      wx.showToast({
-        title: '请输入验证码！',
-        icon: 'none'
-      })
-      return;
-    }
-    if (verCode != this.data.vercode) {
-      wx.showToast({
-        title: '请输入正确的验证码！',
-        icon: 'none'
-      })
-      return;
-    }
+    // if (verCode == null || util.trim(verCode) == "") {
+    //   wx.showToast({
+    //     title: '请输入验证码！',
+    //     icon: 'none'
+    //   })
+    //   return;
+    // }
+    // if (verCode != this.data.vercode) {
+    //   wx.showToast({
+    //     title: '请输入正确的验证码！',
+    //     icon: 'none'
+    //   })
+    //   return;
+    // }
     //联网获取
     getApp().func.bandWX(this.data.encryptedData, this.data.session_key, this.data.iv, function(message,res){
       console.log(res);
@@ -135,6 +139,7 @@ Page({
           showCancel: false,
           success: function (res) {
             //更新页面
+            var isBand = wx.setStorageSync(common.CC_BAND_STATUS, true);
             that.setData({
               isShowBand:true
             })
@@ -143,16 +148,37 @@ Page({
       }
     });
   },
+  modifyVrCode:function(e){
+    var content =e.detail.value;
+    if(content!=null){
+      this.setData({
+        vrcode: content
+      })
+    }
+
+  },
 
 // 解绑微信
   unbindBtn: function (e) {
   var that =this;
    console.log(111);
-   this.setData({
-     dialogTitle: "输入收到的验证码",
-     dialogContent: "111",
-   })
-   this.dialog.showDialog();
+   console.log(e.detail.value);
+   var verCode = this.data.vrcode;
+    //检测用户输入值情况
+    // if (verCode == null || util.trim(verCode) == "") {
+    //   wx.showToast({
+    //     title: '请输入验证码！',
+    //     icon: 'none'
+    //   })
+    //   return;
+    // }
+    // if (verCode != this.data.vercode) {
+    //   wx.showToast({
+    //     title: '请输入正确的验证码！',
+    //     icon: 'none'
+    //   })
+    //   return;
+    // }
    //联网解绑
    getApp().func.unBandWX(function(message,res){
      console.log(res)
@@ -170,6 +196,7 @@ Page({
          success:function(res){
            if(res.confirm){
              //解绑成功；显示绑定页面
+             var isBand = wx.setStorageSync(common.CC_BAND_STATUS, false);
              that.setData({
                isShowBand: false
              })
@@ -193,7 +220,6 @@ Page({
     console.log("获取用户输入" + content);
   }
 })
-
 /**
  * 公用方法 获取验证码倒计时
  */

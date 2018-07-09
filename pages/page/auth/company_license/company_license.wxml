@@ -14,5 +14,5 @@
       <!-- end -->
 </view>
 <button class='middle-btn'  bindtap="chooseImage">重新上传</button>
-<button class='middle-btn bg-blue' bindtap='nextUpLoadIdCard'>下一步</button>
+<button class='middle-btn bg-blue' bindtap='nextUpLoadIdCard'>确认保存</button>
 </view>

@@ -1,4 +1,5 @@
 var common = require('../../../utils/common.js')
+var event = require('../../../utils/event.js')
 Page({
 
   /**
@@ -8,7 +9,7 @@ Page({
     imgUrlValue: "",
     name: "",
     sex: "",
-    farmerType: "",
+    storeType: "",
     mobile: "",
     idCard: "",
     bankNum: "",
@@ -18,6 +19,10 @@ Page({
     bankAddress: "",
     detailAddress: "", 
     isReFresh: false,//是否刷新
+    isHideStore:true,// 是否隐藏店铺信息，默认是隐藏,
+    companyName:"",//
+    legalPersonName:"",
+    legalPersonIdCard:""
   },
 
   /**
@@ -27,42 +32,7 @@ Page({
     //获取用户的个人信息，首先获取本地缓存数据
     var res = wx.getStorageSync(common.CC_FARMERINFO);
     console.log(res)
-    var sex;
-    if (res.data.sex == "1") {
-      sex = "男";
-    } else {
-      sex = "女"
-    }
-    var bankType;
-    if (res.data.priorpub == "B") {
-      bankType = "公司账户"
-    } else
-      if (res.data.priorpub == "C") {
-        bankType = "个人账户"
-      }
-    var personType;
-    if (res.data.personType == "2") {
-      personType = "普通"
-    } else
-      if (res.data.personType == "1") {
-        personType = "贫困"
-      }
-
-    this.setData({
-      imgUrlValue: res.data.store_logo,
-      name: res.data.true_name,
-      sex: sex,
-      farmerType: personType,
-      mobile: res.data.store_telephone,
-      idCard: res.data.sCard,
-      bankNum: res.data.bankNumber,
-      bankName: res.data.bankName,
-      bankAccount: res.data.accountName,
-      bankType: bankType,
-      bankAddress: res.data.bankAddressName,
-      detailAddress: res.data.sendAddressName
-    })
-
+    this.updateView(res);
   },
 
   /**
@@ -71,7 +41,20 @@ Page({
   onReady: function () {
 
   },
+  onShow:function(){
+    var that =this;
+    //页面重现如果收到信息
+    event.on(event.KInfoModifySuccess, this, function (data){
+      console.log(data);
+      that.getPersonMsg();
 
+    });
+    
+
+  },
+  onUnload:function(){
+
+  },
   /**
    * 下拉刷新
    */
@@ -84,9 +67,8 @@ Page({
   },
   getPersonMsg:function(){
     var that =this;
-    var farmerId = wx.getStorageSync(common.CC_FARMERID);
-    getApp().func.getPersonMsg(farmerId,function(message,res){
-      console.log(res)
+    getApp().func.getPersonMsg(function(message,res){
+      console.log("获取信息返回")
       if (that.data.isReFresh) {//判断是否刷新操作
         wx.hideNavigationBarLoading() //完成停止加载
         wx.stopPullDownRefresh() //停止下拉刷新
@@ -97,43 +79,8 @@ Page({
       if(!res){
         return;
       }
-      var sex;
-      if (res.data.sex == "1") {
-        sex = "男";
-      } else {
-        sex = "女"
-      }
-      var bankType;
-      if (res.data.priorpub == "B") {
-        bankType = "公司账户"
-      } else
-        if (res.data.priorpub == "C") {
-          bankType = "个人账户"
-        }
-      var personType;
-      if (res.data.personType == "2") {
-        personType = "普通"
-      } else
-        if (res.data.personType == "1") {
-          personType = "贫困"
-        }
-
-      that.setData({
-        imgUrlValue: res.data.picPath,
-        name: res.data.name,
-        sex: sex,
-        farmerType: personType,
-        mobile: res.data.mobile,
-        idCard: res.data.idCard,
-        bankNum: res.data.bankNumber,
-        bankName: res.data.bankName,
-        bankAccount: res.data.accountName,
-        bankType: bankType,
-        bankAddress: res.data.bankAddressName,
-        detailAddress: res.data.sendAddressName
-      })
-      console.log("更新成功" + sex + personType)
-
+      console.log("更新信息")
+      that.updateView(res);
     })
   },
   /**
@@ -157,28 +104,85 @@ Page({
    * 修改信息
    */
   bindEditInfo:function(res){
-    
-
 
     //如果是公司，修改是让用户选择修改哪种信息；
-    wx.showActionSheet({
-      itemList: ['修改基本信息', '修改营业执照', '修改身份证'],
-      success: function (res) {
-        console.log(res.tapIndex)
-        if (res.tapIndex==0){
+    if (this.data.storeType=="旗舰店"){
+      wx.showActionSheet({
+        itemList: ['修改基本信息', '修改营业执照', '修改身份证'],
+        success: function (res) {
           console.log(res.tapIndex)
-        }else
-          if (res.tapIndex == 1){
+          if (res.tapIndex == 0) {
             console.log(res.tapIndex)
+            wx.navigateTo({
+              url: 'edit_info/edit_info',
+            })
           } else
-            if (res.tapIndex == 2) {
+            if (res.tapIndex == 1) {
               console.log(res.tapIndex)
-            }
-      },
-      fail: function (res) {
-        console.log(res.errMsg)
-      }
-    })
+              wx.navigateTo({
+                url: '../../page/auth/company_license/company_license?type=modify',
+              })
+            } else
+              if (res.tapIndex == 2) {
+                console.log(res.tapIndex)
+                wx.navigateTo({
+                  url: '../../page/auth/company_idCard/company_idCard?type=modify',
+                })
+              }
+        },
+        fail: function (res) {
+          console.log(res.errMsg)
+        }
+      })
+    }else{
+      wx.navigateTo({
+        url: 'edit_info/edit_info',
+      })
+    }
+  
 
+  },
+  /**
+   * 更新页面信息
+   */
+  updateView:function(res){
+    console.log("更新信息开始")
+    console.log(res);
+    var sex;
+    if (res.data.user_information.sex == "1") {
+      sex = "男";
+    } else
+      if (res.data.user_information.sex == "0") {
+        sex = "女"
+      } else {
+        sex = "保密"
+      }
+    var detailAddress = res.data.store_information.ship_area_name + res.data.store_information.ship_address;
+    var storeType = res.data.store_information.store_type;
+    var isHideStore = true;
+    if (storeType != null && storeType == "旗舰店") {
+      isHideStore = false;
+    } else {
+      isHideStore = true;
+    }
+    this.setData({
+      imgUrlValue: res.data.store_information.store_logo,
+      name: res.data.user_information.true_name,
+      sex: sex,
+      storeType: storeType,
+      mobile: res.data.store_information.store_telephone,
+      idCard: res.data.user_information.sCard,
+      bankNum: res.data.store_information.bank_c_account,
+      bankName: res.data.store_information.bank_type_name,
+      bankAccount: res.data.store_information.bank_account_name,//持卡人
+      bankType: res.data.store_information.bank_line_num,
+      bankAddress: res.data.store_information.bank_area_name,
+      detailAddress: detailAddress,
+      isHideStore: isHideStore,
+      companyName: res.data.store_information.license_c_name,//
+      legalPersonName: res.data.store_information.license_legal_name,
+      legalPersonIdCard: res.data.store_information.license_legal_idCard
+    })
+    console.log("更新成功结束")
   }
 })

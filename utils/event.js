@@ -4,6 +4,7 @@ let KChooseGoodItemSuccessEventName ="KChooseGoodItemSuccessEventName";//用户�
 let KLogisiticsModifySuccessEventName = "KLogisiticsModifySuccessEventName";//修改物流成功
 let KGetUserInfoSuccess ="KGetUserInfoSuccess";//获取小程序授权信息成功
 let KProductPublishSuccess = "KProductPublishSuccess";//用于发布产品成功
+let KInfoModifySuccess = "KInfoModifySuccess";//用于修改信息成功
 
 let kProductRecommendPurchaseSuccessEvent = 'kProductRecommendPurchaseSuccessEvent' //购买推介成功的通知
 
@@ -53,3 +54,4 @@ exports.remove = remove;
 exports.emit = emit;
 exports.KGetUserInfoSuccess = KGetUserInfoSuccess;
 exports.KProductPublishSuccess = KProductPublishSuccess;
+exports.KInfoModifySuccess = KInfoModifySuccess;

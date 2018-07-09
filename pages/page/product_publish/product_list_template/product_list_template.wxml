@@ -1,6 +1,6 @@
 <template name="productListTemplate">
   <view class='pro-list-item'>
-    <view class='goods-top' bindtap='goGoodsDetail' data-id="{{id}}">
+    <view class='goods-top' bindtap='goGoodsDetail' data-id="{{goodsId}}">
       <view class='product-img'>
         <image src='{{goodsPicturesUrl}}'></image>
       </view>
@@ -19,17 +19,18 @@
     </view>
     <!-- 按钮 -->
     <view class='goods-bottom'>
-      <view wx:if="{{status=='在仓库中'||status=='违规下架'}}">
-        <button class="pro-btn c-blue"  bingTap="rePublish">重新发布</button>
+      <view wx:if="{{status=='在仓库中'}}">
+        <button class="pro-btn c-blue"   catchtap="rePublish"
+        data-goodsid="{{goodsId}}" data-index="{{ids}}">重新发布</button>
       </view>
       <view wx:elif="{{status=='上架'}}">
-        <button class="pro-btn c-blue" data-goodsid="{{id}}" data-index="{{ids}}
+        <button class="pro-btn c-blue" data-goodsid="{{goodsId}}" data-index="{{ids}}
       catchtap='mddifyStopProduct' >停止出售</button>  
       </view>  
-    <button  class=" pro-btn {{status=='上架'?'c-orange' :''}}" catchtap='modifyGoodsInventory'
-    data-goodsid="{{goodsId}}" data-goodsStatus="{{status}}"
+    <button  class=" pro-btn {{status=='上架'&&goodsInventoryType=='all'?'c-orange' :''}}" catchtap='modifyGoodsInventory'
+    data-goodsid="{{goodsId}}" data-goodsStatus="{{goodsStatus}}"
     data-goodsinventory="{{goodsInventory}} " data-index="{{ids}} ">修改库存</button>
-    <button class="pro-btn {{status=='上架'?'c-blue' :''}}" catchtap='modifyShareCommission' data-goodsid="{{goodsId}} " data-goodsStatus="{{status}}"
+    <button class="pro-btn {{status=='上架'?'c-blue' :''}}" catchtap='modifyShareCommission' data-goodsid="{{goodsId}} " data-goodsStatus="{{goodsStatus}}"
     data-sharecommission="{{shareCommission}} " data-index="{{ids}} ">修改让利</button>
      
   </view>

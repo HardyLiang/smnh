@@ -1,0 +1,19 @@
+<!--pages/page/dialog-code/dialog-code.wxml-->
+<view class='wx_dialog_container' hidden="{{!isShow}}">
+    <view class='wx-mask'></view>
+    <view class='wx-dialog'>
+        <view class='wx-dialog-title'>{{ title }}</view>
+        <view class="input-item">
+        <text class="input-item-label">验证码</text>
+        <view class="input-item-content">
+          <input type="number" placeholder="输入您收到的验证码" name="vercode"></input>
+        </view>
+        <view class="{{selected1?'phone_huo':'hidden'}}" catchtap="_getphone">获取验证码</view>
+        <view class="{{selected?'phone_huo2':'hidden'}}" catchtap="_countdown">{{second}}s后重新获取</view>
+      </view>
+        <view class='wx-dialog-footer'>
+          <view class='wx-dialog-btn' catchtap='_cancelEvent'>{{ cancelText }}</view>
+          <view class='wx-dialog-btn' catchtap='_confirmEvent' data-type="{{dialogType}}">{{ confirmText }}</view>
+        </view>
+    </view>
+</view>

@@ -74,9 +74,9 @@
     </view>
     <view class="input-item">
       <text class="input-item-label">开户行</text>
-      <picker class="input-item-content" bindchange="bindBankChange" value="{{bankIndex}}" range="{{bank}}">
+      <picker class="input-item-content" bindchange="bindBankChange" value="{{bankIndex}}" range="{{bank}}"  range-key='bankName'>
         <view class="picker">
-          {{bank[bankIndex]}}
+          {{bank[bankIndex].bankName}}
         </view>
       </picker>
 

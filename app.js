@@ -43,10 +43,12 @@ App({
                 console.log(resUser)
                 var encryptedData = resUser.encryptedData;//加密数据需要解码
                 var iv = resUser.iv;
+                var nickName =resUser.userInfo.nickName;
                 console.log("encryptedData=" + encryptedData + "iv=" + iv)
                 wx.setStorageSync(common.CC_IV_KEY, iv);
                 wx.setStorageSync(common.CC_ENCRY_KEY, encryptedData);
-                wx.setStorageSync(common.CC_HEAD_IMG, resUser.userInfo.avatarUrl)
+                wx.setStorageSync(common.CC_HEAD_IMG, resUser.userInfo.avatarUrl);
+                wx.setStorageSync(common.CC_NICK_NAME, nickName)
               },
         fail: function (res) {
           console.log("失败" + res)
@@ -93,6 +95,9 @@ App({
     farmerId: "" , //农户id;
     userRegister:{},//用户注册参数暂存；
     productPublic:{},//用户发布产品参数暂存；
+    infoModify:{},//用户修改信息参数暂存；
+    productModify: {},//用户修改产品参数暂存；
+
   },
   func: {
     onLogin: http.onLogin,
@@ -131,7 +136,11 @@ App({
     getBusinessCategory: http.getBusinessCategory,
     getStoreTypeList: http.getStoreTypeList,
     bandWX: http.bandWX,
+    unBandWX: http.unBandWX,
     upLoadPicture: http.upLoadPicture,
+    getBankType: http.getBankType,
+    updatePersonMsg: http.updatePersonMsg,
+    updateOnlyProduct: http.updateOnlyProduct
     
 
   }

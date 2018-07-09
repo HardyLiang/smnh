@@ -11,7 +11,7 @@
     <view class='base-item'>
       <text>性别：</text>{{sex}}</view>
     <view class='base-item'>
-      <text>农户类型：</text>{{farmerType}}</view>
+      <text>店铺类型：</text>{{storeType}}</view>
     <view class='base-item'>
       <text>手机号码：</text>{{mobile}}</view>
     <view class='base-item'>
@@ -37,6 +37,18 @@
     <view class='base-item'>
       <text>发货地址：</text>{{detailAddress}}</view>
   </view>
+  <!--企业信息 -->
+  <view class='base-message mt28' hidden='{{isHideStore}}' >
+    <view class='base-title'>企业信息</view>
+    <view class='base-item'>
+      <text>企业名称：</text>{{companyName}} </view>
+    <view class='base-item'>
+      <text>法人姓名：</text>{{legalPersonName}}</view>
+    <view class='base-item'>
+      <text>法人证件：</text>{{legalPersonIdCard}}
+    </view>
+  </view>
+
   <button class='big-btn' catchtap='bindEditInfo'>编辑信息</button>
   <!-- <button class='big-btn'>保存</button> -->
 </view>

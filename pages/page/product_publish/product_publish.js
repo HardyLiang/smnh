@@ -27,6 +27,7 @@ Page({
     loadmoreTip: "正在加载",//加载文字
     typeAlreadyStatus:false,//是否加载全部完毕
     productlist:[],//产品列表
+    isReFresh:false,
   },
 
   /**
@@ -35,22 +36,22 @@ Page({
   onLoad: function (options) {
     //获取用户的个人信息，首先获取本地缓存数据
     var res = wx.getStorageSync(common.CC_FARMERINFO);
-    var idCard = util.hideIdCardMiddle(res.data.sCard);
+    var idCard = util.hideIdCardMiddle(res.data.user_information.sCard);
     this.setData({
-      imgUrlValue: res.data.store_logo,
-      name: res.data.store_name,
-      mobile: res.data.store_telephone,
+      imgUrlValue: res.data.store_information.store_logo,
+      name: res.data.store_information.store_name,
+      mobile: res.data.store_information.store_telephone,
       idCard: idCard,
-      descriptionEvaluate: res.data.descriptionEvaluate,
-      serviceEvaluate: res.data.serviceEvaluate,
-      shipEvaluate: res.data.shipEvaluate
+      descriptionEvaluate: res.data.store_information.descriptionEvaluate,
+      serviceEvaluate: res.data.store_information.serviceEvaluate,
+      shipEvaluate: res.data.store_information.shipEvaluate
     })
     //获取产品列表
     this.getGoodsInfoByCard(this.data.pageIndex);
   },
   goGoodsDetail: function (e) {
     var detailId = e.currentTarget.dataset.id;
-    console.log(detailId);
+    console.log("获取的Id"+detailId);
     wx.navigateTo({
       url: "goods_detail/goods_detail?id=" + detailId
     })
@@ -61,8 +62,42 @@ Page({
     })
   },
   rePublish: function (e) {
-    wx.navigateTo({
-      url: ""
+    var that = this;
+    var goodsid = e.currentTarget.dataset.goodsid;
+    getApp().globalData.productModify = {};
+    getApp().globalData.productModify[common.CC_PRODUCT_GOOD_ID] = goodsid;
+    getApp().globalData.productModify[common.CC_PRODUCT_GOOD_STATUS] = 0;
+    var params = getApp().globalData.productModify;
+    //弹窗询问用户是否真的要下架
+    wx.showModal({
+      title: '注意',
+      content: '亲，你确认要上架么？',
+      success: function (res) {
+        //确认下架
+        if (res.confirm) {
+          getApp().func.updateOnlyProduct(params, function (message, res) {
+            console.log(res);
+            //失败
+            if (!res) {
+              wx.showToast({
+                title: message,
+              })
+              return;
+            }
+            //成功
+            wx.showToast({
+              title: "上架成功"
+            })
+            //刷新列表
+            var res = wx.getStorageSync(common.CC_FARMERINFO);
+            //获取产品列表
+            that.setData({
+              pageIndex: 1
+            })
+            that.getGoodsInfoByCard(that.data.pageIndex);
+          })
+        }
+      }
     })
   },
  
@@ -80,6 +115,13 @@ Page({
   getGoodsInfoByCard: function (pageIndex) {
     var that = this;
     getApp().func.getGoodsInfoByCard(pageIndex, function (message, res,maxPage) {
+      if (that.data.isReFresh) {//判断是否刷新操作
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
+        that.setData({
+          isReFresh: false
+        })
+      }
       if (!res) {
         wx.showModal({
           title: '提示',
@@ -125,7 +167,7 @@ Page({
    var shareComission = e.currentTarget.dataset.sharecommission;
    var index = parseInt(e.currentTarget.dataset.index);
    var goodsStatus = e.currentTarget.dataset.goodsstatus;
-   if (goodsStatus == 1) {
+   if (goodsStatus == 0) {
    wx.setStorageSync('dialogContent', shareComission);
    console.log("orderId=" + goodsid + "sharecomission=" + shareComission + "index=" + index)
    this.setData({
@@ -151,14 +193,18 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
-    getApp().func.updateShareCommission(orderId, shareCommission, function (message, res) {
+    getApp().globalData.productModify = {};
+    getApp().globalData.productModify[common.CC_PRODUCT_GOOD_ID]=orderId;
+    getApp().globalData.productModify[common.CC_PRODUCT_PROFIT] = shareCommission;
+    var params = getApp().globalData.productModify;
+    getApp().func.updateOnlyProduct(params, function (message, res) {
       wx.hideLoading();
       //修改失败
       if(!res){
         wx.showModal({
           title: '提示',
           content: '修改让利金失败',
-          cancelText:false
+          showCancel:false
         })
         return;
       }
@@ -166,7 +212,7 @@ Page({
         title: '修改成功！',
       })
       //刷新页面数据
-      var mShareCommission = 'list[' + index+'].shareCommission'
+      var mShareCommission = 'productlist[' + index+'].shareCommission'
       that.setData({
         dialogContent: shareCommission,
         [mShareCommission]: shareCommission
@@ -186,7 +232,8 @@ Page({
     var goodsinventory = e.currentTarget.dataset.goodsinventory;
     var index = parseInt(e.currentTarget.dataset.index);
     var goodsStatus = e.currentTarget.dataset.goodsstatus;
-    if (goodsStatus ==1){
+   
+    if (goodsStatus == 0){
       wx.setStorageSync('dialogContent', goodsinventory);
       console.log("orderId=" + goodsid + "goodsinventory=" + goodsinventory + "index=" + index)
       this.setData({
@@ -209,13 +256,19 @@ Page({
   updateGoodInventory: function (id, goodsInventory,index){
     var that=this;
     wx.showLoading();
-    getApp().func.updateGoodInventory(id,goodsInventory,function(message,res){
+    getApp().globalData.productModify={};
+    getApp().globalData.productModify[common.CC_PRODUCT_GOOD_ID] = id;
+    getApp().globalData.productModify[common.CC_PRODUCT_STOCK] = goodsInventory;
+    getApp().globalData.productModify[common.CC_PRODUCT_INV_TYPE] = "all";
+    var params = getApp().globalData.productModify;
+    getApp().func.updateOnlyProduct(params,function(message,res){
       wx.hideLoading();
+      console.log("修改返回" + message)
       if(!res){
         wx.showModal({
           title: '提示',
           content: message,
-          cancelText:false
+          showCancel:false
         });
         return;
       }
@@ -224,7 +277,8 @@ Page({
         title: '修改库存成功！',
       })
       //刷新页面数据
-      var mGoodsInventory = 'list[' + index + '].goodsInventory'
+      
+      var mGoodsInventory = 'productlist[' + index + '].goodsInventory'
       that.setData({
         dialogContent: goodsInventory,
         [mGoodsInventory]: goodsInventory
@@ -241,6 +295,10 @@ Page({
     console.log(e)
     var that =this;
     var goodsid = e.currentTarget.dataset.goodsid;
+    getApp().globalData.productModify = {};
+    getApp().globalData.productModify[common.CC_PRODUCT_GOOD_ID] = goodsid;
+    getApp().globalData.productModify[common.CC_PRODUCT_GOOD_STATUS] = 1;
+    var params = getApp().globalData.productModify;
     //弹窗询问用户是否真的要下架
     wx.showModal({
       title: '注意',
@@ -248,7 +306,7 @@ Page({
       success:function(res){
         //确认下架
         if(res.confirm){
-          getApp().func.stopProduct(goodsid,function(message,res){
+          getApp().func.updateOnlyProduct(params,function(message,res){
             console.log(res);
             //失败
             if(!res){
@@ -264,7 +322,10 @@ Page({
             //刷新列表
             var res = wx.getStorageSync(common.CC_FARMERINFO);
             //获取产品列表
-            that.getGoodsInfoByCard(res.data.idCard);
+            that.setData({
+              pageIndex:1
+            })
+            that.getGoodsInfoByCard(that.data.pageIndex);
           })
         }
       }
@@ -313,5 +374,19 @@ Page({
       loadmoreTip: tipLoading
     })
     this.getGoodsInfoByCard(this.data.pageIndex)
-  }
+  },
+  /**
+   * 下拉刷新
+   */
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading(); //在标题栏中显示加载
+    this.setData({
+      isReFresh: true,
+      pageIndex:  1,
+      isHideLoadMore: false,
+      isHideLoadIcon: false,
+      loadmoreTip: tipLoading,
+    })
+    this.getGoodsInfoByCard(this.data.pageIndex)
+  },
 })

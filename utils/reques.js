@@ -2,6 +2,7 @@
 var md5 = require('../utils/md5.js')
 var urlSet = require('../utils/urlSet.js')
 var util = require('../utils/util.js')
+var common =require('../utils/common.js')
 var that = this;
 let user_id = wx.getStorageSync("user_id");
 let token = wx.getStorageSync("token");
@@ -169,7 +170,10 @@ function getPersonMsg(cb) {
       console.log(res)
       var message = res.data.message;
       var statusCode = res.data.statusCode;
+      console.log(message)
+      console.log(statusCode)
       if (statusCode != null && "200" == statusCode) {
+        wx.setStorageSync(common.CC_FARMERINFO, res.data);
         return typeof cb == "function" && cb(message, res.data)
       } else {
         return typeof cb == "function" && cb(message, false)
@@ -1083,50 +1087,20 @@ function getOrder(status, pageIndex, cb) {
 
 }
 
-//农户停止出售
-function stopProduct(id, cb) {
-  console.log("stopProduct");
-  wx.request({
-    url: urlSet.stopProduct,
-    header: {
-      "Content-Type": "application/json;charset=UTF-8"
-    },
-    method: "post",
-    data: {
-      id: id
-    },
-    success: function (res) {
-      var message = res.data.message;
-      var statusCode = res.data.statusCode;
-      console.log(message);
-      console.log("statusCode" + statusCode);
-      if (statusCode != null && "200" == statusCode) {
-        return typeof cb == "function" && cb(message, res.data)
-      } else {
-        return typeof cb == "function" && cb(message, false)
-      }
-
-    },
-    fail: function () {
-      return typeof cb == "function" && cb("下架失败！", false)
-    }
-  })
-
-}
 
 //单一农产品详细信息
-function getProductDetail(typeId, packageId, cb) {
+function getProductDetail(goodId, cb) {
   console.log("getProductDetail");
   wx.request({
-    url: urlSet.getProductDetail,
+    url: urlSet.getProductDetail+"?user_id=" + user_id + "&token=" + token,
     header: {
-      "Content-Type": "application/json;charset=UTF-8"
+      "Content-Type": "application/x-www-form-urlencoded;",
+      "verify": verify
     },
     method: "post",
-    data: {
-      type: typeId,
-      packageId: packageId
-    },
+    data: util.json2Form({
+      goods_id: goodId
+    }),
     success: function (res) {
       var message = res.data.message;
       var statusCode = res.data.statusCode;
@@ -1144,40 +1118,34 @@ function getProductDetail(typeId, packageId, cb) {
 }
 
 //修改单一农产品信息
-function updateOnlyProduct(id, deviceId, productId,
-  personId, landTypeId, preoutput, minNumber, minPrice, publishDistinctid,
-  preoutputUnit, spec, serveCharge, productDescription, productDetailName, cb) {
+function updateOnlyProduct(params, cb) {
   console.log("updateOnlyProduct");
+  params["user_id"] = user_id;
+  params["token"] = token;
   wx.request({
+    // url: urlSet.updateOnlyProduct + "?user_id=" + user_id + "&token=" + token,
     url: urlSet.updateOnlyProduct,
     header: {
-      "Content-Type": "application/json;charset=UTF-8"
+      "Content-Type": "application/x-www-form-urlencoded;",
+      "verify": verify
     },
     method: "post",
-    data: util.json2Form({
-      id: id,
-      deviceId: deviceId,
-      productId: productId,
-      personId: personId,
-      landTypeId: landTypeId,
-      preoutput: preoutput,
-      minNumber: minNumber,
-      minPrice: minPrice,
-      publishDistinctid: publishDistinctid,
-      preoutputUnit: preoutputUnit,
-      spec: spec,
-      serveCharge: serveCharge,
-      productDescription: productDescription,
-      productDetailName: productDetailName
-    }),
-    success: function (res) {
+    data: util.json2Form(params),
+     success: function (res) {
       var message = res.data.message;
-      console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      var statusCode = res.data.statusCode;
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, true)
+      } else {
+        if (message == null || message == "") {
+          message = "更新失败！"
+        }
+        return typeof cb == "function" && cb(message, false)
+      }
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("更新失败！", false)
     }
   })
 
@@ -1322,39 +1290,33 @@ function getDictionary(id, cb) {
 
 }
 //完善农户信息
-function updatePersonMsg(id, name,
-  idCard, mobile, sex, personType, sendAddressId, address,
-  bankNumber, bankCode, accountName, bankAddress, priorpub, cb) {
+function updatePersonMsg(params, cb) {
   console.log("updatePersonMsg");
   wx.request({
-    url: urlSet.updatePersonMsg,
+    url: urlSet.updatePersonMsg + "?user_id=" + user_id + "&token=" + token,
     header: {
-      "Content-Type": "application/json;charset=UTF-8"
+      "Content-Type": "application/x-www-form-urlencoded;",
+      "verify": verify
     },
     method: "post",
-    data: util.json2Form({
-      id: id,
-      name: name,
-      idCard: idCard,
-      mobile: mobile,
-      sex: sex,
-      personType: personType,
-      sendAddressId: sendAddressId,
-      address: address,
-      bankNumber: bankNumber,
-      bankCode: bankCode,
-      accountName: accountName,
-      bankAddress: bankAddress,
-      priorpub: priorpub,
-    }),
+    data: util.json2Form(params),
     success: function (res) {
+      console.log(res);
       var message = res.data.message;
-      console.log(message);
-      return typeof cb == "function" && cb(res.data)
+      var statusCode = res.data.statusCode;
+      if (statusCode == "200") {
+        return typeof cb == "function" && cb(message, true)
+      } else {
+        if (message == null || message == "") {
+          message = "修改失败！"
+        }
+        return typeof cb == "function" && cb(message, false)
+      }
+
 
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return typeof cb == "function" && cb("修改失败！",false)
     }
   })
 
@@ -1751,7 +1713,7 @@ function unBandWX(cb) {
 /**
  * 上传图片
 */
-function upLoadPicture(id,message,method,filePath,cb) {
+function upLoadPicture(id,method,filePath,cb) {
   wx.uploadFile({
     url: urlSet.uploadPicture,
     filePath: filePath,
@@ -1764,17 +1726,18 @@ function upLoadPicture(id,message,method,filePath,cb) {
       user_id: user_id, 
       token: token,
       id: id,
-      message: message,
       method: method
     },
-    success: function (res) {
+    complete: function (res) {
       console.log(res);
-      var statusCode = res.data.statusCode
-      var message = res.data.message;
+      console.log(res.data);
+      var result = JSON.parse(res.data)
+      var statusCode = result.statusCode
+      var message = result.message;
       console.log(message);
       console.log(statusCode);
       if (statusCode == "200") {
-        return typeof cb == "function" && cb(message, res.data)
+        return typeof cb == "function" && cb(message, result.data.url)
       } else {
         if (message == null || message == "") {
           message = "上传失败！"
@@ -1784,10 +1747,43 @@ function upLoadPicture(id,message,method,filePath,cb) {
     },
     fail: function () {
       return typeof cb == "function" && cb("上传失败！", false)
-    }
+    },
+    
   })
 }
 
+
+/**
+ * 获取银行类型
+ */
+function getBankType(cb) {
+  wx.request({
+    url: urlSet.getBankType,
+    header: {
+      "content-type": "application/json;charset=UTF-8",
+    },
+    method: "get",
+    complete: function (res) {
+      console.log(res);
+      var statusCode = res.data.statusCode
+      var message = res.data.message;
+      console.log(message);
+      console.log(statusCode);
+      if (statusCode == "200") {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        if (message == null || message == "") {
+          message = "获取银行列表失败！"
+        }
+        return typeof cb == "function" && cb(message, false)
+      }
+    },
+    fail: function () {
+      return typeof cb == "function" && cb("获取银行列表失败！", false)
+    }
+  })
+
+}
 
 
 module.exports = {
@@ -1828,7 +1824,6 @@ module.exports = {
   orderShippingSave: orderShippingSave,
   getAllExpCompany: getAllExpCompany,
   getOrder: getOrder,
-  stopProduct: stopProduct,
   getProductDetail: getProductDetail,
   updateOnlyProduct: updateOnlyProduct,
   addOnlyProduct: addOnlyProduct,
@@ -1848,5 +1843,7 @@ module.exports = {
   getBusinessCategory: getBusinessCategory,
   getStoreTypeList: getStoreTypeList,
   bandWX: bandWX,
+  unBandWX: unBandWX,
   upLoadPicture: upLoadPicture,
+  getBankType: getBankType,
 }

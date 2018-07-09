@@ -254,17 +254,10 @@ Page({
     var farmerId = res.data.id;
     var status = "1";
     var statusAlready = "2";
-    var personType;
-    if (res.data.personType == "2") {
-      personType = "普通户"
-    } else
-      if (res.data.personType == "1") {
-        personType = "贫困户"
-      }
+    
     //信息赋值
     this.setData({
       username: name,
-      farmerType: personType,
     })
     if (statusType == typeModify) {//如果是修改物流
         this.getOrder( statusAlready,this.data.pageIndex1,this.data.pageSize);

@@ -30,7 +30,7 @@ var uploadPic = baseUrl + "/siboss/iface/app/managerpic/uploadPic";
 //上传多张图片和文字描述
 var uploadNPic = baseUrl + "/siboss/iface/app/managerpic/uploadNPic";
 //完善农户信息
-var updatePersonMsg = baseUrl + "/siboss/iface/common/ap/updatePersonMsg";
+var updatePersonMsg = baseUrl + "app/seller/store_information_edit.htm";
 //查询字典组列表
 var getDictionary = baseUrl + "/siboss/iface/comm/getDictionary?groupId=";
 //根据区域编码获取区域子集列表
@@ -44,9 +44,9 @@ var getProducts = baseUrl + "/siboss/iface/comm/getProducts?name=";
 //农户新增单一农产品登记信息
 var addOnlyProduct = baseUrl + "app/seller/add_goods.htm";
 //修改单一农产品信息
-var updateOnlyProduct = baseUrl + "/siboss/iface/app/appReg/updateOnlyProduct";
+var updateOnlyProduct = baseUrl + "app/seller/updateGoods.htm";
 //单一农产品详细信息
-var getProductDetail = baseUrl + "/siboss/iface/app/appReg/getProductDetail";
+var getProductDetail = baseUrl + "app/seller/goods_detail_mini.htm";
 //农户停止出售
 var stopProduct = baseUrl + "/siboss/iface/common/ap/soldOutProduct";
 //农户查询消费者订单列表
@@ -109,8 +109,6 @@ var checkMobileByCard = baseUrl + "app/iskyshop_seller_mobile.htm";
 var getSale = baseUrl + "/siboss/iface/common/ap/getSale";
 //获取农户结算记录
 var getSetRec = baseUrl + "/siboss/iface/common/ap/getSetRec";
-//更改产品让利金
-var updateShareCommission = baseUrl + "/siboss/iface/common/ap/updateShareCommission";
 //农户农产品列表信息
 var getGoodsInfoByCard = baseUrl +"app/seller/goods_list_mini.htm";
 //获取地址
@@ -126,11 +124,15 @@ var businessCategory = baseUrl + "app/iskyshop_seller_gc_main.htm";
 //获取店铺类型分类
 var getStoreTypeList = baseUrl + "app/iskyshop_store_type_list.htm";
 //微信绑定
-var bandWX=baseUrl+'app/seller/farmer_idcard_save.htm';
+// var bandWX=baseUrl+'app/seller/farmer_idcard_save.htm';
+var bandWX = baseUrl + 'app/farmer_idcard_save.htm';
 //微信解绑
 var unBandWX = baseUrl +"app/seller/farmer_idcard_out_save.htm";
 //上传图片
 var uploadPicture = baseUrl + "app/seller/uploadPicture.htm";
+//获取银行类型
+var getBankType = baseUrl +"app/iskyshop_bank_type_list.htm";
+
 
 module.exports = {
   baseUrl: baseUrl,
@@ -180,7 +182,6 @@ module.exports = {
   checkMobileByCard: checkMobileByCard,
   getSale: getSale,
   getSetRec: getSetRec,
-  updateShareCommission: updateShareCommission,
   getOrderCountInfo: getOrderCountInfo,
   APPID: APPID,
   SECRET: SECRET,
@@ -195,4 +196,5 @@ module.exports = {
   bandWX: bandWX,
   unBandWX: unBandWX,
   uploadPicture: uploadPicture,
+  getBankType: getBankType,
 }

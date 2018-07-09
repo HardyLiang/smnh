@@ -22,20 +22,15 @@ Page({
   onLoad: function (options) {
     var id = options.id;
     //获取详情
-    this.getProductDetail("1", id);
-    //获取主图
-    this.getPicLists(common.CC_PHOTO_TYPE_PRODUCT_MAIN, id);
-    //获取土地图
-    this.getPicLists(common.CC_PHOTO_TYPE_HEAD_IMG, id);
-   
-
+    this.getProductDetail(id);
+  
   },
   /**
    * 获取个人信息
    */
-  getProductDetail: function (typeId, pageId) {
+  getProductDetail: function (goodsId) {
     var that = this;
-    getApp().func.getProductDetail(typeId, pageId, function (message, res) {
+    getApp().func.getProductDetail(goodsId,function (message, res) {
       console.log(res);
       if (!res) {//失败
         wx.showModal({
@@ -45,17 +40,40 @@ Page({
         })
         return;
       }
+      var mainList =[];
+      var secondaryList = res.data.goods_photos;
+      mainList[0] = res.data.goodsPicturesUrl;
+      if (secondaryList!=null){
+        for (var i = 0; i < secondaryList.length;i++){
+          mainList.push(secondaryList[i].url)
+        }
+      }
+      console.log(mainList)
+      //规格
+      var goodsGspVal = res.data.goods_gsp_val[0].name;
+      //规格描述
+
+      //发货描述
+      var proDescription = res.data.deliveryTips;
+      if (proDescription == null || proDescription==""){
+        proDescription="暂无信息"
+      }
+      var spec = res.data.packDetails;
+      if (spec == null || spec == ""){
+        spec ="暂无信息"
+      }
+
       //成功
       that.setData({
-        minNumber: res.data.minNumber,
-        minPrice: res.data.minPrice,
-        preoutput: res.data.preoutput,
-        productDescription: res.data.productDescription,
-        productDetailName: res.data.productDetailName,
-        productName: res.data.productName,
-        serveCharge: res.data.serveCharge,
-        unitName: res.data.unitName,
-        spec: res.data.spec,
+        minNumber: goodsGspVal,
+        minPrice: res.data.goodsPrice,
+        preoutput: res.data.goodsInventory,
+        productDescription: proDescription,
+        productDetailName: res.data.goods_name,
+        productName: res.data.goodsName,
+        serveCharge: res.data.shareCommission,
+        spec: spec,
+        imgUrls: mainList
       })
     });
   },
@@ -105,6 +123,31 @@ Page({
         that.getPicLists(common.CC_PHOTO_TYPE_PRODUCT_LIST, pageId);
         }
     });
+
+  },
+  /**
+   * 修改信息
+   */
+  modifyProduct:function(e){
+    console.log("修改信息")
+    wx.showActionSheet({
+      itemList: ['修改商品信息', '修改主图', '修改详情图'],
+      success(res) {
+        if (res.tapIndex === 0) {//修改商品信息
+          wx.navigateTo({
+            url: '../../add_product/add_product?type=modify',
+          })
+        } else if (res.tapIndex === 1) {//修改主图
+          wx.navigateTo({
+            url: '../../add_product/product_img/product_img?type=modify',
+          })
+        } else if (res.tapIndex === 2) {//修改详情图
+          wx.navigateTo({
+            url: '../../add_product/product_detail/product_detail?type=modify',
+          })
+        }
+      }
+    })
 
   }
 

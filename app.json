@@ -1,12 +1,11 @@
 {
-  
   "pages": [
+   "pages/page/product_publish/product_publish",
     "pages/index/index",
-    "pages/page/product_publish/product_publish",
+    
     "pages/page/my_order/my_order",
     "pages/page/auth/register/register",
     "pages/page/auth/register_person/register_person",
-    "pages/page/info_list/info_list",
     "pages/page/auth/login/login",
     "pages/page/add_product/product_detail/product_detail",
     "pages/page/add_product/product_img/product_img",
@@ -18,7 +17,7 @@
     "pages/page/auth/forget/forget",
     "pages/logs/logs",
     "pages/page/my_shop/my_shop",
-     "pages/page/wechat_bind/wechat_bind",
+    "pages/page/wechat_bind/wechat_bind",
     "pages/page/wechat_bind/bind_guide/bind_guide",
     "pages/page/my_income/my_income_list/my_income_list",
     "pages/page/message_list/message_list",
@@ -40,7 +39,10 @@
     "pages/page/auth/authorize/authorize",
     "pages/page/addr-select/index",
     "pages/page/dialog-modal/index",
-    "pages/page/add_product/edit_more_norm/edit_more_norm"
+    "pages/page/add_product/edit_more_norm/edit_more_norm",
+    "pages/page/info_list/edit_info/edit_info",
+    "pages/page/dialog-code/dialog-code",
+    "pages/page/info_list/info_list"
   ],
   "window": {
     "backgroundTextStyle": "light",

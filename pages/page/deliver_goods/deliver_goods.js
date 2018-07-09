@@ -179,9 +179,11 @@ Page({
     console.log(chooseList);
     //给产品赋值
     for (var i = 0; i < chooseList.length; i++) {
-      choose = chooseList[i].goods_name + " ";
-      chooseId = chooseList[i].goods_id+",";
+      choose = choose+chooseList[i].goods_name + " ";
+      chooseId = chooseId+chooseList[i].goods_id+",";
     }
+    console.log(choose)
+    console.log(chooseId)
     //根据位置更新选择了的产品
     var mPackageLists = "packageLists[" + this.data.chooseGoodsPosition + "].goods";
     var mPackageListsId = "packageLists[" + this.data.chooseGoodsPosition + "].goodsId";

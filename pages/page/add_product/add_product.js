@@ -319,8 +319,10 @@ Page({
       })
         //通知我的产品列表页面告诉他老子发布成功了
         event.emit(event.KProductPublishSuccess, message);
-        //这个页面就关闭了；
-        wx.navigateBack();
+        //发布成功跳转到上传产品主图
+        wx.navigateTo({
+          url: "product_img/product_img?type=moidify"
+        })
       }
     });
 
