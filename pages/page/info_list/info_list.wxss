@@ -22,7 +22,7 @@
  padding: 32rpx 25rpx;
 }
 .base-title{
-  color: #666;
+  color: #00a0e9;
   line-height: 30px;
   margin-bottom: 10rpx;
   font-size: 16px;

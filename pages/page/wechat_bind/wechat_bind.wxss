@@ -1,11 +1,10 @@
-page{background: #fff;}
+page{background: #fff;padding-top: 20px;}
 .user-head{
   width: 60px;
   height: 60px;
   border-radius: 50%;
   display: block;
-  margin: 15px auto 8px;
-  background: red;
+  margin: 0 auto 10px; 
 }
 .get-code{
   position: absolute;

@@ -179,9 +179,23 @@ Page({
    
   },
   /**
-   * 
+   * 进入个人信息
+   */
+  InInfoList:function(){
+    // if (!util.checkIsLogin()) {
+    //   return;
+    // }
+    wx.navigateTo({
+      url: "../info_list/info_list"
+    })
+  },
+  /**
+   * 修改头像
    */
   uploadImg:function(){
+    // if (!util.checkIsLogin()) {
+    //   return;
+    // }
     var that =this;
     wx.chooseImage({
       count: 1, // 默认9

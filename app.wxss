@@ -230,3 +230,30 @@ color: #00a0e9;
 .show{
   display: block;
 }
+radio{margin-right: 5px;}
+radio .wx-radio-input {
+  border-radius: 50%; /* 圆角 */
+  width: 40rpx;
+  height: 40rpx;
+}
+
+/* 选中后的 背景样式 */
+radio .wx-radio-input.wx-radio-input-checked {
+  border: none;
+  background: #00a0e9;
+}
+/* 选中后的 对勾样式  */
+radio .wx-radio-input.wx-radio-input-checked::before {
+  border-radius: 50%; /* 圆角 */
+  width: 44rpx; 
+  height: 44rpx; 
+  line-height: 44rpx;
+  text-align: center;
+  font-size: 30rpx; 
+  color: #fff; 
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+  background-color: #00a0e9;
+  border: 1rpx solid #00a0e9;
+}

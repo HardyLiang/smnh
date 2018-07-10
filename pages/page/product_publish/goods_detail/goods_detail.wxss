@@ -5,7 +5,7 @@
 }
 .swiper-style swiper-item image {
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 .detail-info{
   padding: 4px 10px;
@@ -50,6 +50,7 @@
   position: fixed;
   top: 10px;
   right: 5px;
+  z-index: 1000;
 }
 .icon-edit image{
   width: 22px;

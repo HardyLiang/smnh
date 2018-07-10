@@ -8,7 +8,7 @@
       bindinput='bindContentInput' data-type="name"></input></view>
     <view class='base-item'>
       <text>性别：</text>      
-      <picker class="input-item-content" bindchange="bindSexChange" value="{{sexIndex}}" range="{{sexList}}">
+      <picker class="input-item-pick" bindchange="bindSexChange" value="{{sexIndex}}" range="{{sexList}}">
         <view class="picker">
           {{sex}}
         </view>
@@ -29,7 +29,7 @@
       bindinput='bindContentInput' data-type="bankNum"></input></view>
     <view class='base-item'>
      <text>开户行：</text>
-     <picker class="input-item-content" bindchange="bindBankChange" value="{{bankIndex}}" range="{{bankList}}"  range-key='bankName'>
+     <picker class="input-item-pick" bindchange="bindBankChange" value="{{bankIndex}}" range="{{bankList}}"  range-key='bankName'>
         <view class="picker">
           {{bankName}} 
         </view>
@@ -39,15 +39,15 @@
       <text>持卡人：</text><input type='text' class='edit_input'
       value="{{bankAccount}}" bindinput='bindContentInput' data-type="bankAccount"></input></view>
     <view class='base-item'>
-      <text>开户类型：</text><picker class="input-item-content" bindchange="bankTypeChange" value="{{bankTypeindex}}" range="{{bankTypeList}}">
+      <text>开户类型：</text><picker class="input-item-pick" bindchange="bankTypeChange" value="{{bankTypeindex}}" range="{{bankTypeList}}">
         <view class="picker">
          {{bankType}}
         </view>
       </picker></view>
     <view class='base-item'>
       <text>开户地址：</text>  <addr-select bind:select="selectArea" data-typeid="bank"
-       addressLeven="2">
-    <view class="input-item-content">{{bankAddress}}</view>
+       addressLeven="2" class="input-item-pick2">
+    <view >{{bankAddress}}</view>
   </addr-select></view>
   </view>
   <!-- 开户信息 -->
@@ -55,8 +55,8 @@
     <view class='base-title'>发货信息</view>
     <view class='base-item'>
       <text>发货区域：</text> <addr-select bind:select="selectArea" data-typeid="detail"
-      addressLeven="4">
-    <view class="input-item-label">{{addressValue}}</view>
+      addressLeven="4" class="input-item-pick2">
+    <view class="input-item-content">{{addressValue}}</view>
   </addr-select>
   </view>
       <view class='base-item'>

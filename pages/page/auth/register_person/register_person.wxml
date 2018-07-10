@@ -50,7 +50,7 @@
       <text class="input-item-label">所在地区</text>
       <addr-select bind:select="selectArea" data-typeid="detail"
       addressLeven="4">
-    <view class="input-item-label">{{addressValue}}</view>
+    <view class="input-item-content">{{addressValue}}</view>
   </addr-select>
     </view>
     <view class="input-item">

@@ -7,7 +7,6 @@ page{
   border-radius: 50%;
   display: block;
   margin: 15px auto 12px;
-  background: red;
 
 }
 
