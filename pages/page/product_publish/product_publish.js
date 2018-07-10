@@ -188,14 +188,14 @@ Page({
   /**
    * 修改让利金
    */
-  updateShareCommission: function (orderId, shareCommission,index) {
+  updateShareCommission: function (id, shareCommission,index) {
     var that =this;
     wx.showLoading({
       title: '加载中...',
     })
     getApp().globalData.productModify = {};
-    getApp().globalData.productModify[common.CC_PRODUCT_GOOD_ID]=orderId;
-    getApp().globalData.productModify[common.CC_PRODUCT_PROFIT] = shareCommission;
+    getApp().globalData.productModify[common.CC_PRODUCT_GOOD_ID] = util.trim(id);
+    getApp().globalData.productModify[common.CC_PRODUCT_PROFIT_2] = shareCommission;
     var params = getApp().globalData.productModify;
     getApp().func.updateOnlyProduct(params, function (message, res) {
       wx.hideLoading();

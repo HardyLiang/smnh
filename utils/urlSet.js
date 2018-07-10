@@ -132,6 +132,8 @@ var unBandWX = baseUrl +"app/seller/farmer_idcard_out_save.htm";
 var uploadPicture = baseUrl + "app/seller/uploadPicture.htm";
 //获取银行类型
 var getBankType = baseUrl +"app/iskyshop_bank_type_list.htm";
+//修改商品详情图片信息
+var updataGoodsDetail = baseUrl +"app/seller/updateGoodsDetailPicture.htm";
 
 
 module.exports = {
@@ -197,4 +199,5 @@ module.exports = {
   unBandWX: unBandWX,
   uploadPicture: uploadPicture,
   getBankType: getBankType,
+  updataGoodsDetail: updataGoodsDetail,
 }

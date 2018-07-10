@@ -6,6 +6,7 @@ var event = require('../../../utils/event.js')
 var app = getApp()
 Page({
   data: {
+    status:'',//状态，是发布还是修改
     showView: false,  //是否分销
     showInv: false,//是否显示规格配置
     imageList: [],
@@ -26,11 +27,101 @@ Page({
       count:"",
       name:""
     }],
-    packDetails:""//全局规格的时候的规格描述
+    packDetails:"",//全局规格的时候的规格描述
+    allCheck:true,
+    specCheck:false,
+    isShowSpec:false,//是否显示库存配置，如果是修改就不能显示
+    isShowModify:false,//是否显示修改规格，
   },
 
-  onLoad: function () {
+  onLoad: function (options) {
     // 生命周期函数--监听页面加载
+    app.globalData.productPublic={}
+    var statusType =options.type
+    var goodId = options.goodId
+    this.setData({
+      status: statusType
+    })
+    if (statusType=="modify"){//修改
+      app.globalData.productPublic[common.CC_PRODUCT_GOOD_ID] = goodId;
+      var info = wx.getStorageSync(common.CC_GOOD_INFO);
+      console.log(info)
+      var goodsInvenType = info.goodsInventoryType;
+      var showInv =false;
+      var allCheck =true;
+      var specCheck =false;
+      var showView =false;
+      var isShowModify=false;
+      app.globalData.productPublic[common.CC_GOODS_INVENTORY_DETAIL] = info.goodsInventoryDetail;
+      app.globalData.productPublic[common.CC_PRODUCT_SPECS_INFO] = info.goods_gsp_val;
+      if (goodsInvenType=="spec"){//规格配置
+        app.globalData.productPublic[common.CC_PRODUCT_INV_TYPE] = "spec"
+      console.log("规格配置")
+        showInv =true;
+        allCheck=false;
+        specCheck=true;
+        var goodsInventoryDetail = info.goodsInventoryDetail;
+        var goodsGspVal = info.goods_gsp_val;
+        if (goodsInventoryDetail.length > 0) {
+          var id = goodsInventoryDetail[0].id;
+          var idList = id.split('_')
+          if(idList.length>2){//多维
+            isShowModify =true;
+          }else{//单维规格
+            isShowModify=false;
+            console.log("单维规格" + goodsInventoryDetail.length)
+            
+            //增加规格
+            for (var i = 0; i < goodsInventoryDetail.length;i++){
+              var name ="";
+              var idlists = goodsInventoryDetail[i].id.split("_")
+              var idlistsId = idlists[0]
+              for (var y = 0; y < goodsGspVal.length;y++){
+                if (idlistsId == goodsGspVal[y].id){
+                  name = goodsGspVal[y].name
+                }
+              }
+              this.addNormListByContent(name, goodsInventoryDetail[i].price, goodsInventoryDetail[i].count)
+            }
+
+          }
+        } else {
+          isShowModify=false;
+        }
+      } else {
+        app.globalData.productPublic[common.CC_PRODUCT_INV_TYPE] = "all"
+        showInv = false;
+        allCheck = true;
+        specCheck = false;
+      }
+      if (info.shareCommission == null && info.shareCommission == "" || info.shareCommission=="0"){
+        showView=false;
+      }else{
+        showView = true;
+      }
+
+      var goodsPrice=info.goodsPrice;
+      console.log(goodsPrice)
+      //给页面赋值
+      this.setData({
+        status: statusType,
+        chooseGoods:info.goodsName,//产品类型
+        goodname: info.dsbGoodsName,//产品名称
+        miniNumber: goodsPrice,//零售价
+        showInv: showInv,
+        allCheck: allCheck,
+        specCheck: specCheck,
+        spec: "",//规格
+        stock: info.goodsInventory,//库存
+        profit: info.shareCommission,//让利
+        remark: info.deliveryTips,//发货说明
+        invType: goodsInvenType,//库存配置存储字段
+        specdescription: info.packDetails,//规格描述
+        showView: showView,
+        isShowSpec:true,
+        isShowModify: isShowModify
+      })
+    }else{
     var showView = true;
     showView: (showView == "true" ? true : false)
     //默认进去就是全局配置
@@ -40,7 +131,6 @@ Page({
     var areaId = farmerInfo.data.area_id;
     if (areaId != null && areaId != "") {//地址不为空的时候给组参进行赋值
       app.globalData.productPublic[common.CC_PRODUCT_AREA_ID] = areaId;
-     
     } else {
       app.globalData.productPublic["goodsDetails"] =this.data.remark; 
       wx.showModal({
@@ -48,18 +138,23 @@ Page({
         content: '亲，你没有设置发货地址，请进入我的信息进行修改！',
         success: function (res) {
           if (res.confirm) {//跳转到我的信息
-
           }
         }
       })
     }
+    }
 
   },
-  onChangeShowState: function () {
+  onChangeShowState: function (e) {
     var that = this;
+    var profit = that.data.profit
     that.setData({
-      showView: (!that.data.showView)
+      showView: (!that.data.showView),
+      profit: that.data.showView ? "" : profit
     })
+    if (that.data.status=="modify"){
+      app.globalData.productPublic[common.CC_PRODUCT_PROFIT_2] = "";
+    }
   },
 
   // 上传图片
@@ -157,6 +252,26 @@ Page({
     this.setData({
       normLists: normList
     })
+    if (this.data.status == "modify") {
+      app.globalData.productPublic[common.CC_PRODUCT_SPECS_INFO].push(newNormItem)
+    }
+    console.log(app.globalData.productPublic[common.CC_PRODUCT_SPECS_INFO])
+
+  },
+  addNormListByContent: function (strName, strPrice, strCount) {
+    var position = this.data.normLists.length;
+    var newNormItem = {
+      sequence: position,
+      name: strName,
+      price: strPrice,
+      count: strCount,
+    }
+    var normList = this.data.normLists;
+    console.log(newNormItem)
+    normList.push(newNormItem);
+    this.setData({
+      normLists: normList
+    })
   },
   /**
 * 删除规格列表
@@ -166,10 +281,30 @@ Page({
     console.log(e);
     console.log(normIndex);
     var newNormList = this.data.normLists;
-    newNormList.splice(normIndex);
+    newNormList.splice(normIndex,1);
     this.setData({
       normLists: newNormList
     })
+    if (this.data.status == "modify" &&this.data.invType == "spec") {
+      var specList = app.globalData.productPublic[common.CC_PRODUCT_SPECS_INFO];
+      var inveList = app.globalData.productPublic[common.CC_GOODS_INVENTORY_DETAIL];
+      if (normIndex >= inveList.length && normIndex< specList.length){
+        specList.splice(normIndex, 1)
+      }else{
+        var thisInveList = inveList[normIndex];
+        var idList = thisInveList.id.split('_')
+        var idListId = idList[0];
+        for (var i = 0; i < specList.length; i++) {
+          if (idListId == specList[i].id) {
+            specList.splice(i, 1)
+          }
+        }
+        inveList.splice(normIndex, 1)
+      }
+      app.globalData.productPublic[common.CC_PRODUCT_SPECS_INFO] = specList;
+      app.globalData.productPublic[common.CC_GOODS_INVENTORY_DETAIL] = inveList;
+      }
+    console.log(app.globalData.productPublic[common.CC_PRODUCT_SPECS_INFO] )
   },
   onShow: function () {
     var that = this;
@@ -182,6 +317,12 @@ Page({
         chosseGoodsId: data.goodsId
       })
       app.globalData.productPublic[common.CC_PRODUCT_TYPE] = data.goodsId;
+    })
+    event.on(event.KEVGGspValSuccess,this,function(data){
+      console.log("修改完多规格。我收到了");
+      console.log(data);
+      app.globalData.productPublic[common.CC_GOODS_INVENTORY_DETAIL]=data;
+
     })
 
   },
@@ -200,6 +341,7 @@ Page({
     if (!typeName) {
       return;
     }
+    
     switch (typeName) {
       case "goodname":
         console.log("goodname")
@@ -242,7 +384,12 @@ Page({
         break;
       case "profit":
         console.log("profit")
-        app.globalData.productPublic[common.CC_PRODUCT_PROFIT] = content;
+        if (this.data.status == "modify") {
+          app.globalData.productPublic[common.CC_PRODUCT_PROFIT_2] = content;
+        } else {
+          app.globalData.productPublic[common.CC_PRODUCT_PROFIT] = content;
+        }
+        
         this.setData({
           profit: content
         })
@@ -278,6 +425,41 @@ Page({
    */
   nextRegister: function (e) {
     console.log("下一步")
+    var params = app.globalData.productPublic;
+    console.log(params)
+    if (this.data.status=="modify"){//修改
+      if (JSON.stringify(params) == "{}"){
+        wx.showToast({
+          title: '请至少修改一个参数',
+        })
+      }
+       var specInfo= app.globalData.productPublic[common.CC_PRODUCT_SPECS_INFO]
+       var inveInfo = app.globalData.productPublic[common.CC_GOODS_INVENTORY_DETAIL]
+       if (specInfo != null && specInfo.length>0){
+         app.globalData.productPublic[common.CC_PRODUCT_SPECS_INFO] = JSON.stringify(specInfo);
+         app.globalData.productPublic[common.CC_GOODS_INVENTORY_DETAIL] = JSON.stringify(inveInfo);
+       }
+    
+      getApp().func.updateOnlyProduct(params, function (message, res) {
+        wx.hideLoading();
+        console.log("修改返回" + message)
+        if (!res) {
+          wx.showModal({
+            title: '提示',
+            content: message,
+            showCancel: false
+          });
+          return;
+        }
+        //修改成功
+        wx.showToast({
+          title: '修改信息成功',
+        })
+        event.emit(event.KUpdateGoodInfoSuccess, message)
+        wx.navigateBack()
+      });
+
+    }else{
     //首先检测用户每个参数是否填写完整；
     // if (util.checkEmpty(this.data.chooseGoods,"请选择产品类型")){
     //   return;
@@ -296,7 +478,7 @@ Page({
     // if (util.checkEmpty(this.data.stock, "请输入库存")) {
     //   return;
     // }
-    var params = app.globalData.productPublic;
+    
     if (this.data.invType=="spec"){//规格配置
       params[common.CC_PRODUCT_SPECS_INFO] = JSON.stringify(this.data.normLists);
     }else
@@ -325,9 +507,7 @@ Page({
         })
       }
     });
-
-
-
+    }
   },
   /**
    * 选择规格配置
@@ -359,23 +539,45 @@ Page({
     var content = e.detail.value;
     var invType = e.currentTarget.dataset.type;
     console.log("position=" + position + "content=" + content + "invType=" + invType)
+  
     if (invType == "inv") {//规格
       var mNormLists = 'normLists[' + position + '].name';
       that.setData({
         [mNormLists]: content
       })
+      if (this.data.status == "modify"){
+          app.globalData.productPublic[common.CC_PRODUCT_SPECS_INFO][position].name = content;
+      }
+     
+      
     } else
       if (invType == "invPrice") {//价格
         var mNormLists = 'normLists[' + position + '].price';
         that.setData({
           [mNormLists]: content
         })
+        if (this.data.status == "modify") {
+          if (position >= app.globalData.productPublic[common.CC_GOODS_INVENTORY_DETAIL].length){
+            app.globalData.productPublic[common.CC_PRODUCT_SPECS_INFO][position].price = content;
+          }else{
+            app.globalData.productPublic[common.CC_GOODS_INVENTORY_DETAIL][position].price = content;
+          }
+          
+        }
       } else
         if (invType == "invStory") {//库存
           var mNormLists = 'normLists[' + position + '].count';
           that.setData({
             [mNormLists]: content
           })
+          if (this.data.status == "modify") {
+            if (position >= app.globalData.productPublic[common.CC_GOODS_INVENTORY_DETAIL].length) {
+              app.globalData.productPublic[common.CC_PRODUCT_SPECS_INFO][position].count = content;
+            }else{
+              app.globalData.productPublic[common.CC_GOODS_INVENTORY_DETAIL][position].count = content;
+            }
+         
+          }
           var productStock = 0;
           for (var i = 0; i < that.data.normLists.length; i++) {
             productStock = productStock + parseInt(that.data.normLists[i].count);
@@ -384,6 +586,7 @@ Page({
           app.globalData.productPublic[common.CC_PRODUCT_STOCK] = productStock;
         }
     console.log(that.data.normLists);
+    console.log(app.globalData.productPublic);
     
   }
 })

@@ -81,6 +81,7 @@ let CC_PRODUCT_GOOD_ID = "goods_id"
 let CC_PRODUCT_GOOD_STATUS ="goods_status"
 let CC_PRODUCT_GOOD_MAIN= "goods_main"//产品主图
 let CC_PRODUCT_GOOD_SEC_LIST = "goods_secondary_list"//产品主图里面的次图列表
+let CC_PRODUCT_PROFIT_2 = "goodsExtra" //让利金
 //微信保存信息
 let CC_SESSION_KEY = "session_key"//session_key
 let CC_IV_KEY = "iv";//iv秘钥
@@ -97,6 +98,9 @@ let CC_UPLOAD_STATUS_MAIN_OTHER = "6";//商品图片，不是主图
 let CC_PRODUCT_ID="productID";
 //农户绑定状态
 let CC_BAND_STATUS ="farmer_idcard_status"
+//产品修改
+let CC_GOOD_INFO="goodInfo";
+let CC_GOODS_INVENTORY_DETAIL="goods_inventory_detail"
 
 exports.CC_USERNAME = CC_USERNAME;
 exports.CC_IDCARD = CC_IDCARD;
@@ -183,3 +187,6 @@ exports.CC_PRODUCT_GOOD_ID = CC_PRODUCT_GOOD_ID;
 exports.CC_PRODUCT_GOOD_STATUS = CC_PRODUCT_GOOD_STATUS;
 exports.CC_PRODUCT_GOOD_MAIN = CC_PRODUCT_GOOD_MAIN;
 exports.CC_PRODUCT_GOOD_SEC_LIST = CC_PRODUCT_GOOD_SEC_LIST;
+exports.CC_PRODUCT_PROFIT_2 = CC_PRODUCT_PROFIT_2;
+exports.CC_GOOD_INFO = CC_GOOD_INFO;
+exports.CC_GOODS_INVENTORY_DETAIL = CC_GOODS_INVENTORY_DETAIL;

@@ -1,5 +1,7 @@
 var common = require('../../../../utils/common.js')
 var util = require('../../../../utils/util.js')
+var event = require('../../../../utils/event.js')
+
 
 Page({
   data: {
@@ -18,12 +20,24 @@ Page({
     serveCharge: '',
     unitName: '',
     spec: '',
+    goodId:"",
+    goodInfo:{},//产品列表
   },
   onLoad: function (options) {
     var id = options.id;
+    this.setData({
+      goodId:id
+    })
     //获取详情
     this.getProductDetail(id);
   
+  },
+  onShow:function(e){
+    var that =this;
+    event.on(event.KUpdateGoodInfoSuccess,this,function(data){
+      console.log("修改信息成功返回")
+      that.getProductDetail(that.data.goodId);
+    })
   },
   /**
    * 获取个人信息
@@ -40,6 +54,7 @@ Page({
         })
         return;
       }
+      
       var mainList =[];
       var secondaryList = res.data.goods_photos;
       mainList[0] = res.data.goodsPicturesUrl;
@@ -73,7 +88,8 @@ Page({
         productName: res.data.goodsName,
         serveCharge: res.data.shareCommission,
         spec: spec,
-        imgUrls: mainList
+        imgUrls: mainList,
+        goodInfo:res.data
       })
     });
   },
@@ -130,20 +146,23 @@ Page({
    */
   modifyProduct:function(e){
     console.log("修改信息")
+    var goodId = this.data.goodId;
+    var goodInfo = this.data.goodInfo;
     wx.showActionSheet({
       itemList: ['修改商品信息', '修改主图', '修改详情图'],
       success(res) {
+        wx.setStorageSync(common.CC_GOOD_INFO, goodInfo);
         if (res.tapIndex === 0) {//修改商品信息
           wx.navigateTo({
-            url: '../../add_product/add_product?type=modify',
+            url: '../../add_product/add_product?type=modify&goodId=' + goodId,
           })
         } else if (res.tapIndex === 1) {//修改主图
           wx.navigateTo({
-            url: '../../add_product/product_img/product_img?type=modify',
+            url: '../../add_product/product_img/product_img?type=modify&goodId=' + goodId,
           })
         } else if (res.tapIndex === 2) {//修改详情图
           wx.navigateTo({
-            url: '../../add_product/product_detail/product_detail?type=modify',
+            url: '../../add_product/product_detail/product_detail?type=modify&goodId=' + goodId,
           })
         }
       }

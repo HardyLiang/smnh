@@ -1,20 +1,22 @@
- <view class="form-group">
+ <view class="form-group" wx:for="{{infoList}}"wx:key="item" wx:for-index="idx">
     <view class="input-item">
       <text class="input-item-label">规格</text>
       <view class="input-item-content">
-        <input type="text" placeholder="" value='{{normName}}'></input>
+        <text >{{item.name}}</text>
       </view>
     </view>
     <view class="input-item">
       <text class="input-item-label">价格</text>
       <view class="input-item-content">
-        <input type="text" placeholder="给商品定个好价格" value='{{goodname}}'></input>
+        <input type="text" placeholder="给商品定个好价格" value='{{item.price}}'
+         bindinput='bindInputChange' data-typeName="price"
+         data-index="{{idx}}"></input>
       </view>
     </view>
     <view class="input-item">
       <text class="input-item-label">库存</text>
       <view class="input-item-content">
-        <input type="text" placeholder="设置一个合理库存" value='{{goodname}}' bindinput='bindInputChange' data-typeName="goodname"></input>
+        <input type="text" placeholder="设置一个合理库存" value='{{item.count}}' bindinput='bindInputChange' data-typeName="count"  data-index="{{idx}}"></input>
       </view>
     </view>
   </view>

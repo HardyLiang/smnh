@@ -119,7 +119,7 @@ Page({
     })
   },
   updataFile:function(status,path,cb){
-    getApp().func.upLoadPicture("", status, path, function (message, res) {
+    getApp().func.upLoadPicture("", status, path,"", function (message, res) {
       if (res) {
         if (status == common.CC_UPLOAD_STATUS_IDCARD){
           wx.setStorageSync(common.CC_IDCARD_FRONT, res);

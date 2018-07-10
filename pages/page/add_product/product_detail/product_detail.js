@@ -6,6 +6,20 @@ Page({
   },
 
   onLoad: function (options) {
+    //获取传送过来的类型
+    var that = this;
+    //获取传过来的状态
+    var typeStatus = options.type
+    var thisId = options.goodId;
+    console.log(typeStatus)
+    console.log(thisId)
+    //判断当前属性是修改还是新增
+    if (typeStatus == "modify") {
+
+    }else{
+      
+    }
+  
   
   },
   /**

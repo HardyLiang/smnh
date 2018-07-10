@@ -5,6 +5,9 @@ let KLogisiticsModifySuccessEventName = "KLogisiticsModifySuccessEventName";//�
 let KGetUserInfoSuccess ="KGetUserInfoSuccess";//获取小程序授权信息成功
 let KProductPublishSuccess = "KProductPublishSuccess";//用于发布产品成功
 let KInfoModifySuccess = "KInfoModifySuccess";//用于修改信息成功
+let KUploadMainImgSuccess = "KUploadMainImgSuccess";//用于上传主图成功
+let KUpdateGoodInfoSuccess = "KUpdateGoodInfoSuccess";//用于修改产品信息成功
+let KEVGGspValSuccess = "KEVGGspValSuccess";//用于修改多规格成功返回
 
 let kProductRecommendPurchaseSuccessEvent = 'kProductRecommendPurchaseSuccessEvent' //购买推介成功的通知
 
@@ -55,3 +58,6 @@ exports.emit = emit;
 exports.KGetUserInfoSuccess = KGetUserInfoSuccess;
 exports.KProductPublishSuccess = KProductPublishSuccess;
 exports.KInfoModifySuccess = KInfoModifySuccess;
+exports.KUploadMainImgSuccess = KUploadMainImgSuccess;
+exports.KUpdateGoodInfoSuccess = KUpdateGoodInfoSuccess;
+exports.KEVGGspValSuccess = KEVGGspValSuccess;

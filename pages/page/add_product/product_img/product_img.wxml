@@ -16,7 +16,7 @@
           </block>
         </view>
         <view class="weui-uploader__input-box">
-          <view class="weui-uploader__input" bindtap="chooseImage"></view>
+          <view class="weui-uploader__input" catchtap="chooseImageSec"></view>
         </view>
       </view>
       <!-- end -->

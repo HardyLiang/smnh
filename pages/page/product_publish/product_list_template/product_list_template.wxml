@@ -30,7 +30,8 @@
     <button  class=" pro-btn {{status=='上架'&&goodsInventoryType=='all'?'c-orange' :''}}" catchtap='modifyGoodsInventory'
     data-goodsid="{{goodsId}}" data-goodsStatus="{{goodsStatus}}"
     data-goodsinventory="{{goodsInventory}} " data-index="{{ids}} ">修改库存</button>
-    <button class="pro-btn {{status=='上架'?'c-blue' :''}}" catchtap='modifyShareCommission' data-goodsid="{{goodsId}} " data-goodsStatus="{{goodsStatus}}"
+    <button class="pro-btn {{status=='上架'?'c-blue' :''}}" catchtap='modifyShareCommission' 
+    data-goodsid="{{goodsId}} " data-goodsStatus="{{goodsStatus}}"
     data-sharecommission="{{shareCommission}} " data-index="{{ids}} ">修改让利</button>
      
   </view>

@@ -15,15 +15,15 @@
     <view class="input-item">
       <text class="input-item-label">零售价</text>
       <view class="input-item-content">
-        <input type="number" placeholder="请输入零售价" value='{{mininumber}}' bindinput='bindInputChange' data-typeName="mininumber"></input>
+        <input type="number" placeholder="请输入零售价" value='{{miniNumber}}' bindinput='bindInputChange' data-typeName="mininumber"></input>
         <!-- <view class='abs-right'>元</view> -->
       </view>
     </view>
-    <view class="input-item">
+    <view class="input-item" hidden="{{isShowSpec}}">
     <text class="input-item-label">库存配置</text>
     <radio-group class="radio-group" bindchange="radioChange">
-    <radio class='' checked='true' value='all'>全局配置</radio>
-    <radio class=''value="spec">规格配置</radio>
+    <radio class='' checked='{{allCheck}}' value='all'>全局配置</radio>
+    <radio class=''value="spec"checked="{{specCheck}}">规格配置</radio>
     </radio-group>
     </view>
     <!-- 全局规格 -->
@@ -81,12 +81,12 @@
       </view>
     </view>
   </view>
-  <view class='proxy-box main-add-btn' bindtap='addNormList'>
+  <view class='proxy-box main-add-btn' bindtap='addNormList' hidden='{{isShowModify}}'>
     <image src='../../images/ic_img_delete_pressed.png' class='add-gg'></image>
     <text >新增规格</text>
   </view>
   <!-- 多规格编辑的时候 -->
-  <view class='proxy-box main-add-btn' bindtap='editMoreNorm'>
+  <view class='proxy-box main-add-btn' bindtap='editMoreNorm'hidden='{{!isShowModify}}'>
     <!-- <image src='../../images/ic_img_delete_pressed.png' class='add-gg'></image> -->
     <text >修改规格</text>
   </view>

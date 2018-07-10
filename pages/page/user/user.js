@@ -117,7 +117,7 @@ Page({
       console.log("我收到裁剪图片啦" + data);
       var imgUrl=data;
       //联网修改图片
-      getApp().func.upLoadPicture('', '', common.CC_UPLOAD_STATUS_HEAD, imgUrl,function (message, res) {
+      getApp().func.upLoadPicture('', common.CC_UPLOAD_STATUS_HEAD, imgUrl,"",function (message, res) {
         console.log(res)
         if (!res) {
           wx.showModal({

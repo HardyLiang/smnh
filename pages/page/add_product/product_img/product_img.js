@@ -1,33 +1,48 @@
 var event=require('../../../../utils/event.js')
 var util=require('../../../../utils/util.js')
+var common=require('../../../../utils/common.js')
 var app=getApp()
 Page({
   data: {
-    imgUrlValue: "",
-    imageList: [],
+    imgUrlValue: "",//主图
+    imageList: [],//次图
+    imageListSave:[],//次图修改保存
     cropBack:"prodectImgBack",//这个是设置裁剪返回的消息名称，可自定义，但是要唯一；
-    status:""
+    status:"",
+    goodId:"",
+    isModifyMain:false,//是否修改了主图
+    isModifySec:false//是否修改次图
   },
 
   onLoad: function (options) {
     var that =this;
     //获取传过来的状态
     var typeStatus = options.type
-   
+    var thisId = options.goodId;
+    console.log(typeStatus)
+    console.log(thisId)
     if(typeStatus=="modify"){
-      var main = wx.getStorageSync(common.CC_PRODUCT_GOOD_MAIN);
-      var secList = wx.getStorageSync(common.CC_PRODUCT_GOOD_SEC_LIST);
+      var info = wx.getStorageSync(common.CC_GOOD_INFO);
+      var secList=[];
+      for (var i = 0; i < info.goods_photos.length;i++){
+        secList.push(info.goods_photos[i])
+      }
+      console.log(info)
         that.setData({
-          imgUrlValue: main,
+          imgUrlValue: info.goodsPicturesUrl,
           imageList: secList,
-          status: typeStatus
+          status: typeStatus,
+          goodId: thisId,
+          imageListSave: info.goods_photos
         })
-    
 
     }else{
+      that.setData({
+        goodId: thisId
+      })
+
     }
   
-    //获取商品Id;
      
 
 
@@ -50,21 +65,30 @@ Page({
     })
   },
   // 上传其他图片，没规定大小
-  chooseImage: function () {//这里是选取图片的方法
-    var that = this,
-      imageList = this.data.imageList;
+  chooseImageSec: function () {//这里是选取图片的方法
+    var that = this;
+    var list=[];
     // console.log(imageList.length)
-    if (imageList.length <= 3) {
+    if (that.data.imageList.length <= 3) {
       wx.chooseImage({
-        count: 4 - imageList.length, // 最多可以选择的图片张数，默认9
+        count: 4 - that.data.imageList.length, // 最多可以选择的图片张数，默认9
         sizeType: ['original', 'compressed'], // original 原图，compressed 压缩图，默认二者都有
         sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
         success: function (res) {
+          console.log(res)
+           if(that.data.imageList.length>0){
+             list.concat(that.data.imageList)
+           }
+          console.log(list)
           var imgsrc = res.tempFilePaths;
-          imageList = imageList.concat(imgsrc);
+          for (var i = 0; i < imgsrc.length;i++){
+            // imageList = imageList.concat(imgsrc[i]);
+            list.push(imgsrc[i])
+          }
           that.setData({
-            imageList: imageList
+            imageList: list
           });
+          
         },
         fail: function () {
           // fail
@@ -107,8 +131,23 @@ Page({
       that.setData({
         imgUrlValue: data
       })
-    
     });
+
+    //上传图片
+    event.on(event.KUploadMainImgSuccess, this, function (data) {
+      console.log("我收到上传成功返回" + data);
+      var index= data;
+      var maxIndex = that.data.imageList.length
+      if (index<maxIndex){
+        that.uploadSecPic(that.data.goodId, common.CC_UPLOAD_STATUS_MAIN, index, that.data.imageList[index])
+      }else{
+        wx.showModal({
+          title: '提示',
+          content: '上传成功！',
+        })
+      }
+ 
+    })
   },
   onUnload: function (options) {
     console.log('user=====onUnload');
@@ -119,21 +158,60 @@ Page({
    * 确认上传
    */
   confirmUpLoad:function(){
+    console.log("确认上传")
+    var that =this;
     //首先检查封面图是否上传了；
     if (util.checkEmpty(this.data.imgUrlValue,"请上传封面图")){
       return;
     }
+    var goodId = util.trim(this.data.goodId);
+    var status = common.CC_UPLOAD_STATUS_MAIN;
     //将图片先上传到服务上并返回路径作为产品发布的入参；
-    
-    if (this.data.typeStatus=="modify"){
+    console.log("goodId=" + goodId + "status=" + status)
+    if (this.data.status=="modify"){
+      console.log("modify")
+      getApp().func.upLoadPicture(goodId, status, this.data.imgUrlValue,"1", function (message, res) {
+        if(res){//成功，上传次图
+          if (that.data.imageList.length>0){
+            that.uploadSecPic(goodId, status, 0, that.data.imageList[0])
+          }else{
+            wx.showModal({
+              title: '提示',
+              content: message,
+              showCancel:false
+            })
+          }
+        }else{
+          wx.showToast({
+            title: message,
+          })
+        }
+
+      });
+
 
     }else{
-
+      console.log("upload")
     }
-    getApp().func.upLoadPicture(id, method, filePath, function (message, res) {
+   
+   
 
-    });
-    
+  },
+  uploadSecPic: function (goodId, status, index, img){
+    var that =this;
+    getApp().func.upLoadPicture(goodId, status, img, "2",function (message, res) {
+      index=index+1
+      if(res){
+          event.emit(event.KUploadMainImgSuccess,index)
+      }else{
+        wx.showModal({
+          title: '提示',
+          content: message,
+          showCancel: false
+        })
+      }
+
+    })
 
   }
 
