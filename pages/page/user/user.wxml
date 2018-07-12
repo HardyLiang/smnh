@@ -21,7 +21,7 @@
         <view class="navigator-arrow"></view>
       </view>
     </navigator>
-    <navigator url="../message_list/message_list">
+    <navigator url="../message_list/message_list" hidden='true'>
       <view class='user-list-item'>
         <view>
           <image class="income-icon" src="../../images/ic_tip_message_left_default.png"></image>我的消息</view>
@@ -38,7 +38,7 @@
     <navigator url="../about_soft/about_soft">
       <view class='user-list-item'>
         <view>
-          <image class="income-icon" src="../../images/ic_about_software_left.png"></image>联系客服</view>
+          <image class="income-icon" src="../../images/ic_about_software_left.png"></image>关于我们</view>
         <view class="navigator-arrow"></view>
       </view>
     </navigator>

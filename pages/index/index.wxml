@@ -17,7 +17,7 @@
   </view>
   <!-- /菜单 -->
   <!-- 我的消息 -->
-  <view class='message-item'>
+  <view class='message-item' hidden='true'>
     <view class='message-style'>
       <image class="message-icon" src="../images/ic_notice_blue_default.png"></image>我的消息
       <!-- <text>2018-04-08 12:12:12</text> -->

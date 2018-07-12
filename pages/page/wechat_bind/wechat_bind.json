@@ -1,6 +1,4 @@
 {
-  "navigationBarTitleText": "微信绑定",
-  "usingComponents": {
-    "dialog": "../dialog/dialog"
-  }
+  "navigationBarTitleText": "微信绑定"
+ 
 }

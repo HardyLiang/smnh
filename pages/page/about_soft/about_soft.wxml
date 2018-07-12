@@ -1,5 +1,4 @@
 <view class='about-soft'>
 <image src='../../images/ic_web_center.png' class='user-head'></image>
-    <text class='user-name color-blue'>系统版本：1.132.23.34</text>
-    <text class='user-name color-blue'>系统版本：1.132.23.34</text>
+    <text class='user-name color-blue'>脱贫致富，用实名农户！</text>
 </view>

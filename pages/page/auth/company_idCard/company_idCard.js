@@ -119,13 +119,13 @@ Page({
     })
   },
   updataFile:function(status,path,cb){
-    getApp().func.upLoadPicture("", status, path,"", function (message, res) {
+    getApp().func.upLoadPicture("", status, path, "", "", function (message, res) {
       if (res) {
         if (status == common.CC_UPLOAD_STATUS_IDCARD){
-          wx.setStorageSync(common.CC_IDCARD_FRONT, res);
+          wx.setStorageSync(common.CC_IDCARD_FRONT, res.url);
         }else
           if (status == common.CC_UPLOAD_STATUS_IDCARD_BACK){
-            wx.setStorageSync(common.CC_IDCARD_BACK, res);
+            wx.setStorageSync(common.CC_IDCARD_BACK, res.url);
         }
         return typeof cb == "function" && cb(true)
       }else{

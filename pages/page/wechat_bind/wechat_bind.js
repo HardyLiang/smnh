@@ -10,9 +10,9 @@ Page({
     second: 60,
     selected: false,
     selected1: true,
-    dialogViewHiddlen: false,
-    dialogTitle: "",
-    dialogContent: "",
+    // dialogViewHiddlen: false,
+    // dialogTitle: "",
+    // dialogContent: "",
     encryptedData:"",
     iv:"",
     session_key:'',
@@ -64,7 +64,7 @@ Page({
      */
   onReady: function () {
     //获得dialog组件
-    this.dialog = this.selectComponent("#dialog");
+    // this.dialog = this.selectComponent("#dialog");
 
   },
   /**
@@ -206,19 +206,19 @@ Page({
      }
    });
   },
-  //弹出窗取消事件
-  _cancelEvent() {
-    console.log('你点击了取消');
-    this.dialog.hideDialog();
-  },
-  //弹出窗确认事件
-  _confirmEvent(e) {
-    console.log('你点击了确定');
-    this.dialog.hideDialog();
-    //获取用户输入的值
-    var content = wx.getStorageSync("dialogContent");
-    console.log("获取用户输入" + content);
-  }
+  // //弹出窗取消事件
+  // _cancelEvent() {
+  //   console.log('你点击了取消');
+  //   this.dialog.hideDialog();
+  // },
+//   //弹出窗确认事件
+//   _confirmEvent(e) {
+//     console.log('你点击了确定');
+//     this.dialog.hideDialog();
+//     //获取用户输入的值
+//     var content = wx.getStorageSync("dialogContent");
+//     console.log("获取用户输入" + content);
+//   }
 })
 /**
  * 公用方法 获取验证码倒计时

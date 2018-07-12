@@ -8,6 +8,7 @@ let KInfoModifySuccess = "KInfoModifySuccess";//用于修改信息成功
 let KUploadMainImgSuccess = "KUploadMainImgSuccess";//用于上传主图成功
 let KUpdateGoodInfoSuccess = "KUpdateGoodInfoSuccess";//用于修改产品信息成功
 let KEVGGspValSuccess = "KEVGGspValSuccess";//用于修改多规格成功返回
+let KUploadDetailSuccess = "KUploadDetailSuccess";//用于修改详情图片成功
 
 let kProductRecommendPurchaseSuccessEvent = 'kProductRecommendPurchaseSuccessEvent' //购买推介成功的通知
 
@@ -61,3 +62,4 @@ exports.KInfoModifySuccess = KInfoModifySuccess;
 exports.KUploadMainImgSuccess = KUploadMainImgSuccess;
 exports.KUpdateGoodInfoSuccess = KUpdateGoodInfoSuccess;
 exports.KEVGGspValSuccess = KEVGGspValSuccess;
+exports.KUploadDetailSuccess = KUploadDetailSuccess;

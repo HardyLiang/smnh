@@ -22,102 +22,23 @@ Page({
         src: avatar
       })
     }
+    //获取信息
+    this.updateData();
+ 
+   
 
  
   },
   onShow: function (options) {
     console.log('user=====onShow');
     var that =this ;
-    event.on(event.kLoginSuccessEventName, this, function (data) {
-      console.log("我去我收到信息了");
-      var name =wx.getStorageSync("userName");
-      var farmerId =wx.getStorageSync('farmerId');
-      console.log("farmerId=" + farmerId);
-      //联网刷新数据
-      app.func.getPersonMsg(function(message,res){
-        console.log(res)
-        if (!res){
-          wx.showToast({
-            title: message,
-            icon:"none"
-          })
-        }
-        console.log()
-        //获取信息成功.给页面赋值
-        that.setData({
-          imgValue: res.data.store_information.store_logo,
-          mobileValue: res.data.store_information.store_telephone,
-          userNameValue: res.data.store_information.store_name,
-          shipValue: '描述：' + res.data.store_information.descriptionEvaluate ,
-          serviceValue: '服务：' + res.data.store_information.serviceEvaluate,
-          storeValue: '发货：' + res.data.store_information.shipEvaluate,
-          btnFlag:true,
-          btnValue:"注销登录"
-        })
-        //保存个人信息列表
-        wx.setStorageSync(common.CC_MOBILE, res.data.store_information.store_telephone);
-        
-        wx.setStorageSync(common.CC_STORE_URL, res.data.store_information.store_url);
-        wx.setStorageSync(common.CC_BAND_STATUS, res.data.store_information.farmer_idcard_status);
-        var storeStatus = res.data.store_information.store_status;
-        var storeAll = res.data.store_information.store_all
-        setTimeout(function(){
-          if (storeStatus != "15") {
-            var message = "店铺异常,请联系客服！";
-            if (storeStatus == "20") {
-              message = "违规关店,请联系客服!"
-              wx.showModal({
-                title: '注意',
-                content: message,
-                showCancel: false,
-                success: function (res) {
-                  if (res.confirm) {
-                    //店铺违规了。。应该做神马东西
-                  }
-                }
-              })
-            } else
-              if (storeStatus == "10" || storeStatus == "11") {
-                if (storeAll && storeStatus != "11"){
-                  message = "店铺待审核,请耐心等待"
-                }else
-                  if (storeAll && storeStatus == "11"){
-                  message = "店铺审核失败，请重新上传相关信息！"
-                }else{
-                    message ="请上传相关证件审核以激活店铺"
-                }
-                wx.showModal({
-                  title: '注意',
-                  content: message,
-                  cancelText:"上传执照",
-                  confirmText: "上传证件",
-                  success: function (res) {
-                    if (res.confirm) {//跳转上传身份证
-                      wx.navigateTo({
-                        url: '../page/auth/company_idCard/company_idCard?type=modify',
-                      })
-                    }else
-                      if (res.cancel){//跳转上传营业执照
-                        wx.navigateTo({
-                          url: '../page/auth/company_license/company_license?type=modify',
-                        })
-                    }
-                  }
-                })
-              }
-            
-          }
-        },2000);
-       
-      });
-     
-    })
+    this.updateData();
     //收到剪切返回
     event.on(this.data.cropBack, this, function (data) {
       console.log("我收到裁剪图片啦" + data);
       var imgUrl=data;
       //联网修改图片
-      getApp().func.upLoadPicture('', common.CC_UPLOAD_STATUS_HEAD, imgUrl,"",function (message, res) {
+      getApp().func.upLoadPicture('', common.CC_UPLOAD_STATUS_HEAD, imgUrl, "", "",function (message, res) {
         console.log(res)
         if (!res) {
           wx.showModal({
@@ -130,7 +51,7 @@ Page({
             title: message,
           })
           that.setData({
-            imgValue:res
+            imgValue:res.url
           })
         }
       });
@@ -147,7 +68,7 @@ Page({
   onUnload:function(options) {
     console.log('user=====onUnload');
     //页面销毁清除页面event接收事件
-    event.remove(event.kLoginSuccessEventName,this);
+   
     event.remove(this.data.cropBack, this);
   }, 
   LoginTap:function(){
@@ -182,9 +103,9 @@ Page({
    * 进入个人信息
    */
   InInfoList:function(){
-    // if (!util.checkIsLogin()) {
-    //   return;
-    // }
+    if (!util.checkIsLogin('../../page/auth/login/login')) {
+      return;
+    }
     wx.navigateTo({
       url: "../info_list/info_list"
     })
@@ -193,9 +114,9 @@ Page({
    * 修改头像
    */
   uploadImg:function(){
-    // if (!util.checkIsLogin()) {
-    //   return;
-    // }
+    if (!util.checkIsLogin('../../page/auth/login/login')) {
+      return;
+    }
     var that =this;
     wx.chooseImage({
       count: 1, // 默认9
@@ -209,5 +130,24 @@ Page({
       }
     })
   },
+  updateData:function(){
+    if ("" != getApp().globalData.userName || "" != getApp().globalData.idCard) {
+      console.log("已登录")
+      var res = wx.getStorageSync(common.CC_FARMERINFO);
+      if (res != null) {
+        //获取信息成功.给页面赋值
+        this.setData({
+          imgValue: res.data.store_information.store_logo,
+          mobileValue: res.data.store_information.store_telephone,
+          userNameValue: res.data.store_information.store_name,
+          shipValue: '描述：' + res.data.store_information.descriptionEvaluate,
+          serviceValue: '服务：' + res.data.store_information.serviceEvaluate,
+          storeValue: '发货：' + res.data.store_information.shipEvaluate,
+          btnFlag: true,
+          btnValue: "注销登录"
+        })
+      }
+    }
+  }
 
 })

@@ -36,7 +36,7 @@ Page({
         showCancel:false
       })
     }else{ 
-      getApp().func.upLoadPicture("", status, path, "",function(message,res){
+      getApp().func.upLoadPicture("", status, path, "","",function(message,res){
             wx.showModal({
               title: '提示',
               content: message,
@@ -50,7 +50,7 @@ Page({
               }
             })
             if(res){
-              wx.setStorageSync(common.CC_BUSINESS_LICENSE, res);
+              wx.setStorageSync(common.CC_BUSINESS_LICENSE, res.url);
             }
       })
 

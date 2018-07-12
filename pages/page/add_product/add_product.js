@@ -42,8 +42,11 @@ Page({
     this.setData({
       status: statusType
     })
+    
+    
     if (statusType=="modify"){//修改
       app.globalData.productPublic[common.CC_PRODUCT_GOOD_ID] = goodId;
+      app.globalData.productPublic[common.CC_PRODUCT_PROFIT_2] = 0;
       var info = wx.getStorageSync(common.CC_GOOD_INFO);
       console.log(info)
       var goodsInvenType = info.goodsInventoryType;
@@ -122,13 +125,15 @@ Page({
         isShowModify: isShowModify
       })
     }else{
+      //进入页面首先赋值给让利金0；让利金现在是必传。没有传0
+      app.globalData.productPublic[common.CC_PRODUCT_PROFIT] = 0;
     var showView = true;
     showView: (showView == "true" ? true : false)
     //默认进去就是全局配置
     app.globalData.productPublic[common.CC_PRODUCT_INV_TYPE] = 'all';
     //默认进去就获取店铺的发货地址
     var farmerInfo = wx.getStorageSync(common.CC_FARMERINFO);
-    var areaId = farmerInfo.data.area_id;
+    var areaId = farmerInfo.data.store_information.area_id;
     if (areaId != null && areaId != "") {//地址不为空的时候给组参进行赋值
       app.globalData.productPublic[common.CC_PRODUCT_AREA_ID] = areaId;
     } else {
@@ -138,6 +143,9 @@ Page({
         content: '亲，你没有设置发货地址，请进入我的信息进行修改！',
         success: function (res) {
           if (res.confirm) {//跳转到我的信息
+          wx.navigateTo({
+            url: '../../../../../info_list/info_list',
+          })
           }
         }
       })
@@ -153,7 +161,7 @@ Page({
       profit: that.data.showView ? "" : profit
     })
     if (that.data.status=="modify"){
-      app.globalData.productPublic[common.CC_PRODUCT_PROFIT_2] = "";
+      app.globalData.productPublic[common.CC_PRODUCT_PROFIT_2] = "0";
     }
   },
 
@@ -329,6 +337,7 @@ Page({
   onUnload: function () {
     //页面销毁清除页面event接收事件
     event.remove(event.KChooseGoodItemSuccessEventName, this);
+    event.remove(event.KEVGGspValSuccess,this)
   },
   /**
    * 用户输入绑定
@@ -461,23 +470,39 @@ Page({
 
     }else{
     //首先检测用户每个参数是否填写完整；
-    // if (util.checkEmpty(this.data.chooseGoods,"请选择产品类型")){
-    //   return;
-    // }
-    // if (util.checkEmpty(this.data.goodname, "请输入产品名称")) {
-    //   return;
-    // }
-    // console.log(this.data.mininumber)
-    // if (util.checkEmpty(this.data.mininumber, "请输入零售价")) {
-    //   return;
-    // }
-    // if (util.checkEmpty(this.data.spec, "请添加规格")) {
-    //   return;
-    // }
+    if (util.checkEmpty(this.data.chooseGoods,"请选择产品类型")){
+      return;
+    }
+    if (util.checkEmpty(this.data.goodname, "请输入产品名称")) {
+      return;
+    }
+    console.log(this.data.mininumber)
+    if (util.checkEmpty(this.data.mininumber, "请输入零售价")) {
+      return;
+    }
+    if (this.data.invType == "all"){
+      if (util.checkEmpty(this.data.allItem[0].count, "请输入库存")) {
+        return;
+      }
+      if (util.checkEmpty(this.data.allItem[0].name, "请输入规格")){
+        return;
+      }
+    }else
+      if (this.data.invType == "spec"){
+        for(var i =0 ;i<this.data.normLists.length;i++){
+          if (util.checkEmpty(this.data.normLists[i].name, "请输入第"+(i+1)+"个的规格")) {
+            return;
+          }
+          if (util.checkEmpty(this.data.normLists[i].price, "请输入第" + (i + 1) +"个的价格")) {
+            return;
+          }
+          if (util.checkEmpty(this.data.normLists[i].count, "请输入第" + (i + 1) + "个的库存")) {
+            return;
+          }
+        }
+        
+      }
 
-    // if (util.checkEmpty(this.data.stock, "请输入库存")) {
-    //   return;
-    // }
     
     if (this.data.invType=="spec"){//规格配置
       params[common.CC_PRODUCT_SPECS_INFO] = JSON.stringify(this.data.normLists);
@@ -488,6 +513,7 @@ Page({
       }
     //联网获取数据
     app.func.addOnlyProduct(params, function (message, res) {
+      console.log(res)
       if (!res) {//失败
         wx.showModal({
           title: '提示',
@@ -496,16 +522,14 @@ Page({
         })
         return;
       } else {//成功，跳转回产品列表页
-      wx.showToast({
-        title: message,
-      })
         //通知我的产品列表页面告诉他老子发布成功了
+        var goodId = res;
         event.emit(event.KProductPublishSuccess, message);
         //发布成功跳转到上传产品主图
         wx.navigateTo({
-          url: "product_img/product_img?type=moidify"
+          url: "product_img/product_img?type=add&goodId=" + goodId
         })
-      }
+      } 
     });
     }
   },

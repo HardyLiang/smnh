@@ -39,11 +39,11 @@ Page({
           'text': '实名开店',
           'url': 'operation_detail/operation_detail?status=smkd'
         },
-        {
-          'icon': '../../images/ic_web_more.png',
-          'text': '更多',
-          'url': ''
-        }
+        // {
+        //   'icon': '../../images/ic_web_more.png',
+        //   'text': '更多',
+        //   'url': ''
+        // }
       ]
     })
   },

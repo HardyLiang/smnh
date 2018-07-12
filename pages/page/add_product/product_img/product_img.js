@@ -11,7 +11,7 @@ Page({
     status:"",
     goodId:"",
     isModifyMain:false,//是否修改了主图
-    isModifySec:false//是否修改次图
+    isModifySec:false,//是否修改次图
   },
 
   onLoad: function (options) {
@@ -77,17 +77,23 @@ Page({
         success: function (res) {
           console.log(res)
            if(that.data.imageList.length>0){
-             list.concat(that.data.imageList)
+             for (var y = 0; y < that.data.imageList.length;y++){
+               list.push(that.data.imageList[y])
+             }
            }
           console.log(list)
+          var index = list.length==0?0:list.length-1;
           var imgsrc = res.tempFilePaths;
           for (var i = 0; i < imgsrc.length;i++){
             // imageList = imageList.concat(imgsrc[i]);
             list.push(imgsrc[i])
           }
           that.setData({
-            imageList: list
+            imageList: list,
+            isModifySec:true,
+
           });
+        
           
         },
         fail: function () {
@@ -129,7 +135,8 @@ Page({
     event.on(this.data.cropBack, this, function (data) {
       console.log("我收到裁剪图片啦" + data);
       that.setData({
-        imgUrlValue: data
+        imgUrlValue: data,
+        isModifyMain:true
       })
     });
 
@@ -139,7 +146,12 @@ Page({
       var index= data;
       var maxIndex = that.data.imageList.length
       if (index<maxIndex){
-        that.uploadSecPic(that.data.goodId, common.CC_UPLOAD_STATUS_MAIN, index, that.data.imageList[index])
+        var oldId=""
+        if (index<that.data.imageListSave.length){
+          oldId = that.data.imageListSave[index].id;
+        }
+      that.uploadSecPic(that.data.goodId, common.CC_UPLOAD_STATUS_MAIN,
+       index, that.data.imageList[index], oldId);
       }else{
         wx.showModal({
           title: '提示',
@@ -168,38 +180,62 @@ Page({
     var status = common.CC_UPLOAD_STATUS_MAIN;
     //将图片先上传到服务上并返回路径作为产品发布的入参；
     console.log("goodId=" + goodId + "status=" + status)
-    if (this.data.status=="modify"){
-      console.log("modify")
-      getApp().func.upLoadPicture(goodId, status, this.data.imgUrlValue,"1", function (message, res) {
-        if(res){//成功，上传次图
-          if (that.data.imageList.length>0){
-            that.uploadSecPic(goodId, status, 0, that.data.imageList[0])
-          }else{
+    if (that.data.isModifyMain){
+      getApp().func.upLoadPicture(goodId, status, this.data.imgUrlValue, "1","", function (message, res) {
+        if (res) {//成功，上传次图
+          if (that.data.imageList.length > 0) {
+            var oldId = ""
+            if (that.data.imageListSave.length>0) {
+              oldId = that.data.imageListSave[0].id;
+            }
+            that.uploadSecPic(goodId, status, 0, that.data.imageList[0],oldId)
+          } else {
             wx.showModal({
               title: '提示',
               content: message,
-              showCancel:false
+              showCancel: false
             })
           }
-        }else{
+        } else {
           wx.showToast({
             title: message,
           })
         }
 
       });
-
-
-    }else{
-      console.log("upload")
     }
-   
-   
+    if (that.data.isModifySec){//修改次图
+     
+    }
+  },
+  /**
+   * 修改次图
+   */
+  modifySec:function(e){
+    if (that.data.imageList.length > 0) {
+      //修改次图有三种情况
+      if (that.data.imageListSave.length>0&&
+      that.data.imageListSave.length < that.data.imageList.length) {//用户只做了删除操作
+        wx.showModal({
+          title: '提示',
+          content: '亲，次图暂不支持删除，可以使用替换操作！',
+          showCancel:false
+        })
+        }else
+        if (that.data.imageListSave.length > 0&&that.data.imageListSave.length < that.data.imageList.length){
+          
+        }
+      var oldId = ""
+      if (that.data.imageListSave.length > 0) {
+        oldId = that.data.imageListSave[0].id;
+      }
+      that.uploadSecPic(goodId, status, 0, that.data.imageList[0], oldId)
+    } 
 
   },
-  uploadSecPic: function (goodId, status, index, img){
+  uploadSecPic: function (goodId, status, index, img,oldId){
     var that =this;
-    getApp().func.upLoadPicture(goodId, status, img, "2",function (message, res) {
+    getApp().func.upLoadPicture(goodId, status, img, "2",oldId,function (message, res) {
       index=index+1
       if(res){
           event.emit(event.KUploadMainImgSuccess,index)
@@ -213,6 +249,23 @@ Page({
 
     })
 
+  },
+  showSuccessDialog:function(message){
+    wx.showModal({
+      title: '提示',
+      content: message,
+      confirmText:"上传详情",
+      cancelText:"返回上级",
+      success:function(res){
+        if(res.confirm){//跳转详情
+          wx.redirectTo({
+            url: '../product_detail/product_detail?type=modify&goodId=' + that.data.goodId,
+        })
+        }else{
+         wx.navigateBack()
+        }
+      }
+    })
   }
 
 

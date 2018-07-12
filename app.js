@@ -140,7 +140,8 @@ App({
     upLoadPicture: http.upLoadPicture,
     getBankType: http.getBankType,
     updatePersonMsg: http.updatePersonMsg,
-    updateOnlyProduct: http.updateOnlyProduct
+    updateOnlyProduct: http.updateOnlyProduct,
+    modifyMainPic: http.modifyMainPic
     
 
   }

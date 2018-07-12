@@ -1713,16 +1713,28 @@ function unBandWX(cb) {
 /**
  * 上传图片
 */
-function upLoadPicture(id,method,filePath,isMain,cb) {
+function upLoadPicture(id,method,filePath,isMain,oldId,cb) {
   var params={};
    if(isMain=="1"||isMain=="2"){
-     params = {
-       user_id: user_id,
-       token: token,
-       id: id,
-       method: method,
-       isMainPicture: isMain
+     if (oldId!=null&&oldId!=""){
+       params = {
+         user_id: user_id,
+         token: token,
+         id: id,
+         method: method,
+         isMainPicture: isMain,
+         old_id: oldId
+       }
+     }else{
+       params = {
+         user_id: user_id,
+         token: token,
+         id: id,
+         method: method,
+         isMainPicture: isMain
+       }
      }
+    
    }else{
     params={
       user_id: user_id,
@@ -1743,14 +1755,16 @@ function upLoadPicture(id,method,filePath,isMain,cb) {
     formData: params,
     complete: function (res) {
       console.log(res);
-      console.log(res.data);
-      var result = JSON.parse(res.data)
+      var result = res.data
+      if (!Array.isArray(result)){
+        result = JSON.parse(result)
+      }
       var statusCode = result.statusCode
       var message = result.message;
       console.log(message);
       console.log(statusCode);
       if (statusCode == "200") {
-        return typeof cb == "function" && cb(message, result.data.url)
+        return typeof cb == "function" && cb(message, result.data)
       } else {
         if (message == null || message == "") {
           message = "上传失败！"
@@ -1802,39 +1816,34 @@ function getBankType(cb) {
  * 上传图片
 */
 function modifyMainPic(goods_id, oldPictureUrl, newPictureId, cb) {
-  wx.uploadFile({
+  wx.request({
     url: urlSet.updataGoodsDetail,
-    filePath: filePath,
-    name: 'imgFile',
     header: {
-      "content-type": "multipart/form-data;",
+      "content-type": "application/x-www-form-urlencoded;",
       "verify": verify
     },
-    formData: {
+    method: "post",
+    data: util.json2Form({
       user_id: user_id,
       token: token,
-      id: id,
-      method: method
-    },
-    complete: function (res) {
+      goods_id: goods_id,
+      oldPictureUrl: oldPictureUrl,
+      newPictureId: newPictureId
+    }),
+    success: function (res) {
       console.log(res);
-      console.log(res.data);
-      var result = JSON.parse(res.data)
-      var statusCode = result.statusCode
-      var message = result.message;
-      console.log(message);
+      var statusCode = res.data.statusCode
+      var message = res.data.message;
       console.log(statusCode);
       if (statusCode == "200") {
-        return typeof cb == "function" && cb(message, result.data.url)
+        return typeof cb == "function" && cb("保存产品详情成功！", true)
       } else {
-        if (message == null || message == "") {
-          message = "上传失败！"
-        }
-        return typeof cb == "function" && cb(message, false)
+       
+        return typeof cb == "function" && cb("保存产品详情失败！", false)
       }
     },
     fail: function () {
-      return typeof cb == "function" && cb("上传失败！", false)
+      return typeof cb == "function" && cb("保存产品详情失败！", false)
     },
 
   })

@@ -1,25 +1,19 @@
 <view class='product-info-img'>
     <text class="product-title">产品详情</text>
     <view class='upload-detail-info'>
-    <view class='uploadList' wx:for="{{photoBoxList}}" wx:key="{{index}}">
-      <view class='upload-type-text'>图片部分 <text class='up-pos up-btn' ></text> <text class='down-pos down-btn'></text> <image src='../../../images/icon_delete.png' catchtap="deleteList" class='icon-delete-detail' ></image></view>
+    <view class='uploadList' wx:for="{{photoBoxList}}" wx:key="{{item}}" wx:for-index="ids">
+      <view class='upload-type-text'>图片部分 <view class='up-pos up-btn' catchtap='upChangePosition'
+      data-index="{{ids}}"></view> <view class='down-pos down-btn' catchtap='downChangePosition'
+      data-index="{{ids}}"></view> <image src='../../../images/icon_delete.png' catchtap="deleteList" data-index="{{ids}}" class='icon-delete-detail' ></image></view>
       <view class='upload-imgBox'>    
     <view class="uploadInput-box" > +
-           <image src='{{item.imgUrlDetail}}'  mode='aspectFill' class='up-image-detail' bindtap="chooseDetailImage" data-index="{{indexPic}}"></image>
+           <image src='{{item.url}}'  mode='aspectFill' class='up-image-detail' bindtap="chooseDetailImage" data-index="{{ids}}"></image>
         </view>
-
       </view>
     </view>
-<view class='uploadList'  wx:for="{{textBoxList}}" wx:key="{{index}}">
-      <view class='upload-type-text'>文字部分 <text class='up-pos up-btn'></text> <text class='down-pos down-btn'></text> <image src='../../../images/icon_delete.png' catchtap="deleteList" class='icon-delete-detail'  data-index="{{textIndex}}"></image></view>
-    
-      <textarea placeholder='添加文字描述' class='detail-text' value="{{item.textVal}}" >
-      </textarea> 
-    </view>
-
-    <button class='add-btn' bindtap='insertText'>+ 添加文字</button>
-    <button class='add-btn' bindtap='insertPhoto'>+ 添加图片</button>
-    </view>
-
+    </view> 
 </view>
-<button class='big-btn'>确定</button>
+<view class=''>
+<button class='big-btn' catchtap='addPicture'>添加图片</button>
+<button class='big-btn' catchtap='uploadPic'>确定</button>
+</view>

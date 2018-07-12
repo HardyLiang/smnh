@@ -65,7 +65,7 @@
   </view>
   <button class='red-big-btn' catchtap='unbindBtn' >解绑</button>
 </view>
-<!-- 页面弹窗 -->
+  <!-- 页面弹窗 
 <view class="container">
     <dialog id='dialog' 
       title='{{dialogTitle}}' 
@@ -75,4 +75,4 @@
       bind:cancelEvent="_cancelEvent"  
       bind:confirmEvent="_confirmEvent">
     </dialog>
-</view>
+</view>  -->

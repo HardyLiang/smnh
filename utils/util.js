@@ -36,7 +36,7 @@ function json2Form(json) {
 }
 
 //判断是否登录了
-function checkIsLogin() {
+function checkIsLogin(url) {
   if ("" == this.trim(getApp().globalData.userName) || "" == this.trim(getApp().globalData.idCard)) {
     wx.showModal({
       title: '提示',
@@ -45,7 +45,8 @@ function checkIsLogin() {
       success: function (res) {
         if (res.confirm) {
           wx.navigateTo({
-            url: '../page/auth/login/login',
+            // url: '../page/auth/login/login',
+            url: url,
           })
         } else if (res.cancel) {
 
