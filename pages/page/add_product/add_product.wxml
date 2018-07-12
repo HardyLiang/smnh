@@ -2,7 +2,7 @@
   <view class='form-group'>
     <view class="input-item">
       <text class="input-item-label">产品类型</text>
-      <view class="input-item-content" bindtap='onProductClassify'>
+      <view class="input-item-content arrow-btm" bindtap='onProductClassify'>
         <input type="text" placeholder="请选择产品类型" value="{{chooseGoods}}" disabled='true'></input>
       </view>
     </view>
@@ -56,7 +56,7 @@
   <view class='form-group pos-re' data-index="{{index}}"
    wx:for="{{normLists}}" wx:key="item" >
     <view class='delete-box'>
-      <image src='../../images/ic_img_delete_pressed.png' class='delete-button' 
+      <image src='../../images/ic_login_gray_delete_left.png' class='delete-button' 
       data-index="{{index}}" bindtap='deleteNormList'></image>
     </view>
     <view class="input-item">
@@ -97,11 +97,12 @@
     <view class='proxy-box'>
       <view class="input-item-content">
         <label bindtap="onChangeShowState">
-          <icon size='22' type='success' wx:if="{{showView}}"></icon>
-          <icon size='24' type='circle' wx:else></icon>
-          我要分销
+          <!-- <icon size='22' type='success' wx:if="{{showView}}"></icon>
+          <icon size='24' type='circle' wx:else></icon> -->
+          <checkbox value="我要分销" checked='{{showView}}'/> 我要分销
           <text class='proxy-msg'>(我分出一部分利润，让别人帮我卖)</text>
         </label>
+        
       </view>
       <view class="hide{{showView?'show':''}}">
         <view class="input-item">

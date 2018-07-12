@@ -65,7 +65,7 @@ Page({
     var leftHeight = 0;
     wx.getSystemInfo({
       success: function (res) {
-        leftHeight = res.windowHeight - 40
+        leftHeight = res.windowHeight 
       }
     })
     this.setData({

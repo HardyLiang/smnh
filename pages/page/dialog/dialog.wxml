@@ -8,6 +8,7 @@
         <view class='wx-dialog-footer'>
           <view class='wx-dialog-btn' catchtap='_cancelEvent'>{{ cancelText }}</view>
           <view class='wx-dialog-btn' catchtap='_confirmEvent' data-type="{{dialogType}}">{{ confirmText }}</view>
-        </view>
+        </view> 
+       
     </view>
 </view>

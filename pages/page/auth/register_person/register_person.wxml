@@ -26,7 +26,7 @@
     </view> 
     <view class="input-item">
       <text class="input-item-label">性别</text>
-      <picker class="input-item-content" bindchange="bindSexChange" value="{{index}}" range="{{sex}}">
+      <picker class="input-item-content arrow-btm" bindchange="bindSexChange" value="{{index}}" range="{{sex}}">
         <view class="picker">
           {{sex[index]}}
         </view>
@@ -74,7 +74,7 @@
     </view>
     <view class="input-item">
       <text class="input-item-label">开户行</text>
-      <picker class="input-item-content" bindchange="bindBankChange" value="{{bankIndex}}" range="{{bank}}"  range-key='bankName'>
+      <picker class="input-item-content arrow-btm" bindchange="bindBankChange" value="{{bankIndex}}" range="{{bank}}"  range-key='bankName'>
         <view class="picker">
           {{bank[bankIndex].bankName}}
         </view>
@@ -97,7 +97,7 @@
     </view>
     <view class="input-item">
       <text class="input-item-label">开户类型</text>
-      <picker class="input-item-content" bindchange="bankTypeChange" value="{{bankTypeindex}}" range="{{bankType}}">
+      <picker class="input-item-content arrow-btm" bindchange="bankTypeChange" value="{{bankTypeindex}}" range="{{bankType}}">
         <view class="picker">
           {{bankType[bankTypeindex]}}
         </view>

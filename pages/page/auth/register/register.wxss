@@ -6,7 +6,7 @@ page{
   height: 60px;
   border-radius: 50%;
   display: block;
-  margin: 15px auto 12px;
+  margin: 28px auto 18px;
 
 }
 

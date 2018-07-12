@@ -1,9 +1,10 @@
   <view class='product-info-img'>
-    <text class="product-title">产品主图 <text class='label-msg'>（第一张必传，最多可上传5张）</text>
+    <text class="product-title">产品主图 <text class='label-msg'>（第一张必传，点击替换）</text>
    </text>
     <view class='up-image'> + 上传封面图 
     <image src='{{imgUrlValue}}' catchtap='uploadImg' mode='aspectFill' class='up-image-info'></image>
     </view>
+    <text class="product-title">其他详细图</text>
     <view class='product-upload'>
       <!-- start -->
       <view class="weui-uploader__bd">

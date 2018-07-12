@@ -1,4 +1,7 @@
 <view class='about-soft'>
 <image src='../../images/ic_web_center.png' class='user-head'></image>
     <text class='user-name color-blue'>脱贫致富，用实名农户！</text>
+    <view>
+    <button open-type="contact" class='big-btn' >联系客服</button>
+    </view>
 </view>

@@ -1,8 +1,7 @@
 <view class='flex-wrap'>
-<view class='search-box'>
+<!-- <view class='search-box'>
     <input type="text" placeholder="请输入搜索分类" class='search-input'></input>
-
-</view>
+</view> -->
 <view class="classify-container flex-wrap flex-direction-row" style="height:{{leftHeight}}px">
 	<!-- left aside -->
 	<view class="aside flex-wrap flex-direction-col">

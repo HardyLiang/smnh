@@ -17,3 +17,4 @@ background: #fff;
 .user-name{
   line-height: 34px;
 }
+.big-btn{padding: 2px 15px;}
