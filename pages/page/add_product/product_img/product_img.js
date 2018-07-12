@@ -164,7 +164,6 @@ Page({
   onUnload: function (options) {
     console.log('user=====onUnload');
     //页面销毁清除页面event接收事件
-    event.remove(this.data.cropBack, this);
   }, 
   /**
    * 确认上传

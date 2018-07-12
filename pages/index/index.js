@@ -159,9 +159,7 @@ Page({
       url: `../page/${url}/${url}`
     })
   },
-  onUnload:function(e){
-    event.remove(event.kLoginSuccessEventName, this);
-  }
+  
  
 
 

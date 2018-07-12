@@ -335,9 +335,7 @@ Page({
 
   },
   onUnload: function () {
-    //页面销毁清除页面event接收事件
-    event.remove(event.KChooseGoodItemSuccessEventName, this);
-    event.remove(event.KEVGGspValSuccess,this)
+  
   },
   /**
    * 用户输入绑定

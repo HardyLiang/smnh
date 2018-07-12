@@ -22,7 +22,8 @@ Page({
     isHideStore:true,// 是否隐藏店铺信息，默认是隐藏,
     companyName:"",//
     legalPersonName:"",
-    legalPersonIdCard:""
+    legalPersonIdCard:"",
+    cropBack: "headImgInfoBack",//这个是设置裁剪返回的消息名称，可自定义，但是要唯一；
   },
 
   /**
@@ -47,13 +48,38 @@ Page({
     event.on(event.KInfoModifySuccess, this, function (data){
       console.log(data);
       that.getPersonMsg();
-
     });
-    
+    event.on(this.data.cropBack, this, function (data) {
+      console.log("我收到裁剪图片啦" + data);
+      var imgUrl = data;
+      //联网修改图片
+      getApp().func.upLoadPicture('', common.CC_UPLOAD_STATUS_HEAD, imgUrl, "", "", function (message, res) {
+        console.log("成功返回");
+        console.log(res)
+        if (!res) {
+          wx.showModal({
+            title: '提示',
+            content: message,
+            showCancel: false
+          })
+        } else {
+          console.log(message)
+          wx.showToast({
+            title: message,
+          })
+          that.setData({
+            imgUrlValue: res.url
+          })
+          var info=wx.getStorageSync(common.CC_FARMERINFO)
+          info.data.store_information.store_logo = res.url
+          wx.setStorageSync(common.CC_FARMERINFO, info);
+          console.log(res.url)
+        }
+      });
+    });
 
   },
   onUnload:function(){
-
   },
   /**
    * 下拉刷新
@@ -87,15 +113,15 @@ Page({
  * 
  */
   uploadImg: function () {
+    var that =this;
     wx.chooseImage({
       count: 1, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success(res) {
         const src = res.tempFilePaths[0]
-
         wx.navigateTo({
-          url: `../upload/upload?src=${src}`
+          url: `../upload/upload?src=${src}&cropBack=` + that.data.cropBack
         })
       }
     })

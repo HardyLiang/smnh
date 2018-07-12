@@ -107,20 +107,20 @@ Page({
     console.log(e.detail.value);
     var verCode = e.detail.value.vercode;
     //检测用户输入值情况
-    // if (verCode == null || util.trim(verCode) == "") {
-    //   wx.showToast({
-    //     title: '请输入验证码！',
-    //     icon: 'none'
-    //   })
-    //   return;
-    // }
-    // if (verCode != this.data.vercode) {
-    //   wx.showToast({
-    //     title: '请输入正确的验证码！',
-    //     icon: 'none'
-    //   })
-    //   return;
-    // }
+    if (verCode == null || util.trim(verCode) == "") {
+      wx.showToast({
+        title: '请输入验证码！',
+        icon: 'none'
+      })
+      return;
+    }
+    if (verCode != this.data.vercode) {
+      wx.showToast({
+        title: '请输入正确的验证码！',
+        icon: 'none'
+      })
+      return;
+    }
     //联网获取
     getApp().func.bandWX(this.data.encryptedData, this.data.session_key, this.data.iv, function(message,res){
       console.log(res);
@@ -165,20 +165,20 @@ Page({
    console.log(e.detail.value);
    var verCode = this.data.vrcode;
     //检测用户输入值情况
-    // if (verCode == null || util.trim(verCode) == "") {
-    //   wx.showToast({
-    //     title: '请输入验证码！',
-    //     icon: 'none'
-    //   })
-    //   return;
-    // }
-    // if (verCode != this.data.vercode) {
-    //   wx.showToast({
-    //     title: '请输入正确的验证码！',
-    //     icon: 'none'
-    //   })
-    //   return;
-    // }
+    if (verCode == null || util.trim(verCode) == "") {
+      wx.showToast({
+        title: '请输入验证码！',
+        icon: 'none'
+      })
+      return;
+    }
+    if (verCode != this.data.vercode) {
+      wx.showToast({
+        title: '请输入正确的验证码！',
+        icon: 'none'
+      })
+      return;
+    }
    //联网解绑
    getApp().func.unBandWX(function(message,res){
      console.log(res)

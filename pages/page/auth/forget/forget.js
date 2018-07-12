@@ -29,23 +29,8 @@ Page({
     this.setData({
       icCardValue: idCard
     })
-    //联网获取手机号
-    getApp().func.checkMobileByCard(idCard, function (message, res) {
-      console.log(res);
-      if (!res) {
-        wx.showToast({
-          title: message,
-          icon: 'none'
-        })
-        return;
-      }
-      //给页面手机号赋值
-      if (res.data.mobile!=null&&res.data.mobile!=""){
-        that.setData({
-          mobile: res.data.mobile,
-        });
-      }
-    })
+    //获取手机号码
+    this.getPhoneNum(this.data.icCardValue)
 
   },
 
@@ -118,7 +103,7 @@ Page({
       })
     }
     //联网获取数据
-    app.func.fotgetPass(this.data.icCardValue,this.data.mobile, function (message, res) {
+    app.func.fotgetPass(this.data.icCardValue, this.data.mobile, function (message, res) {
       console.log(res)
       if (!res) {
         wx.showToast({
@@ -136,10 +121,11 @@ Page({
       var verCode = res.data;
       console.log(verCode);
       that.setData({
-        vercode:verCode
+        vercode: verCode
       })
 
     });
+
   },
   //更新密码
   updatePass:function(e){
@@ -230,6 +216,39 @@ Page({
 
     });
 
+  },
+  /**
+   * 监听身份证输入
+   */
+  bindblurIdCard:function(e){
+    var content =e.detail.value;
+    console.log(content)
+    if(content.length>10){
+      this.getPhoneNum(content)
+    }
+    this.setData({
+      icCardValue:content
+    })
+  },
+  getPhoneNum:function(idCard){
+    var that =this;
+    //联网获取手机号
+    getApp().func.checkMobileByCard(idCard, function (message, res) {
+      console.log(res);
+      if (!res) {
+        wx.showToast({
+          title: message,
+          icon: 'none'
+        })
+        return;
+      }
+      //给页面手机号赋值
+      if (res.data.mobile != null && res.data.mobile != "") {
+        that.setData({
+          mobile: res.data.mobile,
+        });
+      }
+    })
   }
 
 

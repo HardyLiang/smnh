@@ -25,9 +25,6 @@ Page({
     //获取信息
     this.updateData();
  
-   
-
- 
   },
   onShow: function (options) {
     console.log('user=====onShow');
@@ -53,9 +50,11 @@ Page({
           that.setData({
             imgValue:res.url
           })
+          var info = wx.getStorageSync(common.CC_FARMERINFO)
+          info.data.store_information.store_logo = res.url
+          wx.setStorageSync(common.CC_FARMERINFO, info);
         }
       });
-      event.remove(that.data.cropBack, that);
     });
   
   },
@@ -68,8 +67,6 @@ Page({
   onUnload:function(options) {
     console.log('user=====onUnload');
     //页面销毁清除页面event接收事件
-   
-    event.remove(this.data.cropBack, this);
   }, 
   LoginTap:function(){
     if (this.data.btnFlag){
