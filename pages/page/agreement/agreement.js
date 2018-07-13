@@ -9,7 +9,7 @@ Page({
    urlValue:""
   },
   onLoad:function(){
-    var url = urlSet.baseUrl +"/help/contract/agreement.html";
+    var url = urlSet.farmerPrototal;
     console.log(url);
     this.setData({
       urlValue:url

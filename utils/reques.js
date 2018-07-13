@@ -629,7 +629,7 @@ function addOnlyProduct(params, cb) {
       console.log(message);
       console.log("statusCode" + statusCode);
       if (statusCode != null && "200" == statusCode) {
-        return typeof cb == "function" && cb(message, res)
+        return typeof cb == "function" && cb(message, res.data)
       } else {
         if (message == null || message == "") {
           message = "发布失败！"

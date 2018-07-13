@@ -16,7 +16,7 @@
       <text class='color-orange'>{{serveCharge}}元</text> </view>
     <view class='list-message'>库存： {{preoutput}} </view>
     <view class='list-message'>规格： {{minNumber}}</view>
-    <view class='list-message'>规格描述： {{spec}} </view>
+    <view class='list-message' hidden='true'>规格描述： {{spec}} </view>
     <view>
     <view class='detail-title'>发货描述</view>
     <text class='list-message'>{{productDescription}}</text>
@@ -28,8 +28,8 @@
         <view class="detail_list">
             <block wx:for="{{detailUrls}}"wx:key="item">
                     <view class="detail_item">
-                        <image src="{{item.picPath}}"mode="widthFix"/>
-                        <view class="title" wx:if="{{item.picDesc.length>0}}">{{item.picDesc}}</view>
+                        <image src="{{item}}"mode="widthFix"/>
+                        <!-- <view class="title" wx:if="{{item.picDesc.length>0}}">{{item.picDesc}}</view> -->
                     </view>
             </block>
         </view>

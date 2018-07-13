@@ -38,11 +38,11 @@
        <view class="input-item">
       <text class="input-item-label">规格</text>
       <view class="input-item-content">
-        <input type="text" placeholder="请输入规格" value='{{allItem.name}}'
+        <input type="text" placeholder="请输入规格" value='{{spec}}'
         bindinput='bindInputChange' data-typeName="allItemName"></input>
       </view>
     </view>
-      <view class="input-item">
+      <view class="input-item" hidden='true'>
       <text class="input-item-label">规格描述</text>
       <view class="input-item-content">
         <input type="text" placeholder="请输入规格描述" value='{{packDetails}}'

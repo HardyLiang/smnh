@@ -23,4 +23,4 @@
       <!-- end -->
     </view>
   </view>
-  <button class='big-btn' catchtap='confirmUpLoad'>确认上传</button>
+  <button class='big-btn' catchtap='confirmUpLoad'>前往详情修改</button>

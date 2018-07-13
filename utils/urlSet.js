@@ -40,7 +40,7 @@ var orderShippingUpdate = baseUrl + "app/seller/order_shipping_code_save_mini.ht
 //获取订单物流信息
 var getLogisticsInfo = baseUrl + "app/seller/express_info.htm";
 //农户协议URL
-var farmerPrototal = baseUrl + "/help/contract/agreement.html";
+var farmerPrototal = baseUrl + "wap/mini_agreement.htm";
 //获取协议消息列表
 var getAgreementMessageList = baseUrl + "app/seller/message_list.htm";
 //获取协议消息详细信息

@@ -89,7 +89,8 @@ Page({
         serveCharge: res.data.shareCommission,
         spec: spec,
         imgUrls: mainList,
-        goodInfo:res.data
+        goodInfo:res.data,
+        detailUrls: res.data.goods_details_img_list
       })
     });
   },

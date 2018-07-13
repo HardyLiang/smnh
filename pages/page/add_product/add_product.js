@@ -18,7 +18,7 @@ Page({
     specdescription: "",//规格描述
     stock: "",//库存
     profit: "",//让利
-    remark: "只支持顺风快递",//发货说明
+    remark: "",//发货说明
     normLists: [], //规格列表，
     invType:"all",//库存配置存储字段
     allItem:[{   //全局配置的项目内容暂存
@@ -93,6 +93,17 @@ Page({
         }
       } else {
         app.globalData.productPublic[common.CC_PRODUCT_INV_TYPE] = "all"
+        var mAllItemPrice = 'allItem[' + 0 + '].price';
+        var mAllItemName = 'allItem[' + 0 + '].name';
+        var mAllItemCount = 'allItem[' + 0 + '].count';
+        this.setData({
+          [mAllItemPrice]: info.goodsPrice,
+          [mAllItemCount]: info.goodsInventory,
+          [mAllItemName]: info.goods_gsp_val[0].name,
+          spec: info.goods_gsp_val[0].name
+        })
+        console.log(this.data.allItem)
+        console.log(this.data.spec)
         showInv = false;
         allCheck = true;
         specCheck = false;
@@ -114,7 +125,6 @@ Page({
         showInv: showInv,
         allCheck: allCheck,
         specCheck: specCheck,
-        spec: "",//规格
         stock: info.goodsInventory,//库存
         profit: info.shareCommission,//让利
         remark: info.deliveryTips,//发货说明
@@ -154,6 +164,7 @@ Page({
 
   },
   onChangeShowState: function (e) {
+    console.log(e)
     var that = this;
     var profit = that.data.profit
     that.setData({
@@ -162,6 +173,8 @@ Page({
     })
     if (that.data.status=="modify"){
       app.globalData.productPublic[common.CC_PRODUCT_PROFIT_2] = "0";
+    }else{
+      app.globalData.productPublic[common.CC_PRODUCT_PROFIT] = "0";
     }
   },
 
@@ -411,11 +424,13 @@ Page({
       case "allItemName":
         var mAllItem = 'allItem[' + 0 + '].name';
         app.globalData.productPublic[common.CC_PRODUCT_DSB_GOOD_UNIT] = content;
+        app.globalData.productPublic[common.CC_PRODUCT_SPECS_INFO][0].name=content;
         this.setData({
           [mAllItem]: content
         })
       break;
       case "packDetails":
+        app.globalData.productPublic[common.CC_PRODUCT_SPEC_DESCRIPTION] = content;
        this.setData({
          packDetails:content
        })
@@ -521,10 +536,10 @@ Page({
         return;
       } else {//成功，跳转回产品列表页
         //通知我的产品列表页面告诉他老子发布成功了
-        var goodId = res;
+        var goodId = res.data;
         event.emit(event.KProductPublishSuccess, message);
         //发布成功跳转到上传产品主图
-        wx.navigateTo({
+        wx.redirectTo({
           url: "product_img/product_img?type=add&goodId=" + goodId
         })
       } 

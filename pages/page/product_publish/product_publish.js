@@ -1,5 +1,6 @@
 var common = require('../../../utils/common.js')
 var util = require('../../../utils/util.js')
+var event = require('../../../utils/event.js')
 let tipLoading = "正在加载";
 let tipAlready = "全部加载完毕";
 Page({
@@ -108,6 +109,20 @@ Page({
     //获得dialog组件
     this.dialog = this.selectComponent("#dialog");
     
+  },
+  onShow:function(){
+    event.on(event.KProductPublishSuccess,this,function(res){
+      wx.showNavigationBarLoading(); //在标题栏中显示加载
+      this.setData({
+        isReFresh: true,
+        pageIndex: 1,
+        isHideLoadMore: false,
+        isHideLoadIcon: false,
+        loadmoreTip: tipLoading,
+      })
+      this.getGoodsInfoByCard(this.data.pageIndex)
+    })
+
   },
   /**
    *获取产品列表

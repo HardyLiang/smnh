@@ -7,8 +7,8 @@ Page({
     saveImgList:[],
     goodId:"",
     status:"",
-    index:0,//记录要保存图片Index
-    savaListIndex:[]//记录修改图片的位置
+    index:0,//记录要保存图片Index，
+    isModify:false,
   },
 
   onLoad: function (options) {
@@ -82,12 +82,14 @@ Page({
                 newList[index].url = res.url;
                 newList[index].id =res.id 
                 that.setData({
-                  photoBoxList: newList
+                  photoBoxList: newList,
+                  isModify:true
                 })
               }else{
                 list.push(res)
                 that.setData({
-                  photoBoxList: list
+                  photoBoxList: list,
+                  isModify: true
                 });
               }
              
@@ -138,6 +140,23 @@ Page({
     var that =this;
     var oldPictureUrl=''
     var index = that.data.index;
+    if(that.data.status!="modify"){
+      for (var i = 0; i < that.data.photoBoxList.length;i++){
+        if (that.data.photoBoxList[i].url==""){
+         wx.showToast({
+           title: '请选择图片上传，再保存！',
+         })
+         return;
+        }
+      }
+    }else{
+      if (!that.data.isModify){
+        wx.showToast({
+          title: '亲，请先修改再保存！',
+        })
+        return;
+      }
+    }
     console.log('index====' + index + that.data.photoBoxList[index].id)
     if (that.data.saveImgList != null && that.data.saveImgList.length > index){
       oldPictureUrl = that.data.saveImgList[index]
@@ -147,16 +166,7 @@ Page({
         console.log(res)
         if(res){
           index++
-          if (index>=that.data.photoBoxList.length){
-            wx.showModal({
-              title: '提示',
-              content: message,
-              showCancel:false
-            })
-          }else{
-            event.emit(event.KUploadDetailSuccess, index)
-          }
-         
+            event.emit(event.KUploadDetailSuccess, index) 
         }else{
           wx.showModal({
             title: '提示',
@@ -177,16 +187,24 @@ Page({
         index:res
       })
       if (res >= that.data.photoBoxList.length){
-        wx.showModal({
-          title: '提示',
-          content: "保存产品详情成功！",
-          confirmText:"返回详情",
-          success:function(res){
-            if(res.confirm){
+        
+          wx.showModal({
+            title: '提示',
+            content: "保存产品详情成功！",
+            confirmText: that.data.status == "modify" ? "返回详情" : "返回列表",
+            success: function (res) {
+              if (res.confirm) {
+                if(that.data.status=="modify"){
+                  event.emit(event.KUpdateGoodInfoSuccess, "修改成功")
+                }else{
+                  
+                }
+               
               wx.navigateBack()
+              }
             }
-          }
-        })
+          })
+        
       }else{
         that.uploadPic();
       }
