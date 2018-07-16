@@ -118,10 +118,11 @@
  <!-- 页面弹窗  -->
 <view class="container">
     <dialog id='dialog' 
-      title='{{dialogTitle}}' 
-      content='{{dialogContent}}' 
+      title='' 
       cancelText='取消' 
       confirmText='确认'
+      mobile="{{mobile}}"
+      idCard="{{idCard}}"
       bind:cancelEvent="_cancelEvent"  
       bind:confirmEvent="_confirmEvent">
     </dialog>

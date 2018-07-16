@@ -95,6 +95,7 @@
   padding: 5px 20px;
   position: relative;
   
+  
 }
 .input-item-content input{
   text-align: left;

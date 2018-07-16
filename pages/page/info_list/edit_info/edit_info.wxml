@@ -45,9 +45,9 @@
         </view>
       </picker></view>
     <view class='base-item'>
-      <text>开户地址：</text>  <addr-select bind:select="selectArea" data-typeid="bank"
-       addressLeven="2" >
-    <view class="input-item-pick2 arrow-btm">{{bankAddress}}</view>
+      <text>开户地址：</text>  <addr-select  class="input-item-pick2 arrow-btm"
+      bind:select="selectArea" data-typeid="bank"
+       addressLeven="2" >{{bankAddress}}
   </addr-select></view>
   </view>
   <!-- 开户信息 -->
@@ -86,4 +86,16 @@
       bindinput='bindContentInput' data-type="legalPersonIdCard"></input></view>
   </view>
 <button class='big-btn' catchtap='updateStoreInfo'>保存</button> 
-</view>
+</view> 
+<!-- 页面弹窗  -->
+<view class="container">
+    <dialog id='dialog' 
+      title='' 
+       mobile="{{mobile}}"
+      idCard="{{idCard}}"
+      cancelText='取消' 
+      confirmText='确认'
+      bind:cancelEvent="_cancelEvent"  
+      bind:confirmEvent="_confirmEvent">
+    </dialog>
+</view> 

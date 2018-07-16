@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/page/auth/register_person/register_person",
+    
     "pages/index/index",
     "pages/page/product_publish/product_publish",
     "pages/page/my_order/my_order",
     "pages/page/auth/register/register",
-   
+    "pages/page/auth/register_person/register_person",
     "pages/page/auth/login/login",
     "pages/page/add_product/product_detail/product_detail",
     "pages/page/add_product/product_img/product_img",

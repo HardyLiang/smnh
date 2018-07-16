@@ -12,11 +12,6 @@ Component({
       type: String,     // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）
       value: '标题'     // 属性初始值（可选），如果未指定则会根据类型选择一个
     },
-    // 弹窗内容
-    content: {
-      type: String,
-      value: '弹窗内容'
-    },
     // 弹窗取消按钮文字
     cancelText: {
       type: String,
@@ -26,6 +21,14 @@ Component({
     confirmText: {
       type: String,
       value: '确定'
+    },
+    mobile: {
+      type: String,
+      value: ""
+    },
+    idCard: {
+      type: String,
+      value: ""
     }
   },
 
@@ -37,6 +40,7 @@ Component({
     // 弹窗显示控制
     isShow: false,
     vercode: "",
+    inputcode: "",
     second: 60,
     selected: false,
     selected1: true,
@@ -54,7 +58,11 @@ Component({
     //隐藏弹框
     hideDialog() {
       this.setData({
-        isShow: !this.data.isShow
+        isShow: !this.data.isShow,
+        inputcode: "",
+        selected: false,
+        selected1: true,
+        second: 60,
       })
     },
     //展示弹框
@@ -79,11 +87,16 @@ Component({
       var inputContent = e.detail.value;
       console.log("dialog value =======" + inputContent);
       wx.setStorageSync("dialogContent", inputContent);
+
+      this.setData({
+        inputcode: inputContent
+      })
     },
     /**
    * 获取验证码
    */
     getphone: function () {
+      console.log("getPhone")
       var that = this;
       //联网获取数据
       getApp().func.fotgetPass(that.data.idCard, that.data.mobile, function (message, res) {
@@ -106,6 +119,7 @@ Component({
         that.setData({
           vercode: verCode
         })
+        wx.setStorageSync("dialogVrcode", verCode)
       })
     },
   }
@@ -132,4 +146,3 @@ function countdown(that) {
   }
     , 1000)
 }
- 

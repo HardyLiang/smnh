@@ -1,6 +1,7 @@
 // pages/page/info_list/edit_info/edit_info.js
 var common = require('../../../../utils/common.js')
 var event = require('../../../../utils/event.js')
+var util = require('../../../../utils/util.js')
 Page({
 
   /**
@@ -20,7 +21,7 @@ Page({
     bankTypeindex: 0,
     bankTypeList: ['个人账户', '公司账户'],
     bankType: "",
-    bankAddress: "请选择地址",
+    bankAddress: "",
     addressValue:"",
     detailAddress: "",
     isReFresh: false,//是否刷新
@@ -31,7 +32,9 @@ Page({
     sexList: ['男', '女'],
     sexIndex:0,
     storeName:"",
+    isShowDialog:false//普通信息修改不会弹出验证码，如果涉及手机号，银行账号，开户行，持卡人等才会弹出验证码窗口
     // stroeTypeList:[]
+
   },
 
   /**
@@ -54,6 +57,8 @@ Page({
     console.log(res)
     this.updateView(res);
 
+    //弹出窗口
+    this.dialog = this.selectComponent("#dialog");
     
   },
 
@@ -114,12 +119,15 @@ Page({
         getApp().globalData.infoModify[common.CC_REGISTER_NAME] = content;
       break;
       case "mobile":
+        this.setShowDialog();
         getApp().globalData.infoModify[common.CC_REGISTER_MOBILE] = content;
         break;
       case "bankNum":
+        this.setShowDialog();
         getApp().globalData.infoModify[common.CC_BANKACCOUNT] = content;
         break;
       case "bankAccount":
+        this.setShowDialog();
         getApp().globalData.infoModify[common.CC_BANKNAME] = content;
         break;
       case "detailAddress":
@@ -168,6 +176,10 @@ Page({
     } else {
       isHideStore = true;
     }
+    var bandAdd = res.data.store_information.bank_area_name;
+    if(bandAdd==null||bandAdd==""){
+      bandAdd="请输入开户地址"
+    }
     this.setData({
       imgUrlValue: res.data.store_information.store_logo,
       name: res.data.user_information.true_name,
@@ -179,7 +191,7 @@ Page({
       bankName: res.data.store_information.bank_type_name,
       bankAccount: res.data.store_information.bank_account_name,//持卡人
       bankType: res.data.store_information.bank_line_num,
-      bankAddress: res.data.store_information.bank_area_name,
+      bankAddress: bandAdd,
       addressValue: res.data.store_information.ship_area_name,
       detailAddress: res.data.store_information.ship_address,
       isHideStore: isHideStore,
@@ -205,33 +217,12 @@ Page({
         success:function(res){
         }
       })
-    }else{
-      getApp().func.updatePersonMsg(params,function(message,res){
-        console.log(res);
-        if(!res){
-          wx.showModal({
-            title: '提示',
-            content: message,
-            showCancel: false,
-            success: function (res) {
-            }
-          })
-        }else{
-          wx.showModal({
-            title: '提示',
-            content: message,
-            showCancel: false,
-            success: function (res) {
-              if(res.confirm){
-                //发信息给上个页面告诉他有更新
-                event.emit(event.KInfoModifySuccess, "修改成功！");
-                //退出当前页面
-                wx.navigateBack()
-              }
-            }
-          })
-        }
-      })
+    }else
+      if (this.data.isShowDialog){
+       this.dialog.showDialog();
+    }
+    else{
+        this.updatePersonMsg(params);
     }
   },
   /**
@@ -262,19 +253,28 @@ Page({
     console.log(getApp().globalData.infoModify)
   },
   bindBankChange: function (e) {
+    var oldIndex =this.data.bankIndex;
     var index = e.detail.value;
     var bankName = this.data.bankList[index].bankName;
     var bankId = this.data.bankList[index].id;
+    if(oldIndex!=index){
+      this.setShowDialog();
+    }
     this.setData({
       bankIndex: e.detail.value,
       bankName: bankName
     })
+    
     console.log("bankName=" + bankName + "bankId=" + bankId);
     getApp().globalData.infoModify[common.CC_BANK_TYPE_ID] = bankId;
   },
   bankTypeChange: function (e) {
+    var oldIndex = this.data.bankTypeindex;
     var bankIndex = e.detail.value;
-    var bankTypeName = this.data.bankTypeList[bankIndex]
+    var bankTypeName = this.data.bankTypeList[bankIndex];
+    if (oldIndex != index) {
+      this.setShowDialog();
+    }
     this.setData({
       bankTypeindex: e.detail.value,
       bankType: bankTypeName
@@ -309,5 +309,69 @@ Page({
 
 
   },
+  //取消事件
+  _cancelEvent() {
+    console.log('你点击了取消');
+    this.dialog.hideDialog();
+  },
+  //确认事件
+  _confirmEvent(e) {
+    console.log('你点击了确定');
+
+    //获取验证码
+    var vrCode = wx.getStorageSync(common.CC_DIALOG_CONTENT);
+    var inputcode = wx.getStorageSync(common.CC_DIALOG_VRCODE);
+    if (util.checkEmpty(inputcode, "请输入验证码")) {
+      return;
+    }
+
+    if (inputcode != vrCode) {
+      wx.showModal({
+        title: '提示',
+        content: '验证码输入不正确',
+        showCancel: false
+      })
+
+      return;
+    }
+    this.dialog.hideDialog();
+   //联网组参
+    var params = getApp().globalData.infoModify;
+    this.updatePersonMsg(params);
+
+  },
+  setShowDialog: function(){
+    this.setData({
+      isShowDialog:true
+    })
+  },
+  updatePersonMsg:function(params){
+    getApp().func.updatePersonMsg(params, function (message, res) {
+      console.log(res);
+      if (!res) {
+        wx.showModal({
+          title: '提示',
+          content: message,
+          showCancel: false,
+          success: function (res) {
+          }
+        })
+      } else {
+        wx.showModal({
+          title: '提示',
+          content: message,
+          showCancel: false,
+          success: function (res) {
+            if (res.confirm) {
+              //发信息给上个页面告诉他有更新
+              event.emit(event.KInfoModifySuccess, "修改成功！");
+              //退出当前页面
+              wx.navigateBack()
+            }
+          }
+        })
+      }
+    })
+  }
   
 })

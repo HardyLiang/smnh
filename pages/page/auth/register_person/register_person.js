@@ -229,8 +229,7 @@ Page({
    */
   registerShop:function(){
     var that = this;
-    this.dialog.showDialog();
-    return;
+  
     if (util.checkEmpty(this.data.idCard,"请输入您的身份证号码!")){
       return;
     }
@@ -256,50 +255,7 @@ Page({
       return;
     }
     console.log(getApp().globalData.userRegister)
-    getApp().func.addPersonMsg(getApp().globalData.userRegister,function(message,res){
-      console.log("注册返回成功")
-      console.log(res)
-      if(!res){
-        wx.showModal({
-          title: '提示',
-          content: message,
-          showCancel:false
-        })
-        return;
-      }else{
-        wx.showModal({
-          title: '提示',
-          content: message,
-          showCancel: false,
-          success:function(res){
-            if(res.confirm){//注册成功直接登录
-              var idCard = that.data.idCard;
-              var password = idCard.substr(6, 8) + idCard.substr(16, 1);
-              console.log(password);
-              getApp().func.onLogin(idCard, password, function (message, res) {
-                if (res) {//如果登录成功
-                  event.emit(event.kLoginSuccessEventName, message);
-                  setTimeout(function () {
-                    wx.switchTab({
-                      url: '../../../index/index',
-                    })
-                  }, 1000);
-
-                } else {//登录失败，跳转登录页面
-                  wx.navigateTo({
-                    url: '../../auth/login/login',
-                  })
-                }
-              })
-            }
-          }
-        })
-      }
-
-     
-    })
-
-
+    this.dialog.showDialog();
   },
   /**
    * 银行卡号输入监听
@@ -341,9 +297,71 @@ Page({
     this.dialog.hideDialog();
   },
   //确认事件
-  _confirmEvent() {
+  _confirmEvent(e) {
     console.log('你点击了确定');
-    this.dialog.hideDialog();
+    console.log(e)
+    //获取验证码
+    var vrCode = wx.getStorageSync(common.CC_DIALOG_CONTENT);
+    var inputcode = wx.getStorageSync(common.CC_DIALOG_VRCODE);
+    if (util.checkEmpty(inputcode,"请输入验证码")){
+      return;
+    }
+    
+    if (inputcode != vrCode){
+      wx.showModal({
+        title: '提示',
+        content: '验证码输入不正确',
+        showCancel:false
+      })
+  
+      return;
+    }
+
+   this.dialog.hideDialog();
+    getApp().func.addPersonMsg(getApp().globalData.userRegister, function (message, res) {
+      console.log("注册返回成功")
+      console.log(res)
+      if (!res) {
+        wx.showModal({
+          title: '提示',
+          content: message,
+          showCancel: false
+        })
+        return;
+      } else {
+        wx.showModal({
+          title: '提示',
+          content: message,
+          showCancel: false,
+          success: function (res) {
+            if (res.confirm) {//注册成功直接登录
+              var idCard = that.data.idCard;
+              var password = idCard.substr(6, 8) + idCard.substr(16, 1);
+              console.log(password);
+              getApp().func.onLogin(idCard, password, function (message, res) {
+                if (res) {//如果登录成功
+                  event.emit(event.kLoginSuccessEventName, message);
+                  setTimeout(function () {
+                    wx.switchTab({
+                      url: '../../../index/index',
+                    })
+                  }, 1000);
+
+                } else {//登录失败，跳转登录页面
+                  wx.navigateTo({
+                    url: '../../auth/login/login',
+                  })
+                }
+              })
+            }
+          }
+        })
+      }
+
+
+    })
+    
+  
   }
 
 })

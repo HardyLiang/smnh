@@ -101,6 +101,10 @@ let CC_BAND_STATUS ="farmer_idcard_status"
 //产品修改
 let CC_GOOD_INFO="goodInfo";
 let CC_GOODS_INVENTORY_DETAIL="goods_inventory_detail"
+//弹出框返回暂存
+let CC_DIALOG_CONTENT ="dialogContent";//弹出框用户输入地内容
+let CC_DIALOG_VRCODE="dialogVrcode";//弹出框用户获取的验证码
+
 
 exports.CC_USERNAME = CC_USERNAME;
 exports.CC_IDCARD = CC_IDCARD;
@@ -190,3 +194,5 @@ exports.CC_PRODUCT_GOOD_SEC_LIST = CC_PRODUCT_GOOD_SEC_LIST;
 exports.CC_PRODUCT_PROFIT_2 = CC_PRODUCT_PROFIT_2;
 exports.CC_GOOD_INFO = CC_GOOD_INFO;
 exports.CC_GOODS_INVENTORY_DETAIL = CC_GOODS_INVENTORY_DETAIL;
+exports.CC_DIALOG_CONTENT = CC_DIALOG_CONTENT;
+exports.CC_DIALOG_VRCODE = CC_DIALOG_VRCODE;
