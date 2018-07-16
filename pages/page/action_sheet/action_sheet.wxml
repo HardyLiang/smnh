@@ -21,7 +21,7 @@
   </label>
   </checkbox-group>
   </scroll-view>  
-   <button  class="big-btn" type="primary" data-choose="{{chooseList}}"
+   <button  class="big-btn"  data-choose="{{chooseList}}"
    catchtap='_confirmChoose'>确认</button>
   </view>  
 </view>  

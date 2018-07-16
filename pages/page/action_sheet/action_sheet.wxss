@@ -73,3 +73,11 @@
 .button-container{
   margin-top:  10px
 }
+/* 大按钮 */
+.big-btn {
+   padding: 6rpx 0; 
+  background: #00a0e9;
+  color: #fff;
+  margin: 10rpx 120rpx;
+  font-size: 32rpx;
+}
