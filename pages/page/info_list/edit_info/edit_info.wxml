@@ -46,8 +46,8 @@
       </picker></view>
     <view class='base-item'>
       <text>开户地址：</text>  <addr-select bind:select="selectArea" data-typeid="bank"
-       addressLeven="2" class="input-item-pick2 arrow-btm">
-    <view >{{bankAddress}}</view>
+       addressLeven="2" >
+    <view class="input-item-pick2 arrow-btm">{{bankAddress}}</view>
   </addr-select></view>
   </view>
   <!-- 开户信息 -->

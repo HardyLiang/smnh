@@ -90,3 +90,35 @@
     -webkit-transform: scaleX(0.5);
     transform: scaleX(0.5);
 }
+.input-item-content{
+  margin: 5px auto 10px;
+  padding: 5px 20px;
+  position: relative;
+  
+}
+.input-item-content input{
+  text-align: left;
+  height: 36px;
+  line-height: 30px;
+  border-bottom:1px solid #00a0e9; 
+}
+.code-btn{
+  display: inline-block;
+  padding: 0 10px;
+  height: 30px;
+  line-height: 30px;
+  color: #fff;
+  font-size: 24rpx;
+  border-radius: 2px;
+  position: absolute;top: 8px;
+  right: 20px;
+}
+.phone_huo{
+  background: #00a0e9;
+}
+.phone_huo2{
+  background: #eee;
+}
+.hidden{
+  display: none;
+}
