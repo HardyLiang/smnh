@@ -1115,7 +1115,8 @@ function getBankType(cb) {
 /**
  * 上传图片
 */
-function modifyMainPic(goods_id, oldPictureUrl, newPictureId, cb) {
+function modifyMainPic(goods_id, pictureUrls, cb) {
+  var picList = JSON.stringify(pictureUrls);
   wx.request({
     url: urlSet.updataGoodsDetail,
     header: {
@@ -1127,8 +1128,7 @@ function modifyMainPic(goods_id, oldPictureUrl, newPictureId, cb) {
       user_id: user_id,
       token: token,
       goods_id: goods_id,
-      oldPictureUrl: oldPictureUrl,
-      newPictureId: newPictureId
+      pictureUrls: picList,
     }),
     success: function (res) {
       console.log(res);
@@ -1148,6 +1148,43 @@ function modifyMainPic(goods_id, oldPictureUrl, newPictureId, cb) {
 
   })
 }
+/**
+ * 上传图片
+*/
+function removeGoodsPicture(goods_id, picId, cb) {
+  wx.request({
+    url: urlSet.removeGoodsPicture,
+    header: {
+      "content-type": "application/x-www-form-urlencoded;",
+      "verify": verify
+    },
+    method: "post",
+    data: util.json2Form({
+      user_id: user_id,
+      token: token,
+      goods_id: goods_id,
+      pictureId: picId,
+    }),
+    success: function (res) {
+      console.log(res);
+      var statusCode = res.data.statusCode
+      var message = res.data.message;
+      console.log(statusCode);
+      if (statusCode == "200") {
+        return typeof cb == "function" && cb("删除次图成功", true)
+      } else {
+
+        return typeof cb == "function" && cb("删除次图失败", false)
+      }
+    },
+    fail: function () {
+      return typeof cb == "function" && cb("删除次图失败", false)
+    },
+
+  })
+}
+
+
 
 
 
@@ -1188,5 +1225,6 @@ module.exports = {
   unBandWX: unBandWX,
   upLoadPicture: upLoadPicture,
   getBankType: getBankType,
-  modifyMainPic: modifyMainPic
+  modifyMainPic: modifyMainPic,
+  removeGoodsPicture: removeGoodsPicture
 }

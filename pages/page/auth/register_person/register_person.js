@@ -101,9 +101,12 @@ Page({
         bank: res.data
 
       })
+      
       getApp().globalData.userRegister[common.CC_BANK_TYPE_ID] = res.data[0].id;
     })
-
+   //弹出窗口
+    this.dialog = this.selectComponent("#dialog");
+    // this.dialog.showDialog();
       
   },
 
@@ -226,7 +229,8 @@ Page({
    */
   registerShop:function(){
     var that = this;
-
+    this.dialog.showDialog();
+    return;
     if (util.checkEmpty(this.data.idCard,"请输入您的身份证号码!")){
       return;
     }
@@ -328,5 +332,18 @@ Page({
     var name = this.data.bankType[position];
     getApp().globalData.userRegister[common.CC_BANKCODE] = name;
     console.log(getApp().globalData.userRegister[common.CC_BANKCODE])
+  },
+
+  
+  //取消事件
+  _cancelEvent() {
+    console.log('你点击了取消');
+    this.dialog.hideDialog();
+  },
+  //确认事件
+  _confirmEvent() {
+    console.log('你点击了确定');
+    this.dialog.hideDialog();
   }
+
 })

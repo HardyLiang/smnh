@@ -11,7 +11,7 @@
         <view class="weui-uploader__files">
           <block wx:for="{{imageList}}" wx:for-item="image" wx:key="index">
             <view class="weui-uploader__file">
-              <image class="weui-uploader__img" src="{{image}}"   data-index="{{index}}" bindtap="previewImage"  mode='aspectFill'></image>
+              <image class="weui-uploader__img" src="{{image.url}}"   data-index="{{index}}" bindtap="previewImage"  mode='aspectFill'></image>
               <image src='../../../images/icon_delete.png' data-index="{{index}}"   catchtap="deleteImg"class='icon-delete-small' ></image>
             </view>
           </block>

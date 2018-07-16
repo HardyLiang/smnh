@@ -141,8 +141,8 @@ App({
     getBankType: http.getBankType,
     updatePersonMsg: http.updatePersonMsg,
     updateOnlyProduct: http.updateOnlyProduct,
-    modifyMainPic: http.modifyMainPic
-    
+    modifyMainPic: http.modifyMainPic,
+    removeGoodsPicture: http.removeGoodsPicture
 
   }
 })

@@ -6,8 +6,7 @@ Page({
   data: {
     imgUrlValue: "",//主图
     imageList: [],//次图
-    imageListClone:[],//次图列表克隆
-    imageListSave:[],//次图修改保存
+    imageListClone:[],
     cropBack:"prodectImgBack",//这个是设置裁剪返回的消息名称，可自定义，但是要唯一；
     status:"",//记录当前状态
     goodId:""//记录当前产品Id
@@ -22,17 +21,12 @@ Page({
     console.log(thisId)
     if(typeStatus=="modify"){
       var info = wx.getStorageSync(common.CC_GOOD_INFO);
-      var secList=[];
-      for (var i = 0; i < info.goods_photos.length;i++){
-        secList.push(info.goods_photos[i])
-      }
       console.log(info)
         that.setData({
           imgUrlValue: info.goodsPicturesUrl,
-          imageList: secList,
+          imageList: info.goods_photos,
           status: typeStatus,
-          goodId: thisId,
-          imageListSave: info.goods_photos
+          goodId: thisId
         })
 
     }else{
@@ -74,21 +68,13 @@ Page({
         sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
         success: function (res) {
           console.log(res)
-           if(that.data.imageList.length>0){
-             for (var y = 0; y < that.data.imageList.length;y++){
-               list.push(that.data.imageList[y])
-             }
-           }
-          console.log(list)
           var index = list.length==0?0:list.length-1;
           var imgsrc = res.tempFilePaths;
+          var cloneList=[];
           for (var i = 0; i < imgsrc.length;i++){
-            // imageList = imageList.concat(imgsrc[i]);
-            list.push(imgsrc[i])
             cloneList.push(imgsrc[i])
           }
           that.setData({
-            imageList: list,
             imageListClone:cloneList
           });
          that.modifySec();
@@ -119,12 +105,36 @@ Page({
   },
   // 删除图片
   deleteImg: function (e) {
-    var imageList = this.data.imageList;
+    var that =this;
+    var imageList = that.data.imageList;
     var index = e.currentTarget.dataset.index;
-    imageList.splice(index, 1);
-    this.setData({
-      imageList: imageList
-    });
+    if (index < imageList.length){
+      var picId = imageList[index].id;
+      getApp().func.removeGoodsPicture(that.data.goodId, picId, function(message,res){
+        if(!res){
+          wx.showModal({
+            title: '提示',
+            content: message,
+            showCancel:false
+          })
+        }else{
+          wx.showToast({
+            title: message
+          })
+          imageList.splice(index, 1);
+          that.setData({
+            imageList: imageList
+          });
+        }
+      })
+      
+    }else{
+      imageList.splice(index, 1);
+      that.setData({
+        imageList: imageList
+      });
+    }
+   
   },
   onShow :function(e){
     var that =this;
@@ -144,15 +154,12 @@ Page({
     //上传图片
     event.on(event.KUploadMainImgSuccess, this, function (data) {
       console.log("我收到上传成功返回" + data);
+      event.emit(event.KUpdateGoodInfoSuccess, data);
       var index= data;
       var maxIndex = that.data.imageListClone.length
       if (index<maxIndex){
-        var oldId=""
-        if (index<that.data.imageListSave.length){
-          oldId = that.data.imageListSave[index].id;
-        }
       that.uploadSecPic(that.data.goodId, common.CC_UPLOAD_STATUS_MAIN,
-        index, that.data.imageListClone[index], oldId);
+        index, that.data.imageListClone[index], "");
       }else{
         wx.showToast({
           title: '上传次图成功',
@@ -190,6 +197,7 @@ Page({
         wx.showToast({
           title: '主图上传成功',
         })
+        event.emit(event.KUpdateGoodInfoSuccess, message);
         return typeof cb == "function" && cb(true)
       } else {
         wx.showToast({
@@ -209,11 +217,7 @@ Page({
     var goodId = util.trim(this.data.goodId);
     var status = common.CC_UPLOAD_STATUS_MAIN;
     if (that.data.imageListClone.length > 0) {
-      var oldId = ""
-      if (that.data.imageListSave.length > 0) {
-        oldId = that.data.imageListSave[0].id;
-      }
-      that.uploadSecPic(goodId, status, 0, that.data.imageListClone[0], oldId)
+      that.uploadSecPic(goodId, status, 0, that.data.imageListClone[0], "")
     } 
 
   },
@@ -222,6 +226,14 @@ Page({
     getApp().func.upLoadPicture(goodId, status, img, "2",oldId,function (message, res) {
       index=index+1
       if(res){
+        console.log(res);
+        var list=[]
+        list = that.data.imageList;
+        list.push(res)
+        that.setData({
+          imageList:list,
+        })
+        console.log(that.data.imageList)
           event.emit(event.KUploadMainImgSuccess,index)
       }else{
         wx.showModal({

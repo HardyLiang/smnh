@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "开店",
   "usingComponents": {
-    "addr-select": "../../addr-select/index"
+    "addr-select": "../../addr-select/index",
+      "dialog": "../../dialog-code/dialog-code" 
   }
 }

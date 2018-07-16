@@ -76,6 +76,8 @@ var uploadPicture = baseUrl + "app/seller/uploadPicture.htm";
 var getBankType = baseUrl +"app/iskyshop_bank_type_list.htm";
 //修改商品详情图片信息
 var updataGoodsDetail = baseUrl +"app/seller/updateGoodsDetailPicture.htm";
+//删除主图
+var removeGoodsPicture = baseUrl +"/app/seller/removeGoodsPicture.htm";
 
 
 module.exports = {
@@ -115,4 +117,5 @@ module.exports = {
   uploadPicture: uploadPicture,
   getBankType: getBankType,
   updataGoodsDetail: updataGoodsDetail,
+  removeGoodsPicture: removeGoodsPicture
 }

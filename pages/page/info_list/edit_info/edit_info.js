@@ -20,7 +20,7 @@ Page({
     bankTypeindex: 0,
     bankTypeList: ['个人账户', '公司账户'],
     bankType: "",
-    bankAddress: "",
+    bankAddress: "请选择地址",
     addressValue:"",
     detailAddress: "",
     isReFresh: false,//是否刷新

@@ -35,7 +35,11 @@ Component({
    */
   data: {
     // 弹窗显示控制
-    isShow: false
+    isShow: false,
+    vercode: "",
+    second: 60,
+    selected: false,
+    selected1: true,
   },
 
   /**
@@ -75,7 +79,57 @@ Component({
       var inputContent = e.detail.value;
       console.log("dialog value =======" + inputContent);
       wx.setStorageSync("dialogContent", inputContent);
-    }
-
+    },
+    /**
+   * 获取验证码
+   */
+    getphone: function () {
+      var that = this;
+      //联网获取数据
+      getApp().func.fotgetPass(that.data.idCard, that.data.mobile, function (message, res) {
+        console.log(res)
+        if (!res) {
+          wx.showToast({
+            title: message,
+            icon: 'none'
+          })
+          return;
+        }
+        //设置按钮是否可点
+        that.setData({
+          selected: true,
+          selected1: false,
+        });
+        countdown(that);
+        var verCode = res.data;
+        console.log(verCode);
+        that.setData({
+          vercode: verCode
+        })
+      })
+    },
   }
 })
+/**
+ * 公用方法 获取验证码倒计时
+ */
+function countdown(that) {
+  var second = that.data.second;
+  if (second == 0) {
+    // console.log("Time Out...");
+    that.setData({
+      selected: false,
+      selected1: true,
+      second: 60,
+    });
+    return;
+  }
+  var time = setTimeout(function () {
+    that.setData({
+      second: second - 1
+    });
+    countdown(that);
+  }
+    , 1000)
+}
+ 

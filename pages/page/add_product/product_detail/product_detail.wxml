@@ -7,7 +7,7 @@
       data-index="{{ids}}"></view> <image src='../../../images/icon_delete.png' catchtap="deleteList" data-index="{{ids}}" class='icon-delete-detail' ></image></view>
       <view class='upload-imgBox'>    
     <view class="uploadInput-box" > +
-           <image src='{{item.url}}'  mode='aspectFill' class='up-image-detail' bindtap="chooseDetailImage" data-index="{{ids}}"></image>
+           <image src='{{item}}'  mode='aspectFill' class='up-image-detail' bindtap="chooseDetailImage" data-index="{{ids}}"></image>
         </view>
       </view>
     </view>

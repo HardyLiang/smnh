@@ -115,3 +115,14 @@
   </view>
   <button class='big-btn' catchtap='registerShop'>确认开店</button>
 </view>
+ <!-- 页面弹窗  -->
+<view class="container">
+    <dialog id='dialog' 
+      title='{{dialogTitle}}' 
+      content='{{dialogContent}}' 
+      cancelText='取消' 
+      confirmText='确认'
+      bind:cancelEvent="_cancelEvent"  
+      bind:confirmEvent="_confirmEvent">
+    </dialog>
+</view> 

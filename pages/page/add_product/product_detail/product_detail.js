@@ -4,11 +4,9 @@ var common = require('../../../../utils/common.js')
 Page({
   data: {
     photoBoxList:[],
-    saveImgList:[],
     goodId:"",
     status:"",
     index:0,//记录要保存图片Index，
-    isModify:false,
   },
 
   onLoad: function (options) {
@@ -26,10 +24,6 @@ Page({
     })
     
     //判断当前属性是修改还是新增
-    var item = {
-      id: "",
-      url: ""
-    }
     if (typeStatus == "modify") {
       var info = wx.getStorageSync(common.CC_GOOD_INFO);
       console.log(info);
@@ -37,22 +31,15 @@ Page({
       var list =[];
       if(detailList!=null&&detailList.length>0){
         //给页面展示列表赋值
-        for (var i = 0; i < detailList.length;i++){
-          var item ={id:"",url:""}
-          item.url = detailList[i]
-          list.push(item)
-        }
         this.setData({
-          saveImgList: detailList,
-          photoBoxList:list
+          photoBoxList: detailList
         })
-        
       }else{
-        this.insertPhoto(item);
+        this.insertPhoto("");
       }
      
     }else{
-      this.insertPhoto(item);
+      this.insertPhoto("");
     }
   
   
@@ -79,17 +66,14 @@ Page({
               var list = [];
               if (index < that.data.photoBoxList.length){
                 var newList = that.data.photoBoxList;
-                newList[index].url = res.url;
-                newList[index].id =res.id 
+                newList[index] = res.url;
                 that.setData({
                   photoBoxList: newList,
-                  isModify:true
                 })
               }else{
                 list.push(res)
                 that.setData({
                   photoBoxList: list,
-                  isModify: true
                 });
               }
              
@@ -110,10 +94,7 @@ Page({
    
   }, 
   addPicture:function(){
-    var item={
-      id:"",
-      url:""
-    }
+    var item="";
     this.insertPhoto(item)
   },
   // 添加图片部分
@@ -138,35 +119,36 @@ Page({
    */
   uploadPic:function(e){
     var that =this;
-    var oldPictureUrl=''
     var index = that.data.index;
-    if(that.data.status!="modify"){
       for (var i = 0; i < that.data.photoBoxList.length;i++){
-        if (that.data.photoBoxList[i].url==""){
+        if (that.data.photoBoxList[i]==""){
          wx.showToast({
            title: '请选择图片上传，再保存！',
          })
          return;
         }
       }
-    }else{
-      if (!that.data.isModify){
-        wx.showToast({
-          title: '亲，请先修改再保存！',
-        })
-        return;
-      }
-    }
-    console.log('index====' + index + that.data.photoBoxList[index].id)
-    if (that.data.saveImgList != null && that.data.saveImgList.length > index){
-      oldPictureUrl = that.data.saveImgList[index]
-    }
+      console.log('index====' + index + that.data.photoBoxList.length)
     getApp().func.modifyMainPic(
-      this.data.goodId, oldPictureUrl, that.data.photoBoxList[index].id, function(message,res){
+      this.data.goodId, this.data.photoBoxList, function(message,res){
         console.log(res)
         if(res){
-          index++
-            event.emit(event.KUploadDetailSuccess, index) 
+          wx.showModal({
+            title: '提示',
+            content: "保存产品详情成功！",
+            confirmText: that.data.status == "modify" ? "返回详情" : "返回列表",
+            success: function (res) {
+              if (res.confirm) {
+                if (that.data.status == "modify") {
+                  event.emit(event.KUpdateGoodInfoSuccess, "修改成功")
+                } else {
+
+                }
+
+                wx.navigateBack()
+              }
+            }
+          })
         }else{
           wx.showModal({
             title: '提示',
@@ -180,36 +162,7 @@ Page({
 
   },
   onShow:function(e){
-    var that =this;
-    event.on(event.KUploadDetailSuccess,this,function(res){
-      console.log("姜哥，成功了，我收到信息了"+res)
-      that.setData({
-        index:res
-      })
-      if (res >= that.data.photoBoxList.length){
-        
-          wx.showModal({
-            title: '提示',
-            content: "保存产品详情成功！",
-            confirmText: that.data.status == "modify" ? "返回详情" : "返回列表",
-            success: function (res) {
-              if (res.confirm) {
-                if(that.data.status=="modify"){
-                  event.emit(event.KUpdateGoodInfoSuccess, "修改成功")
-                }else{
-                  
-                }
-               
-              wx.navigateBack()
-              }
-            }
-          })
-        
-      }else{
-        that.uploadPic();
-      }
-     
-    })
+  
   },
   /**
    * 删除
