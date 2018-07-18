@@ -2,16 +2,19 @@ page {
   background: -webkit-linear-gradient(top, #00a7ee 0%, #00a0e9 100%);
   height: 100%;
 }
-.login-top{
-margin: 12px auto 18px;
-}
-.login-top image {
-  display: block;
+
+.login-top {
+  margin: 12px auto 18px;
   width: 200rpx;
   height: 200rpx;
   border-radius: 50%;
-  border: 15rpx solid rgba(255, 255, 255, 0.5);
-  margin: 0 auto;
+  /* border: 15rpx solid rgba(255, 255, 255, 0.5); */
+}
+
+.login-top image {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .form-box {
@@ -74,11 +77,13 @@ margin: 12px auto 18px;
   border-radius: 6rpx;
 }
 */
-.login-text{
+
+.login-text {
   font-size: 30rpx;
   line-height: 80rpx;
   color: #fff;
 }
+
 .form-item-text {
   margin-top: 10px;
   height: 60rpx;

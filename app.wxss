@@ -144,6 +144,7 @@ page {
   text-overflow: ellipsis;
 }
 .text-twoLine{
+  display: box;
    display: -webkit-box;
   word-break: break-all;
   -webkit-box-orient: vertical;

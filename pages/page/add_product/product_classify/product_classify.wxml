@@ -2,7 +2,7 @@
 <!-- <view class='search-box'>
     <input type="text" placeholder="请输入搜索分类" class='search-input'></input>
 </view> -->
-<view class="classify-container flex-wrap flex-direction-row" style="height:{{leftHeight}}px">
+<view class="classify-container flex-wrap flex-direction-row" >
 	<!-- left aside -->
 	<view class="aside flex-wrap flex-direction-col">
 		<block wx:for="{{navList}}" wx:key="item">

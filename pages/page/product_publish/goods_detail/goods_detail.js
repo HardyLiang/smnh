@@ -11,7 +11,7 @@ Page({
     autoplay: true,
     interval: 5000,
     duration: 1000,
-    minNumber: '',
+    
     minPrice: '',
     preoutput: '',
     productDescription: '',
@@ -30,7 +30,16 @@ Page({
     })
     //获取详情
     this.getProductDetail(id);
-  
+    // 获取屏幕高度
+    var ImgHeight = 0;
+    wx.getSystemInfo({
+      success: function (res) {
+        ImgHeight = res.windowWidth
+      }
+    })
+    this.setData({
+      ImgHeight: ImgHeight
+    })
   },
   onShow:function(e){
     var that =this;
@@ -68,7 +77,7 @@ Page({
       }
       console.log(mainList)
       //规格
-      var goodsGspVal = res.data.goods_gsp_val[0].name;
+      // var goodsGspVal = res.data.goods_gsp_val[0].name;
       //规格描述
 
       //发货描述
@@ -83,7 +92,7 @@ Page({
 
       //成功
       that.setData({
-        minNumber: goodsGspVal,
+        // minNumber: goodsGspVal,
         minPrice: res.data.goodsPrice,
         preoutput: res.data.goodsInventory,
         productDescription: proDescription,

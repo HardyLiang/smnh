@@ -1,4 +1,5 @@
 <view class='bgcolor-fff' >
+<view class='image-container' style="height:{{ImgHeight}}px">
  <view class='icon-edit' catchtap='modifyProduct'><image src="../../../images/icon_edit.png"  mode='widthfix'
 /></view>
   <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="swiper-style" indicator-color="rgba(255, 255, 255, 1)" indicator-active-color="#00a0e9">
@@ -8,14 +9,15 @@
       </swiper-item>
     </block>
   </swiper>
+  </view>
   <view class='detail-info'>
-    <view class='goods-name text-twoLine'>{{productDetailName}}</view>
+    <view class='goods-name'>{{productDetailName}}</view>
     <view class='list-message'>零售价：
       <text class='color-orange'>{{minPrice}}元</text> </view>
     <view class='list-message'>让利金：
       <text class='color-orange'>{{serveCharge}}元</text> </view>
     <view class='list-message'>库存： {{preoutput}} </view>
-    <view class='list-message'>规格： {{minNumber}}</view>
+    <!-- <view class='list-message'>规格： {{minNumber}}</view> -->
     <view class='list-message' hidden='true'>规格描述： {{spec}} </view>
     <view>
     <view class='detail-title'>发货描述</view>

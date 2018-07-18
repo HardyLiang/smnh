@@ -2,9 +2,13 @@
 .product-list{
   margin-bottom: 70px;
 }
+.big-btn{
+  margin: 10rpx 120rpx;
+}
 .pro-info{
   background: #fff;
   display: flex;
+  display: -webkit-flex;
 }
 .pro-info>view{
   font-size: 24rpx;

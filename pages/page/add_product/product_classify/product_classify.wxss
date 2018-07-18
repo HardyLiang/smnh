@@ -4,6 +4,7 @@
 
 .flex-wrap {
   display: flex;
+  display: -webkit-flex;
 }
 .search-box{
   width: 100%;

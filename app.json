@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/page/product_publish/goods_detail/goods_detail",
+    
     "pages/page/my_order/my_order",
     "pages/page/product_publish/product_publish",
     "pages/page/wechat_bind/wechat_bind",
@@ -11,7 +13,7 @@
     "pages/page/add_product/product_detail/product_detail",
     "pages/page/add_product/product_img/product_img",
     "pages/page/add_product/add_product",
-    "pages/page/product_publish/goods_detail/goods_detail",
+    
     "pages/page/deliver_goods/deliver_goods",
     "pages/page/user/user",
     "pages/page/my_income/my_income",

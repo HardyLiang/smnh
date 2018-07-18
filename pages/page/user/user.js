@@ -7,9 +7,9 @@ Page({
     imgValue:"../../images/ic_web_center.png",
     mobileValue:'暂无电话',
     userNameValue:'暂无店铺名称',
-    shipValue:'描述：5.0',
-    serviceValue:'服务：5.0',
-    storeValue:'发货：5.0',
+    shipValue:'描述：5.0 分',
+    serviceValue:'服务：5.0 分',
+    storeValue:'发货：5.0 分',
     btnFlag:false,
     btnValue:"登录农户账户",
     cropBack: "headImgBack",//这个是设置裁剪返回的消息名称，可自定义，但是要唯一；
@@ -79,9 +79,9 @@ Page({
         imgValue: "../../images/ic_web_center.png",
         mobileValue: '暂无电话',
         userNameValue: '昵称',
-        shipValue: '描述：5.0',
-        serviceValue: '服务：5.0',
-        storeValue: '发货：5.0',
+        shipValue: '描述：5.0 分',
+        serviceValue: '服务：5.0 分',
+        storeValue: '发货：5.0 分',
         btnFlag: false,
         btnValue: "登录农户账户"
       })
@@ -138,9 +138,9 @@ Page({
           imgValue: res.data.store_information.store_logo,
           mobileValue: res.data.store_information.store_telephone,
           userNameValue: res.data.store_information.store_name,
-          shipValue: '描述：' + res.data.store_information.descriptionEvaluate,
-          serviceValue: '服务：' + res.data.store_information.serviceEvaluate,
-          storeValue: '发货：' + res.data.store_information.shipEvaluate,
+          shipValue: '描述：' + res.data.store_information.descriptionEvaluate +" 分",
+          serviceValue: '服务：' + res.data.store_information.serviceEvaluate + " 分",
+          storeValue: '发货：' + res.data.store_information.shipEvaluate + " 分",
           btnFlag: true,
           btnValue: "注销登录"
         })
