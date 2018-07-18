@@ -15,7 +15,7 @@
       <image src='../../../images/ic_login_blue_pass_left.png' class='form-icon'></image>
     		<input class="password" value="{{password}}" password="{{passFlag}}"  placeholder="密码" placeholder-class="phcolor" name="password" 
         type="{{typeFlag}}"focus='{{passFocus}}' />
-    		<image class="clear" id="clear-password" wx:if="{{ password.length > 0 }}" src="{{passwordSrc}}" catchtap="changePass" ></image>
+    		<image class="clear" id="clear-password"  src="{{passwordSrc}}" catchtap="changePass" ></image>
     	</view>
       <view class='login-text'>首次登录请使用手机短信收到的初始密码</view>
 

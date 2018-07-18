@@ -142,7 +142,8 @@ App({
     updatePersonMsg: http.updatePersonMsg,
     updateOnlyProduct: http.updateOnlyProduct,
     modifyMainPic: http.modifyMainPic,
-    removeGoodsPicture: http.removeGoodsPicture
+    removeGoodsPicture: http.removeGoodsPicture,
+    getVerifyCode: http.getVerifyCode
 
   }
 })

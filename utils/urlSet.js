@@ -4,7 +4,8 @@
 // var baseUrl ="https://xz-weixin.e-tecsun.com";
 // var baseUrl ="http://114.67.49.72:80";
 // var baseUrl ="http://test.e-smnh.com/app/iskyshop_seller_login.htm";
-var baseUrl ="http://test.e-smnh.com/"
+// var baseUrl ="http://test.e-smnh.com/"
+var baseUrl ="https://test.e-smnh.com:445/"
 
 let APPID = 'wx00ebf9a68438faf5';
 let SECRET = '52ad3e6d8c872b95b3142645fbfbab79';
@@ -78,6 +79,9 @@ var getBankType = baseUrl +"app/iskyshop_bank_type_list.htm";
 var updataGoodsDetail = baseUrl +"app/seller/updateGoodsDetailPicture.htm";
 //删除主图
 var removeGoodsPicture = baseUrl +"/app/seller/removeGoodsPicture.htm";
+//验证码
+var getVerifyCode = baseUrl + "/app/iskyshop_verify_code.htm";
+
 
 
 module.exports = {
@@ -117,5 +121,6 @@ module.exports = {
   uploadPicture: uploadPicture,
   getBankType: getBankType,
   updataGoodsDetail: updataGoodsDetail,
-  removeGoodsPicture: removeGoodsPicture
+  removeGoodsPicture: removeGoodsPicture,
+  getVerifyCode: getVerifyCode
 }

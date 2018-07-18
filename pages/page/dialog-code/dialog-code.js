@@ -99,7 +99,7 @@ Component({
       console.log("getPhone")
       var that = this;
       //联网获取数据
-      getApp().func.fotgetPass(that.data.idCard, that.data.mobile, function (message, res) {
+      getApp().func.getVerifyCode( that.data.mobile, function (message, res) {
         console.log(res)
         if (!res) {
           wx.showToast({

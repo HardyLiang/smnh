@@ -2,12 +2,13 @@
 var util = require('../../../../utils/util.js');
 var app = getApp();
 var event =require('../../../../utils/event.js')
+var common = require('../../../../utils/common.js')
 
 Page({
   data: {
-    username: '440684198812271518',
+    username: '',
     usernameHide: true,
-    password: '198812271',
+    password: '',
     passwordSrc:'../../../images/ic_pass_gray_hide.png',
     passFocus:false,
     passFlag:true,
@@ -18,8 +19,16 @@ Page({
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     // 页面渲染完成
-    
+    var name = wx.getStorageSync(common.CC_LOGIN_USERNAME);
+    var pass = wx.getStorageSync(common.CC_LOGIN_PASS);
+    if (name!=null&&name!=""){
+      this.setData({
+        username: name,
+        password: pass
+      })
 
+    }
+   
   },
 
   startLogin: function (e) {
@@ -52,6 +61,8 @@ Page({
         });
         return;
       }
+      wx.setStorageSync(common.CC_LOGIN_USERNAME, name);
+      wx.setStorageSync(common.CC_LOGIN_PASS, password);
       wx.showToast({
         title: '登录成功',
         icon: "success",

@@ -318,6 +318,7 @@ Page({
     }
 
    this.dialog.hideDialog();
+   var that =this;
     getApp().func.addPersonMsg(getApp().globalData.userRegister, function (message, res) {
       console.log("注册返回成功")
       console.log(res)

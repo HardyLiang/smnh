@@ -154,7 +154,8 @@ Page({
         })
         console.log(that.data.productlist);
       }else{
-        var list = that.data.productlist;
+        var list =[];
+       list = that.data.productlist;
         for (var i = 0; i < res.data.length; i++) {
           list.push(res.data[i]);
         }

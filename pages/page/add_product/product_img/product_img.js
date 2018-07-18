@@ -155,6 +155,7 @@ Page({
     event.on(event.KUploadMainImgSuccess, this, function (data) {
       console.log("我收到上传成功返回" + data);
       event.emit(event.KUpdateGoodInfoSuccess, data);
+      event.emit(event.KProductPublishSuccess, data);
       var index= data;
       var maxIndex = that.data.imageListClone.length
       if (index<maxIndex){

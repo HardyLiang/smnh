@@ -128,5 +128,5 @@
     <view class='input-item' bindtap='onProductDetail'hidden='ture'>产品详情</view>
   </view>
   <!-- 下一步 -->
-  <button class='big-btn' bindtap='nextRegister'>确认发布</button>
+  <button class='big-btn' bindtap='nextRegister'>{{confirmName}}</button>
 </view>

@@ -89,6 +89,35 @@ function fotgetPass(idCard, mobile, cb) {
 
 
 }
+//忘记密码,获取忘记密码验证码
+function getVerifyCode(mobile, cb) {
+  console.log("getVerifyCode");
+  wx.request({
+    url: urlSet.getVerifyCode + "?&mobile=" + mobile,
+    header: {
+      "Content-Type": "application/json;charset=UTF-8"
+    },
+    method: "get",
+    complete: function (res) {
+      console.log(res);
+      var message = res.data.message;
+      var statusCode = res.data.statusCode;
+      if (statusCode != null && "200" == statusCode) {
+        return typeof cb == "function" && cb(message, res.data)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
+
+    },
+    fail: function () {
+      return typeof cb == "function" && cb("获取验证码失败！", false)
+    }
+  })
+
+
+}
+
+
 //更新密码
 function updatePassword(idCard, newPass, strCode, cb) {
   var md5pass = md5.hexMD5(newPass);
@@ -1226,5 +1255,6 @@ module.exports = {
   upLoadPicture: upLoadPicture,
   getBankType: getBankType,
   modifyMainPic: modifyMainPic,
-  removeGoodsPicture: removeGoodsPicture
+  removeGoodsPicture: removeGoodsPicture,
+  getVerifyCode: getVerifyCode
 }

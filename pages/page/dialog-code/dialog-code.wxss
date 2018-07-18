@@ -113,6 +113,7 @@
   border-radius: 2px;
   position: absolute;top: 8px;
   right: 20px;
+  z-index: 100
 }
 .phone_huo{
   background: #00a0e9;

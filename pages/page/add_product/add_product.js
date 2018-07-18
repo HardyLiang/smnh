@@ -2,7 +2,6 @@
 var event = require('../../../utils/event.js')
 var common = require('../../../utils/common.js')
 var util = require('../../../utils/util.js')
-var event = require('../../../utils/event.js')
 var app = getApp()
 Page({
   data: {
@@ -32,6 +31,7 @@ Page({
     specCheck:false,
     isShowSpec:false,//是否显示库存配置，如果是修改就不能显示
     isShowModify:false,//是否显示修改规格，
+    confirmName:"确认发布",//底部按钮名称
   },
 
   onLoad: function (options) {
@@ -45,6 +45,9 @@ Page({
     
     
     if (statusType=="modify"){//修改
+      wx.setNavigationBarTitle({
+        title: "产品修改",//页面标题为路由参数
+      })
       app.globalData.productPublic[common.CC_PRODUCT_GOOD_ID] = goodId;
       app.globalData.productPublic[common.CC_PRODUCT_PROFIT_2] = 0;
       var info = wx.getStorageSync(common.CC_GOOD_INFO);
@@ -132,7 +135,8 @@ Page({
         specdescription: info.packDetails,//规格描述
         showView: showView,
         isShowSpec:true,
-        isShowModify: isShowModify
+        isShowModify: isShowModify,
+        confirmName: "确认修改"
       })
     }else{
       //进入页面首先赋值给让利金0；让利金现在是必传。没有传0
