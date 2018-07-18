@@ -10,8 +10,8 @@
 		</block>
 	</view>
 
-	<!-- content -->
-	<view class="content flex-item" style="height:{{leftHeight}}px">
+	<!-- content style="height:{{leftHeight}}px"-->
+	<view class="content flex-item" >
 		<block wx:for="{{dishesList}}" wx:key="item">
 			<view class="classify-item" catchtap='subGoodItem'data-id="{{item.id}}" data-name="{{item.className}}"
       wx:if="{{item.display}}" >

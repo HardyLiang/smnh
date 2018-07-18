@@ -1,3 +1,6 @@
+page{
+  
+}
 .flex-wrap.flex-direction-col {
   flex-direction: column;
 }
@@ -24,7 +27,9 @@
 }
 .classify-container{
   height: 100%;
-  overflow: auto;
+   overflow-x:hidden;
+  overflow-y: auto;
+ 
 }
  .aside {
   width:210rpx;
