@@ -272,7 +272,7 @@ Page({
     var oldIndex = this.data.bankTypeindex;
     var bankIndex = e.detail.value;
     var bankTypeName = this.data.bankTypeList[bankIndex];
-    if (oldIndex != index) {
+    if (oldIndex != bankIndex) {
       this.setShowDialog();
     }
     this.setData({

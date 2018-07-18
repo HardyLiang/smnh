@@ -59,9 +59,12 @@ Page({
           console.log(res)
           // var indexPic = res.currentTarget.dataset.indexPic;
           var imgUrlDetail = res.tempFilePaths;
-         
+          wx.showLoading({
+            title: '上传中...',
+          })
           getApp().func.upLoadPicture(that.data.goodId, 
             common.CC_UPLOAD_STATUS_MAIN_OTHER, imgUrlDetail[0], "", "", function(message,res){
+              wx.hideLoading();
               console.log(res);
               var list = [];
               if (index < that.data.photoBoxList.length){

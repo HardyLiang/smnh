@@ -13,12 +13,12 @@
       <text>待发货订单总数：<text class='color-blue'>{{notYetCount}}</text></text>
     </view>
     <!-- 列表 -->
-    <view class="paid-template" wx:if="notYetList.length > 0">
+    <view class="paid-template"  hidden='{{isShowNotYet}}'>
       <block wx:for="{{notYetList}}" wx:key="item" wx:for-index='ids'>
         <template is="paidTemplate" data="{{...item,ids:ids}}" />
       </block>
     </view>
-    <view class='list-none' wx:else>
+    <view class='list-none' hidden='{{!isShowNotYet}}'>
       <image src="../../images/icon_none.png" mode='widthfix' />
       <text>暂无数据</text>
     </view>
@@ -40,12 +40,12 @@
     </view>
   </view>
   <!-- template -->
-  <view class="paid-template" wx:if="alreadyList.length > 0">
+  <view class="paid-template" hidden='{{isShowAlready}}'>
     <block wx:for="{{alreadyList}}" wx:key="item" wx:for-index='ids'>
       <template is="shippedListTemplate" data="{{...item,ids:ids}}" />
     </block>
   </view>
-   <view class='list-none' wx:else>
+   <view class='list-none'hidden="{{!isShowAlready}}">
       <image src="../../images/icon_none.png" mode='widthfix' />
       <text>暂无数据</text>
     </view>

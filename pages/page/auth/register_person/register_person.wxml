@@ -107,7 +107,7 @@
   <!-- //银行信息 -->
   <view class='agree-box'>
     <view class="input-item-content">
-      <label bindtap="">
+      <label bindtap="getToProtol">
         点击确认开店表示您已阅读并同意
         <text class='color-blue'>“实名农户平台”服务协议</text>
       </label>

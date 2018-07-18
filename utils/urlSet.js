@@ -78,9 +78,9 @@ var getBankType = baseUrl +"app/iskyshop_bank_type_list.htm";
 //修改商品详情图片信息
 var updataGoodsDetail = baseUrl +"app/seller/updateGoodsDetailPicture.htm";
 //删除主图
-var removeGoodsPicture = baseUrl +"/app/seller/removeGoodsPicture.htm";
+var removeGoodsPicture = baseUrl +"app/seller/removeGoodsPicture.htm";
 //验证码
-var getVerifyCode = baseUrl + "/app/iskyshop_verify_code.htm";
+var getVerifyCode = baseUrl + "app/iskyshop_verify_code.htm";
 
 
 

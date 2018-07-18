@@ -39,10 +39,11 @@ Page({
     app.globalData.productPublic={}
     var statusType =options.type
     var goodId = options.goodId
-    this.setData({
-      status: statusType
-    })
-    
+    if (statusType!=null){
+      this.setData({
+        status: statusType
+      })
+    }
     
     if (statusType=="modify"){//修改
       wx.setNavigationBarTitle({
@@ -352,7 +353,8 @@ Page({
 
   },
   onUnload: function () {
-  
+    event.remove(event.KChooseGoodItemSuccessEventName, this)
+    event.remove(event.KEVGGspValSuccess, this)
   },
   /**
    * 用户输入绑定

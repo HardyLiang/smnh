@@ -405,4 +405,8 @@ Page({
     })
     this.getGoodsInfoByCard(this.data.pageIndex)
   },
+  onUnload:function(){
+    event.remove(event.KProductPublishSuccess, this)
+  }
+
 })

@@ -24,7 +24,9 @@ Page({
     isHideLoadIcon: false,//是否隐藏loading图标
     loadmoreTip: "正在加载",//加载文字
     typeNotYetStatus:false,//未发货加载更多页面状态，如果是true,表示这个页面已经加载完了
-    typeAlreadyStatus: false,//已发货加载更多页面状态，如果是true,表示这个页面已经加载完了
+    typeAlreadyStatus: false,//已发货加载更多页面状态，如果是true,表示这个页面已经加载完了,
+    isShowAlready: true,//设置已发货列表隐藏列表
+    isShowNotYet:true,//设置未发货列表隐藏列表
   },
   navbarTap: function (e) {
     this.setData({
@@ -33,17 +35,19 @@ Page({
     console.log("选择当前页面" + this.data.currentTab + "状态===" + this.data.typeNotYetStatus)
     if (this.data.currentTab == 0 ){
        this.setData({
-         isHideLoadMore: false,//是否隐藏加载更多
+         isHideLoadMore: this.data.isShowNotYet?true:false,//是否隐藏加载更多
          isHideLoadIcon: this.data.typeNotYetStatus ? true : false,//是否隐藏loading图标
          loadmoreTip: this.data.typeNotYetStatus ? tipAlready : tipLoading,//加载文字
        })
+      
     }else
       if (this.data.currentTab == 1 ){
         this.setData({
-          isHideLoadMore: false,//是否隐藏加载更多
+          isHideLoadMore: this.data.isShowAlready ? true : false,//是否隐藏加载更多
           isHideLoadIcon: this.data.typeAlreadyStatus ? true : false,//是否隐藏loading图标
           loadmoreTip: this.data.typeAlreadyStatus ? tipAlready : tipLoading,//加载文字
         })
+      
     }
   },
   // 复制待发货订单编号
@@ -72,6 +76,11 @@ Page({
       that.getOrderByStatus(typeModify);
     })
     
+  },
+  onUnload:function(){
+    event.remove(event.KDeliverGoodSuccessEventName,this);
+    event.remove(event.KLogisiticsModifySuccessEventName,this);
+
   },
   /**
    * 获取订单
@@ -113,10 +122,18 @@ Page({
         console.log("mPageIndex=" + mPageIndex );
         var mTypeNotYetStatus = that.data.typeNotYetStatus;
         var mTypeAlreadyStatus = that.data.typeAlreadyStatus;
+        var isHideLoad =false;
+        if (that.data.currentTab==0 ){
+          isHideLoad = that.data.isShowNotYet ? true : false
+
+        }else
+          if (that.data.currentTab == 1){
+            isHideLoad = that.data.isShowAlready ? true : false
+          }
          that.setData({
            isLoadMore: false,//是否加载更多
            loadmoreTip: tipAlready,//加载文字
-           isHideLoadMore: false,//是否隐藏加载更多
+           isHideLoadMore: isHideLoad,//是否隐藏加载更多
            isHideLoadIcon: true,//是否隐藏loading图标
            typeNotYetStatus: status == "1" ? true : mTypeNotYetStatus,
            typeAlreadyStatus: status == "2" ? true : mTypeAlreadyStatus
@@ -142,6 +159,11 @@ Page({
             notYetList: list,
             notYetCount:res.count
           });
+          if (list.length > 0) {
+            that.setData({
+              isShowNotYet: false,
+            })
+          }
           
         } else
           if (status != null && status == "2") {//已发货
@@ -159,6 +181,11 @@ Page({
               alreadyList: alreadyList,
               shippedCount:res.count
             });
+            if(alreadyList.length>0){
+              that.setData({
+                isShowAlready:false,
+              })
+            }
           }
         
      

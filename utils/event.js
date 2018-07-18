@@ -17,9 +17,10 @@ var events = {};
 function on(name, self, callback) {
     console.log(events)
     var tuple = [self, callback];
-    var callbacks = events[name];
+    var callbacks = [];
+        callbacks = events[name];
     if (Array.isArray(callbacks)) {
-        callbacks=[];
+        callbacks.splice(name,1)
         callbacks.push(tuple);
     }
     else {

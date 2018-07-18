@@ -49,7 +49,7 @@ Page({
     }
     var statusFore = common.CC_UPLOAD_STATUS_IDCARD;
     var statusBack = common.CC_UPLOAD_STATUS_IDCARD_BACK;
-  
+    
     that.updataFile(statusFore, that.data.foreImagePath, function(res){
       if(res){
         that.updataFile(statusBack, that.data.backImagePath,function(res){
@@ -119,7 +119,9 @@ Page({
     })
   },
   updataFile:function(status,path,cb){
+    wx.showLoading()
     getApp().func.upLoadPicture("", status, path, "", "", function (message, res) {
+      wx.hideLoading()
       if (res) {
         if (status == common.CC_UPLOAD_STATUS_IDCARD){
           wx.setStorageSync(common.CC_IDCARD_FRONT, res.url);

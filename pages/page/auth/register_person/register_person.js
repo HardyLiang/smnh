@@ -363,6 +363,12 @@ Page({
     })
     
   
+  },
+  getToProtol:function(){
+    console.log("跳转网页")
+    wx.navigateTo({
+      url: '../../../page/agreement/agreement',
+    })
   }
 
 })

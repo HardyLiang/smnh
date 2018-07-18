@@ -36,7 +36,9 @@ Page({
         showCancel:false
       })
     }else{ 
+      wx.showLoading()
       getApp().func.upLoadPicture("", status, path, "","",function(message,res){
+        wx.hideLoading();
             wx.showModal({
               title: '提示',
               content: message,

@@ -39,6 +39,9 @@ Page({
       that.getProductDetail(that.data.goodId);
     })
   },
+  onUnload:function(){
+    event.remove(event.KUpdateGoodInfoSuccess,this)
+  },
   /**
    * 获取个人信息
    */

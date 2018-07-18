@@ -146,7 +146,7 @@ Page({
         }, 2000);
 
       });
-
+      
     })
   },
   hrefLink: function (e) {
@@ -159,6 +159,9 @@ Page({
       url: `../page/${url}/${url}`
     })
   },
+  onUnload:function(){
+    event.remove(event.kLoginSuccessEventName,this)
+  }
   
  
 

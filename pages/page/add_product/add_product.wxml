@@ -15,7 +15,7 @@
     <view class="input-item">
       <text class="input-item-label">零售价</text>
       <view class="input-item-content">
-        <input type="number" placeholder="请输入零售价" value='{{miniNumber}}' bindinput='bindInputChange' data-typeName="mininumber"></input>
+        <input type="text" placeholder="请输入零售价" value='{{miniNumber}}' bindinput='bindInputChange' data-typeName="mininumber"></input>
         <!-- <view class='abs-right'>元</view> -->
       </view>
     </view>
@@ -108,7 +108,7 @@
         <view class="input-item">
           <text class="input-item-label">让利金</text>
           <view class="input-item-content">
-            <input type="number" placeholder="请输入让利金" value='{{profit}}' bindinput='bindInputChange' data-typeName="profit"></input>
+            <input type="text" placeholder="请输入让利金" value='{{profit}}' bindinput='bindInputChange' data-typeName="profit"></input>
             <view class='abs-right'>元</view>
           </view>
         </view>

@@ -170,6 +170,8 @@ Page({
   },
   onUnload: function (options) {
     console.log('user=====onUnload');
+    event.remove(event.KUploadMainImgSuccess, this)
+    event.remove(this.data.cropBack, this)
   }, 
   /**
    * 跳转
