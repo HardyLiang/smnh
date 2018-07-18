@@ -38,7 +38,7 @@
     <navigator url="../about_soft/about_soft">
       <view class='user-list-item'>
         <view>
-          <image class="income-icon" src="../../images/ic_about_software_left.png"></image>关于我们</view>
+          <image class="income-icon" src="../../images/ic_about_software_left.png"></image>联系客服</view>
         <view class="navigator-arrow"></view>
       </view>
     </navigator>

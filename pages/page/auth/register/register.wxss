@@ -2,11 +2,11 @@ page{
   background: #fff;
 }
 .user-head{
-  width: 60px;
-  height: 60px;
+  width: 140rpx;
+  height: 140rpx;
   border-radius: 50%;
   display: block;
-  margin: 28px auto 18px;
+  margin: 34px auto 20px;
 
 }
 

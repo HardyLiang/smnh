@@ -35,11 +35,13 @@
 
 .type-nav {
   position: relative;
-  padding: 1rem 0.3rem;
+  padding: 0 0.3rem;
   text-align: center;
   border-bottom: 1px solid #ddd;
   background-color: #fff;
   z-index: 10;
+  height: 128rpx;
+  line-height: 128rpx;
 }
 
 .type-nav.selected {

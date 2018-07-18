@@ -55,8 +55,8 @@
     <view class='base-title'>发货信息</view>
     <view class='base-item'>
       <text>发货区域：</text> <addr-select bind:select="selectArea" data-typeid="detail"
-      addressLeven="4" class="input-item-pick2">
-    <view class="input-item-content">{{addressValue}}</view>
+      addressLeven="4" class="input-item-pick2 arrow-btm">
+    <view class="input-item-content  ">{{addressValue}}</view>
   </addr-select>
   </view>
       <view class='base-item'>

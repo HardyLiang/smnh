@@ -11,13 +11,13 @@
     </view>
     <view class='pro-info-dec'>
       <view>描述相符：
-        <text class='color-red'>{{descriptionEvaluate}}</text>
+        <text class='color-red'>{{descriptionEvaluate}}分</text>
       </view>
       <view>服务态度：
-        <text class='color-red'>{{serviceEvaluate}}</text>
+        <text class='color-red'>{{serviceEvaluate}}分</text>
       </view>
       <view>发货速度：
-        <text class='color-red'>{{shipEvaluate}}</text>
+        <text class='color-red'>{{shipEvaluate}}分</text>
       </view>
     </view>
   </view>

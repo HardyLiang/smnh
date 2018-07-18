@@ -13,14 +13,14 @@
 .goods-name{
   margin: 5px auto;
   font-size: 34rpx;
-  line-height:44rpx;
-  min-height:30px;
-  max-height: 48px;
+  line-height:60rpx;
+  height: 120rpx;
 }
 .list-message{
   font-size: 32rpx;
   color: #666;
-  line-height: 22px;
+  line-height: 80rpx;
+  height: 80rpx;
 }
 .detail-title{
   font-size: 34rpx;

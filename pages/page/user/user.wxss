@@ -32,7 +32,8 @@
   display: block;
   width: 100%;
   text-align: center;
-  line-height: 40px;
+  line-height: 96rpx;
+  height: 96rpx;
   font-size: 14px;
   color: rgba(255, 255, 255, .8);
   border-top: 1px solid rgba(255, 255, 255, .4);
@@ -48,8 +49,9 @@
 }
 
 .user-list-item {
-  display: flex;
-  line-height: 44px;
+  display: flex;                   
+  line-height: 110rpx;                                                                                                                                                                          
+  height: 110rpx;
    border-bottom: 1px solid #eee; 
   padding: 0 30rpx;
 }
@@ -61,7 +63,7 @@
   height: 40rpx;
   margin-right: 8px;
   vertical-align: top;
-  margin-top: 24rpx;
+  margin-top: 36rpx;
 }
 /* .user-list-item:last-child {
   border-bottom: none;
@@ -72,6 +74,7 @@
   background: #fff;
   text-align: center;
   line-height: 50px;
+  height: 50px;
   color: #00a0e9;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;

@@ -12,7 +12,8 @@
 
 .base-item {
   font-size: 15px;
-  line-height: 40px;
+  line-height: 48px;
+  height: 48px;
   display: flex;
 }
 
@@ -21,6 +22,7 @@
   display: inline-block;
   width: 180rpx;
   text-align: right;
+  line-height: 44px;
 }
 
 .mt28 {
@@ -30,22 +32,28 @@
 .edit_input {
   border-bottom: 1px solid #eee;
   flex: 1;
+  height: 40px;
   line-height: 30px;
-  margin-top: 10px;
 }
 
 .input-item-pick {
   border-bottom: 1px solid #eee;
   flex: 1;
-  height: 26px;
-  line-height: 20px;
-  margin-top: 6px;
+  height: 40px;
+  line-height: 40px;
+}
+
+.input-item-pick .picker {
+  margin-top: 2px;
 }
 
 .input-item-pick2 {
   border-bottom: 1px solid #eee;
   flex: 1;
-  min-height: 26px;
-  line-height: 20px;
-  margin-top: 6px;
+  min-height: 30px;
+  max-height: 60px;
+  line-height: 26px;
+}
+.input-item-content{
+  height: 50px;
 }

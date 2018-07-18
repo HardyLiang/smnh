@@ -1,34 +1,42 @@
 @import "paid_list_template/paid_list_template.wxss";
 @import "shipped_list_template/shipped_list_template.wxss";
+
 page {
   background: #f0f0f0;
 }
-.navbar{  
-  flex: none;  
-  display: flex;  
-  background: #fff;  
-}  
-.navbar .item{  
-  position: relative;  
-  flex: auto;  
-  text-align: center;  
-  line-height: 40px;  
-  font-size: 15px;
-}  
-.navbar .item.active{  
-  color: #00a0e9;  
-}  
-.navbar .item.active:after{  
-  content: "";  
-  display: block;  
-  position: absolute;  
-  bottom: 0;  
-  left: 0;  
-  right: 0;  
-  height: 4rpx;  
-  background: #00a0e9;  
+
+.navbar {
+  flex: none;
+  display: flex;
+  background: #fff;
 }
-.order-top-view{
+
+.navbar .item {
+  position: relative;
+  flex: auto;
+  text-align: center;
+  line-height: 48px;
+  height: 48px;
+  font-size: 15px;
+}
+
+.navbar .item.active {
+  color: #00a0e9;
+}
+
+.navbar .item.active:after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  right: 0;
+  width: 60%;
+  height: 4rpx;
+  background: #00a0e9;
+}
+
+.order-top-view {
   border-top: 1px solid #f0f0f0;
   background: #fff;
   line-height: 76rpx;
@@ -36,30 +44,52 @@ page {
   color: #757575;
   display: flex;
 }
-.order-top-view text{
+
+.order-top-view text {
   flex: auto;
   text-align: center;
 }
-.copyBtn{
+
+.copyBtn {
   display: inline-block;
-  border: 1px solid #00a0e9;
   margin-left: 8px;
   padding: 0 8px;
-  font-size: 12px;
+  font-size: 20rpx;
   color: #00a0e9;
   border-radius: 3px;
   height: 44rpx;
   line-height: 44rpx;
-  position:  absolute;
-  right: 15px;
-  margin-top: 5px;
-}
-.copyPos{
   position: absolute;
-  top:0;
-  right: 15px;
+  right: 30rpx;
+  margin-top: 8rpx;
 }
+
+.copyBtn:after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  bottom: -50%;
+  left: -50%;
+  right: -50%;
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
+  border: 1px solid #00a0e9;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+}
+
+.copyPos {
+  position: absolute;
+  top: 0;
+  right: 30rpx;
+}
+
+.consignee-info .copyBtn {
+  right: 10rpx;
+}
+
 /*  加载更多   */
+
 .weui-loading {
   margin: 0 5px;
   width: 20px;
@@ -68,9 +98,10 @@ page {
   vertical-align: middle;
   -webkit-animation: weuiLoading 1s steps(12, end) infinite;
   animation: weuiLoading 1s steps(12, end) infinite;
-  background: transparent  no-repeat;
+  background: transparent no-repeat;
   background-size: 100%;
 }
+
 .weui-loadmore {
   width: 65%;
   margin: 1.5em auto;
@@ -78,6 +109,7 @@ page {
   font-size: 14px;
   text-align: center;
 }
+
 .weui-loadmore_tips {
   display: inline-block;
   vertical-align: middle;

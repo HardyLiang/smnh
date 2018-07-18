@@ -63,7 +63,7 @@
     </view> 
     <text class='text-bind-time'>绑定时间：{{bandTime}}</text>
   </view>
-  <button class='red-big-btn' catchtap='unbindBtn' >解绑</button>
+  <button class='big-btn' catchtap='unbindBtn' >解绑</button>
 </view>
   <!-- 页面弹窗 
 <view class="container">
