@@ -56,7 +56,9 @@ Page({
    */
   getProductDetail: function (goodsId) {
     var that = this;
+    wx.showLoading()
     getApp().func.getProductDetail(goodsId,function (message, res) {
+      wx.hideLoading()
       console.log(res);
       if (!res) {//失败
         wx.showModal({

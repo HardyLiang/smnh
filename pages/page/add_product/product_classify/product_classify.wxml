@@ -6,7 +6,7 @@
 	<!-- left aside -->
 	<view class="aside flex-wrap flex-direction-col">
 		<block wx:for="{{navList}}" wx:key="item">
-			<text class="type-nav {{curNav == item.id ? 'selected' : ''}}" bindtap="selectNav" data-index="{{index}}" data-id="{{item.id}}">{{item.className}}</text>
+			<text class="type-nav {{curNav == item.id ? 'selected' : ''}}" bindtap="selectNav" data-index="{{index}}" data-id="{{item.id}}" wx:if="{{item.display}}">{{item.className}}</text>
 		</block>
 	</view>
 

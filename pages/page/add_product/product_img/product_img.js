@@ -121,6 +121,7 @@ Page({
           wx.showToast({
             title: message
           })
+          event.emit(event.KUpdateGoodInfoSuccess, message);
           imageList.splice(index, 1);
           that.setData({
             imageList: imageList
@@ -225,8 +226,12 @@ Page({
 
   },
   uploadSecPic: function (goodId, status, index, img,oldId){
+    wx.showLoading({
+      title: '上传中',
+    })
     var that =this;
     getApp().func.upLoadPicture(goodId, status, img, "2",oldId,function (message, res) {
+      wx.hideLoading();
       index=index+1
       if(res){
         console.log(res);

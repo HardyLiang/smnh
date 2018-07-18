@@ -129,7 +129,11 @@ Page({
    */
   getGoodsInfoByCard: function (pageIndex) {
     var that = this;
+    if(pageIndex==1){
+      wx.showLoading()
+    }
     getApp().func.getGoodsInfoByCard(pageIndex, function (message, res,maxPage) {
+    wx.hideLoading();
       if (that.data.isReFresh) {//判断是否刷新操作
         wx.hideNavigationBarLoading() //完成停止加载
         wx.stopPullDownRefresh() //停止下拉刷新
