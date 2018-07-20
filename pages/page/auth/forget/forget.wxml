@@ -4,7 +4,7 @@
       <view class="input-item">
         <text class="input-item-label">身份证号</text>
         <view class="input-item-content">
-          <input type="number" placeholder="请输入身份证号码" value='{{icCardValue}}' name="idCard" bindblur='bindblurIdCard'></input>
+          <input type="idcard" placeholder="请输入身份证号码" value='{{icCardValue}}' name="idCard" bindblur='bindblurIdCard'></input>
         </view>
       </view>
       <view class="input-item">

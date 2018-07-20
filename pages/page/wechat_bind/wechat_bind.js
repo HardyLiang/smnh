@@ -1,5 +1,6 @@
 var common = require('../../../utils/common.js');
 var util = require('../../../utils/util.js');
+var event =require("../../../utils/event.js");
 var app = getApp();
 Page({
   data: {
@@ -39,6 +40,9 @@ Page({
     if(userIdCard==""){
       userIdCard = farmerInfo.data.user_information.sCard;
     }
+    if(userName==null||userName==""){//未授权吧
+      util.getOpenId('../auth/authorize/authorize')
+    }
     
 
     console.log(farmerInfo)
@@ -58,6 +62,22 @@ Page({
       bandTime:bandTime
     })
    
+  },
+  onShow:function(){
+    var that =this
+    event.on(event.KGetWeiXinOpenIDSuccess, this,function(res){
+      console.log("收到了信息返回")
+       var userName = wx.getStorageSync(common.CC_NICK_NAME);
+       var imgUrl = wx.getStorageSync(common.CC_HEAD_IMG);
+       that.setData({
+         nickName: userName,
+         imgValue: imgUrl
+       })
+       
+    })
+  },
+  onUnload:function(){
+    event.remove(event.KGetWeiXinOpenIDSuccess,this)
   },
   /**
      * 生命周期函数--监听页面初次渲染完成

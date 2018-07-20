@@ -196,12 +196,15 @@ Page({
     var that = this;
     var goodId = util.trim(this.data.goodId);
     var status = common.CC_UPLOAD_STATUS_MAIN;
+    wx.showLoading()
     getApp().func.upLoadPicture(goodId, status, url, "1", "", function (message, res) {
+      wx.hideLoading()
       if (res) {//成功，
         wx.showToast({
           title: '主图上传成功',
         })
         event.emit(event.KUpdateGoodInfoSuccess, message);
+        event.emit(event.KProductPublishSuccess, message);
         return typeof cb == "function" && cb(true)
       } else {
         wx.showToast({

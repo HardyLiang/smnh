@@ -85,6 +85,8 @@ Page({
         btnFlag: false,
         btnValue: "登录农户账户"
       })
+      wx.setStorageSync(common.CC_LOGIN_USERNAME, "");
+      wx.setStorageSync(common.CC_LOGIN_PASS, "");
       //跳转登录页面
       wx.navigateTo({
         url: "../auth/login/login"

@@ -19,7 +19,7 @@
     <view class="input-item">
       <text class="input-item-label input-width" >法人身份证号</text>
       <view class="input-item-content">
-        <input type="number" placeholder="请输入法人身份证号" value='{{legalPersonIdCard}}'
+        <input type="idcard" placeholder="请输入法人身份证号" value='{{legalPersonIdCard}}'
         data-index="3"
         bindinput='bingContentChange'></input>
       </view>

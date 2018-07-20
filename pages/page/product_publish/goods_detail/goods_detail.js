@@ -11,7 +11,6 @@ Page({
     autoplay: true,
     interval: 5000,
     duration: 1000,
-    
     minPrice: '',
     preoutput: '',
     productDescription: '',

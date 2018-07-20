@@ -2,7 +2,7 @@
   <view class='form-group'>
     <view class="input-item">
       <text class="input-item-label">产品类型</text>
-      <view class="input-item-content arrow-btm" bindtap='onProductClassify'>
+      <view class="input-item-content arrow-btm" bindtap='onProductClassify' >
         <input type="text" placeholder="请选择产品类型" value="{{chooseGoods}}" disabled='true'></input>
       </view>
     </view>
@@ -15,7 +15,7 @@
     <view class="input-item">
       <text class="input-item-label">零售价</text>
       <view class="input-item-content">
-        <input type="text" placeholder="请输入零售价" value='{{miniNumber}}' bindinput='bindInputChange' data-typeName="mininumber"></input>
+        <input type="digit" placeholder="请输入零售价" value='{{miniNumber}}' bindinput='bindInputChange' data-typeName="mininumber"></input>
         <!-- <view class='abs-right'>元</view> -->
       </view>
     </view>
@@ -70,14 +70,14 @@
     <view class="input-item">
       <text class="input-item-label">价格</text>
       <view class="input-item-content">
-        <input type="text" placeholder="给商品定个好价格" value='{{item.price}}'
+        <input type="digit" placeholder="给商品定个好价格" value='{{item.price}}'
         data-index='{{index}}' data-type="invPrice" bindinput='bindTypeInput'></input>
       </view>
     </view>
     <view class="input-item">
       <text class="input-item-label">库存</text>
       <view class="input-item-content">
-        <input type="text" placeholder="设置一个合理库存" value='{{item.count}}' data-index='{{index}}' data-type="invStory" bindinput='bindTypeInput'></input>
+        <input type="number" placeholder="设置一个合理库存" value='{{item.count}}' data-index='{{index}}' data-type="invStory" bindinput='bindTypeInput'></input>
       </view>
     </view>
   </view>
@@ -108,7 +108,7 @@
         <view class="input-item">
           <text class="input-item-label">让利金</text>
           <view class="input-item-content">
-            <input type="text" placeholder="请输入让利金" value='{{profit}}' bindinput='bindInputChange' data-typeName="profit"></input>
+            <input type="digit" placeholder="请输入让利金" value='{{profit}}' bindinput='bindInputChange' data-typeName="profit"></input>
             <view class='abs-right'>元</view>
           </view>
         </view>

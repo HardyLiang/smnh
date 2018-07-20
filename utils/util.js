@@ -1,4 +1,7 @@
 var app = getApp();
+var common =require("../utils/common.js")
+var urlSet =require("../utils/urlSet.js")
+var event =require("../utils/event.js")
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -240,6 +243,70 @@ function checkWorkIsSensitive(message, cb){
 function autoLogin(idCard){
 
 }
+function getOpenId(url) {
+  //从缓存上面获取openID 
+  var openId = (wx.getStorageSync(common.CC_OPENID))
+  console.log("openId==" + openId)
+  wx.login({
+    success: function (res) {
+      console.log(res)
+      if (res.code) {
+        console.log("成功获取用户信息")
+        //成功获取用户信息
+        wx.getUserInfo({
+          success: function (resUser) {
+            console.log(resUser)
+            var encryptedData = resUser.encryptedData;//加密数据需要解码
+            var iv = resUser.iv;
+            var nickName = resUser.userInfo.nickName;
+            console.log("encryptedData=" + encryptedData + "iv=" + iv)
+            wx.setStorageSync(common.CC_IV_KEY, iv);
+            wx.setStorageSync(common.CC_ENCRY_KEY, encryptedData);
+            wx.setStorageSync(common.CC_HEAD_IMG, resUser.userInfo.avatarUrl);
+            wx.setStorageSync(common.CC_NICK_NAME, nickName)
+            event.emit(event.KGetWeiXinOpenIDSuccess, resUser)
+          },
+          fail: function (res) {
+            console.log("失败" + res)
+            wx.showModal({
+              title: '警告',
+              content: '尚未进行授权，请点击确定跳转到授权页面进行授权。',
+              success: function (res) {
+                if (res.confirm) {
+                  console.log('用户点击确定')
+                  wx.navigateTo({
+                    // url: '../page/auth/authorize/authorize',
+                    url:url
+                  });
+                }
+              }
+            })
+           
+          }
+        })
+        if (!openId) {//如果没有openId 就联网进行获取
+          console.log('没有openID 申请')
+          var appid = urlSet.APPID;
+          var secret = urlSet.SECRET;
+          getApp().func.getOpenId(res.code, appid, secret
+            , function (res) {
+              if (res) {
+                var openId = res;
+                console.log("openId---------" + openId);
+                wx.setStorageSync(common.CC_OPENID, openId)
+              } else {
+                console.log("获取openId失败");
+              }
+            })
+        }
+      }
+    },
+    fail: function () {
+      console.log("没有获取到")
+    }
+  })
+
+}
 
 
 
@@ -262,5 +329,6 @@ module.exports = {
   checkEmptyChoose: checkEmptyChoose,
   checkWorkIsSensitive: checkWorkIsSensitive,
   autoLogin: autoLogin,
+  getOpenId: getOpenId
 
 }

@@ -50,8 +50,10 @@ Page({
         title: "产品修改",//页面标题为路由参数
       })
       app.globalData.productPublic[common.CC_PRODUCT_GOOD_ID] = goodId;
-      app.globalData.productPublic[common.CC_PRODUCT_PROFIT_2] = 0;
+     
       var info = wx.getStorageSync(common.CC_GOOD_INFO);
+      var profit = info.shareCommission == null ? 0 : info.shareCommission;
+      app.globalData.productPublic[common.CC_PRODUCT_PROFIT_2] = profit;
       console.log(info)
       var goodsInvenType = info.goodsInventoryType;
       var showInv =false;
@@ -232,6 +234,14 @@ Page({
    * 用户点击跳转选择产品页面
    */
   onProductClassify: function (event) {
+    if (this.data.status=="modify"){
+      wx.showModal({
+        title: '提示',
+        content: '亲，不能修改产品名称',
+        showCancel:false
+      })
+      return;
+    }
     wx.navigateTo({
       url: "product_classify/product_classify"
     })

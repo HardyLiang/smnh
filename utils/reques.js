@@ -764,18 +764,30 @@ function updatePersonMsg(params, cb) {
 }
 
 function getOpenId(code, appid, secret, cb) {
+
   wx.request({
-    url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + appid + '&secret=' + secret + '&grant_type=authorization_code&js_code=' + code,
+    // url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + appid + '&secret=' + secret + '&grant_type=authorization_code&js_code=' + code,
+    url: urlSet.getOpenId,
     header: {
-      "content-type": "application/json;charset=UTF-8"
+      "content-type": "application/x-www-form-urlencoded;"
     },
-    method: "get",
+    method: "post",
+    data: util.json2Form({
+      appId: appid,
+      secret: secret,
+      code: code
+    }),
     complete: function (res) {
-      console.log("数据获取成功")
+      console.log("数据获取openid成功")
       console.log(res)
-      var openId = res.data.openid;
-      var sessionKey = res.data.session_key;
-      var unionId = res.data.unionid;
+      var data =res.data.data
+      if(data!=null&&data!=""){
+        data=JSON.parse(data)
+      }
+      console.log(data)
+      var openId = data.openid;
+      var sessionKey = data.session_key;
+      var unionId = data.unionid;
       wx.setStorageSync("session_key", sessionKey);
       wx.setStorageSync("unionId", unionId)
       console.log("openId=" + openId);

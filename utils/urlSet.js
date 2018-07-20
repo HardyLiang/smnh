@@ -41,7 +41,7 @@ var orderShippingUpdate = baseUrl + "app/seller/order_shipping_code_save_mini.ht
 //获取订单物流信息
 var getLogisticsInfo = baseUrl + "app/seller/express_info.htm";
 //农户协议URL
-var farmerPrototal = baseUrl + "wap/mini_agreement.htm";
+var farmerPrototal = baseUrl + "mini_agreement.htm";
 //获取协议消息列表
 var getAgreementMessageList = baseUrl + "app/seller/message_list.htm";
 //获取协议消息详细信息
@@ -81,6 +81,8 @@ var updataGoodsDetail = baseUrl +"app/seller/updateGoodsDetailPicture.htm";
 var removeGoodsPicture = baseUrl +"app/seller/removeGoodsPicture.htm";
 //验证码
 var getVerifyCode = baseUrl + "app/iskyshop_verify_code.htm";
+//获取openId
+var getOpenId=baseUrl+"app/iskyshop_seller_openid.htm"
 
 
 
@@ -122,5 +124,6 @@ module.exports = {
   getBankType: getBankType,
   updataGoodsDetail: updataGoodsDetail,
   removeGoodsPicture: removeGoodsPicture,
-  getVerifyCode: getVerifyCode
+  getVerifyCode: getVerifyCode,
+  getOpenId: getOpenId
 }

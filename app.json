@@ -1,5 +1,6 @@
 {
   "pages": [
+    
     "pages/index/index",
     "pages/page/product_publish/goods_detail/goods_detail",
     
@@ -7,13 +8,13 @@
     "pages/page/product_publish/product_publish",
     "pages/page/wechat_bind/wechat_bind",
     "pages/page/add_product/product_classify/product_classify",
-    "pages/page/auth/register/register",
+    
     "pages/page/auth/register_person/register_person",
     "pages/page/auth/login/login",
     "pages/page/add_product/product_detail/product_detail",
     "pages/page/add_product/product_img/product_img",
     "pages/page/add_product/add_product",
-    
+    "pages/page/auth/register/register",
     "pages/page/deliver_goods/deliver_goods",
     "pages/page/user/user",
     "pages/page/my_income/my_income",
@@ -48,7 +49,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#00a0e9",
-    "navigationBarTitleText": "农户",
+    "navigationBarTitleText": "实名农户-卖家中心",
     "navigationBarTextStyle": "#fff"
   },
   "tabBar": {

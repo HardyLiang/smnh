@@ -59,6 +59,13 @@ Page({
   onLoad: function () {
     this.fetchData();
     var that = this;
+    var userName = wx.getStorageSync(common.CC_LOGIN_USERNAME);
+    var pass = wx.getStorageSync(common.CC_LOGIN_PASS);
+
+  if(userName!=null&&userName!=""){
+    this.getLogin(userName,pass)
+  }
+
     //进来首先是获取系统信息；
     // app.func.getAgreementMessageList(pageIndex,function(message,res){
     //   if(res){
@@ -89,7 +96,7 @@ Page({
             icon: "none"
           })
         }
-        console.log()
+      
         
         //保存个人信息列表
         wx.setStorageSync(common.CC_MOBILE, res.data.store_information.store_telephone);
@@ -144,6 +151,28 @@ Page({
 
           }
         }, 2000);
+        //检测店铺头像是不是使用了默认头像，如果是，就给他上传一个本地头像
+        if (res.data.store_information.store_logo != null &&
+          res.data.store_information.store_logo.indexOf("resources/style/common/images/store.jpg") != -1) {
+          var imgUrl = wx.getStorageSync(common.CC_HEAD_IMG);
+          if (imgUrl != null) {
+            wx.getImageInfo({
+              src: imgUrl,
+              success: function (res) {
+                console.log(res)
+                var urlPath = res.path;
+                if (urlPath != null) {
+                  var status = "2";
+                  getApp().func.upLoadPicture("", status, urlPath, "", "", function (messge, res) {
+                    console.log("上传店铺头像成功！")
+                    event.emit(event.kLoginSuccessEventName, this);
+                  })
+                }
+              }
+            })
+          }
+
+        }
 
       });
       
@@ -161,6 +190,27 @@ Page({
   },
   onUnload:function(){
     event.remove(event.kLoginSuccessEventName,this)
+  },
+  getLogin:function(userName,pass){
+    wx.showLoading({
+      title: '自动登录中',
+    })
+    getApp().func.onLogin(userName, pass, function (messgae, res) {
+      //隐藏loading弹窗
+      wx.hideLoading()
+      //判断是否登录成功；
+      var data = res;
+      if (!res) {
+        wx.showToast({
+          title: "自动登录失败！请手动登录！",
+          icon: 'none'
+        });
+        return;
+      }
+      wx.setStorageSync(common.CC_LOGIN_USERNAME, userName);
+      wx.setStorageSync(common.CC_LOGIN_PASS, pass);
+      event.emit(event.kLoginSuccessEventName, messgae);
+    })
   }
   
  

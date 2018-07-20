@@ -84,8 +84,8 @@ Page({
     wx.setStorageSync(common.CC_ENCRY_KEY, e.detail.encryptedData);
     wx.setStorageSync(common.CC_IV_KEY, e.detail.iv);
     wx.setStorageSync(common.CC_NICK_NAME, e.detail.userInfo.nickName);
-
     event.emit(event.KGetUserInfoSuccess, e.detail.userInfo.avatarUrl);
+    event.emit(event.KGetWeiXinOpenIDSuccess, e.detail)
     wx.navigateBack();
   }
 
