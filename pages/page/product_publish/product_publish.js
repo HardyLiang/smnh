@@ -120,7 +120,7 @@ Page({
         isHideLoadIcon: false,
         loadmoreTip: tipLoading,
       })
-      this.getGoodsInfoByCard(this.data.pageIndex)
+      this.getGoodsInfoByCard(1)
     })
 
   },

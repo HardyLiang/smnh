@@ -788,7 +788,7 @@ function getOpenId(code, appid, secret, cb) {
       var openId = data.openid;
       var sessionKey = data.session_key;
       var unionId = data.unionid;
-      wx.setStorageSync("session_key", sessionKey);
+      wx.setStorageSync(common.CC_SESSION_KEY, sessionKey);
       wx.setStorageSync("unionId", unionId)
       console.log("openId=" + openId);
       if (openId) {

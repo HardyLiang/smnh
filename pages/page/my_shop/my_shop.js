@@ -17,8 +17,8 @@ Page({
     var that =this;
       //首先联网获取农户店铺URL
     var farmerInfo = wx.getStorageSync(common.CC_FARMERINFO);
-    var storeUrl =farmerInfo.data.store_url;
-    var storeName =farmerInfo.data.store_name;
+    var storeUrl = farmerInfo.data.store_information.store_url;
+    var storeName = farmerInfo.data.store_information.store_name;
     if (!storeUrl){
       wx.showModal({
         title: '提示',

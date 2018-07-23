@@ -4,7 +4,7 @@ var event =require("../../../utils/event.js");
 var app = getApp();
 Page({
   data: {
-    imgValue:"",
+    imgValue:"", 
     mobile: "",
     idCard: "",
     vercode: "",
@@ -47,8 +47,8 @@ Page({
 
     console.log(farmerInfo)
     var isBand = wx.getStorageSync(common.CC_BAND_STATUS);
-    console.log("openID=" + openID + "  userName=" + userName + "  userMobile=" + userMobile
-      + "isBand=" + isBand)
+    console.log("openID=" + openID + "  encryData=" + encryData + "  ivData=" + ivData
+      + "sessionKey=" + sessionKey)
     this.setData({
       mobile: userMobile,
       encryptedData: encryData,

@@ -1,5 +1,6 @@
 var util=require("../../../../utils/util.js")
 var common = require("../../../../utils/common.js");
+var event = require("../../../../utils/event.js")
 var app = getApp();
 Page({
   data: {
@@ -38,6 +39,7 @@ Page({
     }else{ 
       wx.showLoading()
       getApp().func.upLoadPicture("", status, path, "","",function(message,res){
+        
         wx.hideLoading();
             wx.showModal({
               title: '提示',
@@ -53,6 +55,7 @@ Page({
             })
             if(res){
               wx.setStorageSync(common.CC_BUSINESS_LICENSE, res.url);
+              event.emit(event.KInfoModifySuccess,this)
             }
       })
 

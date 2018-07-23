@@ -1,16 +1,24 @@
 var util=require('../../../../utils/util.js')
 var common =require('../../../../utils/common.js')
+var event =require('../../../../utils/event.js')
+var statusFore = common.CC_UPLOAD_STATUS_IDCARD;
+var statusBack = common.CC_UPLOAD_STATUS_IDCARD_BACK;
 var app=getApp();
 Page({
   data: {
     imageListZ: [],
     imageListF: [],
     foreImagePath:"",
-    backImagePath: ""
+    backImagePath: "",
+    modifyPosition:[],
+    status:""
   },
   onLoad: function (options) {
     // 生命周期函数--监听页面加载
     var status = options.type;
+    this.setData({
+      status:status
+    })
     if (status != null && status == "modify") {//修改，先复制
       var farmerInfo = wx.getStorageSync(common.CC_FARMERINFO);
       var fore = farmerInfo.data.store_information.license_legal_idCard_image;
@@ -40,49 +48,105 @@ Page({
   },
   // 下一步
   nextcompanyInfo: function (e) {
-    var that =this;
-    if (util.checkListEmpty(this.data.foreImagePath,"亲，请上传身份证正面照喔！")){
-      return;
-    }
-    if (util.checkListEmpty(this.data.backImagePath, "亲，请上传身份证反面照喔！")) {
-      return;
-    }
-    var statusFore = common.CC_UPLOAD_STATUS_IDCARD;
-    var statusBack = common.CC_UPLOAD_STATUS_IDCARD_BACK;
-    
-    that.updataFile(statusFore, that.data.foreImagePath, function(res){
-      if(res){
-        that.updataFile(statusBack, that.data.backImagePath,function(res){
-          if(res){
-            wx.showModal({
-              title: '提示',
-              content: '上传成功，是否跳转回首页？',
-              success:function(res){
-                if(res.confirm){
-                  wx.switchTab({
-                    url: '../../../../pages/index/index',
-                  })
-                }
-              }
-            })
-          }else{
-            wx.showModal({
-              title: '提示',
-              content: '上传失败，请重新上传',
-              showCancel: false
-            })
-          }
+    var that = this;
+    if (that.data.status=="modify"){
+      if (that.data.modifyPosition.length == 0) {
+        wx.showModal({
+          title: '提示',
+          content: '亲，请先选择图片！',
         })
-      }else{
+
+      }else
+        if (that.data.modifyPosition.length==1){
+          if (that.data.modifyPosition[0]==1){
+            that.upLoadFore()
+        }else
+            if (that.data.modifyPosition[0] == 2){
+              that.upLoadBack()
+            }
+
+      }else
+          if (that.data.modifyPosition.length == 2){
+            that.upLoadFore()
+      }
+      
+    }else{
+      
+      if (util.checkListEmpty(this.data.foreImagePath, "亲，请上传身份证正面照喔！")) {
+        return;
+      }
+      if (util.checkListEmpty(this.data.backImagePath, "亲，请上传身份证反面照喔！")) {
+        return;
+      }
+     
+      that.upLoadFore();
+    }
+  },
+   upLoadFore:function(){
+     var that =this;
+     that.updataFile(statusFore, that.data.foreImagePath, function (res) {
+       if(res){
+         if (that.data.status == "modify") {
+           var  thisFlag =false;
+           for (var i = 0; i < that.data.modifyPosition.length;i++){
+             if (2 == that.data.modifyPosition[i]){
+               thisFlag =true
+               that.upLoadBack();
+             }
+           }  
+           if (!thisFlag){
+             event.emit(event.KInfoModifySuccess, this)
+             wx.showModal({
+               title: '提示',
+               content: '图片上传成功！',
+               showCancel: false
+             })
+           }
+         } else {
+           that.upLoadBack();
+         }
+       }else{
+         wx.showModal({
+           title: '提示',
+           content: '上传失败，请重新上传',
+         })
+       }
+      
+     })
+   },
+   upLoadBack: function (){
+    var that =this ;
+    this.updataFile(statusBack, this.data.backImagePath, function (res) {
+      event.emit(event.KInfoModifySuccess, this)
+      if (res) {
+        if(that.data.status=="modify"){
+          wx.showModal({
+            title: '提示',
+            content: '图片上传成功！',
+            showCancel:false
+          })
+
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: '上传成功，是否跳转回首页？',
+            success: function (res) {
+              if (res.confirm) {
+                wx.switchTab({
+                  url: '../../../../pages/index/index',
+                })
+              }
+            }
+          })
+        }
+      } else {
         wx.showModal({
           title: '提示',
           content: '上传失败，请重新上传',
-          showCancel:false
+          showCancel: false
         })
       }
-    });
-
-  
+    })
   },
   // 上传身份证正面
   chooseImageIdCardZ: function () {
@@ -93,9 +157,11 @@ Page({
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         console.log(res)
+        var list =[1]
         that.setData({
           imageListZ: res.tempFilePaths,
-          foreImagePath: res.tempFilePaths[0]
+          foreImagePath: res.tempFilePaths[0],
+          modifyPosition:list
         })
       }
     })
@@ -109,9 +175,12 @@ Page({
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         console.log(res)
+        var list = that.data.modifyPosition;
+        list.push(2);
         that.setData({
           imageListF: res.tempFilePaths,
-          backImagePath: res.tempFilePaths[0]
+          backImagePath: res.tempFilePaths[0],
+          modifyPosition: list
         })
         app.globalData.userRegister[common.CC_IDCARD_BACK] = that.data.imageListF[0];
         console.log(app.globalData.userRegister)

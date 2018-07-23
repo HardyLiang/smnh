@@ -4,8 +4,8 @@
 // var baseUrl ="https://xz-weixin.e-tecsun.com";
 // var baseUrl ="http://114.67.49.72:80";
 // var baseUrl ="http://test.e-smnh.com/app/iskyshop_seller_login.htm";
-// var baseUrl ="http://test.e-smnh.com/"
-var baseUrl ="https://test.e-smnh.com:446/"
+var baseUrl ="https://test.e-smnh.com/"
+// var baseUrl ="https://test.e-smnh.com:446/"
 
 let APPID = 'wx00ebf9a68438faf5';
 let SECRET = '52ad3e6d8c872b95b3142645fbfbab79';

@@ -245,7 +245,8 @@ function autoLogin(idCard){
 }
 function getOpenId(url) {
   //从缓存上面获取openID 
-  var openId = (wx.getStorageSync(common.CC_OPENID))
+  var openId = wx.getStorageSync(common.CC_OPENID)
+  var sessionKey = wx.getStorageSync(common.CC_SESSION_KEY)
   console.log("openId==" + openId)
   wx.login({
     success: function (res) {
