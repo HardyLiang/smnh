@@ -82,7 +82,7 @@
     </view>
   </view>
   <view class='proxy-box main-add-btn' bindtap='addNormList' hidden='{{isShowModify}}'>
-    <!-- <image src='../../images/ic_login_gray_delete_left.png' class='add-gg'></image> -->
+   <image src='../../images/icon_addEdit.png' class='add-gg'></image> 
     <text >新增规格</text>
   </view>
   <!-- 多规格编辑的时候 -->

@@ -4,7 +4,7 @@
 <!-- start -->
         <view class='idCard-photoZ'>
           <block wx:for="{{imageListZ}}" wx:for-item="image" wx:key="index">
-              <image src="{{image}}" data-src="{{image}}"class='idCard-photo' mode="widthFix" ></image> 
+              <image src="{{image}}" data-src="{{image}}"class='idCard-photo' mode="aspectFill" ></image> 
           </block>
         
           <view  bindtap="chooseImageIdCardZ" class='choose-bindtap'></view>
@@ -17,7 +17,7 @@
 <!-- start -->
         <view class='idCard-photoZ'>
           <block wx:for="{{imageListF}}" wx:for-item="image" wx:key="index">
-              <image src="{{image}}" data-src="{{image}}" class='idCard-photo' mode="widthFix" ></image> 
+              <image src="{{image}}" data-src="{{image}}" class='idCard-photo' mode="aspectFill" ></image> 
           </block>
        
           <view  bindtap="chooseImageIdCardF" class='choose-bindtap'></view>

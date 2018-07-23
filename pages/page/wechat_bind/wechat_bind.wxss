@@ -32,17 +32,29 @@ page{background: #fff;padding-top: 35px;}
   color: #999;
 }
 .success-bind icon{
+  padding-top: 10px;
   display: block;
-  margin: 10px auto;
+  margin:0  auto 10px;
   text-align: center;
 }
 .txt-bind-success{
   display: block;
   color: #00a0e9;
   text-align: center;
+  font-size: 28rpx;
 }
 .text-bind-time{
   color: #999;
   line-height: 36px;
   font-size: 26rpx;
+}
+.success_icon{
+  padding-top: 6px;
+  width: 160rpx;
+  height: 160rpx;
+  margin: 0 auto 8px;
+}
+.success_icon image{
+  width: 100%;
+  height: 100%;
 }

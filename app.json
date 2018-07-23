@@ -1,19 +1,19 @@
 {
   "pages": [
-    
     "pages/index/index",
+    "pages/page/add_product/add_product",
     "pages/page/product_publish/goods_detail/goods_detail",
-    
     "pages/page/my_order/my_order",
     "pages/page/product_publish/product_publish",
+    "pages/page/auth/company_idCard/company_idCard",
+    "pages/page/auth/company_license/company_license",
     "pages/page/wechat_bind/wechat_bind",
     "pages/page/add_product/product_classify/product_classify",
-    
     "pages/page/auth/register_person/register_person",
     "pages/page/auth/login/login",
     "pages/page/add_product/product_detail/product_detail",
     "pages/page/add_product/product_img/product_img",
-    "pages/page/add_product/add_product",
+    
     "pages/page/auth/register/register",
     "pages/page/deliver_goods/deliver_goods",
     "pages/page/user/user",
@@ -21,7 +21,6 @@
     "pages/page/auth/forget/forget",
     "pages/logs/logs",
     "pages/page/my_shop/my_shop",
-    "pages/page/wechat_bind/bind_guide/bind_guide",
     "pages/page/my_income/my_income_list/my_income_list",
     "pages/page/message_list/message_list",
     "pages/page/message_list/message_detail/message_detail",
@@ -33,8 +32,6 @@
     "pages/page/dialog/dialog",
     "pages/page/action_sheet/action_sheet",
     "pages/page/operation_guide/operation_detail/operation_detail",
-    "pages/page/auth/company_license/company_license",
-    "pages/page/auth/company_idCard/company_idCard",
     "pages/page/auth/register_company/register_company",
     "pages/page/upload/upload",
     "pages/page/auth/company_info/company_info",

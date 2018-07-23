@@ -30,7 +30,7 @@
 
 .proxy-box {
   margin-top: 20rpx;
-  padding: 5px 0;
+  padding: 8px 0;
 }
 
 .proxy-msg {
@@ -70,7 +70,7 @@
 }
 
 .main-add-btn {
-  line-height: 22px;
+  line-height: 56rpx;
   font-size: 32rpx;
   color: #505050;
   padding: 0 10px;
@@ -78,10 +78,10 @@
 
 .add-gg {
   vertical-align: top;
-  transform: rotate(45deg);
-  width: 22px;
-  height: 22px;
+  width: 46rpx;
+  height: 46rpx;
   display: inline-block;
+  margin-top: 5rpx;
   margin-right: 5px;
 }
 

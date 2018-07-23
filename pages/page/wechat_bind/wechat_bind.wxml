@@ -1,4 +1,4 @@
-<!-- 未认证 -->
+<!-- 未认证  -->
 <view hidden='{{isShowBand}}'>
   <form bindsubmit='bindSubmit'>
     <image src='{{imgValue}}' class='user-head'></image>
@@ -30,7 +30,7 @@
 
 <!-- 绑定成功 -->
 <view class='success-bind' hidden='{{!isShowBand}}'>
-  <icon type='success' size='80'></icon>
+  <view class='success_icon'><image src='../../images/icon_bind_success.png'></image></view>
   <text class='txt-bind-success'>已绑定！</text>
   <view class='form-group'>
     <view class="input-item">
