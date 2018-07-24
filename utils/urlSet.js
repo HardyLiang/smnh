@@ -126,5 +126,6 @@ module.exports = {
   updataGoodsDetail: updataGoodsDetail,
   removeGoodsPicture: removeGoodsPicture,
   getVerifyCode: getVerifyCode,
-  getOpenId: getOpenId
+  getOpenId: getOpenId,
+  modifyPass: modifyPass
 }

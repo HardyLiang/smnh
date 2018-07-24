@@ -29,19 +29,9 @@
 	display: block;
   padding: 20rpx 0 ;
 }
-.get-code{
-  position: absolute;
-  right: 0;
-  top: 20rpx;
-  border: 1px solid #00a0e9;
-  font-size: 24rpx;
-  color: #00a0e9;
-  padding: 0 10rpx;
-  height:50rpx;
-  line-height: 50rpx; 
-  border-radius: 3px;
-  z-index: 100;
-}
 .hidden{
   display: none;
+}
+.input-item-tip{
+  color: orange
 }

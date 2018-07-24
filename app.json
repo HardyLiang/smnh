@@ -43,6 +43,7 @@
     "pages/page/dialog-code/dialog-code",
     "pages/page/info_list/info_list",
     "pages/page/modify_pass/modify_pass"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",

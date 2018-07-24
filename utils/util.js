@@ -236,13 +236,7 @@ function checkWorkIsSensitive(message, cb){
     }
   })
 }
-/**
- * 自动登录
- * (默认密码状态)
- */
-function autoLogin(idCard){
 
-}
 function getOpenId(url) {
   //从缓存上面获取openID 
   var openId = wx.getStorageSync(common.CC_OPENID)
@@ -308,6 +302,31 @@ function getOpenId(url) {
   })
 
 }
+/**
+ * token等错误的时候提示用户需要重新登录
+ */
+function tokenError(data){
+  console.log(data)
+  var code =data.code;
+  console.log(code)
+  if(code==-100){
+    wx.hideLoading()
+   wx.showModal({
+     title: '提示',
+     content: '亲，你的账号在其他设备登录或者密码已经被修改，请注意账号安全并重新登录',
+     showCancel:false,
+     success:function(res){
+       wx.reLaunch({
+         url: '/pages/page/auth/login/login',
+       })
+     }
+     
+   })
+    return true;
+  }else{
+    return false;
+  }
+}
 
 
 
@@ -329,7 +348,7 @@ module.exports = {
   checkListEmpty: checkListEmpty,
   checkEmptyChoose: checkEmptyChoose,
   checkWorkIsSensitive: checkWorkIsSensitive,
-  autoLogin: autoLogin,
-  getOpenId: getOpenId
+  getOpenId: getOpenId,
+  tokenError: tokenError,
 
 }

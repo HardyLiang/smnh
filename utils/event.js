@@ -10,6 +10,7 @@ let KUpdateGoodInfoSuccess = "KUpdateGoodInfoSuccess";//用于修改产品信息
 let KEVGGspValSuccess = "KEVGGspValSuccess";//用于修改多规格成功返回
 let KUploadDetailSuccess = "KUploadDetailSuccess";//用于修改详情图片成功
 let KGetWeiXinOpenIDSuccess = "KGetWeiXinOpenIDSuccess";//用于获取小程序成功
+let KModifyPassSuccess = "KModifyPassSuccess";//用于修改密码成功
 
 let kProductRecommendPurchaseSuccessEvent = 'kProductRecommendPurchaseSuccessEvent' //购买推介成功的通知
 
@@ -66,3 +67,4 @@ exports.KUpdateGoodInfoSuccess = KUpdateGoodInfoSuccess;
 exports.KEVGGspValSuccess = KEVGGspValSuccess;
 exports.KUploadDetailSuccess = KUploadDetailSuccess;
 exports.KGetWeiXinOpenIDSuccess = KGetWeiXinOpenIDSuccess;
+exports.KModifyPassSuccess = KModifyPassSuccess;

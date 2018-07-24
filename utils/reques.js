@@ -197,6 +197,9 @@ function getPersonMsg(cb) {
     complete: function (res) {
       console.log("获取personmsg")
       console.log(res)
+      if (util.tokenError(res.data)){
+        return;
+      }
       var message = res.data.message;
       var statusCode = res.data.statusCode;
       console.log(message)
@@ -375,6 +378,9 @@ function getAgreementMessageList(pageIndex, cb) {
       currentPage: pageIndex
     }),
     success: function (res) {
+      if (util.tokenError(res.data)) {
+        return;
+      }
       var message = res.data.message;
       var statusCode = res.data.statusCode;
       if (statusCode != null && "200" == statusCode) {
@@ -461,6 +467,9 @@ function orderShippingUpdate(params, cb) {
     method: "post",
     data: util.json2Form(params),
     success: function (res) {
+      if (util.tokenError(res.data)) {
+        return;
+      }
       var message = res.data.message;
       var statusCode = res.data.statusCode;
       console.log(message);
@@ -489,6 +498,9 @@ function orderShippingSave(params, cb) {
     method: "post",
     data: util.json2Form(params),
     success: function (res) {
+      if (util.tokenError(res.data)) {
+        return;
+      }
       var message = res.data.message;
       var statusCode = res.data.statusCode;
       console.log(message);
@@ -517,6 +529,9 @@ function getAllExpCompany(cb) {
     },
     method: "GET",
     success: function (res) {
+      if (util.tokenError(res.data)) {
+        return;
+      }
       var message = res.data.message;
       var statusCode = res.data.statusCode;
       console.log(message);
@@ -551,6 +566,9 @@ function getOrder(status, pageIndex, cb) {
       currentPage: pageIndex
     }),
     success: function (res) {
+      if (util.tokenError(res.data)) {
+        return;
+      }
       var message = res.data.message;
       var statusCode = res.data.statusCode;
       var count = res.data.count;
@@ -591,6 +609,9 @@ function getProductDetail(goodId, cb) {
       goods_id: goodId
     }),
     success: function (res) {
+      if (util.tokenError(res.data)) {
+        return;
+      }
       var message = res.data.message;
       var statusCode = res.data.statusCode;
       if (statusCode != null && "200" == statusCode) {
@@ -621,6 +642,9 @@ function updateOnlyProduct(params, cb) {
     method: "post",
     data: util.json2Form(params),
      success: function (res) {
+       if (util.tokenError(res.data)) {
+         return;
+       }
       var message = res.data.message;
       var statusCode = res.data.statusCode;
       if (statusCode != null && "200" == statusCode) {
@@ -652,6 +676,9 @@ function addOnlyProduct(params, cb) {
     method: "post",
     data: util.json2Form(params),
     success: function (res) {
+      if (util.tokenError(res.data)) {
+        return;
+      }
       var message = res.data.message;
 
       var statusCode = res.data.statusCode;
@@ -712,6 +739,9 @@ function getProductDict(cb) {
       token: token
     }),
     success: function (res) {
+      if (util.tokenError(res.data)) {
+        return;
+      }
       var message = res.data.message;
       var statusCode = res.data.statusCode;
       console.log(res)
@@ -742,6 +772,9 @@ function updatePersonMsg(params, cb) {
     method: "post",
     data: util.json2Form(params),
     success: function (res) {
+      if (util.tokenError(res.data)) {
+        return;
+      }
       console.log(res);
       var message = res.data.message;
       var statusCode = res.data.statusCode;
@@ -819,6 +852,9 @@ function getGoodsInfoByCard(pageindex, cb) {
       currentPage: pageindex
     }),
     complete: function (res) {
+      if (util.tokenError(res.data)) {
+        return;
+      }
       var message = res.data.message;
       var statusCode = res.data.statusCode;
       var count = res.data.count;
@@ -996,6 +1032,9 @@ function bandWX(encryptedData, session_key, iv, cb) {
       iv: iv
     }),
     complete: function (res) {
+      if (util.tokenError(res.data)) {
+        return;
+      }
       console.log(res);
       var statusCode = res.data.statusCode
       var message = res.data.message;
@@ -1031,6 +1070,9 @@ function unBandWX(cb) {
       user_id: user_id, token: token
     }),
     complete: function (res) {
+      if (util.tokenError(res.data)) {
+        return;
+      }
       console.log(res);
       var statusCode = res.data.statusCode
       var message = res.data.message;
@@ -1095,6 +1137,9 @@ function upLoadPicture(id,method,filePath,isMain,oldId,cb) {
     },
     formData: params,
     complete: function (res) {
+      if (util.tokenError(res.data)) {
+        return;
+      }
       console.log(res);
       var result = res.data
       if (!Array.isArray(result)){
@@ -1172,6 +1217,9 @@ function modifyMainPic(goods_id, pictureUrls, cb) {
       pictureUrls: picList,
     }),
     success: function (res) {
+      if (util.tokenError(res.data)) {
+        return;
+      }
       console.log(res);
       var statusCode = res.data.statusCode
       var message = res.data.message;
@@ -1207,6 +1255,9 @@ function removeGoodsPicture(goods_id, picId, cb) {
       pictureId: picId,
     }),
     success: function (res) {
+      if (util.tokenError(res.data)) {
+        return;
+      }
       console.log(res);
       var statusCode = res.data.statusCode
       var message = res.data.message;
@@ -1214,7 +1265,6 @@ function removeGoodsPicture(goods_id, picId, cb) {
       if (statusCode == "200") {
         return typeof cb == "function" && cb("删除次图成功", true)
       } else {
-
         return typeof cb == "function" && cb("删除次图失败", false)
       }
     },
@@ -1224,10 +1274,43 @@ function removeGoodsPicture(goods_id, picId, cb) {
 
   })
 }
+/**
+ * 修改密码
+*/
+function modifyPass(password, cb) {
+  var md5Pass = md5.hexMD5(password)
+  wx.request({
+    url: urlSet.modifyPass,
+    header: {
+      "content-type": "application/x-www-form-urlencoded;",
+      "verify": verify
+    },
+    method: "post",
+    data: util.json2Form({
+      user_id: user_id,
+      token: token,
+      password: md5Pass
+    }),
+    success: function (res) {
+      if (util.tokenError(res.data)) {
+        return;
+      }
+      console.log(res);
+      var statusCode = res.data.statusCode
+      var message = res.data.message;
+      console.log(statusCode);
+      if (statusCode == "200") {
+        return typeof cb == "function" && cb(message, true)
+      } else {
+        return typeof cb == "function" && cb(message, false)
+      }
+    },
+    fail: function () {
+      return typeof cb == "function" && cb("验证密码失败", false)
+    },
 
-
-
-
+  })
+}
 
 
 
@@ -1268,5 +1351,6 @@ module.exports = {
   getBankType: getBankType,
   modifyMainPic: modifyMainPic,
   removeGoodsPicture: removeGoodsPicture,
-  getVerifyCode: getVerifyCode
+  getVerifyCode: getVerifyCode,
+  modifyPass: modifyPass,
 }

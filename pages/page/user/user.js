@@ -56,6 +56,23 @@ Page({
         }
       });
     });
+    //修改密码收到返回
+    event.on(event.KModifyPassSuccess,this,function(res){
+      //清空页面信息
+      this.setData({
+        imgValue: "../../images/ic_web_center.png",
+        mobileValue: '暂无电话',
+        userNameValue: '昵称',
+        shipValue: '描述：5.0 分',
+        serviceValue: '服务：5.0 分',
+        storeValue: '发货：5.0 分',
+        btnFlag: false,
+        btnValue: "登录农户账户"
+      })
+      getApp().globalData.userName = "";
+      getApp().globalData.idCard = "";
+      wx.setStorageSync(common.CC_LOGIN_PASS, "");
+    })
   
   },
   onReady: function (options) {
@@ -68,7 +85,9 @@ Page({
     console.log('user=====onUnload');
     //页面销毁清除页面event接收事件
     event.remove(this.data.cropBack, this)
+    event.remove(event.KModifyPassSuccess, this)
   }, 
+
   LoginTap:function(){
     if (this.data.btnFlag){
       //注销用户
@@ -148,6 +167,14 @@ Page({
         })
       }
     }
+  },
+  bindLinkModify:function(){
+    if (!util.checkIsLogin('../../page/auth/login/login')) {
+      return;
+    }
+    wx.navigateTo({
+      url: '../modify_pass/modify_pass',
+    })
   }
 
 })

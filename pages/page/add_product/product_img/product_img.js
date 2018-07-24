@@ -9,7 +9,8 @@ Page({
     imageListClone:[],
     cropBack:"prodectImgBack",//这个是设置裁剪返回的消息名称，可自定义，但是要唯一；
     status:"",//记录当前状态
-    goodId:""//记录当前产品Id
+    goodId:"",//记录当前产品Id
+    isHideLoading:true
   },
 
   onLoad: function (options) {
@@ -110,7 +111,7 @@ Page({
     var index = e.currentTarget.dataset.index;
     if (index < imageList.length){
       var picId = imageList[index].id;
-      getApp().func.removeGoodsPicture(that.data.goodId, picId, function(message,res){
+      getApp().func.removeGoodsPicture(that.data.goodId,picId, function(message,res){
         if(!res){
           wx.showModal({
             title: '提示',
@@ -142,14 +143,9 @@ Page({
     console.log("onShow");
     event.on(this.data.cropBack, this, function (data) {
       console.log("我收到裁剪图片啦" + data);
+      
       var url =data;
-      that.modifyMain(url,function(res){
-         if(res){
-           that.setData({
-             imgUrlValue: data,
-           })
-         }
-      });
+      that.modifyMain(url);
     });
 
     //上传图片
@@ -163,8 +159,10 @@ Page({
       that.uploadSecPic(that.data.goodId, common.CC_UPLOAD_STATUS_MAIN,
         index, that.data.imageListClone[index], "");
       }else{
-        wx.showToast({
-          title: '上传次图成功',
+        wx.showModal({
+          title: '提示',
+          content: '上传次图成功',
+          showCancel:false
         })
       }
     })
@@ -196,21 +194,31 @@ Page({
     var that = this;
     var goodId = util.trim(this.data.goodId);
     var status = common.CC_UPLOAD_STATUS_MAIN;
-    wx.showLoading()
+    that.setData({
+      isHideLoading: false
+    })
     getApp().func.upLoadPicture(goodId, status, url, "1", "", function (message, res) {
-      wx.hideLoading()
+      that.setData({
+        isHideLoading: true
+      })
+      console.log(res)
       if (res) {//成功，
-        wx.showToast({
-          title: '主图上传成功',
+        wx.showModal({
+          title: '提示',
+          content: '主图上传成功',
+          showCancel:false
+        })
+        that.setData({
+          imgUrlValue: res.url,
         })
         event.emit(event.KUpdateGoodInfoSuccess, message);
         event.emit(event.KProductPublishSuccess, message);
-        return typeof cb == "function" && cb(true)
       } else {
-        wx.showToast({
-          title: message,
+        wx.showModal({
+          title: '提示',
+          content: message,
+          showCancel:false
         })
-        return typeof cb == "function" && cb(false)
       }
 
     });

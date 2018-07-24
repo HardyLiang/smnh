@@ -38,9 +38,9 @@ Page({
       console.log(avatar)
       if (avatar) {
         //  获取到裁剪后的图片,发送消息给原来的页面告诉他路径
-        event.emit(that.data.backCropMessgae, avatar)
+          event.emit(that.data.backCropMessgae, avatar)
         //关闭当前页面
-        wx.navigateBack()
+          wx.navigateBack()
       } else {
         console.log('获取图片失败，请稍后重试')
       }
@@ -48,7 +48,6 @@ Page({
   },
   uploadTap() {
     const self = this
-   
     wx.chooseImage({
       count: 1, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -83,15 +82,15 @@ Page({
           //   icon: 'loading',
           //   duration: 20000
           // })
-          wx.showLoading({
-            title: '上传中',
-          })
+          // wx.showLoading({
+          //   title: '上传中',
+          // })
         })
         .on('imageLoad', (ctx) => {
           console.log(`picture loaded`)
           console.log(`current canvas context:`, ctx)
           // wx.hideToast()
-          wx.hideLoading()
+          // wx.hideLoading()
         })
         .on('beforeDraw', (ctx, instance) => {
           console.log(`before canvas draw,i can do something`)

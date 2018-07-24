@@ -42,13 +42,13 @@
         <view class="navigator-arrow"></view>
       </view>
     </navigator>
-    <navigator url="../modify_pass/modify_pass">
+    <view catchtap='bindLinkModify'>
       <view class='user-list-item'>
         <view>
           <image class="income-icon" src="../../images/ic_about_software_left.png"></image>修改密码</view>
         <view class="navigator-arrow"></view>
       </view>
-    </navigator>
+    </view>
   </view>
   <!-- 登录农户账号 -->
   <view class='user-login' bindtap='LoginTap'>

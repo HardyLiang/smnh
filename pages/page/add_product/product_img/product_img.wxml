@@ -4,7 +4,7 @@
     <view class='up-image'> + 上传封面图 
     <image src='{{imgUrlValue}}' catchtap='uploadImg' mode='aspectFill' class='up-image-info'></image>
     </view>
-    <text class="product-title">其他详细图</text>
+    <text class="product-title">其他主图</text>
     <view class='product-upload'>
       <!-- start -->
       <view class="weui-uploader__bd">
@@ -24,3 +24,8 @@
     </view>
   </view>
   <button class='big-btn' catchtap='confirmUpLoad'>前往详情修改</button>
+  <view>
+ <loading hidden="{{isHideLoading}}">
+  上传中...
+ </loading>
+</view>

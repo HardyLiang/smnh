@@ -92,5 +92,6 @@ App({
     modifyMainPic: http.modifyMainPic,
     removeGoodsPicture: http.removeGoodsPicture,
     getVerifyCode: http.getVerifyCode,
+    modifyPass: http.modifyPass,
   }
 })
