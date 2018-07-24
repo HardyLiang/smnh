@@ -234,14 +234,14 @@ Page({
    * 用户点击跳转选择产品页面
    */
   onProductClassify: function (event) {
-    if (this.data.status=="modify"){
-      wx.showModal({
-        title: '提示',
-        content: '亲，不能修改产品名称',
-        showCancel:false
-      })
-      return;
-    }
+    // if (this.data.status=="modify"){
+    //   wx.showModal({
+    //     title: '提示',
+    //     content: '亲，不能修改产品名称',
+    //     showCancel:false
+    //   })
+    //   return;
+    // }
     wx.navigateTo({
       url: "product_classify/product_classify"
     })

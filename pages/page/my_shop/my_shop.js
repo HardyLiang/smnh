@@ -19,6 +19,7 @@ Page({
     var farmerInfo = wx.getStorageSync(common.CC_FARMERINFO);
     var storeUrl = farmerInfo.data.store_information.store_url;
     var storeName = farmerInfo.data.store_information.store_name;
+    var status = farmerInfo.data.store_information.store_status;
     if (!storeUrl){
       wx.showModal({
         title: '提示',
@@ -32,6 +33,50 @@ Page({
         }
       })
     }
+    var message ='';
+    switch (status){
+      case 0:
+      message="未提交开店申请，无法查看"
+      break;
+      case 5:
+        message = "公司等待信息审核，无法查看"
+        break;
+      case 6:
+        message = "公司信息审核失败，无法查看"
+        break;
+      case 10:
+        message = "店铺等待信息审核，无法查看"
+        break;
+      case 11:
+        message = "店铺审核失败，无法查看"
+        break;
+      case 15://正常营业
+        message = ""
+        break;
+      case 25:
+        message = "店铺到期关闭，无法查看"
+        break;
+      case 26:
+        message = "店铺到期需续费，无法查看"
+        break;
+        default:
+        break;
+    }
+    if(message!=""){
+      wx.showModal({
+        title: '提示',
+        content: message,
+        showCancel:false,
+        success:function(res){
+          if(res.confirm){
+            wx.navigateBack()
+          }
+        }
+      })
+      return;
+    }
+    
+
        //成功给URL赋值
        that.setData({
          urlValue: storeUrl,

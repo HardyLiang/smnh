@@ -3,8 +3,8 @@
 var app = getApp()
 var util = require('../../utils/util.js')
 var event = require('../../utils/event.js')
-var common =require('../../utils/common.js')
-var pageIndex=1;
+var common = require('../../utils/common.js')
+var pageIndex = 1;
 Page({
   data: {
     imgUrls: [
@@ -62,9 +62,9 @@ Page({
     var userName = wx.getStorageSync(common.CC_LOGIN_USERNAME);
     var pass = wx.getStorageSync(common.CC_LOGIN_PASS);
 
-  if(userName!=null&&userName!=""){
-    this.getLogin(userName,pass)
-  }
+    if (userName != null && userName != "") {
+      this.getLogin(userName, pass)
+    }
 
     //进来首先是获取系统信息；
     // app.func.getAgreementMessageList(pageIndex,function(message,res){
@@ -78,11 +78,11 @@ Page({
     //     wx.setStorageSync(common.CC_MESSAGELIST, res.data);
     //   }
     // })
-    
-   
+
+
   },
-  onShow:function(){  
-    var that =this; 
+  onShow: function () {
+    var that = this;
     event.on(event.kLoginSuccessEventName, this, function (data) {
       console.log("我去我收到信息了");
       var name = wx.getStorageSync("userName");
@@ -90,7 +90,7 @@ Page({
       console.log("farmerId=" + farmerId);
       //联网刷新数据
       this.getPersonMsg();
-      
+
     })
   },
   hrefLink: function (e) {
@@ -99,14 +99,14 @@ Page({
     if (!util.checkIsLogin('../page/auth/login/login')) {
       return;
     }
-    var typeId=e.currentTarget.dataset.id;
-    if (typeId == "product_publish" || typeId =="my_order"){//如果是发布产品与订单的时候还要检测店铺属性
+    var typeId = e.currentTarget.dataset.id;
+    if (typeId == "product_publish" || typeId == "my_order") {//如果是发布产品与订单的时候还要检测店铺属性
       var info = wx.getStorageSync(common.CC_FARMERINFO);
-      if (info.data.store_information.store_status == 10 || info.data.store_information.store_status == 11){
+      if (info.data.store_information.store_status == 10 || info.data.store_information.store_status == 11) {
         wx.showModal({
           title: '提示',
           content: '店铺审核未成功，该功能无法使用！',
-          showCancel:false
+          showCancel: false
         })
         return;
       }
@@ -116,10 +116,10 @@ Page({
       url: `../page/${url}/${url}`
     })
   },
-  onUnload:function(){
-    event.remove(event.kLoginSuccessEventName,this)
+  onUnload: function () {
+    event.remove(event.kLoginSuccessEventName, this)
   },
-  getLogin:function(userName,pass){
+  getLogin: function (userName, pass) {
     wx.showLoading({
       title: '自动登录中',
     })
@@ -140,10 +140,10 @@ Page({
       event.emit(event.kLoginSuccessEventName, messgae);
     })
   },
-   
-/**
-   * 下拉刷新
-   */
+
+  /**
+     * 下拉刷新
+     */
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading(); //在标题栏中显示加载
     this.setData({
@@ -151,8 +151,8 @@ Page({
     })
     this.getPersonMsg();
   },
-  getPersonMsg:function(){
-    var that =this;
+  getPersonMsg: function () {
+    var that = this;
     app.func.getPersonMsg(function (message, res) {
       console.log(res)
       if (that.data.isReFresh) {//判断是否刷新操作
@@ -190,15 +190,27 @@ Page({
               }
             })
           } else
-            if (storeStatus == 10 || storeStatus == 11) {
+            if (storeStatus == 10 || storeStatus == 11
+              || storeStatus == 5 || storeStatus == 6
+            ) {
               if (storeAll && storeStatus != 10) {
                 message = "店铺待审核,请耐心等待"
               } else
-                if (storeStatus == 11) {
-                  message = "店铺审核失败，请重新上传相关信息！"
-                } else {
-                  message = "请上传相关证件审核以激活店铺"
-                }
+                if (storeStatus == 10) {
+                  message = "店铺审核中，如需修改，请重新上传相关信息！"
+                } else
+                  if (storeStatus == 11) {
+                    message = "店铺审核失败，请重新上传相关信息！"
+                  } else
+                    if (storeStatus == 5) {
+                      message = "公司等待信息审核，如需修改，请重新上传相关信息！"
+                    }
+                    else
+                      if (storeStatus == 6) {
+                        message = "公司信息审核失败，请重新上传相关信息！"
+                      } else {
+                        message = "请上传相关证件审核以激活店铺"
+                      }
               wx.showModal({
                 title: '注意',
                 content: message,
@@ -214,8 +226,9 @@ Page({
                       wx.navigateTo({
                         url: '../page/auth/company_license/company_license?type=modify',
                       })
-                    }
+                    } 
                 }
+                
               })
             }
 
