@@ -82,6 +82,8 @@ var removeGoodsPicture = baseUrl +"app/seller/removeGoodsPicture.htm";
 var getVerifyCode = baseUrl + "app/iskyshop_verify_code.htm";
 //获取openId
 var getOpenId=baseUrl+"app/iskyshop_seller_openid.htm"
+//修改密码
+var modifyPass = baseUrl + "app/seller/password_check.htm"
 
 
 

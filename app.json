@@ -1,5 +1,6 @@
 {
   "pages": [
+    
     "pages/index/index",
     "pages/page/add_product/add_product",
     "pages/page/product_publish/goods_detail/goods_detail",
@@ -13,7 +14,6 @@
     "pages/page/auth/login/login",
     "pages/page/add_product/product_detail/product_detail",
     "pages/page/add_product/product_img/product_img",
-    
     "pages/page/auth/register/register",
     "pages/page/deliver_goods/deliver_goods",
     "pages/page/user/user",
@@ -41,7 +41,8 @@
     "pages/page/add_product/edit_more_norm/edit_more_norm",
     "pages/page/info_list/edit_info/edit_info",
     "pages/page/dialog-code/dialog-code",
-    "pages/page/info_list/info_list"
+    "pages/page/info_list/info_list",
+    "pages/page/modify_pass/modify_pass"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -69,5 +70,4 @@
       }
     ]
   }
-  
 }

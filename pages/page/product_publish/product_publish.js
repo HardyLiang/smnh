@@ -29,6 +29,7 @@ Page({
     typeAlreadyStatus:false,//是否加载全部完毕
     productlist:[],//产品列表
     isReFresh:false,
+    isHideList:true
   },
 
   /**
@@ -141,6 +142,18 @@ Page({
           isReFresh: false
         })
       }
+      if(pageIndex==1){
+        if(!res||res.data.length==0){
+          that.setData({
+            isHideList:false
+          })
+        }else{
+          that.setData({
+            isHideList: true
+          })
+        }
+      }
+      
       if (!res) {
         wx.showModal({
           title: '提示',

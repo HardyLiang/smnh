@@ -440,10 +440,12 @@ Page({
       case "allItemName":
         var mAllItem = 'allItem[' + 0 + '].name';
         app.globalData.productPublic[common.CC_PRODUCT_DSB_GOOD_UNIT] = content;
-        app.globalData.productPublic[common.CC_PRODUCT_SPECS_INFO][0].name=content;
         this.setData({
           [mAllItem]: content
         })
+        if (this.data.status=="modify"){
+          app.globalData.productPublic[common.CC_PRODUCT_SPECS_INFO][0].name = content;
+        }
       break;
       case "packDetails":
         app.globalData.productPublic[common.CC_PRODUCT_SPEC_DESCRIPTION] = content;
