@@ -38,14 +38,14 @@
     <navigator url="../about_soft/about_soft">
       <view class='user-list-item'>
         <view>
-          <image class="income-icon" src="../../images/ic_about_software_left.png"></image>联系客服</view>
+          <image class="income-icon" src="../../images/ic_contact_help.png"></image>联系客服</view>
         <view class="navigator-arrow"></view>
       </view>
     </navigator>
     <view catchtap='bindLinkModify'>
       <view class='user-list-item'>
         <view>
-          <image class="income-icon" src="../../images/ic_about_software_left.png"></image>修改密码</view>
+          <image class="income-icon" src="../../images/ic_edit_password.png"></image>修改密码</view>
         <view class="navigator-arrow"></view>
       </view>
     </view>

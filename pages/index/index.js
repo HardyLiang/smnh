@@ -37,11 +37,7 @@ Page({
           'text': '我的店铺',
           'url': 'my_shop'
         },
-        // {
-        //   'icon': '../images/ic_main_my_income.png',
-        //   'text': '我的收入',
-        //   'url': 'my_income'
-        // },
+       
         {
           'icon': '../images/ic_main_info_edit.png',
           'text': '我的信息',
@@ -51,7 +47,12 @@ Page({
           'icon': '../images/ic_main_wei_xin.png',
           'text': '微信绑定',
           'url': 'wechat_bind'
-        }
+         }
+        //  {
+        //   'icon': '../images/ic_main_my_income.png',
+        //   'text': '我的收入',
+        //   'url': 'my_income'
+        // }
       ]
 
     })
