@@ -132,8 +132,12 @@ Page({
         }
       }
       console.log('index====' + index + that.data.photoBoxList.length)
+      wx.showLoading({
+        title: '保存中',
+      })
     getApp().func.modifyMainPic(
       this.data.goodId, this.data.photoBoxList, function(message,res){
+        wx.hideLoading()
         console.log(res)
         if(res){
           wx.showModal({

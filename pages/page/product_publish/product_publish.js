@@ -197,7 +197,7 @@ Page({
    console.log("点击修改让利")
    console.log(e)
    var goodsid =e.currentTarget.dataset.goodsid;
-   var shareComission = e.currentTarget.dataset.sharecommission;
+   var shareComission = util.trim(e.currentTarget.dataset.sharecommission);
    var index = parseInt(e.currentTarget.dataset.index);
    var goodsStatus = e.currentTarget.dataset.goodsstatus;
    if (goodsStatus == 0) {
@@ -205,7 +205,7 @@ Page({
    console.log("orderId=" + goodsid + "sharecomission=" + shareComission + "index=" + index)
    this.setData({
      dialogTitle:"修改让利金",
-     dialogContent: shareComission,
+     dialogContent: shareComission=="0"?"":shareComission,
      orderId: goodsid,
      index:index
    })
@@ -228,7 +228,7 @@ Page({
     })
     getApp().globalData.productModify = {};
     getApp().globalData.productModify[common.CC_PRODUCT_GOOD_ID] = util.trim(id);
-    getApp().globalData.productModify[common.CC_PRODUCT_PROFIT_2] = shareCommission;
+    getApp().globalData.productModify[common.CC_PRODUCT_PROFIT_2] = util.trim(shareCommission);
     var params = getApp().globalData.productModify;
     getApp().func.updateOnlyProduct(params, function (message, res) {
       wx.hideLoading();
@@ -262,7 +262,7 @@ Page({
     // console.log("点击修改库存")
     // console.log(e)
     var goodsid = e.currentTarget.dataset.goodsid;
-    var goodsinventory = e.currentTarget.dataset.goodsinventory;
+    var goodsinventory = util.trim(e.currentTarget.dataset.goodsinventory);
     var index = parseInt(e.currentTarget.dataset.index);
     var goodsStatus = e.currentTarget.dataset.goodsstatus;
    

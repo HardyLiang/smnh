@@ -346,7 +346,11 @@ Page({
     })
   },
   updatePersonMsg:function(params){
+    wx.showLoading({
+      title: '保存中',
+    })
     getApp().func.updatePersonMsg(params, function (message, res) {
+      wx.hideLoading()
       console.log(res);
       if (!res) {
         wx.showModal({

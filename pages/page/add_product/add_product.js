@@ -479,7 +479,9 @@ Page({
          app.globalData.productPublic[common.CC_PRODUCT_SPECS_INFO] = JSON.stringify(specInfo);
          app.globalData.productPublic[common.CC_GOODS_INVENTORY_DETAIL] = JSON.stringify(inveInfo);
        }
-    
+       wx.showLoading({
+         title: '修改中',
+       })
       getApp().func.updateOnlyProduct(params, function (message, res) {
         wx.hideLoading();
         console.log("修改返回" + message)
@@ -492,11 +494,18 @@ Page({
           return;
         }
         //修改成功
-        wx.showToast({
-          title: '修改信息成功',
+        wx.showModal({
+          title: '提示',
+          content: '修改信息成功',
+          showCancel:false,
+          success:function(res){
+            if(res.confirm){
+              event.emit(event.KUpdateGoodInfoSuccess, message)
+              wx.navigateBack()
+            }
+          }
         })
-        event.emit(event.KUpdateGoodInfoSuccess, message)
-        wx.navigateBack()
+     
       });
 
     }else{
@@ -543,7 +552,11 @@ Page({
         params[common.CC_PRODUCT_PACK_DETAILS] = this.data.packDetails;
       }
     //联网获取数据
+    wx.showLoading({
+      title: '发布中',
+    })
     app.func.addOnlyProduct(params, function (message, res) {
+      wx.hideLoading()
       console.log(res)
       if (!res) {//失败
         wx.showModal({
@@ -554,12 +567,22 @@ Page({
         return;
       } else {//成功，跳转回产品列表页
         //通知我的产品列表页面告诉他老子发布成功了
-        var goodId = res.data;
-        event.emit(event.KProductPublishSuccess, message);
-        //发布成功跳转到上传产品主图
-        wx.redirectTo({
-          url: "product_img/product_img?type=add&goodId=" + goodId
+        wx.showModal({
+          title: '提示',
+          content: '发布成功',
+          showCancel:false,
+          success:function(res){
+            if(res.confirm){
+              var goodId = res.data;
+              event.emit(event.KProductPublishSuccess, message);
+              //发布成功跳转到上传产品主图
+              wx.redirectTo({
+                url: "product_img/product_img?type=add&goodId=" + goodId
+              })
+            }
+          }
         })
+      
       } 
     });
     }

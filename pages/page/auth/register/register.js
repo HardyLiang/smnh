@@ -53,13 +53,15 @@ Page({
     getApp().globalData.userRegister[common.CC_SHOP_TYPE] = this.data.stroeType[this.data.index];
 
     var imgUrl = wx.getStorageSync(common.CC_HEAD_IMG);
+    console.log("获取头像")
     console.log(imgUrl)
-    if(imgUrl!=null){
+    if(imgUrl!=null&&imgUrl!=""){
       that.setData({
         imgValue:imgUrl
       })
      
     }else{
+      console.log("头像是空")
       that.setData({
         imgValue:"../../../images/ic_smnh_logo_big.png"
       })

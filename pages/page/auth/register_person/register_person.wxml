@@ -7,7 +7,7 @@
         <input type="idcard" placeholder="请输入您的身份证号" value='{{idCard}}'
         bindblur='bindblurIdCard'
         ></input>
-        {{tipIdcardMessage}}
+        <view class='input-item-tip'>{{tipIdcardMessage}}</view>
       </view>
     </view>
     <view class="input-item">
@@ -21,7 +21,9 @@
       <view class="input-item-content">
         <input type="number" placeholder="请输入您的手机号" value='{{mobile}}'  bindblur='bindblurIdMobile'
          ></input>
+         <view class='input-item-tip'>
          {{tipMobileMessage}}
+         </view>
       </view>
     </view> 
     <view class="input-item">

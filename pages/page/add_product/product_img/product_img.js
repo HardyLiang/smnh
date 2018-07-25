@@ -119,14 +119,16 @@ Page({
             showCancel:false
           })
         }else{
-          wx.showToast({
-            title: message
-          })
           event.emit(event.KUpdateGoodInfoSuccess, message);
           imageList.splice(index, 1);
           that.setData({
             imageList: imageList
           });
+          wx.showModal({
+            title: '提示',
+            content: message,
+            showCancel: false
+          })
         }
       })
       
@@ -247,7 +249,9 @@ Page({
       if(res){
         console.log(res);
         var list=[]
-        list = that.data.imageList;
+        if (that.data.imageList.length>0){
+          list = that.data.imageList;
+        }
         list.push(res)
         that.setData({
           imageList:list,

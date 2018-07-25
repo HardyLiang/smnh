@@ -53,7 +53,11 @@ Page({
       console.log("我收到裁剪图片啦" + data);
       var imgUrl = data;
       //联网修改图片
+      wx.showLoading({
+        title: '上传中',
+      })
       getApp().func.upLoadPicture('', common.CC_UPLOAD_STATUS_HEAD, imgUrl, "", "", function (message, res) {
+        wx.hideLoading()
         console.log("成功返回");
         console.log(res)
         if (!res) {
@@ -64,8 +68,10 @@ Page({
           })
         } else {
           console.log(message)
-          wx.showToast({
-            title: message,
+          wx.showModal({
+            title: '提示',
+            content: message,
+            showCancel: false
           })
           that.setData({
             imgUrlValue: res.url
@@ -80,6 +86,7 @@ Page({
 
   },
   onUnload:function(){
+    event.remove(this.data.cropBack,this);
   },
   /**
    * 下拉刷新

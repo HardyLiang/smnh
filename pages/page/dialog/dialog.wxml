@@ -3,7 +3,7 @@
     <view class='wx-dialog'>
         <view class='wx-dialog-title'>{{ title }}</view>
         <view class='wx-dialog-content'>
-        <input type='number' placeholder='请输入内容' value="{{content}}" bindinput='bindInput'></input>
+        <input type='digit' placeholder='请输入内容' value="{{content}}" bindinput='bindInput'></input>
         </view>
         <view class='wx-dialog-footer'>
           <view class='wx-dialog-btn' catchtap='_cancelEvent'>{{ cancelText }}</view>

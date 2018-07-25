@@ -263,7 +263,11 @@ Page({
   },
   orderShippingSave:function(params){
     //联网发货
+    wx.showLoading({
+      title: '发货中',
+    })
     getApp().func.orderShippingSave(params, function (message, res) {
+      wx.hideLoading()
       console.log(message);
       console.log(res);
       //发货失败
@@ -293,7 +297,11 @@ Page({
   },
   orderShippingUpdate: function (params){
     //联网修改物流
+    wx.showLoading({
+      title: '物流保存中',
+    })
     getApp().func.orderShippingUpdate(params, function (message, res) {
+      wx.hideLoading()
       console.log(message);
       console.log(res);
       //修改失败
