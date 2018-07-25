@@ -98,8 +98,15 @@ Page({
              event.emit(event.KInfoModifySuccess, this)
              wx.showModal({
                title: '提示',
-               content: '图片上传成功！',
-               showCancel: false
+               content: '上传成功，是否跳转回首页？',
+               showCancel:false,
+               success: function (res) {
+                 if (res.confirm) {
+                   wx.switchTab({
+                     url: '../../../../pages/index/index',
+                   })
+                 }
+               }
              })
            }
          } else {
@@ -109,6 +116,7 @@ Page({
          wx.showModal({
            title: '提示',
            content: '上传失败，请重新上传',
+           showCancel:false
          })
        }
       
@@ -119,14 +127,6 @@ Page({
     this.updataFile(statusBack, this.data.backImagePath, function (res) {
       event.emit(event.KInfoModifySuccess, this)
       if (res) {
-        if(that.data.status=="modify"){
-          wx.showModal({
-            title: '提示',
-            content: '图片上传成功！',
-            showCancel:false
-          })
-
-        }else{
           wx.showModal({
             title: '提示',
             content: '上传成功，是否跳转回首页？',
@@ -138,7 +138,7 @@ Page({
               }
             }
           })
-        }
+        
       } else {
         wx.showModal({
           title: '提示',
@@ -204,6 +204,9 @@ Page({
       }
     })
 
+  },
+  bindCancel:function(){
+    wx.navigateBack()
   }
   // 预览图片
   // previewImage: function (e) {

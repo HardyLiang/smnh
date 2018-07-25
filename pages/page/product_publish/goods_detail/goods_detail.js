@@ -21,6 +21,7 @@ Page({
     spec: '',
     goodId:"",
     goodInfo:{},//产品列表
+    isReFresh:false
   },
   onLoad: function (options) {
     var id = options.id;
@@ -58,6 +59,13 @@ Page({
     wx.showLoading()
     getApp().func.getProductDetail(goodsId,function (message, res) {
       wx.hideLoading()
+      if (that.data.isReFresh) {//判断是否刷新操作
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
+        that.setData({
+          isReFresh: false
+        })
+      }
       console.log(res);
       if (!res) {//失败
         wx.showModal({
@@ -182,6 +190,14 @@ Page({
       }
     })
 
+  },
+  onPullDownRefresh: function () {
+    var that =this;
+    wx.showNavigationBarLoading(); //在标题栏中显示加载
+    that.setData({
+      isReFresh: true
+    })
+    that.getProductDetail(that.data.goodId);
   }
 
 

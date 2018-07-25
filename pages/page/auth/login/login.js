@@ -66,7 +66,7 @@ Page({
       wx.showToast({
         title: '登录成功',
         icon: "success",
-        duration: 1000,
+        duration: 500,
         success: function () {
           event.emit(event.kLoginSuccessEventName, messgae);
           //延迟1秒跳转,跳转回主页
@@ -74,7 +74,7 @@ Page({
             wx.switchTab({
               url: '../../../index/index',
             })
-          }, 1000);
+          }, 500);
 
         }
 

@@ -25,6 +25,6 @@
         </view>
       <!-- end -->
 </view>
-<button class='middle-btn'>返回</button>
+<button class='middle-btn' catchtap='bindCancel'>返回</button>
 <button class='middle-btn bg-blue' bindtap='nextcompanyInfo'>确认保存</button>
 </view>

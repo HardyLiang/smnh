@@ -220,12 +220,12 @@ Page({
                 success: function (res) {
                   if (res.confirm) {//跳转上传身份证
                     wx.navigateTo({
-                      url: '../page/auth/company_idCard/company_idCard?type=modify',
+                      url: '/pages/page/auth/company_idCard/company_idCard?type=modify',
                     })
                   } else
                     if (res.cancel) {//跳转上传营业执照
                       wx.navigateTo({
-                        url: '../page/auth/company_license/company_license?type=modify',
+                        url: '/pages/page/auth/company_license/company_license?type=modify',
                       })
                     } 
                 }
@@ -234,7 +234,7 @@ Page({
             }
 
         }
-      }, 2000);
+      }, 1000);
       //检测店铺头像是不是使用了默认头像，如果是，就给他上传一个本地头像
       if (res.data.store_information.store_logo != null &&
         res.data.store_information.store_logo.indexOf("resources/style/common/images/store.jpg") != -1) {
