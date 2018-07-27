@@ -1,9 +1,9 @@
 // pages/page/my_income/my_income_list/my_income_list.js
-var common =require('../../../../utils/common.js');
-var util =require('../../../../utils/util.js');
-var app = getApp();
-var pageIndex =1;
-var pageSize =10;
+// var common =require('../../../../utils/common.js');
+// var util =require('../../../../utils/util.js');
+// var app = getApp();
+// var pageIndex =1;
+// var pageSize =10;
 
 Page({
 
@@ -19,11 +19,11 @@ Page({
    */
   onLoad: function (options) {
       //首先获取身份证
-   var idCard =wx.getStorageSync(common.CC_IDCARD);
-   var beginTime = util.formatTimeFirstDayOfYear(new Date());
-   var endTime = util.formatTimeByHorizontal(new Date());
-   //获取列表
-   this.getSetRec(idCard, this.pageIndex, this.pageSize, beginTime, endTime);
+  //  var idCard =wx.getStorageSync(common.CC_IDCARD);
+  //  var beginTime = util.formatTimeFirstDayOfYear(new Date());
+  //  var endTime = util.formatTimeByHorizontal(new Date());
+  //  //获取列表
+  //  this.getSetRec(idCard, this.pageIndex, this.pageSize, beginTime, endTime);
     
   },
 
@@ -76,44 +76,44 @@ Page({
   
   },
 
-  getSetRec:function(idCard,pageIndex,pageSize,beginTime,endTime){
-    var  that =this;
-    app.func.getSetRec(idCard, pageSize, pageIndex, beginTime, endTime,
-    function(message,pageIndex,res){
-      console.log("获取收入列表成功")
-      console.log(res);
-      if (that.data.isReFresh) {//判断是否刷新操作
-        wx.hideNavigationBarLoading() //完成停止加载
-        wx.stopPullDownRefresh() //停止下拉刷新
-        that.setData({
-          isReFresh: false
-        })
-      }
-      if(!res){
-        return;
-      }
-      that.setData({
-        list:res
-      })
+  // getSetRec:function(idCard,pageIndex,pageSize,beginTime,endTime){
+  //   var  that =this;
+  //   app.func.getSetRec(idCard, pageSize, pageIndex, beginTime, endTime,
+  //   function(message,pageIndex,res){
+  //     console.log("获取收入列表成功")
+  //     console.log(res);
+  //     if (that.data.isReFresh) {//判断是否刷新操作
+  //       wx.hideNavigationBarLoading() //完成停止加载
+  //       wx.stopPullDownRefresh() //停止下拉刷新
+  //       that.setData({
+  //         isReFresh: false
+  //       })
+  //     }
+  //     if(!res){
+  //       return;
+  //     }
+  //     that.setData({
+  //       list:res
+  //     })
 
-    });
+  //   });
 
-  },
+  // },
   /**
    * 下拉刷新
    */
-  onPullDownRefresh: function () {
-    wx.showNavigationBarLoading(); //在标题栏中显示加载
-    this.setData({
-      isReFresh: true
-    })
-    //首先获取身份证
-    var idCard = wx.getStorageSync(common.CC_IDCARD);
-    var beginTime = util.formatTimeFirstDayOfYear(new Date());
-    var endTime = util.formatTimeByHorizontal(new Date());
-    //获取列表
-    this.getSetRec(idCard, this.pageIndex, this.pageSize, beginTime, endTime);
-  }
+  // onPullDownRefresh: function () {
+  //   wx.showNavigationBarLoading(); //在标题栏中显示加载
+  //   this.setData({
+  //     isReFresh: true
+  //   })
+  //   //首先获取身份证
+  //   var idCard = wx.getStorageSync(common.CC_IDCARD);
+  //   var beginTime = util.formatTimeFirstDayOfYear(new Date());
+  //   var endTime = util.formatTimeByHorizontal(new Date());
+  //   //获取列表
+  //   this.getSetRec(idCard, this.pageIndex, this.pageSize, beginTime, endTime);
+  // }
 
 
 })

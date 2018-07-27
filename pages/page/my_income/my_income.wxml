@@ -1,4 +1,4 @@
-<view>
+<!-- <view>
   <view class='income-info'>
     <text>待结算</text>
     <text class='income-info-money'>{{noIncome}}元</text>
@@ -38,4 +38,8 @@
       <text class='income-blue'>{{allCount}} </text>
     </view>
   </view>
+</view> -->
+<view class='income'>
+<image  src="../../images/ic_function.png"></image>
+<text>功能建设中...</text>
 </view>

@@ -22,8 +22,8 @@
     <view class="input-item" hidden="{{isShowSpec}}">
     <text class="input-item-label">库存配置</text>
     <radio-group class="radio-group" bindchange="radioChange">
-    <radio class='' checked='{{allCheck}}' value='all'>全局配置</radio>
-    <radio class=''value="spec"checked="{{specCheck}}">规格配置</radio>
+    <radio class='' checked='{{allCheck}}' value='all'>单规格</radio>
+    <radio class=''value="spec"checked="{{specCheck}}">多规格</radio>
     </radio-group>
     </view>
     <!-- 全局规格 -->
