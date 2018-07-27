@@ -46,7 +46,7 @@
   
   <!-- 收货 -->
   <view class='form-group'>
-    <view class='res-title'>收货地址</view>
+    <view class='res-title'>发货地址</view>
 
     <view class="input-item">
       <text class="input-item-label">所在地区</text>

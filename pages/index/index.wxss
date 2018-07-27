@@ -13,19 +13,17 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-content: center;
-  width: 99%;
+  width: 100%;
   margin: 0 auto;
   padding: 2px 0 5px;
+  background: #fff;
 }
 
 .wrap-item {
-  width: 49%;
+  width: 33.333%;
   padding: 25rpx 0 40rpx;
-  margin: 2px .5%;
   text-align: center;
-  position: relative;
-  border-radius: 4px;
-  background: #fff;
+  position: relative; 
 }
 
 .wrap_icon {
