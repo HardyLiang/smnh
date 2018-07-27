@@ -29,3 +29,4 @@
   上传中...
  </loading>
 </view>
+<canvas style='position:absolute;width:{{tWidth}}px;height:{{tHeight}}px;left:-1000px;top:-1000px' canvas-id="attendCanvasId"></canvas>

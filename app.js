@@ -31,7 +31,7 @@ App({
       }
     })
     //获取微信头像和openId等
-    util.getOpenId('../page/auth/authorize/authorize');
+    util.getOpenId('/pages/page/auth/authorize/authorize');
    
   },
   globalData: {

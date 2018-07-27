@@ -17,7 +17,7 @@ Page({
     //首先获取手机
     var idCard = wx.getStorageSync(common.CC_IDCARD);
     //联网获取收入
-    this.getSale(idCard);
+    // this.getSale(idCard);
   },
   /**
    * 获取收入 

@@ -18,7 +18,7 @@ Page({
       //首先联网获取农户店铺URL
     var farmerInfo = wx.getStorageSync(common.CC_FARMERINFO);
     var storeUrl = farmerInfo.data.store_information.store_url;
-    var storeName = farmerInfo.data.store_information.store_name;
+    var storeName = farmerInfo.data.user_information.true_name+"邀请你开店";
     var status = farmerInfo.data.store_information.store_status;
     if (!storeUrl){
       wx.showModal({
@@ -79,7 +79,7 @@ Page({
 
        //成功给URL赋值
        that.setData({
-         urlValue: storeUrl,
+         urlValue: storeUrl ,
          title: storeName
        })
        console.log(that.data.urlValue)
@@ -135,7 +135,7 @@ Page({
     return {
       title: this.data.title,
       desc: '实名农户，为你精选农户直供，安全放心的好产品!',
-      path: "../page/my_shop/my_shop"
+      path: "/pages/page/auth/login/login"
     }
   }
 })

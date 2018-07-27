@@ -567,13 +567,13 @@ Page({
         return;
       } else {//成功，跳转回产品列表页
         //通知我的产品列表页面告诉他老子发布成功了
+        var goodId = res.data;
         wx.showModal({
           title: '提示',
           content: '发布成功',
           showCancel:false,
           success:function(res){
             if(res.confirm){
-              var goodId = res.data;
               event.emit(event.KProductPublishSuccess, message);
               //发布成功跳转到上传产品主图
               wx.redirectTo({

@@ -5,7 +5,9 @@ var app = getApp();
 Page({
   data: {
     imageList:[],
-    imageUploadPath:""
+    imageUploadPath:"",
+    tWidth: "",
+    tHeight: ""
   },
   onLoad: function (options) {
     // 生命周期函数--监听页面加载
@@ -68,9 +70,13 @@ Page({
     util.choosePhoto(1,function(res){
       console.log(res)
       that.setData({
-        imageList: res,
-        imageUploadPath: res[0]
+        imageList: res.tempFilePaths,
+        imageUploadPath: res.tempFilePaths[0]
         });
+      if (res.tempFiles[0].size > 2000000) {
+        console.log(res.tempFiles[0].size)
+        that.drawCanvas(res.tempFilePaths[0])
+      }
     })
     
   },
@@ -81,5 +87,74 @@ Page({
       current: current,
       urls: this.data.imageList
     })
+  },
+  // 缩放图片
+  drawCanvas: function (url) {
+    var that = this;
+    wx.getImageInfo({
+      src: url,
+      success: function (res) {
+        console.log(res);
+        var ctx = wx.createCanvasContext('attendCanvasId');
+        var canvasWidth = res.width//原图宽度 
+        var canvasHeight = res.height;//原图高度
+        console.log("canvasWidth=" + canvasWidth + "canvasHeight=" + canvasHeight)
+        var tWidth = 320; //设置缩略图初始宽度 //可调
+        var tHeight = 480; //设置缩略图初始高度 //可调
+        if (canvasWidth > tWidth || canvasHeight > tHeight) {
+          //按比例计算出缩略图的宽度和高度
+          if (canvasWidth > canvasHeight * 1.8) {
+            tHeight = Math.floor(parseFloat(canvasHeight) * (parseFloat(tWidth) / parseFloat(canvasWidth)));
+          }
+          else {
+            tWidth = Math.floor(parseFloat(canvasWidth) * (parseFloat(tHeight) / parseFloat(canvasHeight)));
+          }
+        }
+        else {
+          tWidth = canvasWidth;
+          tHeight = canvasHeight;
+        }
+        console.log("tWidth=" + tWidth + "tHeight=" + tHeight)
+        that.setData({
+          tWidth: tWidth,
+          tHeight: tHeight
+        })
+        // //绘制新图
+        ctx.drawImage(res.path, 0, 0, tWidth, tHeight)
+        // ctx.drawImage(res.path,0, 0) 
+        ctx.draw(false, function () {
+          that.prodImageOpt(url, tWidth, tHeight)
+        });//在回调进行保存不会出现空白
+      }
+    })
+
+
+
+  },
+  // 生成图片
+  prodImageOpt: function (url, width, height) {
+    console.log(url);
+    var that = this;
+    wx.canvasToTempFilePath({
+      canvasId: 'attendCanvasId',
+      width: width,
+      height: height,
+      destWidth: width,
+      destHeight: height,
+      success: function success(res) {
+        console.log(res)
+        var path = res.tempFilePath;
+        wx.getImageInfo({
+          src: path,
+          success: function (res) {
+            console.log(res)
+          }
+        })
+        console.log(path);
+          that.setData({
+            imageUploadPath: path
+          });
+      }
+    });
   },
 })

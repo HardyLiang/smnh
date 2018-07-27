@@ -40,9 +40,13 @@ Page({
     if(userIdCard==""){
       userIdCard = farmerInfo.data.user_information.sCard;
     }
-    if(userName==null||userName==""){//未授权吧
-      util.getOpenId('../auth/authorize/authorize')
-    }
+    wx.checkSession({
+      fail:function(){
+        util.getOpenId('/pages/page/auth/authorize/authorize');
+      }
+    })
+   
+    
     
 
     console.log(farmerInfo)
@@ -142,7 +146,12 @@ Page({
       return;
     }
     //联网获取
+    wx.showLoading({
+      title: '绑定中',
+    })
     getApp().func.bandWX(this.data.encryptedData, this.data.session_key, this.data.iv, function(message,res){
+      wx.hideLoading()
+      
       console.log(res);
       if(!res){
         wx.showModal({
@@ -158,6 +167,8 @@ Page({
           content: message,
           showCancel: false,
           success: function (res) {
+            event.emit(event.kLoginSuccessEventName,this)
+            wx.navigateBack()
             //更新页面
             var isBand = wx.setStorageSync(common.CC_BAND_STATUS, true);
             that.setData({
@@ -215,6 +226,8 @@ Page({
          showCancel: false,
          success:function(res){
            if(res.confirm){
+             event.emit(event.kLoginSuccessEventName,this)
+             wx.navigateBack()
              //解绑成功；显示绑定页面
              var isBand = wx.setStorageSync(common.CC_BAND_STATUS, false);
              that.setData({

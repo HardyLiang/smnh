@@ -28,3 +28,4 @@
 <button class='middle-btn' catchtap='bindCancel'>返回</button>
 <button class='middle-btn bg-blue' bindtap='nextcompanyInfo'>确认保存</button>
 </view>
+<canvas style='position:absolute;width:{{tWidth}}px;height:{{tHeight}}px;left:-1000px;top:-1000px' canvas-id="attendCanvasId"></canvas>

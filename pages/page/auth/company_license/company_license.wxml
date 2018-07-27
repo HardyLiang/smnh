@@ -16,3 +16,4 @@
 <button class='middle-btn'  bindtap="chooseImage">重新上传</button>
 <button class='middle-btn bg-blue' bindtap='nextUpLoadIdCard'>确认保存</button>
 </view>
+<canvas style='position:absolute;width:{{tWidth}}px;height:{{tHeight}}px;left:-1000px;top:-1000px' canvas-id="attendCanvasId"></canvas>

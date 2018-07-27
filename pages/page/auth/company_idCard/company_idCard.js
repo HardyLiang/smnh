@@ -3,6 +3,8 @@ var common =require('../../../../utils/common.js')
 var event =require('../../../../utils/event.js')
 var statusFore = common.CC_UPLOAD_STATUS_IDCARD;
 var statusBack = common.CC_UPLOAD_STATUS_IDCARD_BACK;
+var fore="fore";
+var back="back";
 var app=getApp();
 Page({
   data: {
@@ -11,7 +13,9 @@ Page({
     foreImagePath:"",
     backImagePath: "",
     modifyPosition:[],
-    status:""
+    status:"",
+    tWidth:"",
+    tHeight:""
   },
   onLoad: function (options) {
     // 生命周期函数--监听页面加载
@@ -153,7 +157,7 @@ Page({
     var that = this
     wx.chooseImage({
       count: 1, // 默认9
-      sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
+      sizeType: ['compressed','original'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         console.log(res)
@@ -163,6 +167,11 @@ Page({
           foreImagePath: res.tempFilePaths[0],
           modifyPosition:list
         })
+        if(res.tempFiles[0].size>2000000){
+          console.log(res.tempFiles[0].size)
+        that.drawCanvas(res.tempFilePaths[0],fore)
+        }
+       
       }
     })
   },
@@ -171,7 +180,7 @@ Page({
     var that = this
     wx.chooseImage({
       count: 1, // 默认9
-      sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
+      sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         console.log(res)
@@ -184,13 +193,21 @@ Page({
         })
         app.globalData.userRegister[common.CC_IDCARD_BACK] = that.data.imageListF[0];
         console.log(app.globalData.userRegister)
+        if (res.tempFiles[0].size > 2000000) {
+          console.log(res.tempFiles[0].size)
+          that.drawCanvas(res.tempFilePaths[0], back)
+        }
       }
     })
   },
   updataFile:function(status,path,cb){
-    wx.showLoading()
+    console.log("上传")
+    wx.showLoading({
+      title: '上传中',
+    })
     getApp().func.upLoadPicture("", status, path, "", "", function (message, res) {
-      wx.hideLoading()
+      console.log("返回")
+      wx.hideLoading();
       if (res) {
         if (status == common.CC_UPLOAD_STATUS_IDCARD){
           wx.setStorageSync(common.CC_IDCARD_FRONT, res.url);
@@ -207,7 +224,83 @@ Page({
   },
   bindCancel:function(){
     wx.navigateBack()
-  }
+  },
+  // 缩放图片
+  drawCanvas: function (url,flag) {
+    var that = this;
+    wx.getImageInfo({
+      src: url,
+      success:function(res){
+        console.log(res);
+        var ctx = wx.createCanvasContext('attendCanvasId');
+        var  canvasWidth = res.width//原图宽度 
+        var canvasHeight = res.height;//原图高度
+        console.log("canvasWidth=" + canvasWidth + "canvasHeight=" + canvasHeight)
+        var tWidth = 320; //设置缩略图初始宽度 //可调
+        var tHeight = 480; //设置缩略图初始高度 //可调
+        if (canvasWidth > tWidth || canvasHeight > tHeight) {
+          //按比例计算出缩略图的宽度和高度
+          if (canvasWidth > canvasHeight * 1.8) {
+            tHeight = Math.floor(parseFloat(canvasHeight) * (parseFloat(tWidth) / parseFloat(canvasWidth)));
+          }
+          else {
+            tWidth = Math.floor(parseFloat(canvasWidth) * (parseFloat(tHeight) / parseFloat(canvasHeight)));
+          }
+        }
+        else {
+          tWidth = canvasWidth;
+          tHeight = canvasHeight;
+        }
+        console.log("tWidth=" + tWidth + "tHeight=" + tHeight)
+        that.setData({
+          tWidth: tWidth,
+          tHeight: tHeight
+        })
+        // //绘制新图
+        ctx.drawImage(res.path, 0, 0, tWidth, tHeight)
+        // ctx.drawImage(res.path,0, 0) 
+        ctx.draw(false, function () {
+          that.prodImageOpt(url, tWidth, tHeight,flag)
+        });//在回调进行保存不会出现空白
+      }
+    })
+    
+    
+   
+  },
+  // 生成图片
+  prodImageOpt: function (url,width,height,flag) {
+    console.log(url);
+    var that = this;
+    wx.canvasToTempFilePath({
+      canvasId: 'attendCanvasId',
+      width: width,
+      height: height,
+      destWidth: width,
+      destHeight: height,
+      success: function success(res) {
+        console.log(res)
+        var path = res.tempFilePath;
+        wx.getImageInfo({
+          src: path,
+          success:function(res){
+          console.log(res)
+          }
+        })
+        console.log(path);
+        if (flag == fore){
+          that.setData({
+            foreImagePath: path
+          });
+        }else{
+          that.setData({
+            backImagePath: path
+          });
+        }
+        
+      }
+    });
+  },
   // 预览图片
   // previewImage: function (e) {
   //   var current = e.target.dataset.src

@@ -7,6 +7,8 @@ Page({
     goodId:"",
     status:"",
     index:0,//记录要保存图片Index，
+    tWidth: "",
+    tHeight: ""
   },
 
   onLoad: function (options) {
@@ -59,30 +61,13 @@ Page({
           console.log(res)
           // var indexPic = res.currentTarget.dataset.indexPic;
           var imgUrlDetail = res.tempFilePaths;
-          wx.showLoading({
-            title: '上传中...',
-          })
-          getApp().func.upLoadPicture(that.data.goodId, 
-            common.CC_UPLOAD_STATUS_MAIN_OTHER, imgUrlDetail[0], "", "", function(message,res){
-              wx.hideLoading();
-              console.log(res);
-              var list = [];
-              if (index < that.data.photoBoxList.length){
-                var newList = that.data.photoBoxList;
-                newList[index] = res.url;
-                that.setData({
-                  photoBoxList: newList,
-                })
-              }else{
-                list.push(res)
-                that.setData({
-                  photoBoxList: list,
-                });
-              }
-             
-              
-          });
-          console.log(that.data.photoBoxList)
+          if (res.tempFiles[0].size > 2000000) {
+            console.log(res.tempFiles[0].size)
+            that.drawCanvas(res.tempFilePaths[0], index)
+          }else{
+            that.uploadImg(imgUrlDetail[0],index)
+          }
+          
         },
         fail: function () {
           wx.showToast({
@@ -96,6 +81,35 @@ Page({
       })
    
   }, 
+  uploadImg:function(imgUrl,index){
+    var that =this;
+    wx.showLoading({
+      title: '上传中...',
+    })
+    getApp().func.upLoadPicture(that.data.goodId,
+      common.CC_UPLOAD_STATUS_MAIN_OTHER, imgUrl, "", "", function (message, res) {
+        wx.hideLoading();
+        console.log(res);
+        var list = [];
+        if (index < that.data.photoBoxList.length) {
+          var newList = that.data.photoBoxList;
+          newList[index] = res.url;
+          that.setData({
+            photoBoxList: newList,
+          })
+        } else {
+          list.push(res)
+          that.setData({
+            photoBoxList: list,
+          });
+        }
+
+
+      });
+    console.log(that.data.photoBoxList)
+
+  },
+
   addPicture:function(){
     var item="";
     this.insertPhoto(item)
@@ -250,5 +264,66 @@ Page({
     }
     return list;
 
-  }
+  },
+  // 缩放图片
+  drawCanvas: function (url,index) {
+    var that = this;
+    wx.getImageInfo({
+      src: url,
+      success: function (res) {
+        console.log(res);
+        var ctx = wx.createCanvasContext('attendCanvasId');
+        var canvasWidth = res.width//原图宽度 
+        var canvasHeight = res.height;//原图高度
+        console.log("canvasWidth=" + canvasWidth + "canvasHeight=" + canvasHeight)
+        var tWidth = 320; //设置缩略图初始宽度 //可调
+        var tHeight = 480; //设置缩略图初始高度 //可调
+        if (canvasWidth > tWidth || canvasHeight > tHeight) {
+          //按比例计算出缩略图的宽度和高度
+          if (canvasWidth > canvasHeight * 1.8) {
+            tHeight = Math.floor(parseFloat(canvasHeight) * (parseFloat(tWidth) / parseFloat(canvasWidth)));
+          }
+          else {
+            tWidth = Math.floor(parseFloat(canvasWidth) * (parseFloat(tHeight) / parseFloat(canvasHeight)));
+          }
+        }
+        else {
+          tWidth = canvasWidth;
+          tHeight = canvasHeight;
+        }
+        console.log("tWidth=" + tWidth + "tHeight=" + tHeight)
+        that.setData({
+          tWidth: tWidth,
+          tHeight: tHeight
+        })
+        // //绘制新图
+        ctx.drawImage(res.path, 0, 0, tWidth, tHeight)
+        // ctx.drawImage(res.path,0, 0) 
+        ctx.draw(false, function () {
+          that.prodImageOpt(url, tWidth, tHeight,index)
+        });//在回调进行保存不会出现空白
+      }
+    })
+
+
+
+  },
+  // 生成图片
+  prodImageOpt: function (url, width, height,index) {
+    console.log(url);
+    var that = this;
+    wx.canvasToTempFilePath({
+      canvasId: 'attendCanvasId',
+      width: width,
+      height: height,
+      destWidth: width,
+      destHeight: height,
+      success: function success(res) {
+        console.log(res)
+        var path = res.tempFilePath;
+        console.log(path);
+        that.uploadImg(path,index)
+      }
+    });
+  },
 })

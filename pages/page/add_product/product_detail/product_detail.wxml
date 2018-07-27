@@ -17,3 +17,4 @@
 <button class='middle-btn' catchtap='addPicture'>添加图片</button>
 <button class='middle-btn bg-blue' catchtap='uploadPic'>确认保存</button>
 </view>
+<canvas style='position:absolute;width:{{tWidth}}px;height:{{tHeight}}px;left:-1000px;top:-1000px' canvas-id="attendCanvasId"></canvas>

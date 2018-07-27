@@ -1,6 +1,8 @@
 var event=require('../../../../utils/event.js')
 var util=require('../../../../utils/util.js')
 var common=require('../../../../utils/common.js')
+var mainType ="main"
+var secType ="sec";
 var app=getApp()
 Page({
   data: {
@@ -10,7 +12,9 @@ Page({
     cropBack:"prodectImgBack",//这个是设置裁剪返回的消息名称，可自定义，但是要唯一；
     status:"",//记录当前状态
     goodId:"",//记录当前产品Id
-    isHideLoading:true
+    isHideLoading:true,
+    tWidth: "",
+    tHeight: ""
   },
 
   onLoad: function (options) {
@@ -46,13 +50,19 @@ Page({
     var  that=this;
     wx.chooseImage({
       count: 1, // 默认9
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success(res) {
         const src = res.tempFilePaths[0]
-        wx.navigateTo({
-          url: `../../upload/upload?src=${src}&cropBack=` + that.data.cropBack
-        })
+        if (res.tempFiles[0].size > 2000000) {
+          console.log(res.tempFiles[0].size)
+          that.drawCanvas(res.tempFilePaths[0], mainType)
+        }else{
+          wx.navigateTo({
+            url: `../../upload/upload?src=${src}&cropBack=` + that.data.cropBack
+          })
+        }
+       
       }
     })
   },
@@ -65,7 +75,7 @@ Page({
     if (that.data.imageList.length <= 3) {
       wx.chooseImage({
         count: 4 - that.data.imageList.length, // 最多可以选择的图片张数，默认9
-        sizeType: ['original', 'compressed'], // original 原图，compressed 压缩图，默认二者都有
+        sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
         sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
         success: function (res) {
           console.log(res)
@@ -239,12 +249,15 @@ Page({
 
   },
   uploadSecPic: function (goodId, status, index, img,oldId){
-    wx.showLoading({
-      title: '上传中',
+    var that =this;
+    that.setData({
+      isHideLoading: false
     })
     var that =this;
     getApp().func.upLoadPicture(goodId, status, img, "2",oldId,function (message, res) {
-      wx.hideLoading();
+      that.setData({
+        isHideLoading: true
+      })
       index=index+1
       if(res){
         console.log(res);
@@ -285,7 +298,74 @@ Page({
         }
       }
     })
-  }
+  },
+  // 缩放图片
+  drawCanvas: function (url,flag) {
+    var that = this;
+    wx.getImageInfo({
+      src: url,
+      success: function (res) {
+        console.log(res);
+        var ctx = wx.createCanvasContext('attendCanvasId');
+        var canvasWidth = res.width//原图宽度 
+        var canvasHeight = res.height;//原图高度
+        console.log("canvasWidth=" + canvasWidth + "canvasHeight=" + canvasHeight)
+        var tWidth = 320; //设置缩略图初始宽度 //可调
+        var tHeight = 480; //设置缩略图初始高度 //可调
+        if (canvasWidth > tWidth || canvasHeight > tHeight) {
+          //按比例计算出缩略图的宽度和高度
+          if (canvasWidth > canvasHeight * 1.8) {
+            tHeight = Math.floor(parseFloat(canvasHeight) * (parseFloat(tWidth) / parseFloat(canvasWidth)));
+          }
+          else {
+            tWidth = Math.floor(parseFloat(canvasWidth) * (parseFloat(tHeight) / parseFloat(canvasHeight)));
+          }
+        }
+        else {
+          tWidth = canvasWidth;
+          tHeight = canvasHeight;
+        }
+        console.log("tWidth=" + tWidth + "tHeight=" + tHeight)
+        that.setData({
+          tWidth: tWidth,
+          tHeight: tHeight
+        })
+        // //绘制新图
+        ctx.drawImage(res.path, 0, 0, tWidth, tHeight)
+        // ctx.drawImage(res.path,0, 0) 
+        ctx.draw(false, function () {
+          that.prodImageOpt(url, tWidth, tHeight, flag)
+        });//在回调进行保存不会出现空白
+      }
+    })
+
+
+
+  },
+  // 生成图片
+  prodImageOpt: function (url, width, height, flag) {
+    console.log(url);
+    var that = this;
+    wx.canvasToTempFilePath({
+      canvasId: 'attendCanvasId',
+      width: width,
+      height: height,
+      destWidth: width,
+      destHeight: height,
+      success: function success(res) {
+        console.log(res)
+        var path = res.tempFilePath;
+        console.log(path);
+        console.log(flag)
+        if(flag==mainType){
+          wx.navigateTo({
+            url: `../../upload/upload?src=${path}&cropBack=` + that.data.cropBack
+          })
+        }
+      
+      }
+    });
+  },
 
 
 

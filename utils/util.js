@@ -85,11 +85,11 @@ function previewImage(){
 function choosePhoto(countNum,cb){
   wx.chooseImage({
     count: countNum, //数量
-    sizeType: ['original', 'compressed'],// 可以指定是原图还是压缩图，默认二者都有  
+    sizeType: ['compressed'],// 可以指定是原图还是压缩图，默认二者都有  
     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有  
     success: function(res) {
       // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
-      return typeof cb == "function" && cb(res.tempFilePaths);
+      return typeof cb == "function" && cb(res);
     },
     fail:function(){
       return typeof cb == "function" && cb(false);
@@ -279,7 +279,7 @@ function getOpenId(url) {
            
           }
         })
-        if (!openId) {//如果没有openId 就联网进行获取
+        //如果没有openId 就联网进行获取
           console.log('没有openID 申请')
           var appid = urlSet.APPID;
           var secret = urlSet.SECRET;
@@ -293,7 +293,7 @@ function getOpenId(url) {
                 console.log("获取openId失败");
               }
             })
-        }
+        
       }
     },
     fail: function () {

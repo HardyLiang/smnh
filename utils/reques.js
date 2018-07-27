@@ -1018,6 +1018,9 @@ function getStoreTypeList(cb) {
  * 绑定微信
  */
 function bandWX(encryptedData, session_key, iv, cb) {
+  console.log("this.data.encryptedData=" + encryptedData)
+  console.log("this.data.session_key=" + session_key)
+  console.log("this.data.iv=" + iv)
   wx.request({
     url: urlSet.bandWX,
     header: {
@@ -1127,6 +1130,7 @@ function upLoadPicture(id,method,filePath,isMain,oldId,cb) {
     }
    }
    console.log(params)
+   
   wx.uploadFile({
     url: urlSet.uploadPicture,
     filePath: filePath,
@@ -1137,18 +1141,25 @@ function upLoadPicture(id,method,filePath,isMain,oldId,cb) {
     },
     formData: params,
     complete: function (res) {
+      console.log("上传完成")
       if (util.tokenError(res.data)) {
         return;
       }
-      console.log(res);
+      console.log("1111111")
       var result = res.data
-      if (!Array.isArray(result)){
-        result = JSON.parse(result)
+      console.log("result=" + result)
+      if (result!=null&&!Array.isArray(result)){
+        try{
+          result = JSON.parse(result)
+        }catch(e){
+          result=""
+        } 
       }
+      console.log("222222")
       var statusCode = result.statusCode
       var message = result.message;
-      console.log(message);
-      console.log(statusCode);
+      console.log("message="+message);
+      console.log("statusCode=" +statusCode);
       if (statusCode == "200") {
         return typeof cb == "function" && cb(message, result.data)
       } else {
@@ -1159,6 +1170,7 @@ function upLoadPicture(id,method,filePath,isMain,oldId,cb) {
       }
     },
     fail: function () {
+      console.log("上传失败")
       return typeof cb == "function" && cb("上传失败！", false)
     },
     
