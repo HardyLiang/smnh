@@ -1,13 +1,10 @@
 
 //上线需要配置这里的信息，包括域名，APPID,密钥
-// var baseUrl ="http://61.28.113.182:9595";
-// var baseUrl ="https://xz-weixin.e-tecsun.com";
-// var baseUrl ="http://114.67.49.72:80";
-// var baseUrl ="http://test.e-smnh.com/app/iskyshop_seller_login.htm";
-var baseUrl ="https://test.e-smnh.com/"
-// var baseUrl ="https://test.e-smnh.com:446/"
-let APPID = 'wx00ebf9a68438faf5';
-let SECRET = '52ad3e6d8c872b95b3142645fbfbab79';
+
+// var baseUrl ="https://test.e-smnh.com/"//测试
+var baseUrl ="https://www.e-smnh.com/"//正式
+let APPID = 'wxcd7f66c7373a72cc';
+let SECRET = '9d32364e7ffa9c11b3a97c5792c3d6ef';
 
 //登陆
 var login = baseUrl +"app/iskyshop_seller_login.htm";

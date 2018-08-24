@@ -85,12 +85,16 @@
 }
 
 .up-pos {
+   width: 20px;
+  height: 20px;
   position: absolute;
   top: 12px;
   right: 80px;
 }
 
 .down-pos {
+  width: 20px;
+  height: 20px;
   position: absolute;
   top: 12px;
   right: 46px;

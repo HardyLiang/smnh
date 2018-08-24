@@ -70,7 +70,7 @@
       <text>店铺名称：</text><input type='text' class='edit_input'value="{{storeName}}"
       bindinput='bindContentInput' data-type="storeName"></input></view>
     <view class='base-item'>
-      <text>店铺类型：</text>{{storeType}}</view>
+      <text>入驻主体：</text>{{storeType}}</view>
       </view>
     <view class='base-message mt28' hidden='{{isHideStore}}'>
     <view class='base-title'>企业信息</view>

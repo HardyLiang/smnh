@@ -248,6 +248,7 @@ function getOpenId(url) {
       if (res.code) {
         console.log("成功获取用户信息")
         //成功获取用户信息
+      
         wx.getUserInfo({
           success: function (resUser) {
             console.log(resUser)

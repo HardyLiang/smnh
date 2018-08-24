@@ -237,7 +237,7 @@ Page({
       }, 1000);
       //检测店铺头像是不是使用了默认头像，如果是，就给他上传一个本地头像
       if (res.data.store_information.store_logo != null &&
-        res.data.store_information.store_logo.indexOf("resources/style/common/images/store.jpg") != -1) {
+        res.data.store_information.store_logo.indexOf("store.jpg") != -1) {
         var imgUrl = wx.getStorageSync(common.CC_HEAD_IMG);
         if (imgUrl != null) {
           wx.getImageInfo({

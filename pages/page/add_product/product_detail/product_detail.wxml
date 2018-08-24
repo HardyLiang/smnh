@@ -2,9 +2,9 @@
     <text class="product-title">产品详情</text>
     <view class='upload-detail-info'>
     <view class='uploadList' wx:for="{{photoBoxList}}" wx:key="{{item}}" wx:for-index="ids">
-      <view class='upload-type-text'>图片部分 <view class='up-pos up-btn' catchtap='upChangePosition'
-      data-index="{{ids}}"></view> <view class='down-pos down-btn' catchtap='downChangePosition'
-      data-index="{{ids}}"></view> <image src='../../../images/icon_delete.png' catchtap="deleteList" data-index="{{ids}}" class='icon-delete-detail' ></image></view>
+      <view class='upload-type-text'>图片部分 <image src="../../../images/ic_bule_uppush.png" class='up-pos' catchtap='upChangePosition'
+      data-index="{{ids}}"></image> <image src="../../../images/ic_bule_down.png" class='down-pos' catchtap='downChangePosition'
+      data-index="{{ids}}"></image> <image src='../../../images/icon_delete.png' catchtap="deleteList" data-index="{{ids}}" class='icon-delete-detail' ></image></view>
       <view class='upload-imgBox'>    
     <view class="uploadInput-box" > +
            <image src='{{item}}'  mode='aspectFill' class='up-image-detail' bindtap="chooseDetailImage" data-index="{{ids}}"></image>

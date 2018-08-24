@@ -57,11 +57,7 @@ Page({
       Address: e.detail.value
     })
   },
-  bankTypeChange: function (e) {
-    this.setData({
-      bankTypeindex: e.detail.value
-    })
-  },
+  
   bindBankChange: function (e) {
     this.setData({
       bankIndex: e.detail.value
@@ -288,6 +284,9 @@ Page({
     var name = this.data.bankType[position];
     getApp().globalData.userRegister[common.CC_BANKCODE] = name;
     console.log(getApp().globalData.userRegister[common.CC_BANKCODE])
+    this.setData({
+      bankTypeindex:position
+    })
   },
 
   

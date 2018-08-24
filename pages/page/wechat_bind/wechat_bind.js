@@ -51,6 +51,9 @@ Page({
 
     console.log(farmerInfo)
     var isBand = wx.getStorageSync(common.CC_BAND_STATUS);
+    if(isBand){
+      userName = farmerInfo.data.user_information.nickName;
+    }
     console.log("openID=" + openID + "  encryData=" + encryData + "  ivData=" + ivData
       + "sessionKey=" + sessionKey)
     this.setData({

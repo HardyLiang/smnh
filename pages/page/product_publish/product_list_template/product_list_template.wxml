@@ -19,7 +19,7 @@
     </view>
     <!-- 按钮 -->
     <view class='goods-bottom'>
-      <view wx:if="{{status=='在仓库中'}}">
+      <view wx:if="{{status=='在仓库中'||status=='违规下架'}}">
         <button class="pro-btn c-blue"   catchtap="rePublish"
         data-goodsid="{{goodsId}}" data-index="{{ids}}">重新发布</button>
       </view>

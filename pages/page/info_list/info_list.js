@@ -10,6 +10,7 @@ Page({
     name: "",
     sex: "",
     storeType: "",
+    storeTypeId: "",
     mobile: "",
     idCard: "",
     bankNum: "",
@@ -24,6 +25,8 @@ Page({
     legalPersonName:"",
     legalPersonIdCard:"",
     cropBack: "headImgInfoBack",//这个是设置裁剪返回的消息名称，可自定义，但是要唯一；
+    storeName:"",
+    storeType:""
   },
 
   /**
@@ -112,6 +115,7 @@ Page({
       if(!res){
         return;
       }
+      
       console.log("更新信息")
       that.updateView(res);
     })
@@ -139,7 +143,7 @@ Page({
   bindEditInfo:function(res){
 
     //如果是公司，修改是让用户选择修改哪种信息；
-    if (this.data.storeType=="旗舰店"){
+    if (this.data.storeType == "旗舰店" || this.data.storeTypeId=="9"){
       wx.showActionSheet({
         itemList: ['修改基本信息', '修改营业执照', '修改身份证'],
         success: function (res) {
@@ -192,8 +196,9 @@ Page({
       }
     var detailAddress = res.data.store_information.ship_area_name + res.data.store_information.ship_address;
     var storeType = res.data.store_information.store_type;
+    var storeTypeId= res.data.store_information.store_type_id;
     var isHideStore = true;
-    if (storeType != null && storeType == "旗舰店") {
+    if (storeType != null && storeType == "旗舰店"||storeTypeId=="9") {
       isHideStore = false;
     } else {
       isHideStore = true;
@@ -203,6 +208,7 @@ Page({
       name: res.data.user_information.true_name,
       sex: sex,
       storeType: storeType,
+      storeTypeId: storeTypeId,
       mobile: res.data.store_information.store_telephone,
       idCard: res.data.user_information.sCard,
       bankNum: res.data.store_information.bank_c_account,
@@ -212,6 +218,8 @@ Page({
       bankAddress: res.data.store_information.bank_area_name,
       detailAddress: detailAddress,
       isHideStore: isHideStore,
+      storeName: res.data.store_information.store_name,
+      storeType: res.data.store_information.store_type,
       companyName: res.data.store_information.license_c_name,//
       legalPersonName: res.data.store_information.license_legal_name,
       legalPersonIdCard: res.data.store_information.license_legal_idCard

@@ -11,7 +11,7 @@
     <view class='base-item'>
       <text>性别：</text>{{sex}}</view>
     <view class='base-item'>
-      <text>店铺类型：</text>{{storeType}}</view>
+      <text>入驻主体：</text>{{storeType}}</view>
     <view class='base-item'>
       <text>手机号码：</text>{{mobile}}</view>
     <view class='base-item'>
@@ -48,6 +48,13 @@
       <text>法人证件：</text>{{legalPersonIdCard}}
     </view>
   </view>
+   <view class='base-message mt28'>
+    <view class='base-title'>店铺信息</view>
+    <view class='base-item'>
+      <text>店铺名称：</text>{{storeName}}</view>
+    <view class='base-item'>
+      <text>入驻主体：</text>{{storeType}}</view>
+      </view>
 
   <button class='big-btn' catchtap='bindEditInfo'>编辑信息</button>
   <!-- <button class='big-btn'>保存</button> -->

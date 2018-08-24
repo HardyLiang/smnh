@@ -9,7 +9,7 @@
       </view>
     </view>
     <view class="input-item">
-      <text class="input-item-label">店铺类型</text>
+      <text class="input-item-label">入驻主体</text>
       <picker class="input-item-content arrow-btm" bindchange="stroeTypeChange" value="{{index}}" range="{{stroeType}}"  range-key='gradeName'>
         <view class="picker">
           {{stroeType[index].gradeName}}

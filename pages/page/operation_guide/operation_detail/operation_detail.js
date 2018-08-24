@@ -16,20 +16,23 @@ Page({
   data: {
     urlValue:"",
     detailList:{
-      "smkd":"http://mp.weixin.qq.com/s/rW2pK6-vq0ptA2wHEMzeSA",
-      "fbcp":"http://mp.weixin.qq.com/s/FuUWKM1MoDqB-wKBGDvoXw",
-      "glyfb":" http://mp.weixin.qq.com/s/OTjw1xKxov9gAduDLqLxBw",
-      "ddfh":"http://mp.weixin.qq.com/s/yIEZvk-bivjyY2BfsI10og",
-      "xggrxx":"http://mp.weixin.qq.com/s/pp3zSFo_i0pVFdc4cWHUBQ",
-      "fxdp":"http://mp.weixin.qq.com/s/w2TXF6Q1GQYgHttCDjK0WQ"  
+      "smkd":"https://mp.weixin.qq.com/s/bWaDCerhVLlBG8Nrj6s1Xw",
+      "fbcp":"https://mp.weixin.qq.com/s/rLHdFGGgtSI09_wGNtFoIw",
+      "glyfb":"https://mp.weixin.qq.com/s/8rYKsCKlY082ay-CXQVBJA",
+      "ddfh":"https://mp.weixin.qq.com/s/yiBi3LCMxIl1Ntl4VuohKQ",
+      "xggrxx":"https://mp.weixin.qq.com/s/J5pqcsgTcylm2leM6RdvSg",
+      "fxdp":"https://mp.weixin.qq.com/s/cuJ-Rp2dhHI1tErOIRWBrA" ,
+      "wxbd":"https://mp.weixin.qq.com/s/RyQviZ539ap_zfouG0dIKQ" ,
     },
     detailTitleList: {
       "smkd": "实名开店",
       "fbcp": "发布产品",
-      "glyfbcp": "管理已发布",
+      "glyfb": "管理已发布",
       "ddfh": "订单发货",
       "xggrxx": "修改个人信息",
-      "fxdp": "分享店铺"
+      "fxdp": "分享店铺",
+      "wxbd": "微信绑定",
+
     }
   },
 

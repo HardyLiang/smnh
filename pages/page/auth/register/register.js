@@ -6,6 +6,7 @@ Page({
     index: 0,
     stroeType: [],
     shopName:"",
+    shopId:"",
     imgValue:"",
     storeName:'',
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -17,7 +18,8 @@ Page({
   stroeTypeChange: function (e) {
     this.setData({
       index: e.detail.value,
-      shopName: this.data.stroeType[e.detail.value].gradeName
+      shopName: this.data.stroeType[e.detail.value].gradeName,
+      shopId:this.data.stroeType[e.detail.value].id
     })
     getApp().globalData.userRegister[common.CC_SHOP_TYPE] = this.data.stroeType[this.data.index].id;
     console.log(getApp().globalData.userRegister)
@@ -34,15 +36,16 @@ Page({
 
     }
 
-    console.log("下一步"+this.data.shopName)
-    if (this.data.shopName.indexOf("旗舰店")==-1){
-      wx.navigateTo({
-        url: `../register_person/register_person?type=person`
-      })
-    }else{
+    console.log("下一步" + this.data.shopName + this.data.shopId)
+    if (this.data.shopName.indexOf("旗舰店") != -1 || this.data.shopId==9){
       wx.navigateTo({
         url: `../register_company/register_company`
       })
+    }else{
+      wx.navigateTo({
+        url: `../register_person/register_person?type=person`
+      })
+     
     }
    
   },

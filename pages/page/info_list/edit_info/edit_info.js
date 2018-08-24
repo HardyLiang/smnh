@@ -24,6 +24,7 @@ Page({
     bankAddress: "",
     addressValue:"",
     detailAddress: "",
+    areaId:"",
     isReFresh: false,//是否刷新
     isHideStore: true,// 是否隐藏店铺信息，默认是隐藏,
     companyName: "",//
@@ -135,6 +136,8 @@ Page({
         this.setData({
           detailAddress: content
         })
+        getApp().globalData.infoModify[common.CC_ADDRESS] = this.data.areaId;
+        getApp().globalData.infoModify[common.CC_SEND_ADDRESSID] = this.data.areaId;
         break;
       case "storeName":
         getApp().globalData.infoModify[common.CC_SHOP_NAME] = content;
@@ -170,8 +173,9 @@ Page({
       }
     
     var storeType = res.data.store_information.store_type;
+    var storeTypeId = res.data.store_information.store_type_id;
     var isHideStore = true;
-    if (storeType != null && storeType == "旗舰店") {
+    if (storeType != null && storeType == "旗舰店" || storeTypeId=="9") {
       isHideStore = false;
     } else {
       isHideStore = true;
@@ -198,9 +202,9 @@ Page({
       companyName: res.data.store_information.license_c_name,//
       legalPersonName: res.data.store_information.license_legal_name,
       legalPersonIdCard: res.data.store_information.license_legal_idCard,
-      storeName: res.data.store_information.store_name
+      storeName: res.data.store_information.store_name,
+      areaId: res.data.store_information.ship_address_id
     })
-
   },
   /**
    * 更新信息
@@ -294,7 +298,8 @@ Page({
     var addressId = e.detail[e.detail.length - 1].id;
     if (typeValue == "detail") {
       this.setData({
-        addressValue: province
+        addressValue: province,
+        areaId: addressId
       })
       getApp().globalData.infoModify[common.CC_ADDRESS] = addressId;
       getApp().globalData.infoModify[common.CC_SEND_ADDRESSID] = addressId;

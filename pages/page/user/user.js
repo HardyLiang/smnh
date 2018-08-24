@@ -163,7 +163,7 @@ Page({
           serviceValue: '服务：' + res.data.store_information.serviceEvaluate + " 分",
           storeValue: '发货：' + res.data.store_information.shipEvaluate + " 分",
           btnFlag: true,
-          btnValue: "注销登录"
+          btnValue: "退出登录"
         })
       }
     }
